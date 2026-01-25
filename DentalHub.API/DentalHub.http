@@ -1,0 +1,6 @@
+@DentalHub_HostAddress = http://localhost:5045
+
+GET {{DentalHub_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
