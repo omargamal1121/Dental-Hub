@@ -5,11 +5,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DentalHub.Infrastructure.ContextAndConfig
 {
-	public class ContextApp:IdentityDbContext<User<Guid>,IdentityRole<Guid>, Guid>
-	{
-	
-		public ContextApp(DbContextOptions<ContextApp> options) : base(options)
-		{
-		}
-	}
+    public class ContextApp : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+    {
+        public ContextApp(DbContextOptions<ContextApp> options) : base(options)
+        {
+        }
+
+        // DbSets
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<PatientCase> PatientCases { get; set; }
+        public DbSet<CaseRequest> CaseRequests { get; set; }
+        public DbSet<Session> Sessions { get; set; }
+        public DbSet<SessionMedia> SessionMedias { get; set; }
+        public DbSet<SessionNote> SessionNotes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ContextApp).Assembly);
+        }
+    }
 }
