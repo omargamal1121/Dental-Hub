@@ -16,7 +16,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
             builder.HasMany(x => x.CaseRequests)
                    .WithOne(x => x.PatientCase)
-                   .HasForeignKey(x => x.CaseId);
+                   .HasForeignKey(x => x.PatientCaseId);
 
             builder.HasMany(x => x.Sessions)
                    .WithOne(x => x.PatientCase)

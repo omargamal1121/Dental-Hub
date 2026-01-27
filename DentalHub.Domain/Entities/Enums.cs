@@ -1,11 +1,4 @@
-﻿public enum UserRole
-{
-    Admin,
-    Student,
-    Doctor,
-    Patient
-}
-
+﻿
 public enum CaseStatus
 {
     Pending,

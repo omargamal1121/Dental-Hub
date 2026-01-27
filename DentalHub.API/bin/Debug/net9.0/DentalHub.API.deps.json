@@ -903,7 +903,8 @@
           "DentalHub.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore": "9.0.12",
-          "MySql.EntityFrameworkCore": "10.0.1"
+          "MySql.EntityFrameworkCore": "10.0.1",
+          "Pomelo.EntityFrameworkCore.MySql": "9.0.0"
         },
         "runtime": {
           "DentalHub.Infrastructure.dll": {

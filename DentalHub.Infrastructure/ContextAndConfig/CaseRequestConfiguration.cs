@@ -1,6 +1,7 @@
 ﻿using DentalHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace DentalHub.Infrastructure.ContextAndConfig
 {
@@ -10,13 +11,21 @@ namespace DentalHub.Infrastructure.ContextAndConfig
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.PatientCase)
-                   .WithMany(x => x.CaseRequests)
-                   .HasForeignKey(x => x.CaseId);
+			builder
+				.HasOne(c => c.Student)
+				.WithMany(s => s.CaseRequests)
+				.HasForeignKey(c => c.StudentId);
 
-            builder.HasOne(x => x.Student)
-                   .WithMany()
-                   .HasForeignKey(x => x.StudentId);
-        }
-    }
+			builder
+				.HasOne(c => c.Doctor)
+				.WithMany(d => d.CaseRequests)
+				.HasForeignKey(c => c.DoctorId);
+
+			builder
+				.HasOne(c => c.PatientCase)
+				.WithMany(p => p.CaseRequests)
+				.HasForeignKey(c => c.PatientCaseId);
+
+		}
+	}
 }

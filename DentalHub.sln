@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36811.4 d17.14
+VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalHub.API", "DentalHub\DentalHub.API.csproj", "{47D964C6-88B3-4FA1-8275-01F14EFA827C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalHub.Domain", "DentalHub.Domain\DentalHub.Domain.csproj", "{B8A4194B-D36E-4762-B7EC-95289B7B204B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalHub.Infrastructure", "DentalHub.Infrastructure\DentalHub.Infrastructure.csproj", "{90A9F7ED-FC6B-4DC4-BC37-901F76D27803}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalHub.Application", "DentalHub.Application\DentalHub.Application.csproj", "{B643A680-D894-48F3-BFF6-6716E22294F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalHub.API", "DentalHub.API\DentalHub.API.csproj", "{B3C55415-040A-CDF2-1429-CEBCA9D02535}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{47D964C6-88B3-4FA1-8275-01F14EFA827C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47D964C6-88B3-4FA1-8275-01F14EFA827C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47D964C6-88B3-4FA1-8275-01F14EFA827C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47D964C6-88B3-4FA1-8275-01F14EFA827C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8A4194B-D36E-4762-B7EC-95289B7B204B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B8A4194B-D36E-4762-B7EC-95289B7B204B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8A4194B-D36E-4762-B7EC-95289B7B204B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{B643A680-D894-48F3-BFF6-6716E22294F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B643A680-D894-48F3-BFF6-6716E22294F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B643A680-D894-48F3-BFF6-6716E22294F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3C55415-040A-CDF2-1429-CEBCA9D02535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3C55415-040A-CDF2-1429-CEBCA9D02535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3C55415-040A-CDF2-1429-CEBCA9D02535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3C55415-040A-CDF2-1429-CEBCA9D02535}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

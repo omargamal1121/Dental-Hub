@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DentalHub.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,7 +40,6 @@ namespace DentalHub.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     FullName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Role = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -197,7 +196,8 @@ namespace DentalHub.Infrastructure.Migrations
                 {
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Specialty = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UniversityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -239,7 +239,8 @@ namespace DentalHub.Infrastructure.Migrations
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     University = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Level = table.Column<int>(type: "int", nullable: false)
+                    Level = table.Column<int>(type: "int", nullable: false),
+                    UniversityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -280,18 +281,25 @@ namespace DentalHub.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CaseId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     StudentId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Description = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    PatientCaseId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    DoctorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CaseRequests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CaseRequests_PatientCases_CaseId",
-                        column: x => x.CaseId,
+                        name: "FK_CaseRequests_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CaseRequests_PatientCases_PatientCaseId",
+                        column: x => x.PatientCaseId,
                         principalTable: "PatientCases",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -312,7 +320,8 @@ namespace DentalHub.Infrastructure.Migrations
                     CaseId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     StudentId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     ScheduledAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    PatientId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
@@ -323,27 +332,51 @@ namespace DentalHub.Infrastructure.Migrations
                         principalTable: "PatientCases",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Sessions_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Sessions_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "SessionMedias",
+                name: "Medias",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    SessionId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    SessionId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    PatientId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     MediaUrl = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PatientCaseId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SessionMedias", x => x.Id);
+                    table.PrimaryKey("PK_Medias", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SessionMedias_Sessions_SessionId",
+                        name: "FK_Medias_PatientCases_PatientCaseId",
+                        column: x => x.PatientCaseId,
+                        principalTable: "PatientCases",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Medias_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Medias_Sessions_SessionId",
                         column: x => x.SessionId,
                         principalTable: "Sessions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -406,9 +439,14 @@ namespace DentalHub.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CaseRequests_CaseId",
+                name: "IX_CaseRequests_DoctorId",
                 table: "CaseRequests",
-                column: "CaseId");
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CaseRequests_PatientCaseId",
+                table: "CaseRequests",
+                column: "PatientCaseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CaseRequests_StudentId",
@@ -416,14 +454,24 @@ namespace DentalHub.Infrastructure.Migrations
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientCases_PatientId",
-                table: "PatientCases",
+                name: "IX_Medias_PatientCaseId",
+                table: "Medias",
+                column: "PatientCaseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Medias_PatientId",
+                table: "Medias",
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SessionMedias_SessionId",
-                table: "SessionMedias",
+                name: "IX_Medias_SessionId",
+                table: "Medias",
                 column: "SessionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientCases_PatientId",
+                table: "PatientCases",
+                column: "PatientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SessionNotes_SessionId",
@@ -434,6 +482,16 @@ namespace DentalHub.Infrastructure.Migrations
                 name: "IX_Sessions_CaseId",
                 table: "Sessions",
                 column: "CaseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sessions_PatientId",
+                table: "Sessions",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sessions_StudentId",
+                table: "Sessions",
+                column: "StudentId");
         }
 
         /// <inheritdoc />
@@ -458,10 +516,7 @@ namespace DentalHub.Infrastructure.Migrations
                 name: "CaseRequests");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
-
-            migrationBuilder.DropTable(
-                name: "SessionMedias");
+                name: "Medias");
 
             migrationBuilder.DropTable(
                 name: "SessionNotes");
@@ -470,13 +525,16 @@ namespace DentalHub.Infrastructure.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Students");
+                name: "Doctors");
 
             migrationBuilder.DropTable(
                 name: "Sessions");
 
             migrationBuilder.DropTable(
                 name: "PatientCases");
+
+            migrationBuilder.DropTable(
+                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "Patients");

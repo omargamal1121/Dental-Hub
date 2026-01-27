@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RSLtf2NgQ6E=",
+  "dgSpecHash": "+99gcZPFq0E=",
   "success": true,
-  "projectFilePath": "D:\\projects\\DentalHub.API\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
+  "projectFilePath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\google.protobuf\\3.32.0\\google.protobuf.3.32.0.nupkg.sha512",
@@ -43,6 +43,8 @@
     "C:\\Users\\DELL\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\mysql.data\\9.6.0\\mysql.data.9.6.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\mysql.entityframeworkcore\\10.0.1\\mysql.entityframeworkcore.10.0.1.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\mysqlconnector\\2.4.0\\mysqlconnector.2.4.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\9.0.0\\pomelo.entityframeworkcore.mysql.9.0.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\system.collections.immutable\\7.0.0\\system.collections.immutable.7.0.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\system.composition\\7.0.0\\system.composition.7.0.0.nupkg.sha512",

@@ -1363,7 +1363,8 @@
           "DentalHub.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore": "9.0.12",
-          "MySql.EntityFrameworkCore": "10.0.1"
+          "MySql.EntityFrameworkCore": "10.0.1",
+          "Pomelo.EntityFrameworkCore.MySql": "9.0.0"
         },
         "compile": {
           "bin/placeholder/DentalHub.Infrastructure.dll": {}
@@ -4088,11 +4089,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projects\\DentalHub.API\\DentalHub\\DentalHub.API.csproj",
+      "projectUniqueName": "D:\\projects\\DentalHub\\DentalHub.API\\DentalHub.API.csproj",
       "projectName": "DentalHub.API",
-      "projectPath": "D:\\projects\\DentalHub.API\\DentalHub\\DentalHub.API.csproj",
+      "projectPath": "D:\\projects\\DentalHub\\DentalHub.API\\DentalHub.API.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "D:\\projects\\DentalHub.API\\DentalHub\\obj\\",
+      "outputPath": "D:\\projects\\DentalHub\\DentalHub.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4114,11 +4115,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\projects\\DentalHub.API\\DentalHub.Application\\DentalHub.Application.csproj": {
-              "projectPath": "D:\\projects\\DentalHub.API\\DentalHub.Application\\DentalHub.Application.csproj"
+            "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj": {
+              "projectPath": "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj"
             },
-            "D:\\projects\\DentalHub.API\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj": {
-              "projectPath": "D:\\projects\\DentalHub.API\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj"
+            "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj": {
+              "projectPath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj"
             }
           }
         }

@@ -3,6 +3,7 @@ using System;
 using DentalHub.Infrastructure.ContextAndConfig;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -19,7 +20,201 @@ namespace DentalHub.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "9.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("DentalHub.Domain.Entities.User<System.Guid>", b =>
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.CaseRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("PatientCaseId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientCaseId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("CaseRequests");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Doctor", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Specialty")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("UniversityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Media", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("MediaUrl")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("PatientCaseId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("SessionId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientCaseId");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("Medias");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Patient", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Patients");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.PatientCase", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TreatmentType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("PatientCases");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Session", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("CaseId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("ScheduledAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CaseId");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Sessions");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.SessionNote", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("SessionId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("SessionNotes");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Student", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<string>("University")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("UniversityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,11 +234,15 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -117,6 +316,8 @@ namespace DentalHub.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("ClaimType")
                         .HasColumnType("longtext");
 
@@ -138,6 +339,8 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("longtext");
@@ -210,6 +413,136 @@ namespace DentalHub.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DentalHub.Domain.Entities.CaseRequest", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.Doctor", "Doctor")
+                        .WithMany("CaseRequests")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DentalHub.Domain.Entities.PatientCase", "PatientCase")
+                        .WithMany("CaseRequests")
+                        .HasForeignKey("PatientCaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DentalHub.Domain.Entities.Student", "Student")
+                        .WithMany("CaseRequests")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("PatientCase");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Doctor", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.User", "User")
+                        .WithOne("Doctor")
+                        .HasForeignKey("DentalHub.Domain.Entities.Doctor", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Media", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.PatientCase", null)
+                        .WithMany("Medias")
+                        .HasForeignKey("PatientCaseId");
+
+                    b.HasOne("DentalHub.Domain.Entities.Patient", "Patient")
+                        .WithMany("Medias")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DentalHub.Domain.Entities.Session", "Session")
+                        .WithMany("Medias")
+                        .HasForeignKey("SessionId");
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("Session");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Patient", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.User", "User")
+                        .WithOne("Patient")
+                        .HasForeignKey("DentalHub.Domain.Entities.Patient", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.PatientCase", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.Patient", "Patient")
+                        .WithMany("PatientCases")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Session", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.PatientCase", "PatientCase")
+                        .WithMany("Sessions")
+                        .HasForeignKey("CaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DentalHub.Domain.Entities.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DentalHub.Domain.Entities.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("PatientCase");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.SessionNote", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.Session", "Session")
+                        .WithMany("SessionNotes")
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Session");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Student", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.User", "User")
+                        .WithOne("Student")
+                        .HasForeignKey("DentalHub.Domain.Entities.Student", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
@@ -221,7 +554,7 @@ namespace DentalHub.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("DentalHub.Domain.Entities.User<System.Guid>", null)
+                    b.HasOne("DentalHub.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -230,7 +563,7 @@ namespace DentalHub.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("DentalHub.Domain.Entities.User<System.Guid>", null)
+                    b.HasOne("DentalHub.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -245,7 +578,7 @@ namespace DentalHub.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DentalHub.Domain.Entities.User<System.Guid>", null)
+                    b.HasOne("DentalHub.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -254,10 +587,55 @@ namespace DentalHub.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("DentalHub.Domain.Entities.User<System.Guid>", null)
+                    b.HasOne("DentalHub.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Doctor", b =>
+                {
+                    b.Navigation("CaseRequests");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Patient", b =>
+                {
+                    b.Navigation("Medias");
+
+                    b.Navigation("PatientCases");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.PatientCase", b =>
+                {
+                    b.Navigation("CaseRequests");
+
+                    b.Navigation("Medias");
+
+                    b.Navigation("Sessions");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Session", b =>
+                {
+                    b.Navigation("Medias");
+
+                    b.Navigation("SessionNotes");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Student", b =>
+                {
+                    b.Navigation("CaseRequests");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Doctor")
+                        .IsRequired();
+
+                    b.Navigation("Patient")
+                        .IsRequired();
+
+                    b.Navigation("Student")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

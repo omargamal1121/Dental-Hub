@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DentalHub.Infrastructure.ContextAndConfig
 {
-    public class SessionMediaConfiguration : IEntityTypeConfiguration<SessionMedia>
+    public class MediaConfiguration : IEntityTypeConfiguration<Media>
     {
-        public void Configure(EntityTypeBuilder<SessionMedia> builder)
+        public void Configure(EntityTypeBuilder<Media> builder)
         {
             builder.HasKey(x => x.Id);
 
             builder.HasOne(x => x.Session)
-                   .WithMany(x => x.SessionMedias)
+                   .WithMany(x => x.Medias)
                    .HasForeignKey(x => x.SessionId);
         }
     }
