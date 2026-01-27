@@ -1,6 +1,4 @@
-using DentalHub.Infrastructure.ContextAndConfig;
-using Microsoft.EntityFrameworkCore;
-using System;
+using DentalHub.Infrastructure.Extensions;
 
 namespace DentalHub.API
 {
@@ -10,32 +8,31 @@ namespace DentalHub.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Add Controllers
             builder.Services.AddControllers();
 
+            // Add API Explorer for Swagger
             builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddDbContext<ContextApp>(options =>
-	        options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
-					   new MySqlServerVersion(new Version(8, 0, 33)))
-            );
 
-			builder.Services.AddSwaggerGen();
+            // Add Swagger
+            builder.Services.AddSwaggerGen();
 
-			var app = builder.Build();
+            // Add Infrastructure Services (DbContext with MySQL, Repositories, UnitOfWork)
+            builder.Services.AddInfrastructureServices(builder.Configuration);
 
+            // Build the application
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline
             if (app.Environment.IsDevelopment())
             {
-         
                 app.UseSwagger();
                 app.UseSwaggerUI();
-			}
+            }
 
+            app.UseHttpsRedirection();
             app.UseRouting();
-         
-			app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

@@ -23,3 +23,16 @@ D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.dll
 D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\refint\DentalHub.Domain.dll
 D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.pdb
 D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\ref\DentalHub.Domain.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.deps.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.pdb
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.csproj.AssemblyReference.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.AssemblyInfoInputs.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.AssemblyInfo.cs
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.csproj.CoreCompileInputs.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.sourcelink.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\obj\Debug\net9.0\refint\DentalHub.Domain.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.pdb
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Domain\obj\Debug\net9.0\ref\DentalHub.Domain.dll

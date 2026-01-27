@@ -25,4 +25,11 @@
     <ProjectReference Include="..\DentalHub.Domain\DentalHub.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="UnitOfWork\" />
+    <Folder Include="Repository\" />
+    <Folder Include="Specification\" />
+  </ItemGroup>
+
 </Project>
