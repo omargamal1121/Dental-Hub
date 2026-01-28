@@ -5,6 +5,18 @@
     "version": "1.0"
   },
   "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "DentalHub.API"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/WeatherForecast": {
       "get": {
         "tags": [
@@ -73,6 +85,9 @@
     }
   },
   "tags": [
+    {
+      "name": "DentalHub.API"
+    },
     {
       "name": "WeatherForecast"
     }
