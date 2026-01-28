@@ -485,3 +485,4 @@ D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\ref
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.pdb
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.genruntimeconfig.cache
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\ref\DentalHub.API.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

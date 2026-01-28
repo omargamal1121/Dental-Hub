@@ -10,8 +10,10 @@
         "dependencies": {
           "DentalHub.Application": "1.0.0",
           "DentalHub.Infrastructure": "1.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.12",
+          "Microsoft.Extensions.Identity.Core": "9.0.12",
           "Pomelo.EntityFrameworkCore.MySql": "9.0.0",
           "Swashbuckle.AspNetCore": "10.1.0"
         },
@@ -841,7 +843,9 @@
       },
       "DentalHub.Application/1.0.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "9.0.12"
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
+          "Microsoft.EntityFrameworkCore": "9.0.12",
+          "Microsoft.Extensions.Identity.Core": "9.0.12"
         },
         "runtime": {
           "DentalHub.Application.dll": {
@@ -853,7 +857,8 @@
       "DentalHub.Domain/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
-          "Microsoft.EntityFrameworkCore": "9.0.12"
+          "Microsoft.EntityFrameworkCore": "9.0.12",
+          "Microsoft.Extensions.Identity.Core": "9.0.12"
         },
         "runtime": {
           "DentalHub.Domain.dll": {
@@ -867,6 +872,7 @@
           "DentalHub.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore": "9.0.12",
+          "Microsoft.Extensions.Identity.Core": "9.0.12",
           "MySql.EntityFrameworkCore": "10.0.1",
           "Pomelo.EntityFrameworkCore.MySql": "9.0.0"
         },

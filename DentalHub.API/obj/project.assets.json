@@ -1337,7 +1337,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "9.0.12"
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
+          "Microsoft.EntityFrameworkCore": "9.0.12",
+          "Microsoft.Extensions.Identity.Core": "9.0.12"
         },
         "compile": {
           "bin/placeholder/DentalHub.Application.dll": {}
@@ -1351,7 +1353,8 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
-          "Microsoft.EntityFrameworkCore": "9.0.12"
+          "Microsoft.EntityFrameworkCore": "9.0.12",
+          "Microsoft.Extensions.Identity.Core": "9.0.12"
         },
         "compile": {
           "bin/placeholder/DentalHub.Domain.dll": {}
@@ -1367,6 +1370,7 @@
           "DentalHub.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore": "9.0.12",
+          "Microsoft.Extensions.Identity.Core": "9.0.12",
           "MySql.EntityFrameworkCore": "10.0.1",
           "Pomelo.EntityFrameworkCore.MySql": "9.0.0"
         },
@@ -4081,8 +4085,10 @@
     "net9.0": [
       "DentalHub.Application >= 1.0.0",
       "DentalHub.Infrastructure >= 1.0.0",
+      "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 9.0.12",
       "Microsoft.EntityFrameworkCore >= 9.0.12",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.12",
+      "Microsoft.Extensions.Identity.Core >= 9.0.12",
       "Pomelo.EntityFrameworkCore.MySql >= 9.0.0",
       "Swashbuckle.AspNetCore >= 10.1.0"
     ]
@@ -4144,6 +4150,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[9.0.12, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[9.0.12, )"
@@ -4151,6 +4161,10 @@
           "Microsoft.EntityFrameworkCore.Tools": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
+            "target": "Package",
+            "version": "[9.0.12, )"
+          },
+          "Microsoft.Extensions.Identity.Core": {
             "target": "Package",
             "version": "[9.0.12, )"
           },
