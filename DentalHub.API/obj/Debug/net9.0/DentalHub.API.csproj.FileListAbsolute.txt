@@ -323,3 +323,330 @@ D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\refint\DentalHub.API.dll
 D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.pdb
 D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.genruntimeconfig.cache
 D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\ref\DentalHub.API.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\appsettings.Development.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\appsettings.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.API.staticwebassets.endpoints.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.API.exe
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.API.deps.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.API.runtimeconfig.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.API.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.API.pdb
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Google.Protobuf.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Humanizer.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\K4os.Compression.LZ4.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\K4os.Compression.LZ4.Streams.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\K4os.Hash.xxHash.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Mono.TextTemplating.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\MySql.Data.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\MySql.EntityFrameworkCore.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\MySqlConnector.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Pomelo.EntityFrameworkCore.MySql.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\System.CodeDom.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\System.Composition.Convention.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\System.Composition.Hosting.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\System.Composition.Runtime.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\System.Composition.TypedParts.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\System.Security.Permissions.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\System.Windows.Extensions.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ZstdSharp.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\runtimes\win-x64\native\comerr64.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\runtimes\win-x64\native\gssapi64.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\runtimes\win-x64\native\k5sprt64.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\runtimes\win-x64\native\krb5_64.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\runtimes\win-x64\native\krbcc64.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.Application.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.Domain.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.Infrastructure.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.Application.pdb
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.Infrastructure.pdb
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\bin\Debug\net9.0\DentalHub.Domain.pdb
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.csproj.AssemblyReference.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\rpswa.dswa.cache.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.AssemblyInfoInputs.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.AssemblyInfo.cs
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.csproj.CoreCompileInputs.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.MvcApplicationPartsAssemblyInfo.cs
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.MvcApplicationPartsAssemblyInfo.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.sourcelink.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\rjimswa.dswa.cache.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\scopedcss\bundle\DentalHub.API.styles.css
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\staticwebassets.build.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\staticwebassets.build.json.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\staticwebassets.development.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\swae.build.ex.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHu.98D64BB8.Up2Date
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\refint\DentalHub.API.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.pdb
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\DentalHub.API.genruntimeconfig.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\ref\DentalHub.API.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\appsettings.Development.json
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\appsettings.json
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.API.staticwebassets.endpoints.json
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.API.exe
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.API.deps.json
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.API.runtimeconfig.json
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.API.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.API.pdb
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Google.Protobuf.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Humanizer.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\K4os.Compression.LZ4.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\K4os.Compression.LZ4.Streams.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\K4os.Hash.xxHash.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.OpenApi.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Mono.TextTemplating.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\MySql.Data.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\MySql.EntityFrameworkCore.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\MySqlConnector.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Pomelo.EntityFrameworkCore.MySql.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.CodeDom.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.Composition.Convention.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.Composition.Hosting.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.Composition.Runtime.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.Composition.TypedParts.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.Security.Permissions.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.Text.Json.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.Windows.Extensions.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ZstdSharp.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\runtimes\win-x64\native\comerr64.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\runtimes\win-x64\native\gssapi64.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\runtimes\win-x64\native\k5sprt64.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\runtimes\win-x64\native\krb5_64.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\runtimes\win-x64\native\krbcc64.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.Application.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.Domain.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.Infrastructure.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.Application.pdb
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.Infrastructure.pdb
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.Domain.pdb
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.csproj.AssemblyReference.cache
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\rpswa.dswa.cache.json
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.GeneratedMSBuildEditorConfig.editorconfig
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.AssemblyInfoInputs.cache
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.AssemblyInfo.cs
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.csproj.CoreCompileInputs.cache
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.MvcApplicationPartsAssemblyInfo.cs
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.MvcApplicationPartsAssemblyInfo.cache
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.sourcelink.json
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\rjimswa.dswa.cache.json
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\scopedcss\bundle\DentalHub.API.styles.css
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\staticwebassets.build.json
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\staticwebassets.build.json.cache
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\staticwebassets.development.json
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\swae.build.ex.cache
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHu.98D64BB8.Up2Date
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\refint\DentalHub.API.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.pdb
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.genruntimeconfig.cache
+I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\ref\DentalHub.API.dll
