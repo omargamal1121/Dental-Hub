@@ -650,3 +650,10 @@ I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\refint\DentalHub.API.
 I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.pdb
 I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.genruntimeconfig.cache
 I:\Project Grade\Dental-Hub\DentalHub.API\obj\Debug\net9.0\ref\DentalHub.API.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\MediatR.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\MediatR.Contracts.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+I:\Project Grade\Dental-Hub\DentalHub.API\bin\Debug\net9.0\System.Diagnostics.DiagnosticSource.dll

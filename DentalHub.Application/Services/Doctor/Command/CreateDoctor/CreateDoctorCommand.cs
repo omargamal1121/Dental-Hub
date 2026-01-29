@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DentalHub.Application.Features.Doctor.Dtos
+namespace DentalHub.Application.Services.Doctor.Command.CreateDoctor
 {
-    internal class DoctorDto
+    internal class CreateDoctorCommand
     {
-        
-
     }
 }

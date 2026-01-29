@@ -134,7 +134,11 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
+                "projectPath": "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -303,6 +307,9 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+              "I:\\Project Grade\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj": {
+                "projectPath": "I:\\Project Grade\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj"
+              },
               "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
                 "projectPath": "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj"
               }

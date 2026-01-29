@@ -14,8 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Doctor\Commands\" />
-    <Folder Include="Features\Doctor\Queries\" />
+    <ProjectReference Include="..\DentalHub.Domain\DentalHub.Domain.csproj" />
   </ItemGroup>
 
 </Project>
