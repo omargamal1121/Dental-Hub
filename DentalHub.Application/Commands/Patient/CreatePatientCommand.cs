@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DentalHub.Application.Commands.Patient
 {
-    internal class CreatePatientCommand
-    {
-    }
+    public record CreatePatientCommand(
+    Guid UserId,
+    int Age,
+    string Phone
+) : IRequest<Result<Guid>>;
 }
+
