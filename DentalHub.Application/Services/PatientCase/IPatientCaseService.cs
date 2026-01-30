@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace DentalHub.Application.Services.PatientCase
 {
-    internal interface IPatientCaseService
-    {
-    }
+   public interface IPatientCaseService
+{
+    // Commands
+    Task<Result<Guid>> CreateAsync(CreatePatientCaseCommand command);
+    Task<Result> UpdateAsync(UpdatePatientCaseCommand command);
+    Task<Result> DeleteAsync(Guid id);
+
+    // Queries
+    Task<Result<PatientCaseDto>> GetByIdAsync(Guid id);
+    Task<Result<List<PatientCaseDto>>> GetByPatientIdAsync(Guid patientId);
 }
+
+}
+
