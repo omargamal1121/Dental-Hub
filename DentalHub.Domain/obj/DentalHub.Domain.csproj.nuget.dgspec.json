@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\DentalHub.Domain\\DentalHub.Domain.csproj": {}
+    "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {}
   },
   "projects": {
-    "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\DentalHub.Domain\\DentalHub.Domain.csproj": {
+    "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\DentalHub.Domain\\DentalHub.Domain.csproj",
+        "projectUniqueName": "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
         "projectName": "DentalHub.Domain",
-        "projectPath": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\DentalHub.Domain\\DentalHub.Domain.csproj",
-        "packagesPath": "C:\\Users\\Saga.Mohamed\\.nuget\\packages\\",
-        "outputPath": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\DentalHub.Domain\\obj\\",
+        "projectPath": "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
+        "packagesPath": "C:\\Users\\hayth\\.nuget\\packages\\",
+        "outputPath": "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Saga.Mohamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hayth\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -85,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

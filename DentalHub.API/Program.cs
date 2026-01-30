@@ -1,7 +1,9 @@
 ﻿using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.ContextAndConfig;
 using DentalHub.Infrastructure.Extensions;
+using DentalHub.Infrastructure.Repository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalHub.API
 {

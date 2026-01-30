@@ -34,3 +34,19 @@ D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Application\obj\Debug\ne
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Application\obj\Debug\net9.0\refint\DentalHub.Application.dll
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.pdb
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\DentalHub.Application\obj\Debug\net9.0\ref\DentalHub.Application.dll
+I:\Project Grade\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Application.deps.json
+I:\Project Grade\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Application.dll
+I:\Project Grade\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Application.pdb
+I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.csproj.AssemblyReference.cache
+I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.GeneratedMSBuildEditorConfig.editorconfig
+I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.AssemblyInfoInputs.cache
+I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.AssemblyInfo.cs
+I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.csproj.CoreCompileInputs.cache
+I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.sourcelink.json
+I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.dll
+I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\refint\DentalHub.Application.dll
+I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.pdb
+I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\ref\DentalHub.Application.dll
+I:\Project Grade\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Domain.dll
+I:\Project Grade\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Domain.pdb
+I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHu.CADDDB1E.Up2Date

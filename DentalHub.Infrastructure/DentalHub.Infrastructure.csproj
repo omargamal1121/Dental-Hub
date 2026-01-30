@@ -23,13 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DentalHub.Application\DentalHub.Application.csproj" />
     <ProjectReference Include="..\DentalHub.Domain\DentalHub.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="UnitOfWork\" />
-    <Folder Include="Repository\" />
     <Folder Include="Specification\" />
   </ItemGroup>
 
