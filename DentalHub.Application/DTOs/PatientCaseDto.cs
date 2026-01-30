@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace DentalHub.Application.DTOs
 {
-    internal class PatientCaseDto
+   public class PatientCaseDto
+{
+    public Guid Id { get; set; }
+    public Guid PatientId { get; set; }
+    public string TreatmentType { get; set; }
+    public CaseStatus Status { get; set; }
+
+    public PatientCaseDto(PatientCase patientCase)
     {
+        Id = patientCase.Id;
+        PatientId = patientCase.PatientId;
+        TreatmentType = patientCase.TreatmentType;
+        Status = patientCase.Status;
     }
 }
+
+}
+
