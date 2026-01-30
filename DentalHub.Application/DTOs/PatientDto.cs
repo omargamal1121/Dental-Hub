@@ -5,8 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DentalHub.Application.DTOs
+{public class PatientDto
 {
-    internal class PatientDto
+    public Guid UserId { get; set; }
+    public int Age { get; set; }
+    public string Phone { get; set; }
+
+    public PatientDto(Patient patient)
     {
+        UserId = patient.UserId;
+        Age = patient.Age;
+        Phone = patient.Phone;
     }
 }
+}
+
