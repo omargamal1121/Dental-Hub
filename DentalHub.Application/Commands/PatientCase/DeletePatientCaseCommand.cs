@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DentalHub.Application.Commands.PatientCase
 {
-    internal class DeletePatientCaseCommand
-    {
-    }
+  public record DeletePatientCaseCommand(Guid Id)
+    : IRequest<Result>;
+
+    
 }
+

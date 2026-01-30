@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace DentalHub.Application.Commands.PatientCase
 {
-    internal class UpdatePatientCaseCommand
-    {
-    }
+ public record UpdatePatientCaseCommand(
+    Guid Id,
+    string TreatmentType,
+    CaseStatus Status
+) : IRequest<Result>;
+
 }
+

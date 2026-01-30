@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace DentalHub.Application.Services.Doctor
 {
-    internal interface IDoctorService
-    {
-    }
+   public interface IDoctorService
+{
+    // Commands
+    Task<Result<Guid>> CreateAsync(CreateDoctorCommand command);
+    Task<Result> UpdateAsync(UpdateDoctorCommand command);
+    Task<Result> DeleteAsync(Guid id);
+
+    // Queries
+    Task<Result<DoctorDto>> GetByIdAsync(Guid id);
+    Task<Result<List<DoctorDto>>> GetAllAsync();
 }
+
+}
+
