@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "A5DfDL+Gg1A=",
+  "dgSpecHash": "1vTbgZFj7+E=",
   "success": true,
-  "projectFilePath": "I:\\Project Grade\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj",
+  "projectFilePath": "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hayth\\.nuget\\packages\\mediatr\\14.0.0\\mediatr.14.0.0.nupkg.sha512",
     "C:\\Users\\hayth\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",

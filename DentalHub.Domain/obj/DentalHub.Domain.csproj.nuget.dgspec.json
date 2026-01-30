@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {}
+    "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {}
   },
   "projects": {
-    "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
+    "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
+        "projectUniqueName": "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
         "projectName": "DentalHub.Domain",
-        "projectPath": "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
+        "projectPath": "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
         "packagesPath": "C:\\Users\\hayth\\.nuget\\packages\\",
-        "outputPath": "I:\\Project Grade\\Dental-Hub\\DentalHub.Domain\\obj\\",
+        "outputPath": "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -85,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
