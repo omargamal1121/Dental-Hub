@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R02BfYfbCDk=",
+  "dgSpecHash": "DU6syPDQ3QE=",
   "success": true,
-  "projectFilePath": "I:\\Project Grade\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
+  "projectFilePath": "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hayth\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "C:\\Users\\hayth\\.nuget\\packages\\google.protobuf\\3.32.0\\google.protobuf.3.32.0.nupkg.sha512",
