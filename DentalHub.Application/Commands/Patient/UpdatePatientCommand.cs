@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DentalHub.Application.Commands.Patient
 {
-    internal class UpdatePatientCommand
-    {
-    }
+    public record UpdatePatientCommand(
+    Guid UserId,
+    int Age,
+    string Phone
+) : IRequest<Result>;
 }
+

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DentalHub.Application.Queries.PatientCase
 {
-    internal class GetPatientCaseByIdQuery
-    {
-    }
+    public record GetPatientCaseByIdQuery(Guid Id)
+    : IRequest<Result<PatientCaseDto>>;
 }
+
