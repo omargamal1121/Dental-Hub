@@ -2,6 +2,10 @@
 using DentalHub.Domain.Entities;
 using DentalHub.Application.Commands.Patient;
 using DentalHub.Application.DTOs;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
 namespace DentalHub.Application.Services.Patient
 {
   public class PatientService : IPatientService

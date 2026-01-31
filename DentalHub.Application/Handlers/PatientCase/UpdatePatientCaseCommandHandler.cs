@@ -14,7 +14,11 @@ namespace DentalHub.Application.Handlers.PatientCase
             _service = service;
         }
 
+<<<<<<< HEAD
         public Task<Result<bool>> Handle(UpdatePatientCaseCommand request, CancellationToken ct)
+=======
+        public Task<Result> Handle(UpdatePatientCaseCommand request, CancellationToken ct)
+>>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
             => _service.UpdateAsync(request);
     }
 }
