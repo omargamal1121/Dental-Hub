@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DentalHub.Application.Common;
+using DentalHub.Domain.Entities;
+using DentalHub.Application.Commands.Patient;
+using DentalHub.Application.DTOs;
 
 namespace DentalHub.Application.Services.Patient
 {

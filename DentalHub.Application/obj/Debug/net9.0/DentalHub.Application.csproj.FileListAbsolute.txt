@@ -50,3 +50,4 @@ I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\ref\DentalHub
 I:\Project Grade\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Domain.dll
 I:\Project Grade\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Domain.pdb
 I:\Project Grade\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHu.CADDDB1E.Up2Date
+D:\projects\DentalHub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.csproj.AssemblyReference.cache

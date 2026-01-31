@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DentalHub.Application.Common;
+using MediatR;
 
 namespace DentalHub.Application.Commands.Patient
 {
@@ -10,6 +7,6 @@ namespace DentalHub.Application.Commands.Patient
     Guid UserId,
     int Age,
     string Phone
-) : IRequest<Result>;
+) : IRequest<Result<bool>>;
 }
 

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DentalHub.Application.Common;
+using DentalHub.Application.DTOs;
+using MediatR;
 
 namespace DentalHub.Application.Queries.Patient
 {

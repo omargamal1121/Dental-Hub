@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DentalHub.Application.Commands.Patient;
+using DentalHub.Application.Common.DentalHub.Domain.Common;
+using DentalHub.Application.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
