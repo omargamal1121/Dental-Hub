@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using DentalHub.Domain.Entities;
 namespace DentalHub.Application.DTOs
 {
    public class DoctorDto
@@ -15,7 +15,7 @@ namespace DentalHub.Application.DTOs
 
     public DoctorDto(Doctor doctor)
     {
-        Id = doctor.Id;
+        Id = doctor.UserId;
         Name = doctor.Name;
         Specialty = doctor.Specialty;
         UniversityId = doctor.UniversityId;

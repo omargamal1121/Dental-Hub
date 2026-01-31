@@ -1,17 +1,19 @@
-﻿using System;
+﻿using DentalHub.Application.Commands.Patient;
+using DentalHub.Application.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using DentalHub.Application.Common;
 namespace DentalHub.Application.Services.Patient
 {
  public interface IPatientService
 {
     // Commands
     Task<Result<Guid>> CreateAsync(CreatePatientCommand command);
-    Task<Result> UpdateAsync(UpdatePatientCommand command);
-    Task<Result> DeleteAsync(Guid userId);
+    Task<Result<bool>> UpdateAsync(UpdatePatientCommand command);
+    Task<Result<bool>> DeleteAsync(Guid userId);
 
     // Queries
     Task<Result<PatientDto>> GetByIdAsync(Guid userId);

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {}
+    "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {}
   },
   "projects": {
-    "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
+    "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
+        "projectUniqueName": "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
         "projectName": "DentalHub.Domain",
-        "projectPath": "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
+        "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
         "packagesPath": "C:\\Users\\hayth\\.nuget\\packages\\",
-        "outputPath": "I:\\Another Version in Project\\Dental-Hub\\DentalHub.Domain\\obj\\",
+        "outputPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

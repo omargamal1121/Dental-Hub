@@ -71,3 +71,6 @@ I:\Project Grade\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.
 I:\Project Grade\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\ref\DentalHub.Infrastructure.dll
 I:\Project Grade\Dental-Hub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Application.dll
 I:\Project Grade\Dental-Hub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Application.pdb
+I:\Project 2\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.dll
+I:\Project 2\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\refint\DentalHub.Infrastructure.dll
+I:\Project 2\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.pdb
