@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MediatR;
+using DentalHub.Application.Common;
 namespace DentalHub.Application.Commands.Doctor
 {
    public record UpdateDoctorCommand(
@@ -11,7 +12,7 @@ namespace DentalHub.Application.Commands.Doctor
     string Name,
     string Specialty,
     int UniversityId
-) : IRequest<Result>;
+) : IRequest<Result<Guid>>;
 
 }
 

@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "mfsOgZcLvZ0=",
+  "success": false,
+  "projectFilePath": "I:\\Project 2\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
+=======
   "dgSpecHash": "dBJyOcpC0J8=",
   "success": false,
   "projectFilePath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
+>>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\google.protobuf\\3.32.0\\google.protobuf.3.32.0.nupkg.sha512",
@@ -77,8 +83,13 @@
       "code": "NU1108",
       "level": "Error",
       "message": "Cycle detected. \r\n  DentalHub.Infrastructure -> DentalHub.Application -> DentalHub.Infrastructure.",
+<<<<<<< HEAD
+      "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
+      "filePath": "I:\\Project 2\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
+=======
       "projectPath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
       "filePath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
+>>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
       "libraryId": "DentalHub.Infrastructure",
       "targetGraphs": [
         "net9.0"

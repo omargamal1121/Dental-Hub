@@ -30,7 +30,6 @@
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="UnitOfWork\" />
-    <Folder Include="Specification\" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using DentalHub.Domain.Entities;
 namespace DentalHub.Application.DTOs
 {
    public class PatientCaseDto
