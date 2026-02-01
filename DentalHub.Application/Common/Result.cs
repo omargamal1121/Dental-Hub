@@ -8,7 +8,7 @@ namespace DentalHub.Application.Common
 {
 
 
-public class Result<T> : Result
+public class Result<T> 
 {
     public T Value { get; }
 		public bool IsSuccess { get; }

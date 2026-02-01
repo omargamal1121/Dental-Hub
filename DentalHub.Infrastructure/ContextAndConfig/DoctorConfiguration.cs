@@ -14,6 +14,8 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 	.WithOne(u => u.Doctor)
 	.HasForeignKey<Doctor>(d => d.UserId)
 				   .OnDelete(DeleteBehavior.Cascade);
-        }
-    }
+			builder.HasQueryFilter(cr => cr.DeleteAt != null);
+
+		}
+	}
 }

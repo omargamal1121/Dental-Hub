@@ -1,6 +1,7 @@
 using DentalHub.Application.Commands.Patient;
 using DentalHub.Application.Common;
-using DentalHub.Application.Services.Patient;
+using DentalHub.Application.Services.PatientCaseService;
+using DentalHub.Application.Services.PatientServcie;
 using MediatR;
 
 namespace DentalHub.Application.Handlers.Patient
@@ -14,11 +15,9 @@ namespace DentalHub.Application.Handlers.Patient
             _service = service;
         }
 
-<<<<<<< HEAD
+
         public Task<Result<bool>> Handle(UpdatePatientCommand request, CancellationToken ct)
-=======
-        public Task<Result> Handle(UpdatePatientCommand request, CancellationToken ct)
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
+
             => _service.UpdateAsync(request);
     }
 }

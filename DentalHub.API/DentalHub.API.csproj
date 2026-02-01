@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DentalHub.Application\DentalHub.Application.csproj" />
-    <ProjectReference Include="..\DentalHub.Infrastructure\DentalHub.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

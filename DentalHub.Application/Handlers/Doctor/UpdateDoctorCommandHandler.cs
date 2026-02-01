@@ -1,19 +1,14 @@
 using DentalHub.Application.Commands.Doctor;
 using DentalHub.Application.Common;
-<<<<<<< HEAD
-=======
-using DentalHub.Application.Common.DentalHub.Domain.Common;
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
-using DentalHub.Application.Services.Doctor;
+
+using DentalHub.Application.Services.DoctorService;
 using MediatR;
 
 namespace DentalHub.Application.Handlers.Doctor
 {
-<<<<<<< HEAD
-    public class UpdateDoctorCommandHandler : IRequestHandler<UpdateDoctorCommand, Result<Guid>>
-=======
-    public class UpdateDoctorCommandHandler : IRequestHandler<UpdateDoctorCommand, Result>
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
+
+    public class UpdateDoctorCommandHandler : IRequestHandler<UpdateDoctorCommand, Result<bool>>
+
     {
         private readonly IDoctorService _service;
 
@@ -22,11 +17,9 @@ namespace DentalHub.Application.Handlers.Doctor
             _service = service;
         }
 
-<<<<<<< HEAD
-        public Task<Result<Guid>> Handle(UpdateDoctorCommand request, CancellationToken ct)
-=======
-        public Task<Result> Handle(UpdateDoctorCommand request, CancellationToken ct)
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
+
+        public Task<Result<bool>> Handle(UpdateDoctorCommand request, CancellationToken ct)
+
             => _service.UpdateAsync(request);
     }
 }

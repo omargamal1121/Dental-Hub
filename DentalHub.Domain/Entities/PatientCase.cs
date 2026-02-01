@@ -1,7 +1,7 @@
 ﻿namespace DentalHub.Domain.Entities
 {
-    public class PatientCase
-    {
+    public class PatientCase : BaseEntitiy
+	{
         public Guid Id { get; set; }
         public Guid PatientId { get; set; }
         public string TreatmentType { get; set; }

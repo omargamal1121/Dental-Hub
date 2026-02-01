@@ -1,19 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "I:\\Project 2\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj": {}
-  },
-  "projects": {
-    "I:\\Project 2\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "I:\\Project 2\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj",
-        "projectName": "DentalHub.Application",
-        "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj",
-        "packagesPath": "C:\\Users\\hayth\\.nuget\\packages\\",
-        "outputPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Application\\obj\\",
-=======
     "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj": {}
   },
   "projects": {
@@ -25,7 +12,6 @@
         "projectPath": "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
         "outputPath": "D:\\projects\\DentalHub\\DentalHub.Application\\obj\\",
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -47,19 +33,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-<<<<<<< HEAD
-              "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
-                "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj"
-              },
-              "I:\\Project 2\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj": {
-                "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj"
-=======
               "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
                 "projectPath": "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj"
               },
               "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj": {
                 "projectPath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj"
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
               }
             }
           }
@@ -117,16 +95,6 @@
         }
       }
     },
-<<<<<<< HEAD
-    "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
-        "projectName": "DentalHub.Domain",
-        "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
-        "packagesPath": "C:\\Users\\hayth\\.nuget\\packages\\",
-        "outputPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\obj\\",
-=======
     "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -135,7 +103,6 @@
         "projectPath": "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
         "outputPath": "D:\\projects\\DentalHub\\DentalHub.Domain\\obj\\",
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -214,16 +181,6 @@
         }
       }
     },
-<<<<<<< HEAD
-    "I:\\Project 2\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "I:\\Project 2\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
-        "projectName": "DentalHub.Infrastructure",
-        "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\hayth\\.nuget\\packages\\",
-        "outputPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Infrastructure\\obj\\",
-=======
     "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -232,17 +189,12 @@
         "projectPath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
         "outputPath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\obj\\",
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-<<<<<<< HEAD
-          "C:\\Users\\hayth\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
           "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -251,29 +203,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-<<<<<<< HEAD
-=======
           "C:\\Program Files\\dotnet\\library-packs": {},
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-<<<<<<< HEAD
-              "I:\\Project 2\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj": {
-                "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj"
-              },
-              "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
-                "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj"
-=======
-              "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj": {
-                "projectPath": "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj"
-              },
               "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
                 "projectPath": "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj"
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
               }
             }
           }

@@ -9,7 +9,8 @@ namespace DentalHub.Infrastructure.ContextAndConfig
     {
         public void Configure(EntityTypeBuilder<CaseRequest> builder)
         {
-            builder.HasKey(x => x.Id);
+			
+			builder.HasKey(x => x.Id);
 
 			builder
 				.HasOne(c => c.Student)
@@ -25,6 +26,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 				.HasOne(c => c.PatientCase)
 				.WithMany(p => p.CaseRequests)
 				.HasForeignKey(c => c.PatientCaseId);
+			builder.HasQueryFilter(cr => cr.DeleteAt != null);
 
 		}
 	}
