@@ -1,7 +1,8 @@
 using DentalHub.Application.Commands.Patient;
 using DentalHub.Application.Common;
 
-using DentalHub.Application.Services.Patient;
+//using DentalHub.Application.Services.Patient;
+using DentalHub.Application.Services.PatientServcie;
 using MediatR;
 
 namespace DentalHub.Application.Handlers.Patient

@@ -2,8 +2,8 @@
 
 namespace DentalHub.Domain.Entities
 {
-    public class Student
-    {
+    public class Student : BaseEntitiy
+	{
         public Guid UserId { get; set; }
         public string University { get; set; }
         public int Level { get; set; }

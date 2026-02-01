@@ -12,7 +12,7 @@ namespace DentalHub.Application.Commands.Doctor
     string Name,
     string Specialty,
     int UniversityId
-) : IRequest<Result<Guid>>;
+) : IRequest<Result<bool>>;
 
 }
 

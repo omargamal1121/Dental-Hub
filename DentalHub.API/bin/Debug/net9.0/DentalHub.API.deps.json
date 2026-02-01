@@ -9,7 +9,6 @@
       "DentalHub.API/1.0.0": {
         "dependencies": {
           "DentalHub.Application": "1.0.0",
-          "DentalHub.Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.12",
@@ -356,8 +355,7 @@
       "Microsoft.CodeAnalysis.Workspaces.MSBuild/4.8.0": {
         "dependencies": {
           "Microsoft.CodeAnalysis.Common": "4.8.0",
-          "Microsoft.CodeAnalysis.Workspaces.Common": "4.8.0",
-          "System.Text.Json": "9.0.12"
+          "Microsoft.CodeAnalysis.Workspaces.Common": "4.8.0"
         },
         "runtime": {
           "lib/net7.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll": {
@@ -444,8 +442,7 @@
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.12",
           "Microsoft.Extensions.DependencyModel": "9.0.12",
           "Microsoft.Extensions.Logging": "9.0.12",
-          "Mono.TextTemplating": "3.0.0",
-          "System.Text.Json": "9.0.12"
+          "Mono.TextTemplating": "3.0.0"
         },
         "runtime": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Design.dll": {
@@ -651,9 +648,6 @@
         }
       },
       "Microsoft.OpenApi/2.3.0": {
-        "dependencies": {
-          "System.Text.Json": "9.0.12"
-        },
         "runtime": {
           "lib/net8.0/Microsoft.OpenApi.dll": {
             "assemblyVersion": "2.3.0.0",
@@ -895,14 +889,6 @@
           }
         }
       },
-      "System.Text.Json/9.0.12": {
-        "runtime": {
-          "lib/net9.0/System.Text.Json.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.1225.60609"
-          }
-        }
-      },
       "System.Windows.Extensions/8.0.0": {
         "runtime": {
           "lib/net8.0/System.Windows.Extensions.dll": {
@@ -930,6 +916,7 @@
       "DentalHub.Application/1.0.0": {
         "dependencies": {
           "DentalHub.Domain": "1.0.0",
+          "DentalHub.Infrastructure": "1.0.0",
           "MediatR": "14.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore": "9.0.12",
@@ -957,7 +944,6 @@
       },
       "DentalHub.Infrastructure/1.0.0": {
         "dependencies": {
-          "DentalHub.Application": "1.0.0",
           "DentalHub.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore": "9.0.12",
@@ -1399,13 +1385,6 @@
       "sha512": "sha512-v/BBylw7XevuAsHXoX9dDUUfmBIcUf7Lkz8K3ZXIKz3YRKpw8YftpSir4n4e/jDTKFoaK37AsC3xnk+GNFI1Ow==",
       "path": "system.security.permissions/8.0.0",
       "hashPath": "system.security.permissions.8.0.0.nupkg.sha512"
-    },
-    "System.Text.Json/9.0.12": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-wHv2GrfYd4/uaoZQJj6NOR8M0AlnWJ2/MFAHQomSMqk+/rSIY6AlcitL6LXbTgXf8+ngGjAAmQm17kfbNplQ9w==",
-      "path": "system.text.json/9.0.12",
-      "hashPath": "system.text.json.9.0.12.nupkg.sha512"
     },
     "System.Windows.Extensions/8.0.0": {
       "type": "package",

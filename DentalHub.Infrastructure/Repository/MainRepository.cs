@@ -15,7 +15,7 @@ namespace DentalHub.Infrastructure.Repository
             _dbSet = _context.Set<T>();
         }
 
-        // ========== Read Operations with Projection ==========
+   
 
         public async Task<List<TResult>> GetAllAsync<TResult>(
             ISpecificationWithProjection<T, TResult> specification)

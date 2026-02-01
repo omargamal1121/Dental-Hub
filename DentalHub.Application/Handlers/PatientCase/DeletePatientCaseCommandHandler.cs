@@ -1,6 +1,7 @@
 using DentalHub.Application.Commands.PatientCase;
 using DentalHub.Application.Common;
-using DentalHub.Application.Services.PatientCase;
+using DentalHub.Application.Services.PatientCaseService;
+using DentalHub.Application.Services.PatientCaseService;
 using MediatR;
 
 namespace DentalHub.Application.Handlers.PatientCase

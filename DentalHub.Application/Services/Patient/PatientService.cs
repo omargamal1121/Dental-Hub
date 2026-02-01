@@ -1,21 +1,20 @@
 ﻿using DentalHub.Application.Common;
-using DentalHub.Domain.Entities;
 using DentalHub.Application.Commands.Patient;
 using DentalHub.Application.DTOs;
-<<<<<<< HEAD
-=======
+using DentalHub.Infrastructure.UnitOfWork;
+using DentalHub.Infrastructure.Specification;
+using DentalHub.Domain.Entities;
 
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
-namespace DentalHub.Application.Services.Patient
+namespace DentalHub.Application.Services.PatientServcie
 {
   public class PatientService : IPatientService
 {
-    private readonly IPatientRepository _patientRepo;
+    private readonly IUnitOfWork  _unitOfWork;
 
-    public PatientService(IPatientRepository patientRepo)
+    public PatientService(IUnitOfWork unitOfWork )
     {
-        _patientRepo = patientRepo;
-    }
+       _unitOfWork = unitOfWork;
+		}
 
     public async Task<Result<Guid>> CreateAsync(CreatePatientCommand command)
     {
@@ -26,36 +25,36 @@ namespace DentalHub.Application.Services.Patient
             Phone = command.Phone
         };
 
-        await _patientRepo.AddAsync(patient);
+        await _unitOfWork.Patients.AddAsync(patient);
         return Result<Guid>.Success(patient.UserId);
     }
 
     public async Task<Result<bool>> UpdateAsync(UpdatePatientCommand command)
     {
-        var patient = await _patientRepo.GetByIdAsync(command.UserId);
+        var patient = await _unitOfWork.Patients.GetByIdAsync(command.UserId);
         if (patient is null)
             return Result<bool>.Failure("Patient not found");
 
         patient.Age = command.Age;
         patient.Phone = command.Phone;
 
-        await _patientRepo.UpdateAsync(patient);
-        return Result<bool>.Success();
+         _unitOfWork.Patients.Update(patient);
+        return Result<bool>.Success(true);
     }
 
     public async Task<Result<bool>> DeleteAsync(Guid userId)
     {
-        var patient = await _patientRepo.GetByIdAsync(userId);
+        var patient = await _unitOfWork.Patients.GetByIdAsync(userId);
         if (patient is null)
             return Result<bool>.Failure("Patient not found");
 
-        await _patientRepo.DeleteAsync(patient);
-        return Result<bool>.Success();
+         _unitOfWork.Patients.Remove(patient);
+        return Result<bool>.Success(true);
     }
 
     public async Task<Result<PatientDto>> GetByIdAsync(Guid userId)
     {
-        var patient = await _patientRepo.GetByIdAsync(userId);
+        var patient = await _unitOfWork.Patients.GetByIdAsync(userId);
         if (patient is null)
             return Result<PatientDto>.Failure("Patient not found");
 
@@ -64,7 +63,7 @@ namespace DentalHub.Application.Services.Patient
 
     public async Task<Result<List<PatientDto>>> GetAllAsync()
     {
-        var patients = await _patientRepo.GetAllAsync();
+        var patients = await _unitOfWork.Patients.GetAllAsync(new BaseSpecification<Patient> { });
         return Result<List<PatientDto>>.Success(
             patients.Select(p => new PatientDto(p)).ToList());
     }

@@ -1,7 +1,7 @@
 ﻿namespace DentalHub.Domain.Entities
 {
-    public class Session
-    {
+    public class Session : BaseEntitiy
+	{
         public Guid Id { get; set; }
         public Guid CaseId { get; set; }
         public Guid StudentId { get; set; }

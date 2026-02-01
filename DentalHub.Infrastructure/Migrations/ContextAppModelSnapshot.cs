@@ -28,6 +28,12 @@ namespace DentalHub.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -43,6 +49,9 @@ namespace DentalHub.Infrastructure.Migrations
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -60,12 +69,25 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Specialty")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("UniversityId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("UserId");
 
@@ -77,6 +99,12 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("MediaUrl")
                         .IsRequired()
@@ -90,6 +118,9 @@ namespace DentalHub.Infrastructure.Migrations
 
                     b.Property<Guid?>("SessionId")
                         .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -110,9 +141,18 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("UserId");
 
@@ -125,6 +165,12 @@ namespace DentalHub.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<Guid>("PatientId")
                         .HasColumnType("char(36)");
 
@@ -134,6 +180,9 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<string>("TreatmentType")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -151,6 +200,12 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<Guid>("CaseId")
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<Guid>("PatientId")
                         .HasColumnType("char(36)");
 
@@ -162,6 +217,9 @@ namespace DentalHub.Infrastructure.Migrations
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -180,12 +238,21 @@ namespace DentalHub.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Note")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<Guid>("SessionId")
                         .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -199,6 +266,12 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
@@ -208,6 +281,9 @@ namespace DentalHub.Infrastructure.Migrations
 
                     b.Property<int>("UniversityId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("UserId");
 

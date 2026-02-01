@@ -733,7 +733,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "DentalHub.Application": "1.0.0",
           "DentalHub.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore": "9.0.12",
@@ -1823,19 +1822,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "I:\\Project 2\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj",
-      "projectName": "DentalHub.Application",
-      "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj",
-      "packagesPath": "C:\\Users\\hayth\\.nuget\\packages\\",
-      "outputPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Application\\obj\\",
-=======
       "projectUniqueName": "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj",
       "projectName": "DentalHub.Application",
       "projectPath": "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
       "outputPath": "D:\\projects\\DentalHub\\DentalHub.Application\\obj\\",
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1857,19 +1848,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-<<<<<<< HEAD
-            "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
-              "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj"
-            },
-            "I:\\Project 2\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj": {
-              "projectPath": "I:\\Project 2\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj"
-=======
             "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
               "projectPath": "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj"
             },
             "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj": {
               "projectPath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj"
->>>>>>> 06a39604c75770df99dfba2cd9260a57c8d96007
             }
           }
         }
@@ -1926,16 +1909,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1108",
-      "level": "Error",
-      "message": "Cycle detected. \r\n  DentalHub.Application -> DentalHub.Infrastructure -> DentalHub.Application.",
-      "libraryId": "DentalHub.Application",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  }
 }

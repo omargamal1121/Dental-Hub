@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DentalHub.Domain\DentalHub.Domain.csproj" />
-	  <ProjectReference Include="..\DentalHub.Infrastructure\DentalHub.Infrastructure.csproj"/>
+	  <ProjectReference Include="..\DentalHub.Infrastructure\DentalHub.Infrastructure.csproj" />
 
   </ItemGroup>
 

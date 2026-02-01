@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DentalHub.Application.Commands.PatientCase;
+using DentalHub.Application.Common;
+using DentalHub.Application.DTOs;
 
-namespace DentalHub.Application.Services.PatientCase
+namespace DentalHub.Application.Services.PatientCaseService
 {
    public interface IPatientCaseService
 {
     // Commands
     Task<Result<Guid>> CreateAsync(CreatePatientCaseCommand command);
-    Task<Result> UpdateAsync(UpdatePatientCaseCommand command);
-    Task<Result> DeleteAsync(Guid id);
+    Task<Result<bool>> UpdateAsync(UpdatePatientCaseCommand command);
+    Task<Result<bool>> DeleteAsync(Guid id);
 
     // Queries
     Task<Result<PatientCaseDto>> GetByIdAsync(Guid id);
-    Task<Result<List<PatientCaseDto>>> GetByPatientIdAsync(Guid patientId);
+    //Task<Result<List<PatientCaseDto>>> GetByPatientIdAsync(Guid patientId);
 }
 
 }
