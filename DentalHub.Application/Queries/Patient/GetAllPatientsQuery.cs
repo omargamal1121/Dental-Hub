@@ -1,10 +1,9 @@
 ﻿using DentalHub.Application.Common;
-using DentalHub.Application.DTOs;
 using MediatR;
+using DentalHub.Application.DTOs.Patients;
 
 namespace DentalHub.Application.Queries.Patient
 {
    public record GetAllPatientsQuery()
     : IRequest<Result<List<PatientDto>>>;
 }
-

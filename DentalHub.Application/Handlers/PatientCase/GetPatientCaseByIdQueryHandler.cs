@@ -1,8 +1,7 @@
 using DentalHub.Application.Common;
-using DentalHub.Application.DTOs;
+using DentalHub.Application.DTOs.Cases;
 using DentalHub.Application.Queries.PatientCase;
-using DentalHub.Application.Services.PatientCaseService;
-using DentalHub.Application.Services.PatientCaseService;
+using DentalHub.Application.Services.Cases;
 using MediatR;
 
 namespace DentalHub.Application.Handlers.PatientCase
@@ -16,7 +15,9 @@ namespace DentalHub.Application.Handlers.PatientCase
             _service = service;
         }
 
-        public Task<Result<PatientCaseDto>> Handle(GetPatientCaseByIdQuery request, CancellationToken ct)
-            => _service.GetByIdAsync(request.Id);
+        public async Task<Result<PatientCaseDto>> Handle(GetPatientCaseByIdQuery request, CancellationToken ct)
+        {
+            return await _service.GetCaseByIdAsync(request.Id);
+        }
     }
 }

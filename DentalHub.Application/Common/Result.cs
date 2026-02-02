@@ -1,37 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DentalHub.Application.Common
 {
-
-
-public class Result<T> 
-{
-    public T Value { get; }
-		public bool IsSuccess { get; }
-		public bool IsFailure => !IsSuccess;
-		public string Error { get; }
-
-
-		private Result(bool isSuccess, T value, string error)
-      
+    /// <summary>
+    /// Generic result wrapper for service operations
+    /// يستخدم لإرجاع نتائج العمليات بشكل موحد
+    /// </summary>
+    public class Result<T>
     {
-            IsSuccess = isSuccess;
-            Error = error;
+        public bool IsSuccess { get; set; }
+        public T? Data { get; set; }
+        public string? Message { get; set; }
+        public List<string>? Errors { get; set; }
 
+        // Success Result
+        public static Result<T> Success(T data, string? message = null)
+        {
+            return new Result<T>
+            {
+                IsSuccess = true,
+                Data = data,
+                Message = message
+            };
+        }
 
-			Value = value;
+        // Failure Result
+        public static Result<T> Failure(string error)
+        {
+            return new Result<T>
+            {
+                IsSuccess = false,
+                Errors = new List<string> { error }
+            };
+        }
+
+        public static Result<T> Failure(List<string> errors)
+        {
+            return new Result<T>
+            {
+                IsSuccess = false,
+                Errors = errors
+            };
+        }
     }
 
-    public static Result<T> Success(T value)
-        => new(true, value, null);
+    /// <summary>
+    /// Non-generic result for operations that don't return data
+    /// للعمليات اللي مش بترجع بيانات (مثل Delete)
+    /// </summary>
+    public class Result
+    {
+        public bool IsSuccess { get; set; }
+        public string? Message { get; set; }
+        public List<string>? Errors { get; set; }
 
-    public static Result<T> Failure(string error)
-        => new(false, default!, error);
+        public static Result Success(string? message = null)
+        {
+            return new Result
+            {
+                IsSuccess = true,
+                Message = message
+            };
+        }
+
+        public static Result Failure(string error)
+        {
+            return new Result
+            {
+                IsSuccess = false,
+                Errors = new List<string> { error }
+            };
+        }
+
+        public static Result Failure(List<string> errors)
+        {
+            return new Result
+            {
+                IsSuccess = false,
+                Errors = errors
+            };
+        }
+    }
 }
-
-}
-

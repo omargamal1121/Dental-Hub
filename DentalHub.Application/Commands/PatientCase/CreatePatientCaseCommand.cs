@@ -9,4 +9,3 @@ namespace DentalHub.Application.Commands.PatientCase
 ) : IRequest<Result<Guid>>;
 
 }
-

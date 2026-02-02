@@ -1,6 +1,6 @@
 using DentalHub.Application.Commands.Patient;
 using DentalHub.Application.Common;
-using DentalHub.Application.Services.PatientServcie;
+using DentalHub.Application.Services.Patients;
 using MediatR;
 
 namespace DentalHub.Application.Handlers.Patient
@@ -14,9 +14,16 @@ namespace DentalHub.Application.Handlers.Patient
             _service = service;
         }
 
+        public async Task<Result<bool>> Handle(DeletePatientCommand request, CancellationToken ct)
+        {
+            var result = await _service.DeletePatientAsync(request.UserId);
 
-        public Task<Result<bool>> Handle(DeletePatientCommand request, CancellationToken ct)
+            if (!result.IsSuccess)
+            {
+                return Result<bool>.Failure(result.Message ?? "Delete failed");
+            }
 
-            => _service.DeleteAsync(request.UserId);
+            return Result<bool>.Success(true, "Patient deleted successfully");
+        }
     }
 }

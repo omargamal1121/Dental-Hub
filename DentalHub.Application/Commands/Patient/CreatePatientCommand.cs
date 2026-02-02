@@ -11,7 +11,9 @@ namespace DentalHub.Application.Commands.Patient
     public record CreatePatientCommand(
     Guid UserId,
     int Age,
+    string FullName,
+    string Email,
+    string Password,
     string Phone
 ) : IRequest<Result<Guid>>;
 }
-
