@@ -1,26 +1,32 @@
-//using DentalHub.Application.Commands.Doctor;
-//using DentalHub.Application.Common;
+using DentalHub.Application.Commands.Doctor;
+using DentalHub.Application.Common;
+using DentalHub.Application.Services.Doctors;
+using MediatR;
 
-//using DentalHub.Application.Services.DoctorService;
-//using MediatR;
-//using DentalHub.Application.Handlers;
-//using DentalHub.Application.Services.DoctorService;
-//namespace DentalHub.Application.Handlers.Doctor
-//{
-//    public class DeleteDoctorCommandHandler : IRequestHandler<DeleteDoctorCommand, Result<Guid>>
+namespace DentalHub.Application.Handlers.Doctor
+{
+    /// <summary>
+    /// Fixed: Changed return type from Result<Guid> to Result<bool> for consistency
+    /// </summary>
+    public class DeleteDoctorCommandHandler : IRequestHandler<DeleteDoctorCommand, Result<bool>>
+    {
+        private readonly IDoctorService _service;
 
+        public DeleteDoctorCommandHandler(IDoctorService service)
+        {
+            _service = service;
+        }
 
+        public async Task<Result<bool>> Handle(DeleteDoctorCommand request, CancellationToken ct)
+        {
+            var result = await _service.DeleteDoctorAsync(request.Id);
 
-//    {
-//        private readonly IDoctorService _service;
+            if (!result.IsSuccess)
+            {
+                return Result<bool>.Failure(result.Message ?? "Delete failed");
+            }
 
-//        public DeleteDoctorCommandHandler(IDoctorService service)
-//        {
-//            _service = service;
-//        }
-
-//        public Task<Result<Guid>> Handle(DeleteDoctorCommand request, CancellationToken ct)
-
-//            => _service.DeleteAsync(request.Id);
-//    }
-//}
+            return Result<bool>.Success(true, "Doctor deleted successfully");
+        }
+    }
+}

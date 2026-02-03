@@ -16,3 +16,21 @@ D:\projects\DentalHub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Applicati
 D:\projects\DentalHub\DentalHub.Application\obj\Debug\net9.0\refint\DentalHub.Application.dll
 D:\projects\DentalHub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.pdb
 D:\projects\DentalHub\DentalHub.Application\obj\Debug\net9.0\ref\DentalHub.Application.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.csproj.AssemblyReference.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.AssemblyInfoInputs.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.AssemblyInfo.cs
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.csproj.CoreCompileInputs.cache
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.sourcelink.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\refint\DentalHub.Application.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.pdb
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Application.deps.json
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Application.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Application.pdb
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Domain.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Infrastructure.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Domain.pdb
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Infrastructure.pdb
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHu.CADDDB1E.Up2Date
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\ref\DentalHub.Application.dll

@@ -1,8 +1,8 @@
-using DentalHub.Application.Common;
-
-using DentalHub.Application.DTOs;
+﻿using DentalHub.Application.Common;
+using DentalHub.Application.DTOs.Doctors;
 using DentalHub.Application.Queries.Doctor;
-using DentalHub.Application.Services.DoctorService;
+using DentalHub.Application.Services;
+using DentalHub.Application.Services.Doctors;
 using MediatR;
 
 namespace DentalHub.Application.Handlers.Doctor
@@ -16,7 +16,10 @@ namespace DentalHub.Application.Handlers.Doctor
             _service = service;
         }
 
-        public Task<Result<List<DoctorDto>>> Handle(GetAllDoctorsQuery request, CancellationToken ct)
-            => _service.GetAllAsync();
+        public async Task<Result<List<DoctorDto>>> Handle(GetAllDoctorsQuery request, CancellationToken ct)
+        {
+            //Service_GetAllDoctorsAsync_GetAllAsync
+            return await _service.GetAllDoctorsAsync();
+        }
     }
 }

@@ -3606,23 +3606,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DELL\\.nuget\\packages\\": {},
+    "C:\\Users\\Saga.Mohamed\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
+      "projectUniqueName": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
       "projectName": "DentalHub.Infrastructure",
-      "projectPath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\obj\\",
+      "projectPath": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\Saga.Mohamed\\.nuget\\packages\\",
+      "outputPath": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Saga.Mohamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3631,15 +3631,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
-              "projectPath": "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj"
+            "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
+              "projectPath": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj"
             }
           }
         }
