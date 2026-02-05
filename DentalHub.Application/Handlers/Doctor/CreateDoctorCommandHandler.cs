@@ -17,12 +17,11 @@ namespace DentalHub.Application.Handlers.Doctor
 
         public async Task<Result<Guid>> Handle(CreateDoctorCommand request, CancellationToken ct)
         {
-            // Use real data  from the request
             var registerDto = new RegisterDoctorDto
             {
                 FullName = request.Name,
-                Email = request.Email,             
-                Password = request.Password,     
+                Email = request.Email,
+                Password = request.Password,
                 Name = request.Name,
                 Specialty = request.Specialty,
                 UniversityId = request.UniversityId
@@ -32,10 +31,10 @@ namespace DentalHub.Application.Handlers.Doctor
 
             if (!result.IsSuccess)
             {
-                return Result<Guid>.Failure(result.Message ?? "Doctor creation failed");
+                return Result<Guid>.Failure(result.Errors ?? new List<string> { result.Message ?? "Creation failed" }, result.Status);
             }
 
-            return Result<Guid>.Success(result.Data.UserId, "Doctor created successfully");
+            return Result<Guid>.Success(result.Data.UserId, result.Message, result.Status);
         }
     }
 }

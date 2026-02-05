@@ -1,7 +1,8 @@
 using DentalHub.Application.Commands.Patient;
 using DentalHub.Application.Common;
-using DentalHub.Application.Services.Patients;
 using DentalHub.Application.DTOs.Patients;
+
+using DentalHub.Application.Services.Patients;
 using MediatR;
 
 namespace DentalHub.Application.Handlers.Patient
@@ -20,18 +21,22 @@ namespace DentalHub.Application.Handlers.Patient
             var dto = new UpdatePatientDto
             {
                 UserId = request.UserId,
-                Age = request.Age,
-                Phone = request.Phone
+                FullName = request.FullName,
+                Phone = request.PhoneNumber,
+                NationalId = request.NationalId,
+                BirthDate = request.BirthDate,
+                
+                Gender = request.Gender
             };
 
             var result = await _service.UpdatePatientAsync(dto);
 
             if (!result.IsSuccess)
             {
-                return Result<bool>.Failure(result.Message ?? "Update failed");
+                return Result<bool>.Failure(result.Errors ?? new List<string> { result.Message ?? "Update failed" }, result.Status);
             }
 
-            return Result<bool>.Success(true, "Patient updated successfully");
+            return Result<bool>.Success(true, result.Message ?? "Patient updated successfully", result.Status);
         }
     }
 }

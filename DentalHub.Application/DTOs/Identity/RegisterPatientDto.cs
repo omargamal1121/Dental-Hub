@@ -31,5 +31,8 @@ namespace DentalHub.Application.DTOs.Identity
         [Required(ErrorMessage = "Age is required")]
         [Range(5, 120, ErrorMessage = "Age must be between 5 and 120")]
         public int Age { get; set; }
-    }
+		public Gender  Gender { get; set; }
+		public string NationalId { get; set; }
+		public DateTime BirthDate { get; set; }
+	}
 }

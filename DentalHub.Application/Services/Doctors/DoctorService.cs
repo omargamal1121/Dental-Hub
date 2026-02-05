@@ -20,9 +20,6 @@ namespace DentalHub.Application.Services.Doctors
 
         #region Doctor Profile
 
-        /// <summary>
-        /// Get doctor by user ID
-        /// </summary>
         public async Task<Result<DoctorDto>> GetDoctorByIdAsync(Guid userId)
         {
             try
@@ -67,9 +64,7 @@ namespace DentalHub.Application.Services.Doctors
             }
         }
 
-        /// <summary>
-        /// Get all doctors with pagination
-        /// </summary>
+
         public async Task<Result<List<DoctorDto>>> GetAllDoctorsAsync(int page = 1, int pageSize = 10)
         {
             try
@@ -110,10 +105,7 @@ namespace DentalHub.Application.Services.Doctors
             }
         }
 
-        /// <summary>
-        /// Get doctors by university
-        /// الدكاترة حسب الجامعة
-        /// </summary>
+   
         public async Task<Result<List<DoctorDto>>> GetDoctorsByUniversityAsync(
             int universityId, int page = 1, int pageSize = 10)
         {
@@ -156,9 +148,7 @@ namespace DentalHub.Application.Services.Doctors
             }
         }
 
-        /// <summary>
-        /// Update doctor information
-        /// </summary>
+
         public async Task<Result<DoctorDto>> UpdateDoctorAsync(UpdateDoctorDto dto)
         {
             try
@@ -205,9 +195,6 @@ namespace DentalHub.Application.Services.Doctors
             }
         }
 
-        /// <summary>
-        /// Soft delete doctor
-        /// </summary>
         public async Task<Result> DeleteDoctorAsync(Guid userId)
         {
             try

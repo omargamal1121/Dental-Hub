@@ -1,7 +1,7 @@
 ﻿using DentalHub.Application.Commands.PatientCase;
 using DentalHub.Application.Common;
-using DentalHub.Application.Services.Cases;
 using DentalHub.Application.DTOs.Cases;
+using DentalHub.Application.Services.Cases;
 using MediatR;
 
 namespace DentalHub.Application.Handlers.PatientCase
@@ -20,17 +20,19 @@ namespace DentalHub.Application.Handlers.PatientCase
             var dto = new CreateCaseDto
             {
                 PatientId = request.PatientId,
-                TreatmentType = request.TreatmentType
+              
+                Description = request.Description,
+             
             };
 
             var result = await _service.CreateCaseAsync(dto);
 
             if (!result.IsSuccess)
             {
-                return Result<Guid>.Failure(result.Message ?? "Creation failed");
+                return Result<Guid>.Failure(result.Errors ?? new List<string> { result.Message ?? "Case creation failed" }, result.Status);
             }
 
-            return Result<Guid>.Success(result.Data.Id, "Case created successfully");
+            return Result<Guid>.Success(result.Data.Id, result.Message, result.Status);
         }
     }
 }

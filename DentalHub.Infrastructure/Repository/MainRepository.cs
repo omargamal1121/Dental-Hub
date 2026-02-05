@@ -35,7 +35,7 @@ namespace DentalHub.Infrastructure.Repository
                 .FirstOrDefaultAsync();
         }
 
-        // ========== Read Operations without Projection ==========
+      
 
         public async Task<List<T>> GetAllAsync(ISpecification<T> specification)
         {
@@ -78,7 +78,6 @@ namespace DentalHub.Infrastructure.Repository
             return await query.AnyAsync();
         }
 
-        // ========== Write Operations ==========
 
         public async Task<T> AddAsync(T item)
         {

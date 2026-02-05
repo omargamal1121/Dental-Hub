@@ -1,18 +1,13 @@
-﻿using DentalHub.Application.Common;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using DentalHub.Application.Common;
 
 namespace DentalHub.Application.Commands.PatientCase
 {
- public record UpdatePatientCaseCommand(
-    Guid Id,
-    string TreatmentType,
-    CaseStatus Status
-) : IRequest<Result<bool>>;
-
+    public record UpdatePatientCaseCommand(
+        Guid Id,
+        string Title,
+        string Description,
+        int CaseTypeId,
+        string Status
+    ) : IRequest<Result<bool>>;
 }
-

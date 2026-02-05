@@ -7,10 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.Cases
 {
-    /// <summary>
-    /// NEW: Complete implementation of CaseRequestService
-    /// Handles student requests to doctors for case approval
-    /// </summary>
+   
     public class CaseRequestService : ICaseRequestService
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -24,15 +21,12 @@ namespace DentalHub.Application.Services.Cases
 
         #region Create Request
 
-        /// <summary>
-        /// Create a new case request
-        /// الطالب يعمل طلب للدكتور للموافقة على حالة
-        /// </summary>
+    
         public async Task<Result<CaseRequestDto>> CreateRequestAsync(CreateCaseRequestDto dto)
         {
             try
             {
-                // VALIDATION 1: Check if patient case exists and is available (Pending)
+               
                 var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(dto.PatientCaseId);
                 if (patientCase == null)
                 {
@@ -45,7 +39,7 @@ namespace DentalHub.Application.Services.Cases
                         $"Case is not available. Current status: {patientCase.Status}");
                 }
 
-                // VALIDATION 2: Check if student exists
+             
                 var student = await _unitOfWork.Students.GetByIdAsync(
                     new BaseSpecification<Student>(s => s.UserId == dto.StudentId));
                 if (student == null)
@@ -61,7 +55,7 @@ namespace DentalHub.Application.Services.Cases
                     return Result<CaseRequestDto>.Failure("Doctor not found");
                 }
 
-                // BUSINESS RULE 1: Check if student already has a pending/approved request for this case
+           
                 var existingRequestSpec = new BaseSpecification<CaseRequest>(cr =>
                     cr.PatientCaseId == dto.PatientCaseId &&
                     cr.StudentId == dto.StudentId &&
@@ -74,7 +68,7 @@ namespace DentalHub.Application.Services.Cases
                         $"You already have a {existingRequest.Status} request for this case");
                 }
 
-                // BUSINESS RULE 2: Check if case already has an approved request from another student
+
                 var approvedRequestSpec = new BaseSpecification<CaseRequest>(cr =>
                     cr.PatientCaseId == dto.PatientCaseId &&
                     cr.Status == RequestStatus.Approved);
@@ -86,7 +80,7 @@ namespace DentalHub.Application.Services.Cases
                         "This case has already been approved for another student");
                 }
 
-                // Create the request
+           
                 var caseRequest = new CaseRequest
                 {
                     Id = Guid.NewGuid(),
@@ -118,10 +112,7 @@ namespace DentalHub.Application.Services.Cases
 
         #region Get Requests
 
-        /// <summary>
-        /// Get all requests for a specific doctor
-        /// الطلبات اللي جايالو الدكتور
-        /// </summary>
+
         public async Task<Result<List<CaseRequestDto>>> GetRequestsByDoctorIdAsync(
             Guid doctorId, int page = 1, int pageSize = 10)
         {
@@ -164,10 +155,6 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        /// <summary>
-        /// Get all requests made by a specific student
-        /// الطلبات اللي الطالب عملها
-        /// </summary>
         public async Task<Result<List<CaseRequestDto>>> GetRequestsByStudentIdAsync(
             Guid studentId, int page = 1, int pageSize = 10)
         {
@@ -210,9 +197,6 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        /// <summary>
-        /// Get request by ID
-        /// </summary>
         public async Task<Result<CaseRequestDto>> GetRequestByIdAsync(Guid requestId)
         {
             try
@@ -261,10 +245,7 @@ namespace DentalHub.Application.Services.Cases
 
         #region Approve/Reject Request
 
-        /// <summary>
-        /// Approve or reject a case request
-        /// الدكتور يوافق أو يرفض الطلب
-        /// </summary>
+ 
         public async Task<Result<CaseRequestDto>> ApproveOrRejectRequestAsync(ApproveCaseRequestDto dto)
         {
             try
@@ -357,10 +338,7 @@ namespace DentalHub.Application.Services.Cases
 
         #region Cancel Request
 
-        /// <summary>
-        /// Cancel a pending request
-        /// الطالب يلغي الطلب بتاعه
-        /// </summary>
+
         public async Task<Result> CancelRequestAsync(Guid requestId, Guid studentId)
         {
             try
@@ -372,19 +350,19 @@ namespace DentalHub.Application.Services.Cases
                     return Result.Failure("Request not found");
                 }
 
-                // AUTHORIZATION: Verify that this student owns the request
+          
                 if (request.StudentId != studentId)
                 {
                     return Result.Failure("You are not authorized to cancel this request");
                 }
 
-                // Can only cancel pending requests
+       
                 if (request.Status != RequestStatus.Pending)
                 {
                     return Result.Failure($"Cannot cancel a {request.Status.ToString().ToLower()} request");
                 }
 
-                // Soft delete by setting DeleteAt
+           
                 request.DeleteAt = DateTime.UtcNow;
                 _unitOfWork.CaseRequests.Update(request);
                 await _unitOfWork.SaveChangesAsync();

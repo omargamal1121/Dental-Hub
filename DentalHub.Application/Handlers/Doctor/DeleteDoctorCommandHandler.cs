@@ -5,9 +5,6 @@ using MediatR;
 
 namespace DentalHub.Application.Handlers.Doctor
 {
-    /// <summary>
-    /// Fixed: Changed return type from Result<Guid> to Result<bool> for consistency
-    /// </summary>
     public class DeleteDoctorCommandHandler : IRequestHandler<DeleteDoctorCommand, Result<bool>>
     {
         private readonly IDoctorService _service;
@@ -20,13 +17,11 @@ namespace DentalHub.Application.Handlers.Doctor
         public async Task<Result<bool>> Handle(DeleteDoctorCommand request, CancellationToken ct)
         {
             var result = await _service.DeleteDoctorAsync(request.Id);
-
-            if (!result.IsSuccess)
+             if (!result.IsSuccess)
             {
-                return Result<bool>.Failure(result.Message ?? "Delete failed");
+                return Result<bool>.Failure(result.Errors ?? new List<string> { result.Message ?? "Delete failed" }, result.Status);
             }
-
-            return Result<bool>.Success(true, "Doctor deleted successfully");
+            return Result<bool>.Success(true, result.Message ?? "Doctor deleted successfully", result.Status);
         }
     }
 }

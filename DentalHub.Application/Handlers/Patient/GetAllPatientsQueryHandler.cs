@@ -17,7 +17,7 @@ namespace DentalHub.Application.Handlers.Patient
 
         public async Task<Result<List<PatientDto>>> Handle(GetAllPatientsQuery request, CancellationToken ct)
         {
-            return await _service.GetAllPatientsAsync();
+            return await _service.GetAllPatientsAsync(request.PageNumber, request.PageSize);
         }
     }
 }

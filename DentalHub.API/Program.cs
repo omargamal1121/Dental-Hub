@@ -1,9 +1,14 @@
-﻿using DentalHub.Application.Extensions;
+﻿using DentalHub.API.Middleware;
+using DentalHub.Application.Extensions;
+using DentalHub.Application.Services.Auth;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.ContextAndConfig;
 using DentalHub.Infrastructure.Extensions;
-using DentalHub.API.Middleware;
+using Hangfire;
+using Hangfire.MySql;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Serilog;
 
 namespace DentalHub.API
 {
@@ -13,14 +18,43 @@ namespace DentalHub.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // ========== Add Controllers ==========
-            builder.Services.AddControllers();
+			Log.Logger = new LoggerConfiguration()
+	    .MinimumLevel.Information()
+	    .WriteTo.Console()
+	    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+	    .CreateLogger();
+			// ========== Add Controllers ==========
+			builder.Services.AddControllers();
+            
+			builder.Host.UseSerilog();
 
-            // ========== Add API Explorer for Swagger ==========
-            builder.Services.AddEndpointsApiExplorer();
+			// ========== Add API Explorer for Swagger ==========
+			builder.Services.AddEndpointsApiExplorer();
+       
+            builder.Services.AddScoped<ITokenService, TokenService>();
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+            builder.Services.AddScoped<IPasswordService, PasswordService>();
+      //      builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<IAccountEmailService, AccountEmailService>();
+			builder.Services.AddHangfire(config =>
+			config.UseStorage(
+				new MySqlStorage(
+					builder.Configuration.GetConnectionString("DefaultConnection"),
+					new MySqlStorageOptions
+					{
+						TablesPrefix = "Hangfire_",
+						QueuePollInterval = TimeSpan.FromSeconds(10),
+					}
+				)
+			)
+		);
 
-            // ========== Configure Swagger ==========
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddHangfireServer();
+
+
+			// ========== Configure Swagger ==========
+			builder.Services.AddSwaggerGen();
 
             // ========== Add Infrastructure Services ==========
             // This registers: DbContext, Repositories, UnitOfWork
@@ -40,9 +74,8 @@ namespace DentalHub.API
                         .ToArray()
                 );
             });
-
-            // ========== Configure Identity ==========
-            builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
+      
+			builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
             {
                 // Password settings
                 options.Password.RequireDigit = true;
@@ -51,18 +84,15 @@ namespace DentalHub.API
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 6;
 
-                // Lockout settings
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
 
-                // User settings
                 options.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<ContextApp>()
             .AddDefaultTokenProviders();
 
-            // ========== Configure Cookie Settings ==========
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
@@ -72,7 +102,6 @@ namespace DentalHub.API
                 options.SlidingExpiration = true;
             });
 
-            // ========== Configure CORS ==========
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
@@ -83,43 +112,40 @@ namespace DentalHub.API
                 });
             });
 
-            // Build the application
+
             var app = builder.Build();
 
-            // ========== Configure the HTTP request pipeline ==========
+            app.UseHttpsRedirection();
 
-            // Global Exception Handler (MUST be first!)
             app.UseGlobalExceptionHandler();
 
-            // Enable Swagger in Development
-            if (app.Environment.IsDevelopment())
-            {
+          
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "DentalHub API v1");
                     options.RoutePrefix = "swagger";
                 });
-            }
+           
 
-            // HTTPS Redirection
-            app.UseHttpsRedirection();
+          
 
-            // Routing
+       
             app.UseRouting();
 
-            // CORS (Must be after UseRouting and before UseAuthorization)
+       
             app.UseCors("AllowAll");
 
-            // Authentication & Authorization (Order matters!)
+     
             app.UseAuthentication();
             app.UseAuthorization();
 
             // Map Controllers
             app.MapControllers();
+            app.UseHangfireDashboard("/hangfire");
 
-            // Redirect root to Swagger
-            app.MapGet("/", () => Results.Redirect("/swagger"));
+			// Redirect root to Swagger
+			app.MapGet("/", () => Results.Redirect("/swagger"));
 
             // Run the application
             app.Run();

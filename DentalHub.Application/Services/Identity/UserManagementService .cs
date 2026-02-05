@@ -8,10 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.Identity
 {
-    /// <summary>
-    /// Authentication service - handles user registration, login, and management
-    /// هنا بيتم التعامل مع UserManager لإدارة المستخدمين
-    /// </summary>
+  
     public class AuthService : IUserManagementService
     {
         private readonly UserManager<User> _userManager;
@@ -33,36 +30,28 @@ namespace DentalHub.Application.Services.Identity
 
         #region Patient Registration
 
-        /// <summary>
-        /// Register a new patient
-        /// خطوات التسجيل:
-        /// 1. التحقق إن الإيميل مش مكرر
-        /// 2. إنشاء User في الـ Identity System
-        /// 3. إضافة Role للـ User
-        /// 4. إنشاء Patient Record في البيزنس جداول
-        /// </summary>
+ 
         public async Task<Result<AuthResponseDto>> RegisterPatientAsync(RegisterPatientDto dto)
         {
             try
             {
-                // STEP 1: Check if email already exists
+              
                 var existingUser = await _userManager.FindByEmailAsync(dto.Email);
                 if (existingUser != null)
                 {
                     return Result<AuthResponseDto>.Failure("Email already exists");
                 }
 
-                // STEP 2: Create User in Identity System
                 var user = new User
                 {
                     UserName = dto.Email,
                     Email = dto.Email,
                     FullName = dto.FullName,
                     PhoneNumber = dto.Phone,
-                    EmailConfirmed = true // للتبسيط، في الإنتاج هنحتاج Email Confirmation
+                    EmailConfirmed = true 
                 };
 
-                // هنا بنحفظ الـ User مع الـ Password في جداول الـ Identity
+               
                 var result = await _userManager.CreateAsync(user, dto.Password);
 
                 if (!result.Succeeded)
@@ -71,14 +60,14 @@ namespace DentalHub.Application.Services.Identity
                     return Result<AuthResponseDto>.Failure(errors);
                 }
 
-                // STEP 3: Add Role to User
+  
                 await EnsureRoleExistsAsync("Patient");
                 await _userManager.AddToRoleAsync(user, "Patient");
 
-                // STEP 4: Create Patient Record
+            
                 var patient = new Patient
                 {
-                    UserId = user.Id, // Foreign Key من الـ Identity User
+                    UserId = user.Id, 
                     Age = dto.Age,
                     Phone = dto.Phone,
                     CreateAt = DateTime.UtcNow
@@ -89,7 +78,6 @@ namespace DentalHub.Application.Services.Identity
 
                 _logger.LogInformation("Patient registered successfully: {Email}", dto.Email);
 
-                // STEP 5: Return Response
                 return Result<AuthResponseDto>.Success(new AuthResponseDto
                 {
                     UserId = user.Id,
@@ -109,22 +97,19 @@ namespace DentalHub.Application.Services.Identity
 
         #region Student Registration
 
-        /// <summary>
-        /// Register a new student
-        /// نفس خطوات الـ Patient لكن بنضيف بيانات Student
-        /// </summary>
+        
         public async Task<Result<AuthResponseDto>> RegisterStudentAsync(RegisterStudentDto dto)
         {
             try
             {
-                // STEP 1: Check email
+               
                 var existingUser = await _userManager.FindByEmailAsync(dto.Email);
                 if (existingUser != null)
                 {
                     return Result<AuthResponseDto>.Failure("Email already exists");
                 }
 
-                // STEP 2: Create User
+              
                 var user = new User
                 {
                     UserName = dto.Email,
@@ -140,12 +125,9 @@ namespace DentalHub.Application.Services.Identity
                     var errors = result.Errors.Select(e => e.Description).ToList();
                     return Result<AuthResponseDto>.Failure(errors);
                 }
-
-                // STEP 3: Add Role
                 await EnsureRoleExistsAsync("Student");
                 await _userManager.AddToRoleAsync(user, "Student");
 
-                // STEP 4: Create Student Record
                 var student = new Student
                 {
                     UserId = user.Id,
@@ -248,9 +230,7 @@ namespace DentalHub.Application.Services.Identity
 
         #region Helper Methods
 
-        /// <summary>
-        /// Check if email already exists
-        /// </summary>
+ 
         public async Task<Result<bool>> CheckEmailExistsAsync(string email)
         {
             try
@@ -265,9 +245,7 @@ namespace DentalHub.Application.Services.Identity
             }
         }
 
-        /// <summary>
-        /// Delete user and all related data
-        /// </summary>
+    
         public async Task<Result> DeleteUserAsync(Guid userId)
         {
             try
@@ -294,10 +272,7 @@ namespace DentalHub.Application.Services.Identity
             }
         }
 
-        /// <summary>
-        /// Ensure role exists in database
-        /// بنتأكد إن الـ Role موجود، لو مش موجود بننشئه
-        /// </summary>
+       
         private async Task EnsureRoleExistsAsync(string roleName)
         {
             var roleExists = await _roleManager.RoleExistsAsync(roleName);

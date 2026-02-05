@@ -19,5 +19,7 @@ namespace DentalHub.Application.DTOs.Doctors
 
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Specialty must be between 3 and 100 characters")]
         public string? Specialty { get; set; }
-    }
+
+		public int UniversityId { get; set; }
+	}
 }

@@ -1,12 +1,14 @@
-﻿using DentalHub.Application.Common;
-using MediatR;
+﻿using MediatR;
+using DentalHub.Application.Common;
 
 namespace DentalHub.Application.Commands.Patient
 {
     public record UpdatePatientCommand(
-    Guid UserId,
-    int Age,
-    string Phone
-) : IRequest<Result<bool>>;
+        Guid UserId,
+        string FullName,
+        string PhoneNumber,
+        string NationalId,
+        DateTime BirthDate,
+        Gender Gender
+    ) : IRequest<Result<bool>>;
 }
-

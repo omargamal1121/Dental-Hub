@@ -21,9 +21,6 @@ namespace DentalHub.Application.Services.Students
 
         #region Student Profile
 
-        /// <summary>
-        /// Get student by user ID
-        /// </summary>
         public async Task<Result<StudentDto>> GetStudentByIdAsync(Guid userId)
         {
             try
@@ -44,8 +41,7 @@ namespace DentalHub.Application.Services.Students
                     }
                 );
 
-                spec.AddInclude(s => s.User);
-                spec.AddInclude(s => s.CaseRequests);
+            
 
                 var student = await _unitOfWork.Students.GetByIdAsync(spec);
 
@@ -63,9 +59,7 @@ namespace DentalHub.Application.Services.Students
             }
         }
 
-        /// <summary>
-        /// Get all students with pagination
-        /// </summary>
+     
         public async Task<Result<List<StudentDto>>> GetAllStudentsAsync(int page = 1, int pageSize = 10)
         {
             try
@@ -85,8 +79,7 @@ namespace DentalHub.Application.Services.Students
                     }
                 );
 
-                spec.AddInclude(s => s.User);
-                spec.AddInclude(s => s.CaseRequests);
+            
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(s => s.CreateAt);
 
@@ -101,9 +94,7 @@ namespace DentalHub.Application.Services.Students
             }
         }
 
-        /// <summary>
-        /// Update student information
-        /// </summary>
+     
         public async Task<Result<StudentDto>> UpdateStudentAsync(UpdateStudentDto dto)
         {
             try
@@ -118,7 +109,7 @@ namespace DentalHub.Application.Services.Students
                     return Result<StudentDto>.Failure("Student not found");
                 }
 
-                // Update fields if provided
+          
                 if (!string.IsNullOrWhiteSpace(dto.FullName))
                 {
                     student.User.FullName = dto.FullName;
@@ -150,9 +141,7 @@ namespace DentalHub.Application.Services.Students
             }
         }
 
-        /// <summary>
-        /// Soft delete student
-        /// </summary>
+  
         public async Task<Result> DeleteStudentAsync(Guid userId)
         {
             try
@@ -166,7 +155,7 @@ namespace DentalHub.Application.Services.Students
                 }
 
                 student.DeleteAt = DateTime.UtcNow;
-                _unitOfWork.Students.Update(student);
+                //_unitOfWork.Students.Update(student);
                 await _unitOfWork.SaveChangesAsync();
 
                 _logger.LogInformation("Student deleted: {UserId}", userId);
@@ -184,16 +173,12 @@ namespace DentalHub.Application.Services.Students
 
         #region Available Cases
 
-        /// <summary>
-        /// Get available cases for student
-        /// الحالات المتاحة للطالب (Status = Pending)
-        /// </summary>
+     
         public async Task<Result<List<PatientCaseDto>>> GetAvailableCasesForStudentAsync(
             Guid studentId, int page = 1, int pageSize = 10)
         {
             try
             {
-                // Verify student exists
                 var student = await _unitOfWork.Students.GetByIdAsync(
                     new BaseSpecification<Student>(s => s.UserId == studentId));
 
@@ -202,7 +187,6 @@ namespace DentalHub.Application.Services.Students
                     return Result<List<PatientCaseDto>>.Failure("Student not found");
                 }
 
-                // Get available cases (Pending status)
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
                     pc => pc.Status == CaseStatus.Pending,
                     pc => new PatientCaseDto
@@ -219,9 +203,7 @@ namespace DentalHub.Application.Services.Students
                     }
                 );
 
-                spec.AddInclude("Patient.User");
-                spec.AddInclude("Sessions");
-                spec.AddInclude("CaseRequests");
+           
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(pc => pc.CreateAt);
 
@@ -240,16 +222,12 @@ namespace DentalHub.Application.Services.Students
 
         #region Statistics
 
-        /// <summary>
-        /// Get student statistics
-        /// إحصائيات الطالب (طلباته، جلساته، إلخ)
-        /// </summary>
         public async Task<Result<StudentStatsDto>> GetStudentStatisticsAsync(Guid studentId)
         {
             try
             {
                 var spec = new BaseSpecification<Student>(s => s.UserId == studentId);
-                spec.AddInclude(s => s.CaseRequests);
+               
 
                 var student = await _unitOfWork.Students.GetByIdAsync(spec);
 
@@ -258,11 +236,11 @@ namespace DentalHub.Application.Services.Students
                     return Result<StudentStatsDto>.Failure("Student not found");
                 }
 
-                // Get all sessions for this student
+              
                 var sessionsSpec = new BaseSpecification<Session>(s => s.StudentId == studentId);
                 var sessions = await _unitOfWork.Sessions.GetAllAsync(sessionsSpec);
 
-                // Get approved case requests to count cases
+
                 var approvedRequests = student.CaseRequests
                     .Where(cr => cr.Status == RequestStatus.Approved)
                     .ToList();

@@ -20,3 +20,8 @@ public enum SessionStatus
     Done,
     Cancelled
 }
+public enum Gender
+{
+    Male,
+    Female,
+}

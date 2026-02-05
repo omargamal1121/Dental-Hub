@@ -1,58 +1,58 @@
 namespace DentalHub.Application.Common
 {
-    /// <summary>
-    /// Generic result wrapper for service operations
-    /// يستخدم لإرجاع نتائج العمليات بشكل موحد
-    /// </summary>
+ 
     public class Result<T>
     {
         public bool IsSuccess { get; set; }
         public T? Data { get; set; }
         public string? Message { get; set; }
         public List<string>? Errors { get; set; }
+		public int Status { get; set; }
 
-        // Success Result
-        public static Result<T> Success(T data, string? message = null)
+		// Success Result
+		public static Result<T> Success(T data, string? message = null,int status=200)
         {
             return new Result<T>
             {
-                IsSuccess = true,
+                Errors = null,
+                Status = status,
+				IsSuccess = true,
                 Data = data,
                 Message = message
             };
         }
 
         // Failure Result
-        public static Result<T> Failure(string error)
+        public static Result<T> Failure(string error,int status=400)
         {
             return new Result<T>
             {
-                IsSuccess = false,
+                Status = status,
+				IsSuccess = false,
                 Errors = new List<string> { error }
             };
         }
 
-        public static Result<T> Failure(List<string> errors)
+        public static Result<T> Failure(List<string> errors, int status = 400)
         {
             return new Result<T>
             {
-                IsSuccess = false,
+                Status = status,
+				IsSuccess = false,
                 Errors = errors
             };
         }
     }
 
-    /// <summary>
-    /// Non-generic result for operations that don't return data
-    /// للعمليات اللي مش بترجع بيانات (مثل Delete)
-    /// </summary>
+
     public class Result
     {
-        public bool IsSuccess { get; set; }
+		public int Status { get; set; }
+		public bool IsSuccess { get; set; }
         public string? Message { get; set; }
         public List<string>? Errors { get; set; }
 
-        public static Result Success(string? message = null)
+        public static Result Success(string? message = null,int status= 200)
         {
             return new Result
             {
@@ -61,20 +61,22 @@ namespace DentalHub.Application.Common
             };
         }
 
-        public static Result Failure(string error)
+        public static Result Failure(string error, int status = 400)
         {
             return new Result
             {
-                IsSuccess = false,
+                Status = status,
+				IsSuccess = false,
                 Errors = new List<string> { error }
             };
         }
 
-        public static Result Failure(List<string> errors)
+        public static Result Failure(List<string> errors, int status = 400)
         {
             return new Result
             {
-                IsSuccess = false,
+                Status = status,
+				IsSuccess = false,
                 Errors = errors
             };
         }

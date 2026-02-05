@@ -2226,23 +2226,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Saga.Mohamed\\.nuget\\packages\\": {},
+    "C:\\Users\\DELL\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
+      "projectUniqueName": "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj",
       "projectName": "DentalHub.Domain",
-      "projectPath": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
-      "packagesPath": "C:\\Users\\Saga.Mohamed\\.nuget\\packages\\",
-      "outputPath": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Domain\\obj\\",
+      "projectPath": "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj",
+      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+      "outputPath": "D:\\projects\\DentalHub\\DentalHub.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Saga.Mohamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2251,6 +2251,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

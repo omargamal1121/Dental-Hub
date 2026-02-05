@@ -1,9 +1,7 @@
-﻿using DentalHub.Application.Common;
-using MediatR;
+﻿using MediatR;
+using DentalHub.Application.Common;
 
 namespace DentalHub.Application.Commands.Patient
 {
-  public record DeletePatientCommand(Guid UserId)
-    : IRequest<Result<bool>>;
+    public record DeletePatientCommand(Guid Id) : IRequest<Result<bool>>;
 }
-

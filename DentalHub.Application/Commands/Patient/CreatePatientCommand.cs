@@ -1,19 +1,15 @@
-﻿using DentalHub.Application.Common;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using DentalHub.Application.Common;
 
 namespace DentalHub.Application.Commands.Patient
 {
     public record CreatePatientCommand(
-    Guid UserId,
-    int Age,
-    string FullName,
-    string Email,
-    string Password,
-    string Phone
-) : IRequest<Result<Guid>>;
+        string FullName,
+        string Email,
+        string Password,
+        string PhoneNumber,
+        string NationalId,
+        DateTime BirthDate,
+        Gender Gender
+    ) : IRequest<Result<Guid>>;
 }
