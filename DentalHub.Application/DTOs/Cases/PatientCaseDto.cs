@@ -1,9 +1,6 @@
 namespace DentalHub.Application.DTOs.Cases
 {
-    /// <summary>
     /// DTO for patient case information
-    /// معلومات الحالة
-    /// </summary>
     public class PatientCaseDto
     {
         public Guid Id { get; set; }

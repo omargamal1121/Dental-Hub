@@ -53,35 +53,6 @@
         }
       }
     },
-    "/api/Auth/refresh-token": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokensDtoApiResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokensDtoApiResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokensDtoApiResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Auth/logout": {
       "post": {
         "tags": [

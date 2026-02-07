@@ -1,9 +1,6 @@
-namespace DentalHub.Application.DTOs.Patients
+ namespace DentalHub.Application.DTOs.Patients
 {
-    /// <summary>
     /// DTO for patient information
-    /// معلومات المريض اللي بترجع للـ Frontend
-    /// </summary>
     public class PatientDto
     {
         public Guid UserId { get; set; }

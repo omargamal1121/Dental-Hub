@@ -1,6 +1,5 @@
 ﻿using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Doctors;
-using DentalHub.Application.DTOs.Doctors;
 using DentalHub.Application.Queries.Doctor;
 using DentalHub.Application.Services.Doctors;
 using MediatR;

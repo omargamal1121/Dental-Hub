@@ -1,8 +1,6 @@
 namespace DentalHub.Application.DTOs.Sessions
 {
-    /// <summary>
     /// DTO for session information
-    /// </summary>
     public class SessionDto
     {
         public Guid Id { get; set; }

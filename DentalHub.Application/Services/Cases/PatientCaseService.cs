@@ -20,10 +20,7 @@ namespace DentalHub.Application.Services.Cases
 
         #region CRUD Operations
 
-        /// <summary>
         /// Create a new patient case
-        /// المريض ينشئ حالة جديدة
-        /// </summary>
         public async Task<Result<PatientCaseDto>> CreateCaseAsync(CreateCaseDto dto)
         {
             try
@@ -62,9 +59,7 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        /// <summary>
         /// Get case by ID
-        /// </summary>
         public async Task<Result<PatientCaseDto>> GetCaseByIdAsync(Guid caseId)
         {
             try
@@ -105,9 +100,7 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        /// <summary>
         /// Get all cases with pagination
-        /// </summary>
         public async Task<Result<List<PatientCaseDto>>> GetAllCasesAsync(int page = 1, int pageSize = 10)
         {
             try
@@ -144,9 +137,7 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        /// <summary>
         /// Update case information
-        /// </summary>
         public async Task<Result<PatientCaseDto>> UpdateCaseAsync(UpdateCaseDto dto)
         {
             try
@@ -180,9 +171,7 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        /// <summary>
         /// Soft delete case
-        /// </summary>
         public async Task<Result> DeleteCaseAsync(Guid caseId)
         {
             try
@@ -219,9 +208,7 @@ namespace DentalHub.Application.Services.Cases
 
         #region Query Operations
 
-        /// <summary>
         /// Get cases by status
-        /// </summary>
         public async Task<Result<List<PatientCaseDto>>> GetCasesByStatusAsync(
             string status, int page = 1, int pageSize = 10)
         {
@@ -266,9 +253,7 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        /// <summary>
         /// Get all cases for a specific patient
-        /// </summary>
         public async Task<Result<List<PatientCaseDto>>> GetPatientCasesAsync(
             Guid patientId, int page = 1, int pageSize = 10)
         {
@@ -311,10 +296,8 @@ namespace DentalHub.Application.Services.Cases
 
         #region Status Management
 
-        /// <summary>
         /// Update case status
-        /// تغيير حالة الـ Case (Pending → InProgress → Completed)
-        /// </summary>
+        /// Change Case (Pending → InProgress → Completed)
         public async Task<Result<PatientCaseDto>> UpdateCaseStatusAsync(Guid caseId, string newStatus)
         {
             try
@@ -355,10 +338,8 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        /// <summary>
         /// ADDED: Combined method to update both treatment type and status in one transaction
         /// This prevents double database calls and ensures data consistency
-        /// </summary>
         public async Task<Result<PatientCaseDto>> UpdateCaseWithStatusAsync(
             Guid caseId,
             string? treatmentType,
@@ -406,10 +387,7 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        /// <summary>
         /// Validate if status transition is allowed
-        /// التحقق من إن الانتقال بين الحالات منطقي
-        /// </summary>
         private bool IsValidStatusTransition(CaseStatus currentStatus, CaseStatus newStatus)
         {
             return (currentStatus, newStatus) switch

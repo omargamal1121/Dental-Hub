@@ -19,9 +19,7 @@ namespace DentalHub.Application.Services.Doctors
             int universityId, int page = 1, int pageSize = 10);
     }
 
-    /// <summary>
     /// DTO for doctor statistics
-    /// </summary>
     public class DoctorStatsDto
     {
         public int TotalRequests { get; set; }

@@ -2,9 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DentalHub.Application.DTOs.Identity
 {
-    /// <summary>
     /// DTO for user login
-    /// </summary>
     public class LoginDto
     {
         [Required(ErrorMessage = "Email is required")]

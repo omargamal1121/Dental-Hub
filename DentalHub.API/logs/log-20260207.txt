@@ -1,0 +1,72 @@
+2026-02-07 15:53:46.754 +02:00 [INF] DB tables already exist. Exit install
+2026-02-07 15:53:46.856 +02:00 [INF] User profile is available. Using 'C:\Users\Saga.Mohamed\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-07 15:53:47.129 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-07 15:53:47.132 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-07 15:53:47.224 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-07 15:53:47.227 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-07 15:53:47.229 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-07 15:53:47.232 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-07 15:53:47.248 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-07 15:53:47.250 +02:00 [INF] Hosting environment: Development
+2026-02-07 15:53:47.252 +02:00 [INF] Content root path: D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.API
+2026-02-07 15:53:47.676 +02:00 [INF] Server saja-mohamed:29780:5bc67be9 successfully announced in 411.6647 ms
+2026-02-07 15:53:47.683 +02:00 [INF] Server saja-mohamed:29780:5bc67be9 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-07 15:53:47.697 +02:00 [INF] Server saja-mohamed:29780:5bc67be9 all the dispatchers started
+2026-02-07 15:53:48.336 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-07 15:53:48.789 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-07 15:53:48.802 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-07 15:53:48.808 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-07 15:53:48.825 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 null null 491.445ms
+2026-02-07 15:53:48.964 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-07 15:53:48.992 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 27.4839ms
+2026-02-07 15:53:49.087 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-07 15:53:49.268 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 181.6949ms
+2026-02-07 15:53:49.439 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-07 15:53:49.556 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 116.9574ms
+2026-02-07 15:53:58.510 +02:00 [WRN] Stopping the server due to DomainUnload or ProcessExit event...
+2026-02-07 15:53:58.513 +02:00 [INF] Server saja-mohamed:29780:5bc67be9 caught stopping signal...
+2026-02-07 15:53:58.515 +02:00 [INF] Server saja-mohamed:29780:5bc67be9 caught stopped signal...
+2026-02-07 15:53:58.518 +02:00 [WRN] Server saja-mohamed:29780:5bc67be9 caught shutdown signal...
+2026-02-07 15:53:58.522 +02:00 [WRN] Server saja-mohamed:29780:5bc67be9 stopped non-gracefully due to Worker. Outstanding work on those dispatchers could be aborted, and there can be delays in background processing. This server instance will be incorrectly shown as active for a while. To avoid non-graceful shutdowns, investigate what prevents from stopping gracefully and add CancellationToken support for those methods.
+2026-02-07 15:53:59.000 +02:00 [INF] Server saja-mohamed:29780:5bc67be9 successfully reported itself as stopped in 472.2141 ms
+2026-02-07 15:53:59.003 +02:00 [INF] Server saja-mohamed:29780:5bc67be9 has been stopped in total 488.1641 ms
+2026-02-07 20:28:26.447 +02:00 [INF] DB tables already exist. Exit install
+2026-02-07 20:28:26.502 +02:00 [INF] User profile is available. Using 'C:\Users\Saga.Mohamed\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-07 20:28:26.703 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-07 20:28:26.705 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-07 20:28:26.763 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-07 20:28:26.765 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-07 20:28:26.766 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-07 20:28:26.767 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-07 20:28:26.775 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-07 20:28:26.777 +02:00 [INF] Hosting environment: Development
+2026-02-07 20:28:26.778 +02:00 [INF] Content root path: D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.API
+2026-02-07 20:28:27.037 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-07 20:28:27.134 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-07 20:28:27.143 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-07 20:28:27.144 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-07 20:28:27.150 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 null null 113.3371ms
+2026-02-07 20:28:27.204 +02:00 [INF] Server saja-mohamed:38924:9dd5cce7 successfully announced in 419.3197 ms
+2026-02-07 20:28:27.208 +02:00 [INF] Server saja-mohamed:38924:9dd5cce7 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-07 20:28:27.214 +02:00 [INF] Server saja-mohamed:38924:9dd5cce7 all the dispatchers started
+2026-02-07 20:28:27.241 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-07 20:28:27.256 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 14.092ms
+2026-02-07 20:28:27.303 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-07 20:28:27.332 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 28.7866ms
+2026-02-07 20:28:27.517 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-07 20:28:27.555 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 37.0209ms
+2026-02-07 20:28:47.765 +02:00 [WRN] Stopping the server due to DomainUnload or ProcessExit event...
+2026-02-07 20:28:47.766 +02:00 [INF] Server saja-mohamed:38924:9dd5cce7 caught stopping signal...
+2026-02-07 20:28:47.767 +02:00 [INF] Server saja-mohamed:38924:9dd5cce7 caught stopped signal...
+2026-02-07 20:28:47.768 +02:00 [WRN] Server saja-mohamed:38924:9dd5cce7 caught shutdown signal...
+2026-02-07 20:28:47.768 +02:00 [INF] Server saja-mohamed:38924:9dd5cce7 All dispatchers stopped
+2026-02-07 20:28:48.305 +02:00 [INF] Server saja-mohamed:38924:9dd5cce7 successfully reported itself as stopped in 534.9838 ms
+2026-02-07 20:28:48.308 +02:00 [INF] Server saja-mohamed:38924:9dd5cce7 has been stopped in total 541.1389 ms

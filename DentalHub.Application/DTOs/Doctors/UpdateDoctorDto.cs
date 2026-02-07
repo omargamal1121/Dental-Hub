@@ -2,9 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DentalHub.Application.DTOs.Doctors
 {
-    /// <summary>
     /// DTO for updating doctor information
-    /// </summary>
     public class UpdateDoctorDto
     {
         [Required(ErrorMessage = "User ID is required")]

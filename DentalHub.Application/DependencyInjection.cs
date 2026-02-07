@@ -1,3 +1,4 @@
+using DentalHub.Application.Services.Admins;
 using DentalHub.Application.Services.Cases;
 using DentalHub.Application.Services.Doctors;
 using DentalHub.Application.Services.Identity;
@@ -25,6 +26,7 @@ namespace DentalHub.Application
       
             services.AddScoped<IDoctorService, DoctorService>();
 
+            services.AddScoped<IAdminService, AdminService>();
 
             services.AddScoped<IPatientCaseService, PatientCaseService>();
             services.AddScoped<ICaseRequestService, CaseRequestService>();

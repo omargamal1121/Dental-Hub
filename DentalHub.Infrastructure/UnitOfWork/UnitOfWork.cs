@@ -19,6 +19,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
         public IMainRepository<Student> Students { get; }
         public IMainRepository<Patient> Patients { get; }
         public IMainRepository<Doctor> Doctors { get; }
+        public IMainRepository<Admin> Admins { get; }
         public IMainRepository<PatientCase> PatientCases { get; }
         public IMainRepository<CaseRequest> CaseRequests { get; }
         public IMainRepository<Session> Sessions { get; }
@@ -30,6 +31,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
             IMainRepository<Student> students,
             IMainRepository<Patient> patients,
             IMainRepository<Doctor> doctors,
+            IMainRepository<Admin> admins,
             IMainRepository<PatientCase> patientCases,
             IMainRepository<CaseRequest> caseRequests,
             IMainRepository<Session> sessions,
@@ -42,6 +44,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
             Students = students;
             Patients = patients;
             Doctors = doctors;
+            Admins = admins;
             PatientCases = patientCases;
             CaseRequests = caseRequests;
             Sessions = sessions;
