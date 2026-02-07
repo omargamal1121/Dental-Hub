@@ -10,6 +10,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
         IMainRepository<Student> Students { get; }
         IMainRepository<Patient> Patients { get; }
         IMainRepository<Doctor> Doctors { get; }
+        IMainRepository<Admin> Admins { get; }
         IMainRepository<PatientCase> PatientCases { get; }
         IMainRepository<CaseRequest> CaseRequests { get; }
         IMainRepository<Session> Sessions { get; }

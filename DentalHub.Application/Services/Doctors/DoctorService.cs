@@ -226,10 +226,7 @@ namespace DentalHub.Application.Services.Doctors
 
         #region Statistics
 
-        /// <summary>
         /// Get doctor statistics
-        /// إحصائيات الدكتور (طلباته، طلابه، حالاته)
-        /// </summary>
         public async Task<Result<DoctorStatsDto>> GetDoctorStatisticsAsync(Guid doctorId)
         {
             try

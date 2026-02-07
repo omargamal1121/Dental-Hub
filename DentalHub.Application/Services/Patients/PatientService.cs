@@ -19,9 +19,7 @@ namespace DentalHub.Application.Services.Patients
             _logger = logger;
         }
 
-        /// <summary>
         /// Get patient by user ID with projection to DTO
-        /// </summary>
         public async Task<Result<PatientDto>> GetPatientByIdAsync(Guid userId)
         {
             try
@@ -62,9 +60,7 @@ namespace DentalHub.Application.Services.Patients
             }
         }
 
-        /// <summary>
         /// Get all patients with pagination
-        /// </summary>
         public async Task<Result<List<PatientDto>>> GetAllPatientsAsync(int page = 1, int pageSize = 10)
         {
             try
@@ -99,9 +95,7 @@ namespace DentalHub.Application.Services.Patients
             }
         }
 
-        /// <summary>
         /// Update patient information
-        /// </summary>
         public async Task<Result<PatientDto>> UpdatePatientAsync(UpdatePatientDto dto)
         {
             try
@@ -151,9 +145,7 @@ namespace DentalHub.Application.Services.Patients
             }
         }
 
-        /// <summary>
         /// Soft delete patient (set DeleteAt)
-        /// </summary>
         public async Task<Result> DeletePatientAsync(Guid userId)
         {
             try

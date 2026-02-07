@@ -161,9 +161,7 @@ namespace DentalHub.Application.Services.Identity
 
         #region Doctor Registration
 
-        /// <summary>
         /// Register a new doctor
-        /// </summary>
         public async Task<Result<AuthResponseDto>> RegisterDoctorAsync(RegisterDoctorDto dto)
         {
             try

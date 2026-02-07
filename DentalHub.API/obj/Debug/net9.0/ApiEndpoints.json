@@ -115,26 +115,6 @@
   },
   {
     "ContainingType": "DentalHub.API.Controllers.AuthController",
-    "Method": "RefreshToken",
-    "RelativePath": "api/Auth/refresh-token",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[DentalHub.Application.DTOs.Auth.TokensDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "DentalHub.API.Controllers.AuthController",
     "Method": "ResetPassword",
     "RelativePath": "api/Auth/reset-password",
     "HttpMethod": "POST",

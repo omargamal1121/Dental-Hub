@@ -15,6 +15,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
         public DbSet<Student> Students { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<PatientCase> PatientCases { get; set; }
         public DbSet<CaseRequest> CaseRequests { get; set; }
         public DbSet<Session> Sessions { get; set; }

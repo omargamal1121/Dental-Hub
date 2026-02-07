@@ -2,9 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DentalHub.Application.DTOs.Cases
 {
-    /// <summary>
     /// DTO for creating a new patient case
-    /// </summary>
     public class CreateCaseDto
     {
         [Required(ErrorMessage = "Patient ID is required")]

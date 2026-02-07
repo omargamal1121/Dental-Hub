@@ -2,9 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DentalHub.Application.DTOs.Sessions
 {
-    /// <summary>
     /// DTO for creating a new session
-    /// </summary>
     public class CreateSessionDto
     {
         [Required(ErrorMessage = "Case ID is required")]

@@ -20,9 +20,7 @@ namespace DentalHub.Application.Services.Students
         Task<Result<StudentStatsDto>> GetStudentStatisticsAsync(Guid studentId);
     }
 
-    /// <summary>
     /// DTO for student statistics
-    /// </summary>
     public class StudentStatsDto
     {
         public int TotalRequests { get; set; }

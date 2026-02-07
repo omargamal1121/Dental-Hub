@@ -2,9 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DentalHub.Application.DTOs.Cases
 {
-    /// <summary>
     /// DTO for approving/rejecting a case request
-    /// </summary>
     public class ApproveCaseRequestDto
     {
         [Required(ErrorMessage = "Request ID is required")]
@@ -21,9 +19,7 @@ namespace DentalHub.Application.DTOs.Cases
         public string? RejectionReason { get; set; }
     }
 
-    /// <summary>
     /// Custom validation attribute for conditional required fields
-    /// </summary>
     public class RequiredIfAttribute : ValidationAttribute
     {
         private readonly string _propertyName;

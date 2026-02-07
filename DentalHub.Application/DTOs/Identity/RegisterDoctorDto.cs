@@ -2,9 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DentalHub.Application.DTOs.Identity
 {
-    /// <summary>
     /// DTO for doctor registration
-    /// </summary>
     public class RegisterDoctorDto
     {
         [Required(ErrorMessage = "Full name is required")]

@@ -9,5 +9,6 @@ namespace DentalHub.Domain.Entities
         public Patient Patient { get; set; }
         public Student Student { get; set; }
         public Doctor Doctor { get; set; }
+        public Admin Admin { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DentalHub.Application.Services.Cases;
+﻿using DentalHub.Application.Services.Admins;
+using DentalHub.Application.Services.Cases;
 using DentalHub.Application.Services.Doctors;
 using DentalHub.Application.Services.Identity;
 using DentalHub.Application.Services.Patients;
@@ -8,14 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalHub.Application.Extensions
 {
-    /// <summary>
     /// Extension methods for registering application services
-    /// </summary>
     public static class ApplicationServicesExtension
     {
-        /// <summary>
         /// Register all application services to the DI container
-        /// </summary>
         public static IServiceCollection AddApplicationServices(
             this IServiceCollection services)
         {
@@ -26,6 +23,7 @@ namespace DentalHub.Application.Extensions
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<IAdminService, AdminService>();
 
             // Register Case Management Services
             services.AddScoped<IPatientCaseService, PatientCaseService>();

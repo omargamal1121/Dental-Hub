@@ -3,9 +3,7 @@ using DentalHub.Application.DTOs.Identity;
 
 namespace DentalHub.Application.Services.Identity
 {
-    /// <summary>
     /// Interface for authentication and user management services
-    /// </summary>
     public interface IUserManagementService
     {
         // Registration

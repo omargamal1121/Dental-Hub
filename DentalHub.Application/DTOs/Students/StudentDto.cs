@@ -1,9 +1,6 @@
 namespace DentalHub.Application.DTOs.Students
 {
-    /// <summary>
     /// DTO for student information
-    /// معلومات الطالب
-    /// </summary>
     public class StudentDto
     {
         public Guid UserId { get; set; }

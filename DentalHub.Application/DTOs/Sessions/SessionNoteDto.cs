@@ -2,9 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DentalHub.Application.DTOs.Sessions
 {
-    /// <summary>
     /// DTO for session note
-    /// </summary>
     public class SessionNoteDto
     {
         public Guid Id { get; set; }
@@ -13,9 +11,7 @@ namespace DentalHub.Application.DTOs.Sessions
         public DateTime CreateAt { get; set; }
     }
 
-    /// <summary>
     /// DTO for creating a session note
-    /// </summary>
     public class CreateSessionNoteDto
     {
         [Required]

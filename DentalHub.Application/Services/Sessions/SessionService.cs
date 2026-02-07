@@ -7,10 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.Sessions
 {
-    /// <summary>
-    /// NEW: Complete implementation of SessionService
     /// Handles treatment sessions between students and patients
-    /// </summary>
     public class SessionService : ISessionService
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -24,10 +21,7 @@ namespace DentalHub.Application.Services.Sessions
 
         #region CRUD Operations
 
-        /// <summary>
-        /// Create a new session
-        /// الطالب ينشئ جلسة علاج جديدة
-        /// </summary>
+        /// Student Create a new session
         public async Task<Result<SessionDto>> CreateSessionAsync(CreateSessionDto dto)
         {
             try
@@ -123,9 +117,7 @@ namespace DentalHub.Application.Services.Sessions
             }
         }
 
-        /// <summary>
         /// Get session by ID
-        /// </summary>
         public async Task<Result<SessionDto>> GetSessionByIdAsync(Guid sessionId)
         {
             try
@@ -171,9 +163,7 @@ namespace DentalHub.Application.Services.Sessions
             }
         }
 
-        /// <summary>
         /// Get all sessions with pagination
-        /// </summary>
         public async Task<Result<List<SessionDto>>> GetAllSessionsAsync(int page = 1, int pageSize = 10)
         {
             try
@@ -215,9 +205,7 @@ namespace DentalHub.Application.Services.Sessions
             }
         }
 
-        /// <summary>
         /// Soft delete session
-        /// </summary>
         public async Task<Result> DeleteSessionAsync(Guid sessionId)
         {
             try
@@ -254,10 +242,7 @@ namespace DentalHub.Application.Services.Sessions
 
         #region Filter Queries
 
-        /// <summary>
         /// Get sessions by student ID
-        /// جلسات طالب معين
-        /// </summary>
         public async Task<Result<List<SessionDto>>> GetSessionsByStudentIdAsync(
             Guid studentId, int page = 1, int pageSize = 10)
         {
@@ -301,10 +286,7 @@ namespace DentalHub.Application.Services.Sessions
             }
         }
 
-        /// <summary>
         /// Get sessions by patient ID
-        /// جلسات مريض معين
-        /// </summary>
         public async Task<Result<List<SessionDto>>> GetSessionsByPatientIdAsync(
             Guid patientId, int page = 1, int pageSize = 10)
         {
@@ -348,10 +330,7 @@ namespace DentalHub.Application.Services.Sessions
             }
         }
 
-        /// <summary>
         /// Get sessions by case ID
-        /// كل الجلسات الخاصة بحالة معينة
-        /// </summary>
         public async Task<Result<List<SessionDto>>> GetSessionsByCaseIdAsync(
             Guid caseId, int page = 1, int pageSize = 10)
         {
@@ -399,10 +378,7 @@ namespace DentalHub.Application.Services.Sessions
 
         #region Status Management
 
-        /// <summary>
-        /// Update session status
-        /// تغيير حالة الجلسة (Scheduled → Done / Cancelled)
-        /// </summary>
+        /// Update session status (Scheduled → Done / Cancelled)
         public async Task<Result<SessionDto>> UpdateSessionStatusAsync(Guid sessionId, string newStatus)
         {
             try
@@ -444,9 +420,7 @@ namespace DentalHub.Application.Services.Sessions
             }
         }
 
-        /// <summary>
         /// Validate status transition
-        /// </summary>
         private bool IsValidStatusTransition(SessionStatus currentStatus, SessionStatus newStatus)
         {
             return (currentStatus, newStatus) switch
@@ -470,10 +444,7 @@ namespace DentalHub.Application.Services.Sessions
 
         #region Session Notes
 
-        /// <summary>
-        /// Add a note to a session
-        /// الطالب يضيف ملاحظة للجلسة
-        /// </summary>
+        /// Student Add a note to a session
         public async Task<Result<SessionNoteDto>> AddSessionNoteAsync(CreateSessionNoteDto dto)
         {
             try
@@ -514,10 +485,7 @@ namespace DentalHub.Application.Services.Sessions
             }
         }
 
-        /// <summary>
         /// Get all notes for a session
-        /// كل الملاحظات الخاصة بجلسة معينة
-        /// </summary>
         public async Task<Result<List<SessionNoteDto>>> GetSessionNotesAsync(Guid sessionId)
         {
             try

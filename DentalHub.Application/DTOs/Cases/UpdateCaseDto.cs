@@ -2,9 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DentalHub.Application.DTOs.Cases
 {
-    /// <summary>
     /// DTO for updating a patient case
-    /// </summary>
     public class UpdateCaseDto
     {
         [Required]
