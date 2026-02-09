@@ -36,10 +36,9 @@ namespace DentalHub.Application.Services.Doctors
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
                         TotalStudents = d.CaseRequests
-                            .Where(cr => cr.Status == RequestStatus.Approved)
-                            .Select(cr => cr.StudentId)
-                            .Distinct()
-                            .Count(),
+                            
+                  
+                            .Count(cr => cr.Status == RequestStatus.Approved),
                         PendingRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
                         ApprovedRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved)
                     }
@@ -65,11 +64,13 @@ namespace DentalHub.Application.Services.Doctors
         }
 
 
-        public async Task<Result<List<DoctorDto>>> GetAllDoctorsAsync(int page = 1, int pageSize = 10)
+        public async Task<Result<List<DoctorDto>>> GetAllDoctorsAsync(int page = 1, int pageSize = 10, string? name = null, string? spec = null)
         {
             try
             {
-                var spec = new BaseSpecificationWithProjection<Doctor, DoctorDto>(
+                var filterSpec = new BaseSpecificationWithProjection<Doctor, DoctorDto>(
+                    d => (string.IsNullOrEmpty(name) || d.Name.Contains(name)) &&
+                         (string.IsNullOrEmpty(spec) || d.Specialty.Contains(spec)),
                     d => new DoctorDto
                     {
                         UserId = d.UserId,
@@ -79,22 +80,15 @@ namespace DentalHub.Application.Services.Doctors
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
-                        TotalStudents = d.CaseRequests
-                            .Where(cr => cr.Status == RequestStatus.Approved)
-                            .Select(cr => cr.StudentId)
-                            .Distinct()
-                            .Count(),
-                        PendingRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
-                        ApprovedRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved)
+                  
                     }
                 );
 
-                spec.AddInclude(d => d.User);
-                spec.AddInclude(d => d.CaseRequests);
-                spec.ApplyPaging(page, pageSize);
-                spec.ApplyOrderByDescending(d => d.CreateAt);
+             
+                filterSpec.ApplyPaging(page, pageSize);
+                filterSpec.ApplyOrderByDescending(d => d.CreateAt);
 
-                var doctors = await _unitOfWork.Doctors.GetAllAsync(spec);
+                var doctors = await _unitOfWork.Doctors.GetAllAsync(filterSpec);
 
                 return Result<List<DoctorDto>>.Success(doctors);
             }
@@ -122,13 +116,7 @@ namespace DentalHub.Application.Services.Doctors
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
-                        TotalStudents = d.CaseRequests
-                            .Where(cr => cr.Status == RequestStatus.Approved)
-                            .Select(cr => cr.StudentId)
-                            .Distinct()
-                            .Count(),
-                        PendingRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
-                        ApprovedRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved)
+              
                     }
                 );
 
@@ -163,7 +151,7 @@ namespace DentalHub.Application.Services.Doctors
                     return Result<DoctorDto>.Failure("Doctor not found");
                 }
 
-                // Update fields if provided
+     
                 if (!string.IsNullOrWhiteSpace(dto.FullName))
                 {
                     doctor.User.FullName = dto.FullName;

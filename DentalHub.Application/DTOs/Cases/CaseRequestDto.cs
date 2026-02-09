@@ -17,4 +17,10 @@ namespace DentalHub.Application.DTOs.Cases
         public string Status { get; set; } = string.Empty;
         public DateTime CreateAt { get; set; }
     }
+    public class CaseRequestCountDto
+    {
+		public Guid Id { get; set; }
+		public CaseStatus  Status { get; set; }
+        public Guid doctorid   { get; set; }
+}
 }

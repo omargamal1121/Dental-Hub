@@ -11,9 +11,11 @@ namespace DentalHub.Infrastructure.ContextAndConfig
             builder.HasKey(x => x.UserId);
 
 			builder.HasOne(d => d.User)
-	.WithOne(u => u.Doctor)
-	.HasForeignKey<Doctor>(d => d.UserId)
-				   .OnDelete(DeleteBehavior.Cascade);
+			.WithOne(u => u.Doctor)
+			.HasForeignKey<Doctor>(d => d.UserId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+
 			builder.HasQueryFilter(cr => cr.DeleteAt == null);
 
 		}

@@ -1,4 +1,5 @@
-﻿using DentalHub.Domain.Entities;
+﻿using DentalHub.Domain.DomainExceptions;
+using DentalHub.Domain.Entities;
 using System;
 
 namespace DentalHub.Domain.Factories
@@ -8,7 +9,7 @@ namespace DentalHub.Domain.Factories
         public static SessionNote Create(Guid sessionId, string note)
         {
             if (sessionId == Guid.Empty)
-                throw new ArgumentException("SessionId cannot be empty");
+                throw new DomainException("SessionId cannot be empty");
 
             if (string.IsNullOrWhiteSpace(note))
                 note = "No notes provided";

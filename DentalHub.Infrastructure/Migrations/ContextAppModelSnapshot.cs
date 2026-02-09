@@ -22,6 +22,32 @@ namespace DentalHub.Infrastructure.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
+            modelBuilder.Entity("DentalHub.Domain.Entities.Admin", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsSuperAdmin")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Admins");
+                });
+
             modelBuilder.Entity("DentalHub.Domain.Entities.CaseRequest", b =>
                 {
                     b.Property<Guid>("Id")
@@ -290,6 +316,42 @@ namespace DentalHub.Infrastructure.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("DentalHub.Domain.Entities.UniversityMember", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Department")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Faculty")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UniversityId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UniversityId")
+                        .IsUnique();
+
+                    b.ToTable("UniversityMembers");
+                });
+
             modelBuilder.Entity("DentalHub.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -489,6 +551,17 @@ namespace DentalHub.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DentalHub.Domain.Entities.Admin", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.User", "User")
+                        .WithOne("Admin")
+                        .HasForeignKey("DentalHub.Domain.Entities.Admin", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DentalHub.Domain.Entities.CaseRequest", b =>
                 {
                     b.HasOne("DentalHub.Domain.Entities.Doctor", "Doctor")
@@ -655,7 +728,7 @@ namespace DentalHub.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("DentalHub.Domain.Entities.User", null)
-                        .WithMany()
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -705,14 +778,15 @@ namespace DentalHub.Infrastructure.Migrations
 
             modelBuilder.Entity("DentalHub.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Doctor")
-                        .IsRequired();
+                    b.Navigation("Admin");
 
-                    b.Navigation("Patient")
-                        .IsRequired();
+                    b.Navigation("Doctor");
 
-                    b.Navigation("Student")
-                        .IsRequired();
+                    b.Navigation("Patient");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

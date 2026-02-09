@@ -1,4 +1,5 @@
-﻿using DentalHub.Domain.Entities;
+﻿using DentalHub.Domain.DomainExceptions;
+using DentalHub.Domain.Entities;
 using System;
 
 namespace DentalHub.Domain.Factories
@@ -8,10 +9,10 @@ namespace DentalHub.Domain.Factories
         public static Media Create(Guid patientId, string mediaUrl, Guid? sessionId = null)
         {
             if (patientId == Guid.Empty)
-                throw new ArgumentException("PatientId cannot be empty");
+                throw new DomainException("PatientId cannot be empty");
 
             if (string.IsNullOrWhiteSpace(mediaUrl))
-                throw new ArgumentException("MediaUrl cannot be empty");
+                throw new DomainException("MediaUrl cannot be empty");
 
             return new Media
             {

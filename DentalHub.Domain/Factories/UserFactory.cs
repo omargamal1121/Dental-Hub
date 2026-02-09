@@ -1,4 +1,5 @@
-﻿using DentalHub.Domain.Entities;
+﻿using DentalHub.Domain.DomainExceptions;
+using DentalHub.Domain.Entities;
 using System;
 using System.Text.RegularExpressions;
 
@@ -9,17 +10,17 @@ namespace DentalHub.Domain.Factories
         public static User Create(string fullName, string email, string password)
         {
             if (string.IsNullOrWhiteSpace(fullName))
-                throw new ArgumentException("FullName cannot be empty");
+                throw new DomainException("FullName cannot be empty");
 
             if (string.IsNullOrWhiteSpace(email))
-                throw new ArgumentException("Email cannot be empty");
+                throw new DomainException("Email cannot be empty");
 
             var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
             if (!emailRegex.IsMatch(email))
-                throw new ArgumentException("Email format is invalid");
+                throw new DomainException("Email format is invalid");
 
             if (string.IsNullOrWhiteSpace(password) || password.Length < 6)
-                throw new ArgumentException("Password must be at least 6 characters");
+                throw new DomainException("Password must be at least 6 characters");
 
             return new User
             {

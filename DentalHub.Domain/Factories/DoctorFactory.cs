@@ -1,4 +1,5 @@
-﻿using DentalHub.Domain.Entities;
+﻿using DentalHub.Domain.DomainExceptions;
+using DentalHub.Domain.Entities;
 using System;
 
 namespace DentalHub.Domain.Factories
@@ -8,13 +9,13 @@ namespace DentalHub.Domain.Factories
         public static Doctor Create(Guid userId, string specialty, int universityId)
         {
             if (userId == Guid.Empty)
-                throw new ArgumentException("UserId cannot be empty");
+                throw new DomainException("UserId cannot be empty");
 
             if (string.IsNullOrWhiteSpace(specialty))
                 specialty = "General";
 
             if (universityId <= 0)
-                throw new ArgumentException("UniversityId must be greater than 0");
+                throw new DomainException("UniversityId must be greater than 0");
 
             return new Doctor
             {

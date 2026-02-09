@@ -11,7 +11,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
         {
         }
 
-        // DbSets
+      
         public DbSet<Student> Students { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
@@ -21,6 +21,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Media> Medias { get; set; }
         public DbSet<SessionNote> SessionNotes { get; set; }
+        public DbSet<UniversityMember>  UniversityMembers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

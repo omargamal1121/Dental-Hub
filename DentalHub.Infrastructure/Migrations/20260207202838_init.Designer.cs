@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DentalHub.Infrastructure.Migrations
 {
     [DbContext(typeof(ContextApp))]
-    [Migration("20260201163236_add-baseentity")]
-    partial class addbaseentity
+    [Migration("20260207202838_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,32 @@ namespace DentalHub.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Admin", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsSuperAdmin")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Admins");
+                });
 
             modelBuilder.Entity("DentalHub.Domain.Entities.CaseRequest", b =>
                 {
@@ -492,6 +518,17 @@ namespace DentalHub.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DentalHub.Domain.Entities.Admin", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.User", "User")
+                        .WithOne("Admin")
+                        .HasForeignKey("DentalHub.Domain.Entities.Admin", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DentalHub.Domain.Entities.CaseRequest", b =>
                 {
                     b.HasOne("DentalHub.Domain.Entities.Doctor", "Doctor")
@@ -658,7 +695,7 @@ namespace DentalHub.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("DentalHub.Domain.Entities.User", null)
-                        .WithMany()
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -708,14 +745,15 @@ namespace DentalHub.Infrastructure.Migrations
 
             modelBuilder.Entity("DentalHub.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Doctor")
-                        .IsRequired();
+                    b.Navigation("Admin");
 
-                    b.Navigation("Patient")
-                        .IsRequired();
+                    b.Navigation("Doctor");
 
-                    b.Navigation("Student")
-                        .IsRequired();
+                    b.Navigation("Patient");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

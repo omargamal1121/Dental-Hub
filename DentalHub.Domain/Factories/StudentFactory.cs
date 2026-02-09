@@ -1,4 +1,5 @@
-﻿using DentalHub.Domain.Entities;
+﻿using DentalHub.Domain.DomainExceptions;
+using DentalHub.Domain.Entities;
 using System;
 
 namespace DentalHub.Domain.Factories
@@ -8,16 +9,16 @@ namespace DentalHub.Domain.Factories
         public static Student Create(Guid userId, string university, int universityId, int level)
         {
             if (userId == Guid.Empty)
-                throw new ArgumentException("UserId cannot be empty");
+                throw new DomainException("UserId cannot be empty");
 
             if (string.IsNullOrWhiteSpace(university))
                 university = "Unknown University";
 
             if (universityId <= 0)
-                throw new ArgumentException("UniversityId must be greater than 0");
+                throw new DomainException("UniversityId must be greater than 0");
 
             if (level <= 0 || level > 6)
-                throw new ArgumentException("Level must be between 1 and 6");
+                throw new DomainException("Level must be between 1 and 6");
 
             return new Student
             {

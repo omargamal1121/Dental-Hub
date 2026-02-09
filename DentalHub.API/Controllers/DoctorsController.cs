@@ -40,9 +40,13 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ApiResponse<List<DoctorDto>>>> GetAll()
+        public async Task<ActionResult<ApiResponse<List<DoctorDto>>>> GetAll(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string? name = null,
+            [FromQuery] string? spec = null)
         {
-            var result = await _mediator.Send(new GetAllDoctorsQuery());
+            var result = await _mediator.Send(new GetAllDoctorsQuery(page, pageSize, name, spec));
             return HandleResult(result);
         }
 

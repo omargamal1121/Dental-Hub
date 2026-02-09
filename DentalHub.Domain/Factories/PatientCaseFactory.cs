@@ -1,4 +1,5 @@
-﻿using DentalHub.Domain.Entities;
+﻿using DentalHub.Domain.DomainExceptions;
+using DentalHub.Domain.Entities;
 using System;
 
 namespace DentalHub.Domain.Factories
@@ -8,7 +9,7 @@ namespace DentalHub.Domain.Factories
         public static PatientCase Create(Guid patientId, string treatmentType, CaseStatus status)
         {
             if (patientId == Guid.Empty)
-                throw new ArgumentException("PatientId cannot be empty");
+                throw new DomainException("PatientId cannot be empty");
 
             if (string.IsNullOrWhiteSpace(treatmentType))
                 treatmentType = "General Treatment";

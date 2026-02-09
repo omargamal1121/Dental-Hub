@@ -11,6 +11,7 @@ namespace DentalHub.Application.Services.Admins
     public class AdminService : IAdminService
     {
         private readonly IUnitOfWork _unitOfWork;
+      
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly ILogger<AdminService> _logger;
@@ -67,7 +68,7 @@ namespace DentalHub.Application.Services.Admins
                 var admin = new Admin
                 {
                     UserId = user.Id,
-                    Role = dto.Role,
+                    
                     Phone = dto.Phone,
                     IsSuperAdmin = dto.IsSuperAdmin,
                     CreateAt = DateTime.UtcNow
@@ -104,7 +105,7 @@ namespace DentalHub.Application.Services.Admins
                         UserId = a.UserId,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
-                        Role = a.Role,
+                    
                         Phone = a.Phone,
                         IsSuperAdmin = a.IsSuperAdmin,
                         CreateAt = a.CreateAt
@@ -140,7 +141,7 @@ namespace DentalHub.Application.Services.Admins
                         UserId = a.UserId,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
-                        Role = a.Role,
+                       
                         Phone = a.Phone,
                         IsSuperAdmin = a.IsSuperAdmin,
                         CreateAt = a.CreateAt
@@ -168,14 +169,17 @@ namespace DentalHub.Application.Services.Admins
         {
             try
             {
-                var spec = new BaseSpecificationWithProjection<Admin, AdminDto>(
-                    a => a.Role == role,
-                    a => new AdminDto
+				var adminRole = await _roleManager.FindByNameAsync("Admin");
+                if (adminRole == null)
+                    return Result<List<AdminDto>>.Failure("No Admin Role", 500);
+				var adminRoleId = adminRole.Id;
+				var spec = new BaseSpecificationWithProjection<Admin, AdminDto>(
+					 a => a.User.UserRoles.Any(ur => ur.RoleId == adminRoleId),
+					a => new AdminDto
                     {
                         UserId = a.UserId,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
-                        Role = a.Role,
                         Phone = a.Phone,
                         IsSuperAdmin = a.IsSuperAdmin,
                         CreateAt = a.CreateAt
@@ -209,7 +213,7 @@ namespace DentalHub.Application.Services.Admins
                         UserId = a.UserId,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
-                        Role = a.Role,
+                   
                         Phone = a.Phone,
                         IsSuperAdmin = a.IsSuperAdmin,
                         CreateAt = a.CreateAt
@@ -252,10 +256,7 @@ namespace DentalHub.Application.Services.Admins
                     admin.User.FullName = dto.FullName;
                 }
 
-                if (!string.IsNullOrWhiteSpace(dto.Role))
-                {
-                    admin.Role = dto.Role;
-                }
+              
 
                 if (!string.IsNullOrWhiteSpace(dto.Phone))
                 {

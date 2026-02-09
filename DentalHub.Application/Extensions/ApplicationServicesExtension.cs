@@ -5,6 +5,7 @@ using DentalHub.Application.Services.Identity;
 using DentalHub.Application.Services.Patients;
 using DentalHub.Application.Services.Sessions;
 using DentalHub.Application.Services.Students;
+using DentalHub.Application.Services.UniversityMembers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalHub.Application.Extensions
@@ -31,6 +32,9 @@ namespace DentalHub.Application.Extensions
 
             // Register Session Management Services
             services.AddScoped<ISessionService, SessionService>();
+
+            // Register University Member Service
+            services.AddScoped<IUniversityMemberService, UniversityMemberService>();
 
             return services;
         }

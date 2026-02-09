@@ -1,4 +1,5 @@
-﻿using DentalHub.Domain.Entities;
+﻿using DentalHub.Domain.DomainExceptions;
+using DentalHub.Domain.Entities;
 using System;
 
 namespace DentalHub.Domain.Factories
@@ -9,13 +10,13 @@ namespace DentalHub.Domain.Factories
         {
 
             if (studentId == Guid.Empty)
-                throw new ArgumentException("StudentId cannot be empty");
+                throw new DomainException("StudentId cannot be empty");
 
             if (doctorId == Guid.Empty)
-                throw new ArgumentException("DoctorId cannot be empty");
+                throw new DomainException("DoctorId cannot be empty");
 
             if (patientCaseId == Guid.Empty)
-                throw new ArgumentException("PatientCaseId cannot be empty");
+                throw new DomainException("PatientCaseId cannot be empty");
 
             if (string.IsNullOrWhiteSpace(description))
                 description = "No description provided";
