@@ -9,7 +9,7 @@ namespace DentalHub.Application.DTOs.Doctors
         public string Email { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string Specialty { get; set; } = string.Empty;
-        public int UniversityId { get; set; }
+        public string UniversityId { get; set; }
 
         public DateTime CreateAt { get; set; }
         public int TotalStudents { get; set; }

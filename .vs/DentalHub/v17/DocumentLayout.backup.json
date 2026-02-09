@@ -3,20 +3,64 @@
   "WorkspaceRootPath": "D:\\projects\\DentalHub\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|d:\\projects\\dentalhub\\dentalhub.application\\handlers\\universitymember\\getuniversitymemberbyuniversityidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\handlers\\universitymember\\getuniversitymemberbyuniversityidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\projects\\DentalHub\\DentalHub.Infrastructure\\Migrations\\20260209214538_change-UniversityId-to-string.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DentalHub.Infrastructure\\Migrations\\20260209214538_change-UniversityId-to-string.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B3C55415-040A-CDF2-1429-CEBCA9D02535}|DentalHub.API\\DentalHub.API.csproj|d:\\projects\\dentalhub\\dentalhub.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B3C55415-040A-CDF2-1429-CEBCA9D02535}|DentalHub.API\\DentalHub.API.csproj|solutionrelative:dentalhub.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|d:\\projects\\dentalhub\\dentalhub.application\\services\\doctors\\doctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\services\\doctors\\doctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\projects\\DentalHub\\DentalHub.Infrastructure\\Migrations\\20260209132155_add-UniversityMember-table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DentalHub.Infrastructure\\Migrations\\20260209132155_add-UniversityMember-table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|d:\\projects\\dentalhub\\dentalhub.application\\services\\doctors\\idoctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\services\\doctors\\idoctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{90A9F7ED-FC6B-4DC4-BC37-901F76D27803}|DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj|d:\\projects\\dentalhub\\dentalhub.infrastructure\\migrations\\20260207202838_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90A9F7ED-FC6B-4DC4-BC37-901F76D27803}|DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj|solutionrelative:dentalhub.infrastructure\\migrations\\20260207202838_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|d:\\projects\\dentalhub\\dentalhub.application\\services\\students\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\services\\students\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|d:\\projects\\dentalhub\\dentalhub.application\\dtos\\students\\studentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\dtos\\students\\studentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|d:\\projects\\dentalhub\\dentalhub.application\\dtos\\doctors\\doctordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\dtos\\doctors\\doctordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8A4194B-D36E-4762-B7EC-95289B7B204B}|DentalHub.Domain\\DentalHub.Domain.csproj|d:\\projects\\dentalhub\\dentalhub.domain\\factories\\studentfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8A4194B-D36E-4762-B7EC-95289B7B204B}|DentalHub.Domain\\DentalHub.Domain.csproj|solutionrelative:dentalhub.domain\\factories\\studentfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8A4194B-D36E-4762-B7EC-95289B7B204B}|DentalHub.Domain\\DentalHub.Domain.csproj|d:\\projects\\dentalhub\\dentalhub.domain\\factories\\doctorfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8A4194B-D36E-4762-B7EC-95289B7B204B}|DentalHub.Domain\\DentalHub.Domain.csproj|solutionrelative:dentalhub.domain\\factories\\doctorfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8A4194B-D36E-4762-B7EC-95289B7B204B}|DentalHub.Domain\\DentalHub.Domain.csproj|d:\\projects\\dentalhub\\dentalhub.domain\\entities\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8A4194B-D36E-4762-B7EC-95289B7B204B}|DentalHub.Domain\\DentalHub.Domain.csproj|solutionrelative:dentalhub.domain\\entities\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8A4194B-D36E-4762-B7EC-95289B7B204B}|DentalHub.Domain\\DentalHub.Domain.csproj|d:\\projects\\dentalhub\\dentalhub.domain\\entities\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8A4194B-D36E-4762-B7EC-95289B7B204B}|DentalHub.Domain\\DentalHub.Domain.csproj|solutionrelative:dentalhub.domain\\entities\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|d:\\projects\\dentalhub\\dentalhub.application\\handlers\\students\\createstudentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\handlers\\students\\createstudentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|d:\\projects\\dentalhub\\dentalhub.application\\dtos\\identity\\registerstudentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\dtos\\identity\\registerstudentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|d:\\projects\\dentalhub\\dentalhub.application\\handlers\\doctor\\createdoctorcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\handlers\\doctor\\createdoctorcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|d:\\projects\\dentalhub\\dentalhub.application\\commands\\doctor\\createdoctorcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\commands\\doctor\\createdoctorcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|d:\\projects\\dentalhub\\dentalhub.application\\commands\\students\\createstudentcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\commands\\students\\createstudentcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,62 +70,205 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20260209214538_change-UniversityId-to-string.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\Migrations\\20260209214538_change-UniversityId-to-string.cs",
+              "RelativeDocumentMoniker": "DentalHub.Infrastructure\\Migrations\\20260209214538_change-UniversityId-to-string.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\Migrations\\20260209214538_change-UniversityId-to-string.cs",
+              "RelativeToolTip": "DentalHub.Infrastructure\\Migrations\\20260209214538_change-UniversityId-to-string.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:45:38.954Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IDoctorService.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Application\\Services\\Doctors\\IDoctorService.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Services\\Doctors\\IDoctorService.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Application\\Services\\Doctors\\IDoctorService.cs",
+              "RelativeToolTip": "DentalHub.Application\\Services\\Doctors\\IDoctorService.cs",
+              "ViewState": "AgIAAA4AAAAAmpmZmZkjwBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:44:44.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "StudentDto.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Application\\DTOs\\Students\\StudentDto.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\DTOs\\Students\\StudentDto.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Application\\DTOs\\Students\\StudentDto.cs",
+              "RelativeToolTip": "DentalHub.Application\\DTOs\\Students\\StudentDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:44:32.528Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StudentService.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Application\\Services\\Students\\StudentService.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Services\\Students\\StudentService.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Application\\Services\\Students\\StudentService.cs",
+              "RelativeToolTip": "DentalHub.Application\\Services\\Students\\StudentService.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAmwEkAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:44:25.861Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DoctorDto.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Application\\DTOs\\Doctors\\DoctorDto.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\DTOs\\Doctors\\DoctorDto.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Application\\DTOs\\Doctors\\DoctorDto.cs",
+              "RelativeToolTip": "DentalHub.Application\\DTOs\\Doctors\\DoctorDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:44:03.146Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DoctorService.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Application\\Services\\Doctors\\DoctorService.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Services\\Doctors\\DoctorService.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Application\\Services\\Doctors\\DoctorService.cs",
+              "RelativeToolTip": "DentalHub.Application\\Services\\Doctors\\DoctorService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:43:55.749Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StudentFactory.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Domain\\Factories\\StudentFactory.cs",
+              "RelativeDocumentMoniker": "DentalHub.Domain\\Factories\\StudentFactory.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Domain\\Factories\\StudentFactory.cs",
+              "RelativeToolTip": "DentalHub.Domain\\Factories\\StudentFactory.cs",
+              "ViewState": "AgIAAA0AAACAy8zMzMwmwBkAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:42:37.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DoctorFactory.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Domain\\Factories\\DoctorFactory.cs",
+              "RelativeDocumentMoniker": "DentalHub.Domain\\Factories\\DoctorFactory.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Domain\\Factories\\DoctorFactory.cs",
+              "RelativeToolTip": "DentalHub.Domain\\Factories\\DoctorFactory.cs",
+              "ViewState": "AgIAAAIAAAAAjJmZmZnJvxEAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:41:43.857Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Doctor.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Domain\\Entities\\Doctor.cs",
+              "RelativeDocumentMoniker": "DentalHub.Domain\\Entities\\Doctor.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Domain\\Entities\\Doctor.cs",
+              "RelativeToolTip": "DentalHub.Domain\\Entities\\Doctor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:37:45.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Student.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Domain\\Entities\\Student.cs",
+              "RelativeDocumentMoniker": "DentalHub.Domain\\Entities\\Student.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Domain\\Entities\\Student.cs",
+              "RelativeToolTip": "DentalHub.Domain\\Entities\\Student.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:37:36.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RegisterStudentDto.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Application\\DTOs\\Identity\\RegisterStudentDto.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\DTOs\\Identity\\RegisterStudentDto.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Application\\DTOs\\Identity\\RegisterStudentDto.cs",
+              "RelativeToolTip": "DentalHub.Application\\DTOs\\Identity\\RegisterStudentDto.cs",
+              "ViewState": "AgIAABAAAAAAzMzMzMwuwB0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:37:14.827Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.API\\Program.cs",
-              "RelativeDocumentMoniker": "DentalHub.API\\Program.cs",
-              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.API\\Program.cs",
-              "RelativeToolTip": "DentalHub.API\\Program.cs",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "CreateStudentCommandHandler.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Application\\Handlers\\Students\\CreateStudentCommandHandler.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Handlers\\Students\\CreateStudentCommandHandler.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Application\\Handlers\\Students\\CreateStudentCommandHandler.cs",
+              "RelativeToolTip": "DentalHub.Application\\Handlers\\Students\\CreateStudentCommandHandler.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAuwBgAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-09T14:00:30.618Z",
+              "WhenOpened": "2026-02-09T21:37:07.283Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GetUniversityMemberByUniversityIdQueryHandler.cs",
-              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Application\\Handlers\\UniversityMember\\GetUniversityMemberByUniversityIdQueryHandler.cs",
-              "RelativeDocumentMoniker": "DentalHub.Application\\Handlers\\UniversityMember\\GetUniversityMemberByUniversityIdQueryHandler.cs",
-              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Application\\Handlers\\UniversityMember\\GetUniversityMemberByUniversityIdQueryHandler.cs",
-              "RelativeToolTip": "DentalHub.Application\\Handlers\\UniversityMember\\GetUniversityMemberByUniversityIdQueryHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABeAAAAAAAAAA==",
+              "DocumentIndex": 12,
+              "Title": "CreateDoctorCommandHandler.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Application\\Handlers\\Doctor\\CreateDoctorCommandHandler.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Handlers\\Doctor\\CreateDoctorCommandHandler.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Application\\Handlers\\Doctor\\CreateDoctorCommandHandler.cs",
+              "RelativeToolTip": "DentalHub.Application\\Handlers\\Doctor\\CreateDoctorCommandHandler.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA8wBMAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-09T13:59:12.938Z",
+              "WhenOpened": "2026-02-09T21:36:41.949Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "20260209132155_add-UniversityMember-table.cs",
-              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\Migrations\\20260209132155_add-UniversityMember-table.cs",
-              "RelativeDocumentMoniker": "DentalHub.Infrastructure\\Migrations\\20260209132155_add-UniversityMember-table.cs",
-              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\Migrations\\20260209132155_add-UniversityMember-table.cs",
-              "RelativeToolTip": "DentalHub.Infrastructure\\Migrations\\20260209132155_add-UniversityMember-table.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwBsAAABSAAAAAAAAAA==",
+              "DocumentIndex": 14,
+              "Title": "CreateStudentCommand.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Application\\Commands\\Students\\CreateStudentCommand.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Commands\\Students\\CreateStudentCommand.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Application\\Commands\\Students\\CreateStudentCommand.cs",
+              "RelativeToolTip": "DentalHub.Application\\Commands\\Students\\CreateStudentCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-09T13:21:55.398Z",
+              "WhenOpened": "2026-02-09T21:36:18.168Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "20260207202838_init.cs",
-              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\Migrations\\20260207202838_init.cs",
-              "RelativeDocumentMoniker": "DentalHub.Infrastructure\\Migrations\\20260207202838_init.cs",
-              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\Migrations\\20260207202838_init.cs",
-              "RelativeToolTip": "DentalHub.Infrastructure\\Migrations\\20260207202838_init.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 13,
+              "Title": "CreateDoctorCommand.cs",
+              "DocumentMoniker": "D:\\projects\\DentalHub\\DentalHub.Application\\Commands\\Doctor\\CreateDoctorCommand.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Commands\\Doctor\\CreateDoctorCommand.cs",
+              "ToolTip": "D:\\projects\\DentalHub\\DentalHub.Application\\Commands\\Doctor\\CreateDoctorCommand.cs",
+              "RelativeToolTip": "DentalHub.Application\\Commands\\Doctor\\CreateDoctorCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-09T13:21:39.592Z",
+              "WhenOpened": "2026-02-09T21:35:58.256Z",
               "EditorCaption": ""
             }
           ]

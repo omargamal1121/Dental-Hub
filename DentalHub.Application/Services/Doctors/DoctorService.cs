@@ -101,7 +101,7 @@ namespace DentalHub.Application.Services.Doctors
 
    
         public async Task<Result<List<DoctorDto>>> GetDoctorsByUniversityAsync(
-            int universityId, int page = 1, int pageSize = 10)
+            string universityId, int page = 1, int pageSize = 10)
         {
             try
             {

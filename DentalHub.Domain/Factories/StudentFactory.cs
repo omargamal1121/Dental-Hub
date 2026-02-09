@@ -6,7 +6,7 @@ namespace DentalHub.Domain.Factories
 {
     public static class StudentFactory
     {
-        public static Student Create(Guid userId, string university, int universityId, int level)
+        public static Student Create(Guid userId, string university, string universityId)
         {
             if (userId == Guid.Empty)
                 throw new DomainException("UserId cannot be empty");
@@ -14,18 +14,16 @@ namespace DentalHub.Domain.Factories
             if (string.IsNullOrWhiteSpace(university))
                 university = "Unknown University";
 
-            if (universityId <= 0)
-                throw new DomainException("UniversityId must be greater than 0");
+            if (string.IsNullOrEmpty(universityId))
+                throw new DomainException("UniversityId Can't Be Empty");
 
-            if (level <= 0 || level > 6)
-                throw new DomainException("Level must be between 1 and 6");
-
+           
             return new Student
             {
                 UserId = userId,
                 University = university,
                 UniversityId = universityId,
-                Level = level,
+                Level = 1,
                 CreateAt = DateTime.UtcNow
             };
         }

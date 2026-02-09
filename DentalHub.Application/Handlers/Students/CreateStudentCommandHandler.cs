@@ -22,7 +22,7 @@ namespace DentalHub.Application.Handlers.Students
                 FullName = request.FullName,
                 Email = request.Email,
                 Password = request.Password,
-                University = request.University,
+                UniversityId = request.UniversityId,
                 
             };
 

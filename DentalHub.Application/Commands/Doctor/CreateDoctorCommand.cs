@@ -8,6 +8,6 @@ namespace DentalHub.Application.Commands.Doctor
         string Email,
         string Password,
         string Specialty,
-        int UniversityId
+        string UniversityId
     ) : IRequest<Result<Guid>>;
 }

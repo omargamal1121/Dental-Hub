@@ -1974,8 +1974,8 @@
             "nullable": true
           },
           "universityId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2072,13 +2072,9 @@
             "type": "string",
             "nullable": true
           },
-          "university": {
+          "universityId": {
             "type": "string",
             "nullable": true
-          },
-          "grade": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -2107,8 +2103,8 @@
             "nullable": true
           },
           "universityId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "createAt": {
             "type": "string",
@@ -2723,8 +2719,8 @@
             "nullable": true
           },
           "universityId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "level": {
             "type": "integer",

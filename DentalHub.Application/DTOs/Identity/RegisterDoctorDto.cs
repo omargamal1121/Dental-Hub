@@ -30,7 +30,7 @@ namespace DentalHub.Application.DTOs.Identity
         public string Specialty { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "University ID is required")]
-        [Range(1, int.MaxValue, ErrorMessage = "University ID must be a positive number")]
-        public int UniversityId { get; set; }
+       
+        public string UniversityId { get; set; }
     }
 }

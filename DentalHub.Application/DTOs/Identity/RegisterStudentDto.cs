@@ -27,7 +27,7 @@ namespace DentalHub.Application.DTOs.Identity
 
         [Required(ErrorMessage = "University ID is required")]
         [Range(1, int.MaxValue, ErrorMessage = "University ID must be a positive number")]
-        public int UniversityId { get; set; }
+        public string UniversityId { get; set; }
 
         [Required(ErrorMessage = "Level is required")]
         [Range(1, 5, ErrorMessage = "Level must be between 1 and 5")]
