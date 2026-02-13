@@ -17,6 +17,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
         IMainRepository<SessionNote> SessionNotes { get; }
         IMainRepository<Media> Medias { get; }
         IMainRepository<UniversityMember> UniversityMembers { get; }
+        IMainRepository<CaseType> CaseTypes { get; }
 
         // Save Changes
         Task<int> SaveChangesAsync();

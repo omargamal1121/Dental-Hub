@@ -1,3 +1,5 @@
+using DentalHub.Application.DTOs.CaseTypes;
+
 namespace DentalHub.Application.DTOs.Cases
 {
     /// DTO for case request information
@@ -6,7 +8,7 @@ namespace DentalHub.Application.DTOs.Cases
         public Guid Id { get; set; }
         public Guid PatientCaseId { get; set; }
         public string PatientName { get; set; } = string.Empty;
-        public string TreatmentType { get; set; } = string.Empty;
+        public List<CaseTypeDto>  CaseTypeDtos { get; set; } =  new List<CaseTypeDto>();
         public Guid StudentId { get; set; }
         public string StudentName { get; set; } = string.Empty;
         public string University { get; set; } = string.Empty;

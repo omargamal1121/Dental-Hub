@@ -26,6 +26,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
         public IMainRepository<SessionNote> SessionNotes { get; }
         public IMainRepository<Media> Medias { get; }
         public IMainRepository<UniversityMember> UniversityMembers { get; }
+        public IMainRepository<CaseType> CaseTypes { get; }
 
         public UnitOfWork(
             IMainRepository<User> users,
@@ -39,6 +40,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
             IMainRepository<SessionNote> sessionNotes,
             IMainRepository<Media> medias,
             IMainRepository<UniversityMember> universityMembers,
+            IMainRepository<CaseType> caseTypes,
             ContextApp context,
             ILogger<UnitOfWork>? logger = null)
         {
@@ -53,6 +55,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
             SessionNotes = sessionNotes;
             Medias = medias;
             UniversityMembers = universityMembers;
+            CaseTypes = caseTypes;
             _context = context;
             _logger = logger;
         }

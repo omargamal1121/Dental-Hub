@@ -1,4 +1,5 @@
 ﻿using DentalHub.Application.Exceptions;
+using DentalHub.Domain.DomainExceptions;
 using System.Net;
 using System.Text.Json;
 
@@ -66,6 +67,15 @@ namespace DentalHub.API.Middleware
                     {
                         StatusCode = (int)HttpStatusCode.BadRequest,
                         Message = businessEx.Message,
+                        IsSuccess = false
+                    };
+                    break;
+
+                case DomainException domainEx:
+                    response = new ErrorResponse
+                    {
+                        StatusCode = (int)HttpStatusCode.BadRequest,
+                        Message = domainEx.Message,
                         IsSuccess = false
                     };
                     break;

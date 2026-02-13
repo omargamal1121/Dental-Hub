@@ -22,6 +22,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
         public DbSet<Media> Medias { get; set; }
         public DbSet<SessionNote> SessionNotes { get; set; }
         public DbSet<UniversityMember>  UniversityMembers { get; set; }
+        public DbSet<CaseType>   CaseTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

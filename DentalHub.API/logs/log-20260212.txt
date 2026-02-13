@@ -1,0 +1,57 @@
+2026-02-12 20:58:26.187 +02:00 [INF] DB tables already exist. Exit install
+2026-02-12 20:58:26.305 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-12 20:58:26.752 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-12 20:58:26.789 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-12 20:58:26.962 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-12 20:58:26.975 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-12 20:58:26.977 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-12 20:58:26.980 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-12 20:58:27.000 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-12 20:58:27.023 +02:00 [INF] Hosting environment: Development
+2026-02-12 20:58:27.056 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-12 20:58:27.580 +02:00 [INF] Server mrrobot:13708:55499c69 successfully announced in 552.7852 ms
+2026-02-12 20:58:27.586 +02:00 [INF] Server mrrobot:13708:55499c69 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-12 20:58:27.603 +02:00 [INF] Server mrrobot:13708:55499c69 all the dispatchers started
+2026-02-12 20:58:31.942 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-12 20:58:32.433 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-12 20:58:32.477 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-12 20:58:32.480 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-12 20:58:32.487 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 0 null 546.1206ms
+2026-02-12 20:58:32.589 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 20:58:32.591 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui.css - null null
+2026-02-12 20:58:32.591 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.js - null null
+2026-02-12 20:58:32.591 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.css - null null
+2026-02-12 20:58:32.599 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui-standalone-preset.js - null null
+2026-02-12 20:58:32.643 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui-bundle.js - null null
+2026-02-12 20:58:32.670 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui.css - 304 null null 79.4417ms
+2026-02-12 20:58:32.675 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.css - 304 null null 84.1041ms
+2026-02-12 20:58:32.686 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui-standalone-preset.js - 304 null null 87.3841ms
+2026-02-12 20:58:32.709 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui-bundle.js - 304 null null 66.7493ms
+2026-02-12 20:58:32.729 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 140.1713ms
+2026-02-12 20:58:32.795 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.js - 200 null application/javascript;charset=utf-8 204.0005ms
+2026-02-12 20:58:32.803 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-12 20:58:33.017 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 213.2673ms
+2026-02-12 20:58:33.687 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-12 20:58:34.249 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 561.9854ms
+2026-02-12 21:10:05.634 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-12 21:10:05.660 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 26.6214ms
+2026-02-12 21:10:06.010 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 21:10:06.073 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-12 21:10:06.457 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 446.9453ms
+2026-02-12 21:10:06.475 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 402.409ms
+2026-02-12 21:10:06.908 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-12 21:10:06.951 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/favicon-32x32.png - null null
+2026-02-12 21:10:06.962 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 53.7293ms
+2026-02-12 21:10:06.969 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/favicon-32x32.png - 304 null null 17.1281ms
+2026-02-12 21:10:18.805 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-12 21:10:18.816 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 11.0184ms
+2026-02-12 21:10:18.915 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-12 21:10:18.915 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-12 21:10:18.930 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 14.8665ms
+2026-02-12 21:10:18.943 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 27.9061ms
+2026-02-12 21:10:19.035 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-12 21:10:19.061 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 25.8163ms

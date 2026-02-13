@@ -6,23 +6,24 @@ namespace DentalHub.Domain.Factories
 {
     public static class PatientCaseFactory
     {
-        public static PatientCase Create(Guid patientId, string treatmentType, CaseStatus status)
+        public static PatientCase Create(Guid patientId, Guid  casetypeid,string Description)
         {
             if (patientId == Guid.Empty)
                 throw new DomainException("PatientId cannot be empty");
+            if (casetypeid == Guid.Empty)
+                throw new DomainException("casetypeid cannot be empty");
 
-            if (string.IsNullOrWhiteSpace(treatmentType))
-                treatmentType = "General Treatment";
 
-            if (!Enum.IsDefined(typeof(CaseStatus), status))
-                status = CaseStatus.Pending;
 
             return new PatientCase
             {
                 Id = Guid.NewGuid(),
                 PatientId = patientId,
-                TreatmentType = treatmentType,
-                Status = status,
+                CaseTypeId = casetypeid,
+                Description = Description,
+
+
+                Status = CaseStatus.Pending,
                 CreateAt = DateTime.UtcNow
             };
         }

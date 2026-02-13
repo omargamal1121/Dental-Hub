@@ -21,7 +21,24 @@ namespace DentalHub.Infrastructure.ContextAndConfig
             builder.HasMany(x => x.Sessions)
                    .WithOne(x => x.PatientCase)
                    .HasForeignKey(x => x.CaseId);
+            builder.HasOne(x => x.CaseType)
+                   .WithMany(x => x.PatientCases)
+                   .HasForeignKey(x => x.CaseTypeId);
 			builder.HasQueryFilter(cr => cr.DeleteAt == null);
+           
+
+		}
+	}
+    public class CaseTypeConfiguration : IEntityTypeConfiguration<CaseType>
+    {
+        public void Configure(EntityTypeBuilder<CaseType> builder)
+        {
+            builder.HasKey(ct => ct.Id);
+            builder.HasIndex(ct => ct.Name).IsUnique();
+            builder.HasMany(ct=>ct.Medias).WithOne(m=>m.CaseType).HasForeignKey(ct=>ct.CaseTypeId);
+			builder.HasQueryFilter(cr => cr.DeleteAt == null);
+
+
 
 		}
 	}

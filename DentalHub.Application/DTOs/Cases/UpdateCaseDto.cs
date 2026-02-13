@@ -8,8 +8,7 @@ namespace DentalHub.Application.DTOs.Cases
         [Required]
         public Guid Id { get; set; }
 
-        [StringLength(200, MinimumLength = 3)]
-        public string? TreatmentType { get; set; }
+      
 
         [StringLength(1000)]
         public string? Description { get; set; }

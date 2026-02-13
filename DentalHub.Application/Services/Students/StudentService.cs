@@ -195,7 +195,7 @@ namespace DentalHub.Application.Services.Students
                         PatientId = pc.PatientId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        TreatmentType = pc.TreatmentType,
+                       
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,

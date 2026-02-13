@@ -1,5 +1,6 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Cases;
+using DentalHub.Application.DTOs.CaseTypes;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
@@ -25,21 +26,31 @@ namespace DentalHub.Application.Services.Cases
         {
             try
             {
-                // Validate patient exists
-                var patient = await _unitOfWork.Patients.GetByIdAsync(
-                    new BaseSpecification<Patient>(p => p.UserId == dto.PatientId));
 
-                if (patient == null)
+                var patient = await _unitOfWork.Patients.AnyAsync(new BaseSpecification<Patient>(i => i.UserId == dto.PatientId));
+
+                if (!patient)
                 {
                     return Result<PatientCaseDto>.Failure("Patient not found");
                 }
+                var casetype = await _unitOfWork.CaseTypes.AnyAsync(new BaseSpecification<CaseType>(i => i.Id == dto.CaseTypeId));
 
-                // Create new case
-                var patientCase = new PatientCase
+                if(!casetype)
+                {
+					return Result<PatientCaseDto>.Failure("Case type not found");
+
+
+				}
+
+
+
+
+				var patientCase = new PatientCase
                 {
                     Id = Guid.NewGuid(),
                     PatientId = dto.PatientId,
-                    TreatmentType = dto.TreatmentType,
+                    Description =dto.Description??string.Empty,
+                    CaseTypeId = dto.CaseTypeId,
                     Status = CaseStatus.Pending,
                     CreateAt = DateTime.UtcNow
                 };
@@ -72,18 +83,19 @@ namespace DentalHub.Application.Services.Cases
                         PatientId = pc.PatientId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        TreatmentType = pc.TreatmentType,
+                        CaseType = new CaseTypeDto { Id = pc.CaseTypeId, Name = pc.CaseType.Name },
+                        
+
+
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
                         PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending)
                     }
-                );
+                )
+                {
 
-                spec.AddInclude("Patient.User");
-                spec.AddInclude("Sessions");
-                spec.AddInclude("CaseRequests");
-
+                };
                 var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(spec);
 
                 if (patientCase == null)
@@ -112,7 +124,7 @@ namespace DentalHub.Application.Services.Cases
                         PatientId = pc.PatientId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        TreatmentType = pc.TreatmentType,
+                       
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
@@ -149,12 +161,7 @@ namespace DentalHub.Application.Services.Cases
                     return Result<PatientCaseDto>.Failure("Case not found");
                 }
 
-                // Update fields if provided
-                if (!string.IsNullOrWhiteSpace(dto.TreatmentType))
-                {
-                    patientCase.TreatmentType = dto.TreatmentType;
-                }
-
+               
                 patientCase.UpdateAt = DateTime.UtcNow;
 
                 _unitOfWork.PatientCases.Update(patientCase);
@@ -228,7 +235,7 @@ namespace DentalHub.Application.Services.Cases
                         PatientId = pc.PatientId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        TreatmentType = pc.TreatmentType,
+                       
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
@@ -267,7 +274,7 @@ namespace DentalHub.Application.Services.Cases
                         PatientId = pc.PatientId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        TreatmentType = pc.TreatmentType,
+                      
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
@@ -361,13 +368,7 @@ namespace DentalHub.Application.Services.Cases
                         $"Cannot change status from {patientCase.Status} to {newStatus}");
                 }
 
-                // Update treatment type if provided
-                if (!string.IsNullOrWhiteSpace(treatmentType))
-                {
-                    patientCase.TreatmentType = treatmentType;
-                }
-
-                // Update status
+              
                 patientCase.Status = newStatus;
                 patientCase.UpdateAt = DateTime.UtcNow;
 

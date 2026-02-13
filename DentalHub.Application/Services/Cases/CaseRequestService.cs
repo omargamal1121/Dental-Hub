@@ -125,7 +125,7 @@ namespace DentalHub.Application.Services.Cases
                         Id = cr.Id,
                         PatientCaseId = cr.PatientCaseId,
                         PatientName = cr.PatientCase.Patient.User.FullName,
-                        TreatmentType = cr.PatientCase.TreatmentType,
+                   
                         StudentId = cr.StudentId,
                         StudentName = cr.Student.User.FullName,
                         University = cr.Student.University,
@@ -167,7 +167,7 @@ namespace DentalHub.Application.Services.Cases
                         Id = cr.Id,
                         PatientCaseId = cr.PatientCaseId,
                         PatientName = cr.PatientCase.Patient.User.FullName,
-                        TreatmentType = cr.PatientCase.TreatmentType,
+                      
                         StudentId = cr.StudentId,
                         StudentName = cr.Student.User.FullName,
                         University = cr.Student.University,
@@ -208,7 +208,7 @@ namespace DentalHub.Application.Services.Cases
                         Id = cr.Id,
                         PatientCaseId = cr.PatientCaseId,
                         PatientName = cr.PatientCase.Patient.User.FullName,
-                        TreatmentType = cr.PatientCase.TreatmentType,
+                    
                         StudentId = cr.StudentId,
                         StudentName = cr.Student.User.FullName,
                         University = cr.Student.University,

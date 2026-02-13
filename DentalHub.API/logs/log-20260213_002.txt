@@ -1,0 +1,45 @@
+2026-02-13 01:27:14.713 +02:00 [ERR] The model for context 'ContextApp' has pending changes. Add a new migration before updating the database. See https://aka.ms/efcore-docs-pending-changes.
+2026-02-13 01:27:15.652 +02:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-02-13 01:27:15.759 +02:00 [INF] Executed DbCommand (81ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db39102_EFMigrationsLock', 259200)
+2026-02-13 01:27:16.015 +02:00 [INF] Executed DbCommand (75ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-02-13 01:27:16.645 +02:00 [INF] Executed DbCommand (84ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
+2026-02-13 01:27:16.725 +02:00 [INF] Executed DbCommand (77ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-02-13 01:27:16.734 +02:00 [INF] Applying migration '20260212232304_add-casetype-entity'.
+2026-02-13 01:27:16.856 +02:00 [ERR] Failed executing DbCommand (78ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `PatientCases` RENAME COLUMN `TreatmentType` TO `Description`;
+2026-02-13 01:28:49.652 +02:00 [INF] DB tables already exist. Exit install
+2026-02-13 01:28:49.778 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-13 01:28:50.032 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-13 01:28:50.039 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-13 01:28:50.192 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-13 01:28:50.238 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-13 01:28:50.241 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-13 01:28:50.300 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-13 01:28:50.334 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-13 01:28:50.380 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-13 01:28:50.543 +02:00 [INF] Hosting environment: Development
+2026-02-13 01:28:50.575 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-13 01:28:50.760 +02:00 [INF] Server mrrobot:21076:3bb4c243 successfully announced in 348.5026 ms
+2026-02-13 01:28:50.773 +02:00 [INF] Server mrrobot:21076:3bb4c243 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-13 01:28:50.874 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 540.5815ms
+2026-02-13 01:28:51.006 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-13 01:28:51.007 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-13 01:28:51.092 +02:00 [INF] Server mrrobot:21076:3bb4c243 all the dispatchers started
+2026-02-13 01:28:51.175 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 169.6109ms
+2026-02-13 01:28:51.233 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 225.5263ms
+2026-02-13 01:28:51.430 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-13 01:28:51.510 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 79.2355ms

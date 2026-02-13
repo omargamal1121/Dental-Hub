@@ -20,6 +20,8 @@ namespace DentalHub.Application.Handlers.PatientCase
             var dto = new CreateCaseDto
             {
                 PatientId = request.PatientId,
+                CaseTypeId= request.CaseTypeId,
+                
               
                 Description = request.Description,
              

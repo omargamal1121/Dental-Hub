@@ -1,0 +1,67 @@
+2026-02-13 01:23:58.317 +02:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-02-13 01:23:58.498 +02:00 [INF] Executed DbCommand (86ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db39102_EFMigrationsLock', 259200)
+2026-02-13 01:23:58.753 +02:00 [INF] Executed DbCommand (74ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-02-13 01:23:59.392 +02:00 [INF] Executed DbCommand (84ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
+2026-02-13 01:23:59.470 +02:00 [INF] Executed DbCommand (75ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-02-13 01:23:59.483 +02:00 [INF] Applying migration '20260212232304_add-casetype-entity'.
+2026-02-13 01:23:59.621 +02:00 [INF] Executed DbCommand (83ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `PatientCases` RENAME COLUMN `TreatmentType` TO `Description`;
+2026-02-13 01:23:59.702 +02:00 [INF] Executed DbCommand (81ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `PatientCases` ADD `CaseTypeId` char(36) COLLATE ascii_general_ci NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+2026-02-13 01:23:59.787 +02:00 [INF] Executed DbCommand (84ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Medias` ADD `CaseTypeId` char(36) COLLATE ascii_general_ci NULL;
+2026-02-13 01:23:59.867 +02:00 [INF] Executed DbCommand (80ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `CaseTypes` (
+    `Id` char(36) COLLATE ascii_general_ci NOT NULL,
+    `Name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `Description` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `CreateAt` datetime(6) NOT NULL,
+    `UpdateAt` datetime(6) NULL,
+    `DeleteAt` datetime(6) NULL,
+    CONSTRAINT `PK_CaseTypes` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-02-13 01:23:59.957 +02:00 [INF] Executed DbCommand (89ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_PatientCases_CaseTypeId` ON `PatientCases` (`CaseTypeId`);
+2026-02-13 01:24:00.040 +02:00 [INF] Executed DbCommand (83ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX `IX_CaseTypes_Name` ON `CaseTypes` (`Name`);
+2026-02-13 01:24:00.127 +02:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Medias` ADD CONSTRAINT `FK_Medias_CaseTypes_Id` FOREIGN KEY (`Id`) REFERENCES `CaseTypes` (`Id`) ON DELETE CASCADE;
+2026-02-13 01:24:00.213 +02:00 [ERR] Failed executing DbCommand (84ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `PatientCases` ADD CONSTRAINT `FK_PatientCases_CaseTypes_CaseTypeId` FOREIGN KEY (`CaseTypeId`) REFERENCES `CaseTypes` (`Id`) ON DELETE CASCADE;
+2026-02-13 01:27:12.944 +02:00 [INF] DB tables already exist. Exit install
+2026-02-13 01:27:13.100 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-13 01:27:13.348 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-13 01:27:13.352 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-13 01:27:13.503 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-13 01:27:13.541 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-13 01:27:13.590 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-13 01:27:13.610 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-13 01:27:13.616 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-13 01:27:13.659 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-13 01:27:13.689 +02:00 [INF] Hosting environment: Development
+2026-02-13 01:27:13.691 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-13 01:27:13.886 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 383.9678ms
+2026-02-13 01:27:13.979 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-13 01:27:13.979 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-13 01:27:14.022 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 42.6738ms
+2026-02-13 01:27:14.025 +02:00 [INF] Server mrrobot:15496:2e73f5c8 successfully announced in 353.5782 ms
+2026-02-13 01:27:14.041 +02:00 [INF] Server mrrobot:15496:2e73f5c8 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-13 01:27:14.056 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 76.7448ms
+2026-02-13 01:27:14.105 +02:00 [INF] Server mrrobot:15496:2e73f5c8 all the dispatchers started
+2026-02-13 01:27:14.197 +02:00 [INF] 1 servers were removed due to timeout
+2026-02-13 01:27:14.556 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-13 01:27:14.675 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 119.2593ms

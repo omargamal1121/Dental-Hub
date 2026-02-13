@@ -128,7 +128,7 @@ namespace DentalHub.Application.Services.Sessions
                     {
                         Id = s.Id,
                         CaseId = s.CaseId,
-                        TreatmentType = s.PatientCase.TreatmentType,
+                      
                         PatientId = s.PatientId,
                         PatientName = s.Patient.User.FullName,
                         StudentId = s.StudentId,
@@ -173,7 +173,7 @@ namespace DentalHub.Application.Services.Sessions
                     {
                         Id = s.Id,
                         CaseId = s.CaseId,
-                        TreatmentType = s.PatientCase.TreatmentType,
+                       
                         PatientId = s.PatientId,
                         PatientName = s.Patient.User.FullName,
                         StudentId = s.StudentId,
@@ -254,7 +254,7 @@ namespace DentalHub.Application.Services.Sessions
                     {
                         Id = s.Id,
                         CaseId = s.CaseId,
-                        TreatmentType = s.PatientCase.TreatmentType,
+                     
                         PatientId = s.PatientId,
                         PatientName = s.Patient.User.FullName,
                         StudentId = s.StudentId,
@@ -298,7 +298,7 @@ namespace DentalHub.Application.Services.Sessions
                     {
                         Id = s.Id,
                         CaseId = s.CaseId,
-                        TreatmentType = s.PatientCase.TreatmentType,
+                       
                         PatientId = s.PatientId,
                         PatientName = s.Patient.User.FullName,
                         StudentId = s.StudentId,
@@ -311,11 +311,7 @@ namespace DentalHub.Application.Services.Sessions
                     }
                 );
 
-                spec.AddInclude("PatientCase");
-                spec.AddInclude("Patient.User");
-                spec.AddInclude("Student.User");
-                spec.AddInclude("SessionNotes");
-                spec.AddInclude("Medias");
+            
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(s => s.ScheduledAt);
 
@@ -342,7 +338,7 @@ namespace DentalHub.Application.Services.Sessions
                     {
                         Id = s.Id,
                         CaseId = s.CaseId,
-                        TreatmentType = s.PatientCase.TreatmentType,
+                       
                         PatientId = s.PatientId,
                         PatientName = s.Patient.User.FullName,
                         StudentId = s.StudentId,

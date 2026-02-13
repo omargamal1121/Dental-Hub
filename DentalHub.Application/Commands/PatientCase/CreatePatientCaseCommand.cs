@@ -7,6 +7,6 @@ namespace DentalHub.Application.Commands.PatientCase
         Guid PatientId,
         string Title,
         string Description,
-        int CaseTypeId
+        Guid CaseTypeId
     ) : IRequest<Result<Guid>>;
 }

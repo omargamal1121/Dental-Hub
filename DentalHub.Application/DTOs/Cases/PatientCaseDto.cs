@@ -1,3 +1,5 @@
+using DentalHub.Application.DTOs.CaseTypes;
+
 namespace DentalHub.Application.DTOs.Cases
 {
     /// DTO for patient case information
@@ -7,7 +9,7 @@ namespace DentalHub.Application.DTOs.Cases
         public Guid PatientId { get; set; }
         public string PatientName { get; set; } = string.Empty;
         public int PatientAge { get; set; }
-        public string TreatmentType { get; set; } = string.Empty;
+        public  CaseTypeDto  CaseType { get; set; }
         public string Status { get; set; } = string.Empty;
         public DateTime CreateAt { get; set; }
         public int TotalSessions { get; set; }
