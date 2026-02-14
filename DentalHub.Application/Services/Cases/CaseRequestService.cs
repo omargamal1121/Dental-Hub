@@ -3,6 +3,7 @@ using DentalHub.Application.DTOs.Cases;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
+using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.Cases
@@ -113,7 +114,7 @@ namespace DentalHub.Application.Services.Cases
         #region Get Requests
 
 
-        public async Task<Result<List<CaseRequestDto>>> GetRequestsByDoctorIdAsync(
+        public async Task<Result<PagedResult<CaseRequestDto>>> GetRequestsByDoctorIdAsync(
             Guid doctorId, int page = 1, int pageSize = 10)
         {
             try
@@ -144,18 +145,26 @@ namespace DentalHub.Application.Services.Cases
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(cr => cr.CreateAt);
 
-                var requests = await _unitOfWork.CaseRequests.GetAllAsync(spec);
+				var requestsList = await _unitOfWork.CaseRequests.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.CaseRequests.CountAsync(spec);
 
-                return Result<List<CaseRequestDto>>.Success(requests);
+				var pagedResult = PaginationFactory<CaseRequestDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: requestsList
+				);
+
+				return Result<PagedResult<CaseRequestDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting requests for doctor: {DoctorId}", doctorId);
-                return Result<List<CaseRequestDto>>.Failure("Error retrieving requests");
+                return Result<PagedResult<CaseRequestDto>>.Failure("Error retrieving requests");
             }
         }
 
-        public async Task<Result<List<CaseRequestDto>>> GetRequestsByStudentIdAsync(
+        public async Task<Result<PagedResult<CaseRequestDto>>> GetRequestsByStudentIdAsync(
             Guid studentId, int page = 1, int pageSize = 10)
         {
             try
@@ -186,14 +195,22 @@ namespace DentalHub.Application.Services.Cases
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(cr => cr.CreateAt);
 
-                var requests = await _unitOfWork.CaseRequests.GetAllAsync(spec);
+				var requestsList = await _unitOfWork.CaseRequests.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.CaseRequests.CountAsync(spec);
 
-                return Result<List<CaseRequestDto>>.Success(requests);
+				var pagedResult = PaginationFactory<CaseRequestDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: requestsList
+				);
+
+				return Result<PagedResult<CaseRequestDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting requests for student: {StudentId}", studentId);
-                return Result<List<CaseRequestDto>>.Failure("Error retrieving requests");
+                return Result<PagedResult<CaseRequestDto>>.Failure("Error retrieving requests");
             }
         }
 

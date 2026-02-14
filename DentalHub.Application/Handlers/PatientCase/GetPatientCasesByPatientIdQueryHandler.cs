@@ -7,7 +7,7 @@ using MediatR;
 namespace DentalHub.Application.Handlers.PatientCase
 {
     /// Handler to get all cases for a specific patient
-    public class GetPatientCasesByPatientIdQueryHandler : IRequestHandler<GetPatientCasesByPatientIdQuery, Result<List<PatientCaseDto>>>
+    public class GetPatientCasesByPatientIdQueryHandler : IRequestHandler<GetPatientCasesByPatientIdQuery, Result<PagedResult<PatientCaseDto>>>
     {
         private readonly IPatientCaseService _service;
 
@@ -16,7 +16,7 @@ namespace DentalHub.Application.Handlers.PatientCase
             _service = service;
         }
 
-        public async Task<Result<List<PatientCaseDto>>> Handle(GetPatientCasesByPatientIdQuery request, CancellationToken ct)
+        public async Task<Result<PagedResult<PatientCaseDto>>> Handle(GetPatientCasesByPatientIdQuery request, CancellationToken ct)
         {
             // FIX: Use GetPatientCasesAsync instead of GetCaseByIdAsync
             return await _service.GetPatientCasesAsync(request.PatientId, request.Page, request.PageSize);

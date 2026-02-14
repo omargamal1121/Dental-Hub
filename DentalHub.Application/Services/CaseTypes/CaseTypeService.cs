@@ -5,6 +5,7 @@ using DentalHub.Domain.Factories;
 using DentalHub.Domain.DomainExceptions;
 using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
+using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.CaseTypes
@@ -50,7 +51,7 @@ namespace DentalHub.Application.Services.CaseTypes
             }
         }
 
-        public async Task<Result<List<CaseTypeDto>>> GetAllCaseTypesAsync(int page = 1, int pageSize = 10, string? search = null)
+        public async Task<Result<PagedResult<CaseTypeDto>>> GetAllCaseTypesAsync(int page = 1, int pageSize = 10, string? search = null)
         {
             try
             {
@@ -67,14 +68,22 @@ namespace DentalHub.Application.Services.CaseTypes
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderBy(ct => ct.Name);
 
-                var caseTypes = await _unitOfWork.CaseTypes.GetAllAsync(spec);
+				var caseTypesList = await _unitOfWork.CaseTypes.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.CaseTypes.CountAsync(spec);
 
-                return Result<List<CaseTypeDto>>.Success(caseTypes);
+				var pagedResult = PaginationFactory<CaseTypeDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: caseTypesList
+				);
+
+				return Result<PagedResult<CaseTypeDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting all case types");
-                return Result<List<CaseTypeDto>>.Failure("Error retrieving case types", 500);
+                return Result<PagedResult<CaseTypeDto>>.Failure("Error retrieving case types", 500);
             }
         }
 

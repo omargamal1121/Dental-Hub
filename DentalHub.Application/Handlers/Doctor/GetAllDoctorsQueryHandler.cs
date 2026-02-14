@@ -6,7 +6,7 @@ using MediatR;
 
 namespace DentalHub.Application.Handlers.Doctor
 {
-    public class GetAllDoctorsQueryHandler : IRequestHandler<GetAllDoctorsQuery, Result<List<DoctorDto>>>
+    public class GetAllDoctorsQueryHandler : IRequestHandler<GetAllDoctorsQuery, Result<PagedResult<DoctorlistDto>>>
     {
         private readonly IDoctorService _service;
 
@@ -15,7 +15,7 @@ namespace DentalHub.Application.Handlers.Doctor
             _service = service;
         }
 
-        public async Task<Result<List<DoctorDto>>> Handle(GetAllDoctorsQuery request, CancellationToken ct)
+        public async Task<Result<PagedResult<DoctorlistDto>>> Handle(GetAllDoctorsQuery request, CancellationToken ct)
         {
             return await _service.GetAllDoctorsAsync(request.Page, request.PageSize, request.Name, request.Spec);
         }

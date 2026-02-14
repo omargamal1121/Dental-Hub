@@ -9,5 +9,5 @@ namespace DentalHub.Application.Queries.PatientCase
         Guid PatientId,
         int Page = 1,
         int PageSize = 10
-    ) : IRequest<Result<List<PatientCaseDto>>>;
+    ) : IRequest<Result<PagedResult<PatientCaseDto>>>;
 }

@@ -7,7 +7,7 @@ namespace DentalHub.Application.Services.Doctors
     {
         // Doctor Profile
         Task<Result<DoctorDto>> GetDoctorByIdAsync(Guid userId);
-        Task<Result<List<DoctorDto>>> GetAllDoctorsAsync(int page = 1, int pageSize = 10, string? name = null, string? spec = null);
+        Task<Result<PagedResult<DoctorlistDto>>> GetAllDoctorsAsync(int page = 1, int pageSize = 10, string? name = null, string? spec = null);
         Task<Result<DoctorDto>> UpdateDoctorAsync(UpdateDoctorDto dto);
         Task<Result> DeleteDoctorAsync(Guid userId);
 
@@ -15,7 +15,7 @@ namespace DentalHub.Application.Services.Doctors
         Task<Result<DoctorStatsDto>> GetDoctorStatisticsAsync(Guid doctorId);
 
         // Get doctors by university
-        Task<Result<List<DoctorDto>>> GetDoctorsByUniversityAsync(
+        Task<Result<PagedResult<DoctorDto>>> GetDoctorsByUniversityAsync(
             string universityId, int page = 1, int pageSize = 10);
     }
 }

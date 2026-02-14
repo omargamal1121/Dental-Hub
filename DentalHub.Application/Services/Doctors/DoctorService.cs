@@ -1,5 +1,6 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Doctors;
+using DentalHub.Application.Factories;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
@@ -44,8 +45,7 @@ namespace DentalHub.Application.Services.Doctors
                     }
                 );
 
-                spec.AddInclude(d => d.User);
-                spec.AddInclude(d => d.CaseRequests);
+           
 
                 var doctor = await _unitOfWork.Doctors.GetByIdAsync(spec);
 
@@ -64,14 +64,14 @@ namespace DentalHub.Application.Services.Doctors
         }
 
 
-        public async Task<Result<List<DoctorDto>>> GetAllDoctorsAsync(int page = 1, int pageSize = 10, string? name = null, string? spec = null)
+        public async Task<Result<PagedResult<DoctorlistDto>>> GetAllDoctorsAsync(int page = 1, int pageSize = 10, string? name = null, string? spec = null)
         {
             try
             {
-                var filterSpec = new BaseSpecificationWithProjection<Doctor, DoctorDto>(
+                var filterSpec = new BaseSpecificationWithProjection<Doctor, DoctorlistDto>(
                     d => (string.IsNullOrEmpty(name) || d.Name.Contains(name)) &&
                          (string.IsNullOrEmpty(spec) || d.Specialty.Contains(spec)),
-                    d => new DoctorDto
+                    d => new DoctorlistDto
                     {
                         UserId = d.UserId,
                         FullName = d.User.FullName,
@@ -87,20 +87,30 @@ namespace DentalHub.Application.Services.Doctors
              
                 filterSpec.ApplyPaging(page, pageSize);
                 filterSpec.ApplyOrderByDescending(d => d.CreateAt);
+				var doctorsList = await _unitOfWork.Doctors.GetAllAsync(filterSpec);
+				var totalCount = await _unitOfWork.Doctors.CountAsync(filterSpec);
 
-                var doctors = await _unitOfWork.Doctors.GetAllAsync(filterSpec);
 
-                return Result<List<DoctorDto>>.Success(doctors);
+
+				var pagedResult = PaginationFactory<DoctorlistDto>.Create(
+	   count: totalCount,
+	   page: page,
+	   pageSize: pageSize,
+	   data: doctorsList
+   );
+
+
+				return Result<PagedResult<DoctorlistDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting all doctors");
-                return Result<List<DoctorDto>>.Failure("Error retrieving doctors");
+                return Result<PagedResult<DoctorlistDto>>.Failure("Error retrieving doctors");
             }
         }
 
    
-        public async Task<Result<List<DoctorDto>>> GetDoctorsByUniversityAsync(
+        public async Task<Result<PagedResult<DoctorDto>>> GetDoctorsByUniversityAsync(
             string universityId, int page = 1, int pageSize = 10)
         {
             try
@@ -125,14 +135,22 @@ namespace DentalHub.Application.Services.Doctors
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(d => d.CreateAt);
 
-                var doctors = await _unitOfWork.Doctors.GetAllAsync(spec);
+				var doctorsList = await _unitOfWork.Doctors.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.Doctors.CountAsync(spec);
 
-                return Result<List<DoctorDto>>.Success(doctors);
+				var pagedResult = PaginationFactory<DoctorDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: doctorsList
+				);
+
+				return Result<PagedResult<DoctorDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting doctors by university: {UniversityId}", universityId);
-                return Result<List<DoctorDto>>.Failure("Error retrieving doctors");
+                return Result<PagedResult<DoctorDto>>.Failure("Error retrieving doctors");
             }
         }
 
@@ -269,4 +287,5 @@ namespace DentalHub.Application.Services.Doctors
 
         #endregion
     }
+
 }

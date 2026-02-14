@@ -20,7 +20,7 @@ namespace DentalHub.Infrastructure.Repository
         public async Task<List<TResult>> GetAllAsync<TResult>(
             ISpecificationWithProjection<T, TResult> specification)
         {
-            var query = _dbSet.AsQueryable();
+            var query = _dbSet.AsQueryable().AsNoTracking();
             return await SpecificationWithProjectionEvaluator<T, TResult>
                 .GetQuery(query, specification)
                 .ToListAsync();
@@ -39,7 +39,7 @@ namespace DentalHub.Infrastructure.Repository
 
         public async Task<List<T>> GetAllAsync(ISpecification<T> specification)
         {
-            var query = _dbSet.AsQueryable();
+            var query = _dbSet.AsQueryable().AsNoTracking();
             return await SpecificationEvaluator<T>
                 .GetQuery(query, specification)
                 .ToListAsync();
@@ -60,17 +60,16 @@ namespace DentalHub.Infrastructure.Repository
 
         public async Task<int> CountAsync(ISpecification<T> specification)
         {
-            var query = _dbSet.AsQueryable();
+            var query = _dbSet.AsQueryable().AsNoTracking();
 
-            if (specification.Criteria != null)
-                query = query.Where(specification.Criteria);
+          return  await SpecificationEvaluator<T>.GetCountQuery(query, specification).CountAsync();
 
-            return await query.CountAsync();
+          
         }
 
         public async Task<bool> AnyAsync(ISpecification<T> specification)
         {
-            var query = _dbSet.AsQueryable();
+            var query = _dbSet.AsQueryable().AsNoTracking();
 
             if (specification.Criteria != null)
                 query = query.Where(specification.Criteria);

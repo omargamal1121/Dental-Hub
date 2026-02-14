@@ -4,6 +4,7 @@ using DentalHub.Application.Exceptions;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
+using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.Patients
@@ -61,7 +62,7 @@ namespace DentalHub.Application.Services.Patients
         }
 
         /// Get all patients with pagination
-        public async Task<Result<List<PatientDto>>> GetAllPatientsAsync(int page = 1, int pageSize = 10)
+        public async Task<Result<PagedResult<PatientDto>>> GetAllPatientsAsync(int page = 1, int pageSize = 10)
         {
             try
             {
@@ -84,14 +85,23 @@ namespace DentalHub.Application.Services.Patients
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(p => p.CreateAt);
 
-                var patients = await _unitOfWork.Patients.GetAllAsync(spec);
+				var patientsList = await _unitOfWork.Patients.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.Patients.CountAsync(spec);
 
-                return Result<List<PatientDto>>.Success(patients);
+
+				var pagedResult = PaginationFactory<PatientDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: patientsList
+				);
+
+                return Result<PagedResult<PatientDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting all patients");
-                return Result<List<PatientDto>>.Failure("Error retrieving patients");
+                return Result<PagedResult<PatientDto>>.Failure("Error retrieving patients");
             }
         }
 

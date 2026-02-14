@@ -4,7 +4,7 @@ using MediatR;
 
 namespace DentalHub.Application.Queries.CaseTypes
 {
-    public class GetAllCaseTypesQuery : IRequest<Result<List<CaseTypeDto>>>
+    public class GetAllCaseTypesQuery : IRequest<Result<PagedResult<CaseTypeDto>>>
     {
         public int Page { get; }
         public int PageSize { get; }

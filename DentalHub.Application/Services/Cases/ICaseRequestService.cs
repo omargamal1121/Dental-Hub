@@ -9,8 +9,8 @@ namespace DentalHub.Application.Services.Cases
         Task<Result<CaseRequestDto>> CreateRequestAsync(CreateCaseRequestDto dto);
 
         // Get Requests
-        Task<Result<List<CaseRequestDto>>> GetRequestsByDoctorIdAsync(Guid doctorId, int page = 1, int pageSize = 10);
-        Task<Result<List<CaseRequestDto>>> GetRequestsByStudentIdAsync(Guid studentId, int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<CaseRequestDto>>> GetRequestsByDoctorIdAsync(Guid doctorId, int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<CaseRequestDto>>> GetRequestsByStudentIdAsync(Guid studentId, int page = 1, int pageSize = 10);
         Task<Result<CaseRequestDto>> GetRequestByIdAsync(Guid requestId);
 
         // Approve/Reject

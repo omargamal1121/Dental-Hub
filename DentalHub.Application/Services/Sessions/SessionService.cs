@@ -3,6 +3,7 @@ using DentalHub.Application.DTOs.Sessions;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
+using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.Sessions
@@ -164,7 +165,7 @@ namespace DentalHub.Application.Services.Sessions
         }
 
         /// Get all sessions with pagination
-        public async Task<Result<List<SessionDto>>> GetAllSessionsAsync(int page = 1, int pageSize = 10)
+        public async Task<Result<PagedResult<SessionDto>>> GetAllSessionsAsync(int page = 1, int pageSize = 10)
         {
             try
             {
@@ -194,14 +195,22 @@ namespace DentalHub.Application.Services.Sessions
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(s => s.ScheduledAt);
 
-                var sessions = await _unitOfWork.Sessions.GetAllAsync(spec);
+				var sessionsList = await _unitOfWork.Sessions.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.Sessions.CountAsync(spec);
 
-                return Result<List<SessionDto>>.Success(sessions);
+				var pagedResult = PaginationFactory<SessionDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: sessionsList
+				);
+
+				return Result<PagedResult<SessionDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting all sessions");
-                return Result<List<SessionDto>>.Failure("Error retrieving sessions");
+                return Result<PagedResult<SessionDto>>.Failure("Error retrieving sessions");
             }
         }
 
@@ -243,7 +252,7 @@ namespace DentalHub.Application.Services.Sessions
         #region Filter Queries
 
         /// Get sessions by student ID
-        public async Task<Result<List<SessionDto>>> GetSessionsByStudentIdAsync(
+        public async Task<Result<PagedResult<SessionDto>>> GetSessionsByStudentIdAsync(
             Guid studentId, int page = 1, int pageSize = 10)
         {
             try
@@ -275,19 +284,27 @@ namespace DentalHub.Application.Services.Sessions
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(s => s.ScheduledAt);
 
-                var sessions = await _unitOfWork.Sessions.GetAllAsync(spec);
+				var sessionsList = await _unitOfWork.Sessions.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.Sessions.CountAsync(spec);
 
-                return Result<List<SessionDto>>.Success(sessions);
+				var pagedResult = PaginationFactory<SessionDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: sessionsList
+				);
+
+				return Result<PagedResult<SessionDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting sessions for student: {StudentId}", studentId);
-                return Result<List<SessionDto>>.Failure("Error retrieving sessions");
+                return Result<PagedResult<SessionDto>>.Failure("Error retrieving sessions");
             }
         }
 
         /// Get sessions by patient ID
-        public async Task<Result<List<SessionDto>>> GetSessionsByPatientIdAsync(
+        public async Task<Result<PagedResult<SessionDto>>> GetSessionsByPatientIdAsync(
             Guid patientId, int page = 1, int pageSize = 10)
         {
             try
@@ -315,19 +332,27 @@ namespace DentalHub.Application.Services.Sessions
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(s => s.ScheduledAt);
 
-                var sessions = await _unitOfWork.Sessions.GetAllAsync(spec);
+				var sessionsList = await _unitOfWork.Sessions.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.Sessions.CountAsync(spec);
 
-                return Result<List<SessionDto>>.Success(sessions);
+				var pagedResult = PaginationFactory<SessionDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: sessionsList
+				);
+
+				return Result<PagedResult<SessionDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting sessions for patient: {PatientId}", patientId);
-                return Result<List<SessionDto>>.Failure("Error retrieving sessions");
+                return Result<PagedResult<SessionDto>>.Failure("Error retrieving sessions");
             }
         }
 
         /// Get sessions by case ID
-        public async Task<Result<List<SessionDto>>> GetSessionsByCaseIdAsync(
+        public async Task<Result<PagedResult<SessionDto>>> GetSessionsByCaseIdAsync(
             Guid caseId, int page = 1, int pageSize = 10)
         {
             try
@@ -359,14 +384,22 @@ namespace DentalHub.Application.Services.Sessions
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(s => s.ScheduledAt);
 
-                var sessions = await _unitOfWork.Sessions.GetAllAsync(spec);
+				var sessionsList = await _unitOfWork.Sessions.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.Sessions.CountAsync(spec);
 
-                return Result<List<SessionDto>>.Success(sessions);
+				var pagedResult = PaginationFactory<SessionDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: sessionsList
+				);
+
+				return Result<PagedResult<SessionDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting sessions for case: {CaseId}", caseId);
-                return Result<List<SessionDto>>.Failure("Error retrieving sessions");
+                return Result<PagedResult<SessionDto>>.Failure("Error retrieving sessions");
             }
         }
 

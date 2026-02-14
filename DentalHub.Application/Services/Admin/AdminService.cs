@@ -3,6 +3,7 @@ using DentalHub.Application.DTOs.Admins;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
+using DentalHub.Application.Factories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
@@ -131,7 +132,7 @@ namespace DentalHub.Application.Services.Admins
         }
 
         /// Get all admins with pagination
-        public async Task<Result<List<AdminDto>>> GetAllAdminsAsync(int page = 1, int pageSize = 10)
+        public async Task<Result<PagedResult<AdminDto>>> GetAllAdminsAsync(int page = 1, int pageSize = 10)
         {
             try
             {
@@ -152,26 +153,34 @@ namespace DentalHub.Application.Services.Admins
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(a => a.CreateAt);
 
-                var admins = await _unitOfWork.Admins.GetAllAsync(spec);
+				var adminsList = await _unitOfWork.Admins.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.Admins.CountAsync(spec);
 
-                return Result<List<AdminDto>>.Success(admins);
+				var pagedResult = PaginationFactory<AdminDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: adminsList
+				);
+
+				return Result<PagedResult<AdminDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting all admins");
-                return Result<List<AdminDto>>.Failure("Error retrieving admins");
+                return Result<PagedResult<AdminDto>>.Failure("Error retrieving admins");
             }
         }
 
         /// Get admins by role
-        public async Task<Result<List<AdminDto>>> GetAdminsByRoleAsync(
+        public async Task<Result<PagedResult<AdminDto>>> GetAdminsByRoleAsync(
             string role, int page = 1, int pageSize = 10)
         {
             try
             {
 				var adminRole = await _roleManager.FindByNameAsync("Admin");
                 if (adminRole == null)
-                    return Result<List<AdminDto>>.Failure("No Admin Role", 500);
+                    return Result<PagedResult<AdminDto>>.Failure("No Admin Role", 500);
 				var adminRoleId = adminRole.Id;
 				var spec = new BaseSpecificationWithProjection<Admin, AdminDto>(
 					 a => a.User.UserRoles.Any(ur => ur.RoleId == adminRoleId),
@@ -190,19 +199,27 @@ namespace DentalHub.Application.Services.Admins
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(a => a.CreateAt);
 
-                var admins = await _unitOfWork.Admins.GetAllAsync(spec);
+				var adminsList = await _unitOfWork.Admins.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.Admins.CountAsync(spec);
 
-                return Result<List<AdminDto>>.Success(admins);
+				var pagedResult = PaginationFactory<AdminDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: adminsList
+				);
+
+				return Result<PagedResult<AdminDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting admins by role: {Role}", role);
-                return Result<List<AdminDto>>.Failure("Error retrieving admins");
+                return Result<PagedResult<AdminDto>>.Failure("Error retrieving admins");
             }
         }
 
         /// Get super admins only
-        public async Task<Result<List<AdminDto>>> GetSuperAdminsAsync(int page = 1, int pageSize = 10)
+        public async Task<Result<PagedResult<AdminDto>>> GetSuperAdminsAsync(int page = 1, int pageSize = 10)
         {
             try
             {
@@ -224,14 +241,22 @@ namespace DentalHub.Application.Services.Admins
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(a => a.CreateAt);
 
-                var admins = await _unitOfWork.Admins.GetAllAsync(spec);
+				var adminsList = await _unitOfWork.Admins.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.Admins.CountAsync(spec);
 
-                return Result<List<AdminDto>>.Success(admins);
+				var pagedResult = PaginationFactory<AdminDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: adminsList
+				);
+
+				return Result<PagedResult<AdminDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting super admins");
-                return Result<List<AdminDto>>.Failure("Error retrieving super admins");
+                return Result<PagedResult<AdminDto>>.Failure("Error retrieving super admins");
             }
         }
 

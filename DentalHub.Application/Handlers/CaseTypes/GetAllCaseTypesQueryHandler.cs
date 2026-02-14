@@ -6,7 +6,7 @@ using MediatR;
 
 namespace DentalHub.Application.Handlers.CaseTypes
 {
-    public class GetAllCaseTypesQueryHandler : IRequestHandler<GetAllCaseTypesQuery, Result<List<CaseTypeDto>>>
+    public class GetAllCaseTypesQueryHandler : IRequestHandler<GetAllCaseTypesQuery, Result<PagedResult<CaseTypeDto>>>
     {
         private readonly ICaseTypeService _service;
 
@@ -15,7 +15,7 @@ namespace DentalHub.Application.Handlers.CaseTypes
             _service = service;
         }
 
-        public async Task<Result<List<CaseTypeDto>>> Handle(GetAllCaseTypesQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PagedResult<CaseTypeDto>>> Handle(GetAllCaseTypesQuery request, CancellationToken cancellationToken)
         {
             return await _service.GetAllCaseTypesAsync(request.Page, request.PageSize, request.Searching);
         }

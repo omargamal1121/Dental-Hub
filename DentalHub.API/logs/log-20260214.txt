@@ -1,0 +1,501 @@
+2026-02-14 13:56:05.649 +02:00 [INF] DB tables already exist. Exit install
+2026-02-14 13:56:05.790 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-14 13:56:06.217 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-14 13:56:06.220 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-14 13:56:06.462 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-14 13:56:06.483 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-14 13:56:06.486 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-14 13:56:06.502 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-14 13:56:06.604 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-14 13:56:06.662 +02:00 [INF] Hosting environment: Development
+2026-02-14 13:56:06.739 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-14 13:56:07.260 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-14 13:56:07.359 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-14 13:56:07.368 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-14 13:56:07.371 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-14 13:56:07.376 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 0 null 115.5543ms
+2026-02-14 13:56:07.389 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger - null null
+2026-02-14 13:56:07.396 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger - 301 0 null 7.0743ms
+2026-02-14 13:56:07.397 +02:00 [INF] Server mrrobot:16296:67174593 successfully announced in 765.3189 ms
+2026-02-14 13:56:07.408 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-14 13:56:07.413 +02:00 [INF] Server mrrobot:16296:67174593 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-14 13:56:07.473 +02:00 [INF] Server mrrobot:16296:67174593 all the dispatchers started
+2026-02-14 13:56:07.513 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 104.8093ms
+2026-02-14 13:56:07.597 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui.css - null null
+2026-02-14 13:56:07.598 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.css - null null
+2026-02-14 13:56:07.598 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui-bundle.js - null null
+2026-02-14 13:56:07.599 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui-standalone-preset.js - null null
+2026-02-14 13:56:07.599 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.js - null null
+2026-02-14 13:56:07.641 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.css - 200 152 text/css 42.9555ms
+2026-02-14 13:56:07.680 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 13:56:07.687 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.js - 200 null application/javascript;charset=utf-8 87.787ms
+2026-02-14 13:56:07.706 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui.css - 200 26248 text/css 109.2639ms
+2026-02-14 13:56:07.713 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui-standalone-preset.js - 200 77848 text/javascript 113.9601ms
+2026-02-14 13:56:07.732 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 49.4187ms
+2026-02-14 13:56:07.762 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui-bundle.js - 200 424871 text/javascript 163.3041ms
+2026-02-14 13:56:08.113 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 13:56:08.260 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 147.1779ms
+2026-02-14 14:04:45.997 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-14 14:04:46.012 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 15.3307ms
+2026-02-14 14:04:46.100 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 14:04:46.105 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 5.2033ms
+2026-02-14 14:04:46.210 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 14:04:46.215 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/favicon-32x32.png - null null
+2026-02-14 14:04:46.232 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/favicon-32x32.png - 200 628 image/png 16.1882ms
+2026-02-14 14:04:46.284 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 73.1327ms
+2026-02-14 14:06:49.446 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-14 14:06:49.456 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 10.186ms
+2026-02-14 14:06:49.523 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 14:06:49.545 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 21.755ms
+2026-02-14 14:06:49.598 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 14:06:49.650 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 52.0569ms
+2026-02-14 14:07:24.933 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-14 14:07:24.949 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 15.4119ms
+2026-02-14 14:07:25.025 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 14:07:25.191 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 165.7705ms
+2026-02-14 14:07:25.300 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 14:07:25.523 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 222.9561ms
+2026-02-14 14:07:29.427 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-14 14:07:29.470 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 42.9689ms
+2026-02-14 14:07:29.567 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 14:07:29.754 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 187.0249ms
+2026-02-14 14:07:29.818 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 14:07:29.933 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 115.2126ms
+2026-02-14 14:08:41.958 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-14 14:08:42.023 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 65.509ms
+2026-02-14 14:08:42.110 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 14:08:42.134 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 24.6209ms
+2026-02-14 14:08:42.181 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 14:08:42.215 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 34.6144ms
+2026-02-14 14:11:59.904 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-14 14:11:59.913 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 9.1028ms
+2026-02-14 14:11:59.998 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 14:12:00.044 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 45.8014ms
+2026-02-14 14:12:00.108 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 14:12:00.148 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 40.6381ms
+2026-02-14 14:13:44.037 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-14 14:13:44.052 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 15.0461ms
+2026-02-14 14:13:44.156 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 14:13:44.238 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 81.7709ms
+2026-02-14 14:13:44.296 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 14:13:44.361 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 65.2847ms
+2026-02-14 14:14:14.355 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-14 14:14:14.438 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 83.1801ms
+2026-02-14 14:14:14.523 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 14:14:14.565 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 41.929ms
+2026-02-14 14:14:14.622 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 14:14:14.672 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 50.1067ms
+2026-02-14 14:14:24.617 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-14 14:14:24.636 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 19.5303ms
+2026-02-14 14:14:24.722 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 14:14:24.847 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 125.1085ms
+2026-02-14 14:14:24.904 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 14:14:24.948 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 43.5381ms
+2026-02-14 14:33:15.042 +02:00 [WRN] Server mrrobot:16296:67174593 encountered an exception while sending heartbeat
+MySqlConnector.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+   at MySqlConnector.Core.ServerSession.ConnectAsync(ConnectionSettings cs, MySqlConnection connection, Int64 startingTimestamp, ILoadBalancer loadBalancer, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 439
+   at MySqlConnector.Core.ServerSession.ConnectAndRedirectAsync(ILogger connectionLogger, ILogger poolLogger, IConnectionPoolMetadata pool, ConnectionSettings cs, ILoadBalancer loadBalancer, MySqlConnection connection, Action`4 logMessage, Int64 startingTimestamp, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 697
+   at MySqlConnector.Core.ServerSession.ConnectAndRedirectAsync(ILogger connectionLogger, ILogger poolLogger, IConnectionPoolMetadata pool, ConnectionSettings cs, ILoadBalancer loadBalancer, MySqlConnection connection, Action`4 logMessage, Int64 startingTimestamp, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 702
+   at MySqlConnector.Core.ConnectionPool.GetSessionAsync(MySqlConnection connection, Int64 startingTimestamp, Int32 timeoutMilliseconds, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ConnectionPool.cs:line 116
+   at MySqlConnector.Core.ConnectionPool.GetSessionAsync(MySqlConnection connection, Int64 startingTimestamp, Int32 timeoutMilliseconds, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ConnectionPool.cs:line 150
+   at MySqlConnector.MySqlConnection.CreateSessionAsync(ConnectionPool pool, Int64 startingTimestamp, Activity activity, Nullable`1 ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlConnection.cs:line 1092
+   at MySqlConnector.MySqlConnection.OpenAsync(Nullable`1 ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlConnection.cs:line 567
+   at Hangfire.MySql.MySqlStorage.UseConnection[T](Func`2 func)
+   at Hangfire.Server.ServerHeartbeatProcess.Execute(BackgroundProcessContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\ServerHeartbeatProcess.cs:line 42
+2026-02-14 14:33:29.967 +02:00 [ERR] Execution Worker is in the Failed state now due to an exception, execution will be retried in no more than 00:05:00
+MySqlConnector.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+   at MySqlConnector.Core.ServerSession.ConnectAsync(ConnectionSettings cs, MySqlConnection connection, Int64 startingTimestamp, ILoadBalancer loadBalancer, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 439
+   at MySqlConnector.Core.ServerSession.ConnectAndRedirectAsync(ILogger connectionLogger, ILogger poolLogger, IConnectionPoolMetadata pool, ConnectionSettings cs, ILoadBalancer loadBalancer, MySqlConnection connection, Action`4 logMessage, Int64 startingTimestamp, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 697
+   at MySqlConnector.Core.ServerSession.ConnectAndRedirectAsync(ILogger connectionLogger, ILogger poolLogger, IConnectionPoolMetadata pool, ConnectionSettings cs, ILoadBalancer loadBalancer, MySqlConnection connection, Action`4 logMessage, Int64 startingTimestamp, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 702
+   at MySqlConnector.Core.ConnectionPool.GetSessionAsync(MySqlConnection connection, Int64 startingTimestamp, Int32 timeoutMilliseconds, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ConnectionPool.cs:line 116
+   at MySqlConnector.Core.ConnectionPool.GetSessionAsync(MySqlConnection connection, Int64 startingTimestamp, Int32 timeoutMilliseconds, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ConnectionPool.cs:line 150
+   at MySqlConnector.MySqlConnection.CreateSessionAsync(ConnectionPool pool, Int64 startingTimestamp, Activity activity, Nullable`1 ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlConnection.cs:line 1092
+   at MySqlConnector.MySqlConnection.OpenAsync(Nullable`1 ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlConnection.cs:line 567
+   at Hangfire.MySql.MySqlStorage.CreateAndOpenConnection()
+   at Hangfire.MySql.JobQueue.MySqlJobQueue.Dequeue(String[] queues, CancellationToken cancellationToken)
+   at Hangfire.MySql.MySqlStorageConnection.FetchNextJob(String[] queues, CancellationToken cancellationToken)
+   at Hangfire.Server.Worker.Execute(BackgroundProcessContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\Worker.cs:line 107
+   at Hangfire.Server.BackgroundProcessDispatcherBuilder.ExecuteProcess(Guid executionId, Object state) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundProcessDispatcherBuilder.cs:line 82
+   at Hangfire.Processing.BackgroundExecution.Run(Action`2 callback, Object state) in C:\projects\hangfire-525\src\Hangfire.Core\Processing\BackgroundExecution.cs:line 118
+2026-02-14 14:33:45.095 +02:00 [WRN] Server mrrobot:16296:67174593 encountered an exception while sending heartbeat
+MySqlConnector.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+   at MySqlConnector.Core.ServerSession.ConnectAsync(ConnectionSettings cs, MySqlConnection connection, Int64 startingTimestamp, ILoadBalancer loadBalancer, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 439
+   at MySqlConnector.Core.ServerSession.ConnectAndRedirectAsync(ILogger connectionLogger, ILogger poolLogger, IConnectionPoolMetadata pool, ConnectionSettings cs, ILoadBalancer loadBalancer, MySqlConnection connection, Action`4 logMessage, Int64 startingTimestamp, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 697
+   at MySqlConnector.Core.ServerSession.ConnectAndRedirectAsync(ILogger connectionLogger, ILogger poolLogger, IConnectionPoolMetadata pool, ConnectionSettings cs, ILoadBalancer loadBalancer, MySqlConnection connection, Action`4 logMessage, Int64 startingTimestamp, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 702
+   at MySqlConnector.Core.ConnectionPool.GetSessionAsync(MySqlConnection connection, Int64 startingTimestamp, Int32 timeoutMilliseconds, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ConnectionPool.cs:line 116
+   at MySqlConnector.Core.ConnectionPool.GetSessionAsync(MySqlConnection connection, Int64 startingTimestamp, Int32 timeoutMilliseconds, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ConnectionPool.cs:line 150
+   at MySqlConnector.MySqlConnection.CreateSessionAsync(ConnectionPool pool, Int64 startingTimestamp, Activity activity, Nullable`1 ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlConnection.cs:line 1092
+   at MySqlConnector.MySqlConnection.OpenAsync(Nullable`1 ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlConnection.cs:line 567
+   at Hangfire.MySql.MySqlStorage.UseConnection[T](Func`2 func)
+   at Hangfire.Server.ServerHeartbeatProcess.Execute(BackgroundProcessContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\ServerHeartbeatProcess.cs:line 42
+2026-02-14 14:33:46.124 +02:00 [ERR] Execution DelayedJobScheduler is in the Failed state now due to an exception, execution will be retried in no more than 00:00:25
+MySqlConnector.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+   at MySqlConnector.Core.ServerSession.ConnectAsync(ConnectionSettings cs, MySqlConnection connection, Int64 startingTimestamp, ILoadBalancer loadBalancer, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 439
+   at MySqlConnector.Core.ServerSession.ConnectAndRedirectAsync(ILogger connectionLogger, ILogger poolLogger, IConnectionPoolMetadata pool, ConnectionSettings cs, ILoadBalancer loadBalancer, MySqlConnection connection, Action`4 logMessage, Int64 startingTimestamp, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 697
+   at MySqlConnector.Core.ServerSession.ConnectAndRedirectAsync(ILogger connectionLogger, ILogger poolLogger, IConnectionPoolMetadata pool, ConnectionSettings cs, ILoadBalancer loadBalancer, MySqlConnection connection, Action`4 logMessage, Int64 startingTimestamp, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 702
+   at MySqlConnector.Core.ConnectionPool.GetSessionAsync(MySqlConnection connection, Int64 startingTimestamp, Int32 timeoutMilliseconds, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ConnectionPool.cs:line 116
+   at MySqlConnector.Core.ConnectionPool.GetSessionAsync(MySqlConnection connection, Int64 startingTimestamp, Int32 timeoutMilliseconds, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ConnectionPool.cs:line 150
+   at MySqlConnector.MySqlConnection.CreateSessionAsync(ConnectionPool pool, Int64 startingTimestamp, Activity activity, Nullable`1 ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlConnection.cs:line 1092
+   at MySqlConnector.MySqlConnection.OpenAsync(Nullable`1 ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlConnection.cs:line 567
+   at Hangfire.Server.DelayedJobScheduler.UseConnectionDistributedLock[T](JobStorage storage, Func`2 action) in C:\projects\hangfire-525\src\Hangfire.Core\Server\DelayedJobScheduler.cs:line 407
+   at Hangfire.Server.DelayedJobScheduler.Execute(BackgroundProcessContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\DelayedJobScheduler.cs:line 148
+   at Hangfire.Server.BackgroundProcessDispatcherBuilder.ExecuteProcess(Guid executionId, Object state) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundProcessDispatcherBuilder.cs:line 82
+   at Hangfire.Processing.BackgroundExecution.Run(Action`2 callback, Object state) in C:\projects\hangfire-525\src\Hangfire.Core\Processing\BackgroundExecution.cs:line 118
+2026-02-14 14:33:46.423 +02:00 [ERR] Execution RecurringJobScheduler is in the Failed state now due to an exception, execution will be retried in no more than 00:00:25
+MySqlConnector.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+   at MySqlConnector.Core.ServerSession.ConnectAsync(ConnectionSettings cs, MySqlConnection connection, Int64 startingTimestamp, ILoadBalancer loadBalancer, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 439
+   at MySqlConnector.Core.ServerSession.ConnectAndRedirectAsync(ILogger connectionLogger, ILogger poolLogger, IConnectionPoolMetadata pool, ConnectionSettings cs, ILoadBalancer loadBalancer, MySqlConnection connection, Action`4 logMessage, Int64 startingTimestamp, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 697
+   at MySqlConnector.Core.ServerSession.ConnectAndRedirectAsync(ILogger connectionLogger, ILogger poolLogger, IConnectionPoolMetadata pool, ConnectionSettings cs, ILoadBalancer loadBalancer, MySqlConnection connection, Action`4 logMessage, Int64 startingTimestamp, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 702
+   at MySqlConnector.Core.ConnectionPool.GetSessionAsync(MySqlConnection connection, Int64 startingTimestamp, Int32 timeoutMilliseconds, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ConnectionPool.cs:line 116
+   at MySqlConnector.Core.ConnectionPool.GetSessionAsync(MySqlConnection connection, Int64 startingTimestamp, Int32 timeoutMilliseconds, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ConnectionPool.cs:line 150
+   at MySqlConnector.MySqlConnection.CreateSessionAsync(ConnectionPool pool, Int64 startingTimestamp, Activity activity, Nullable`1 ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlConnection.cs:line 1092
+   at MySqlConnector.MySqlConnection.OpenAsync(Nullable`1 ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlConnection.cs:line 567
+   at Hangfire.Server.RecurringJobScheduler.UseConnectionDistributedLock[T](JobStorage storage, Func`2 action)
+   at Hangfire.Server.RecurringJobScheduler.Execute(BackgroundProcessContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\RecurringJobScheduler.cs:line 176
+   at Hangfire.Server.BackgroundProcessDispatcherBuilder.ExecuteProcess(Guid executionId, Object state) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundProcessDispatcherBuilder.cs:line 82
+   at Hangfire.Processing.BackgroundExecution.Run(Action`2 callback, Object state) in C:\projects\hangfire-525\src\Hangfire.Core\Processing\BackgroundExecution.cs:line 118
+2026-02-14 14:34:15.258 +02:00 [INF] Server mrrobot:16296:67174593 is now able to continue sending heartbeats
+2026-02-14 14:34:27.289 +02:00 [INF] Execution DelayedJobScheduler recovered from the Failed state after 00:00:41.1372315 and is in the Running state now
+2026-02-14 14:34:27.351 +02:00 [INF] Execution RecurringJobScheduler recovered from the Failed state after 00:00:40.8602712 and is in the Running state now
+2026-02-14 15:29:31.767 +02:00 [INF] DB tables already exist. Exit install
+2026-02-14 15:29:31.877 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-14 15:29:32.314 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-14 15:29:32.318 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-14 15:29:32.499 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-14 15:29:32.850 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-14 15:29:32.849 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-14 15:29:32.851 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-14 15:29:32.859 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-14 15:29:32.894 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-14 15:29:32.911 +02:00 [INF] Hosting environment: Development
+2026-02-14 15:29:32.919 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-14 15:29:32.938 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-14 15:29:32.945 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-14 15:29:32.948 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-14 15:29:32.953 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 0 null 105.7035ms
+2026-02-14 15:29:33.118 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 15:29:33.203 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 85.047ms
+2026-02-14 15:29:33.286 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 15:29:33.380 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 94.2297ms
+2026-02-14 15:29:33.560 +02:00 [INF] Server mrrobot:17304:972e0a09 successfully announced in 647.995 ms
+2026-02-14 15:29:33.670 +02:00 [INF] Server mrrobot:17304:972e0a09 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-14 15:29:33.885 +02:00 [INF] Server mrrobot:17304:972e0a09 all the dispatchers started
+2026-02-14 15:29:50.109 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - null null
+2026-02-14 15:29:50.136 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:29:50.169 +02:00 [INF] Route matched with {action = "GetAll", controller = "Doctors"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[DentalHub.Application.Common.PagedResult`1[DentalHub.Application.DTOs.Doctors.DoctorlistDto]]]] GetAll(Int32, Int32, System.String, System.String) on controller DentalHub.API.Controllers.DoctorsController (DentalHub.API).
+2026-02-14 15:29:50.182 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-02-14 15:29:52.610 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'DentalHub.Infrastructure.ContextAndConfig.ContextApp'.
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-02-14 15:29:52.973 +02:00 [INF] Executed DbCommand (94ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `d0`.`UserId`, `a`.`FullName`, `a`.`Email`, `d0`.`Name`, `d0`.`Specialty`, `d0`.`UniversityId`, `d0`.`CreateAt`
+FROM (
+    SELECT `d`.`UserId`, `d`.`CreateAt`, `d`.`Name`, `d`.`Specialty`, `d`.`UniversityId`
+    FROM `Doctors` AS `d`
+    WHERE `d`.`DeleteAt` IS NULL
+    ORDER BY `d`.`CreateAt` DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS `d0`
+INNER JOIN `AspNetUsers` AS `a` ON `d0`.`UserId` = `a`.`Id`
+ORDER BY `d0`.`CreateAt` DESC
+2026-02-14 15:29:53.007 +02:00 [ERR] Error getting all doctors
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at DentalHub.Infrastructure.Repository.MainRepository`1.CountAsync(ISpecification`1 specification) in D:\projects\DentalHub\DentalHub.Infrastructure\Repository\MainRepository.cs:line 65
+   at DentalHub.Application.Services.Doctors.DoctorService.GetAllDoctorsAsync(Int32 page, Int32 pageSize, String name, String spec) in D:\projects\DentalHub\DentalHub.Application\Services\Doctors\DoctorService.cs:line 93
+2026-02-14 15:29:53.063 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[DentalHub.Application.Common.PagedResult`1[[DentalHub.Application.DTOs.Doctors.DoctorlistDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-14 15:29:53.097 +02:00 [INF] Executed action DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API) in 2910.5965ms
+2026-02-14 15:29:53.101 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:29:53.117 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - 400 null application/json; charset=utf-8 3008.3038ms
+2026-02-14 15:30:25.592 +02:00 [INF] DB tables already exist. Exit install
+2026-02-14 15:30:25.761 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-14 15:30:26.296 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-14 15:30:26.299 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-14 15:30:26.502 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-14 15:30:26.518 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-14 15:30:26.567 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-14 15:30:26.575 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-14 15:30:26.682 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-14 15:30:27.377 +02:00 [INF] Hosting environment: Development
+2026-02-14 15:30:27.819 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-14 15:30:27.886 +02:00 [INF] Server mrrobot:14756:acda5539 successfully announced in 1173.7562 ms
+2026-02-14 15:30:28.390 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-14 15:30:28.489 +02:00 [INF] Server mrrobot:14756:acda5539 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-14 15:30:28.565 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-14 15:30:28.726 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-14 15:30:28.766 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-14 15:30:28.790 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 0 null 983.0646ms
+2026-02-14 15:30:29.262 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 15:30:29.668 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 405.8963ms
+2026-02-14 15:30:29.735 +02:00 [INF] Server mrrobot:14756:acda5539 all the dispatchers started
+2026-02-14 15:30:30.567 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 15:30:30.650 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 83.6046ms
+2026-02-14 15:30:41.023 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - null null
+2026-02-14 15:30:41.042 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:30:41.085 +02:00 [INF] Route matched with {action = "GetAll", controller = "Doctors"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[DentalHub.Application.Common.PagedResult`1[DentalHub.Application.DTOs.Doctors.DoctorlistDto]]]] GetAll(Int32, Int32, System.String, System.String) on controller DentalHub.API.Controllers.DoctorsController (DentalHub.API).
+2026-02-14 15:30:41.100 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-02-14 15:30:48.241 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'DentalHub.Infrastructure.ContextAndConfig.ContextApp'.
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-02-14 15:30:48.740 +02:00 [INF] Executed DbCommand (89ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `d0`.`UserId`, `a`.`FullName`, `a`.`Email`, `d0`.`Name`, `d0`.`Specialty`, `d0`.`UniversityId`, `d0`.`CreateAt`
+FROM (
+    SELECT `d`.`UserId`, `d`.`CreateAt`, `d`.`Name`, `d`.`Specialty`, `d`.`UniversityId`
+    FROM `Doctors` AS `d`
+    WHERE `d`.`DeleteAt` IS NULL
+    ORDER BY `d`.`CreateAt` DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS `d0`
+INNER JOIN `AspNetUsers` AS `a` ON `d0`.`UserId` = `a`.`Id`
+ORDER BY `d0`.`CreateAt` DESC
+2026-02-14 15:30:49.205 +02:00 [ERR] Error getting all doctors
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at DentalHub.Infrastructure.Repository.MainRepository`1.CountAsync(ISpecification`1 specification) in D:\projects\DentalHub\DentalHub.Infrastructure\Repository\MainRepository.cs:line 65
+   at DentalHub.Application.Services.Doctors.DoctorService.GetAllDoctorsAsync(Int32 page, Int32 pageSize, String name, String spec) in D:\projects\DentalHub\DentalHub.Application\Services\Doctors\DoctorService.cs:line 93
+2026-02-14 15:30:49.239 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[DentalHub.Application.Common.PagedResult`1[[DentalHub.Application.DTOs.Doctors.DoctorlistDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-14 15:30:49.272 +02:00 [INF] Executed action DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API) in 8173.5519ms
+2026-02-14 15:30:49.277 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:30:49.299 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - 400 null application/json; charset=utf-8 8276.5877ms
+2026-02-14 15:31:37.163 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - null null
+2026-02-14 15:31:37.182 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:31:37.185 +02:00 [INF] Route matched with {action = "GetAll", controller = "Doctors"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[DentalHub.Application.Common.PagedResult`1[DentalHub.Application.DTOs.Doctors.DoctorlistDto]]]] GetAll(Int32, Int32, System.String, System.String) on controller DentalHub.API.Controllers.DoctorsController (DentalHub.API).
+2026-02-14 15:31:37.618 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'DentalHub.Infrastructure.ContextAndConfig.ContextApp'.
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-02-14 15:31:37.880 +02:00 [INF] Executed DbCommand (79ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `d0`.`UserId`, `a`.`FullName`, `a`.`Email`, `d0`.`Name`, `d0`.`Specialty`, `d0`.`UniversityId`, `d0`.`CreateAt`
+FROM (
+    SELECT `d`.`UserId`, `d`.`CreateAt`, `d`.`Name`, `d`.`Specialty`, `d`.`UniversityId`
+    FROM `Doctors` AS `d`
+    WHERE `d`.`DeleteAt` IS NULL
+    ORDER BY `d`.`CreateAt` DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS `d0`
+INNER JOIN `AspNetUsers` AS `a` ON `d0`.`UserId` = `a`.`Id`
+ORDER BY `d0`.`CreateAt` DESC
+2026-02-14 15:31:38.023 +02:00 [ERR] Error getting all doctors
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at DentalHub.Infrastructure.Repository.MainRepository`1.CountAsync(ISpecification`1 specification) in D:\projects\DentalHub\DentalHub.Infrastructure\Repository\MainRepository.cs:line 65
+   at DentalHub.Application.Services.Doctors.DoctorService.GetAllDoctorsAsync(Int32 page, Int32 pageSize, String name, String spec) in D:\projects\DentalHub\DentalHub.Application\Services\Doctors\DoctorService.cs:line 93
+2026-02-14 15:31:38.030 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[DentalHub.Application.Common.PagedResult`1[[DentalHub.Application.DTOs.Doctors.DoctorlistDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-14 15:31:38.033 +02:00 [INF] Executed action DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API) in 843.1593ms
+2026-02-14 15:31:38.037 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:31:38.040 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - 400 null application/json; charset=utf-8 876.7405ms
+2026-02-14 15:32:02.315 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - null null
+2026-02-14 15:32:02.352 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:32:02.355 +02:00 [INF] Route matched with {action = "GetAll", controller = "Doctors"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[DentalHub.Application.Common.PagedResult`1[DentalHub.Application.DTOs.Doctors.DoctorlistDto]]]] GetAll(Int32, Int32, System.String, System.String) on controller DentalHub.API.Controllers.DoctorsController (DentalHub.API).
+2026-02-14 15:32:22.040 +02:00 [INF] Executed DbCommand (243ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `d0`.`UserId`, `a`.`FullName`, `a`.`Email`, `d0`.`Name`, `d0`.`Specialty`, `d0`.`UniversityId`, `d0`.`CreateAt`
+FROM (
+    SELECT `d`.`UserId`, `d`.`CreateAt`, `d`.`Name`, `d`.`Specialty`, `d`.`UniversityId`
+    FROM `Doctors` AS `d`
+    WHERE `d`.`DeleteAt` IS NULL
+    ORDER BY `d`.`CreateAt` DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS `d0`
+INNER JOIN `AspNetUsers` AS `a` ON `d0`.`UserId` = `a`.`Id`
+ORDER BY `d0`.`CreateAt` DESC
+2026-02-14 15:32:33.904 +02:00 [INF] Executed DbCommand (75ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Doctors` AS `d`
+WHERE `d`.`DeleteAt` IS NULL
+2026-02-14 15:33:04.302 +02:00 [INF] Executing OkObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[DentalHub.Application.Common.PagedResult`1[[DentalHub.Application.DTOs.Doctors.DoctorlistDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-14 15:33:04.461 +02:00 [INF] Executed action DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API) in 62100.7842ms
+2026-02-14 15:33:04.465 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:33:04.468 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - 200 null application/json; charset=utf-8 62152.8392ms
+2026-02-14 15:33:20.063 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - null null
+2026-02-14 15:33:20.097 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:33:20.101 +02:00 [INF] Route matched with {action = "GetAll", controller = "Doctors"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[DentalHub.Application.Common.PagedResult`1[DentalHub.Application.DTOs.Doctors.DoctorlistDto]]]] GetAll(Int32, Int32, System.String, System.String) on controller DentalHub.API.Controllers.DoctorsController (DentalHub.API).
+2026-02-14 15:33:22.002 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'DentalHub.Infrastructure.ContextAndConfig.ContextApp'.
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-02-14 15:33:22.082 +02:00 [INF] Executed DbCommand (82ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `d0`.`UserId`, `a`.`FullName`, `a`.`Email`, `d0`.`Name`, `d0`.`Specialty`, `d0`.`UniversityId`, `d0`.`CreateAt`
+FROM (
+    SELECT `d`.`UserId`, `d`.`CreateAt`, `d`.`Name`, `d`.`Specialty`, `d`.`UniversityId`
+    FROM `Doctors` AS `d`
+    WHERE `d`.`DeleteAt` IS NULL
+    ORDER BY `d`.`CreateAt` DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS `d0`
+INNER JOIN `AspNetUsers` AS `a` ON `d0`.`UserId` = `a`.`Id`
+ORDER BY `d0`.`CreateAt` DESC
+2026-02-14 15:33:25.382 +02:00 [ERR] Error getting all doctors
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at DentalHub.Infrastructure.Repository.MainRepository`1.CountAsync(ISpecification`1 specification) in D:\projects\DentalHub\DentalHub.Infrastructure\Repository\MainRepository.cs:line 65
+   at DentalHub.Application.Services.Doctors.DoctorService.GetAllDoctorsAsync(Int32 page, Int32 pageSize, String name, String spec) in D:\projects\DentalHub\DentalHub.Application\Services\Doctors\DoctorService.cs:line 93
+2026-02-14 15:33:25.388 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[DentalHub.Application.Common.PagedResult`1[[DentalHub.Application.DTOs.Doctors.DoctorlistDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-14 15:33:25.393 +02:00 [INF] Executed action DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API) in 5287.0635ms
+2026-02-14 15:33:25.409 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:33:25.412 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - 400 null application/json; charset=utf-8 5349.6389ms
+2026-02-14 15:35:29.131 +02:00 [INF] 1 servers were removed due to timeout
+2026-02-14 15:53:35.892 +02:00 [INF] DB tables already exist. Exit install
+2026-02-14 15:53:35.996 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-14 15:53:36.210 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-14 15:53:36.215 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-14 15:53:36.368 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-14 15:53:36.635 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-14 15:53:36.669 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-14 15:53:36.698 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-14 15:53:36.743 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-14 15:53:36.854 +02:00 [INF] Hosting environment: Development
+2026-02-14 15:53:36.855 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-14 15:53:36.865 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-14 15:53:37.042 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-14 15:53:37.089 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-14 15:53:37.122 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-14 15:53:37.130 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 0 null 275.8203ms
+2026-02-14 15:53:37.267 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 15:53:37.321 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 52.9797ms
+2026-02-14 15:53:37.349 +02:00 [INF] Server mrrobot:18300:bbc1a9bf successfully announced in 548.3274 ms
+2026-02-14 15:53:37.390 +02:00 [INF] Server mrrobot:18300:bbc1a9bf is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-14 15:53:37.427 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 15:53:37.456 +02:00 [INF] Server mrrobot:18300:bbc1a9bf all the dispatchers started
+2026-02-14 15:53:37.549 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 121.5847ms
+2026-02-14 15:53:37.578 +02:00 [INF] 1 servers were removed due to timeout
+2026-02-14 15:53:47.973 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - null null
+2026-02-14 15:53:48.009 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:53:48.042 +02:00 [INF] Route matched with {action = "GetAll", controller = "Doctors"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[DentalHub.Application.Common.PagedResult`1[DentalHub.Application.DTOs.Doctors.DoctorlistDto]]]] GetAll(Int32, Int32, System.String, System.String) on controller DentalHub.API.Controllers.DoctorsController (DentalHub.API).
+2026-02-14 15:53:48.055 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-02-14 15:53:51.598 +02:00 [INF] Executed DbCommand (95ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `d0`.`UserId`, `a`.`FullName`, `a`.`Email`, `d0`.`Name`, `d0`.`Specialty`, `d0`.`UniversityId`, `d0`.`CreateAt`
+FROM (
+    SELECT `d`.`UserId`, `d`.`CreateAt`, `d`.`Name`, `d`.`Specialty`, `d`.`UniversityId`
+    FROM `Doctors` AS `d`
+    WHERE `d`.`DeleteAt` IS NULL
+    ORDER BY `d`.`CreateAt` DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS `d0`
+INNER JOIN `AspNetUsers` AS `a` ON `d0`.`UserId` = `a`.`Id`
+ORDER BY `d0`.`CreateAt` DESC
+2026-02-14 15:53:51.798 +02:00 [INF] Executed DbCommand (75ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Doctors` AS `d`
+WHERE `d`.`DeleteAt` IS NULL
+2026-02-14 15:53:51.822 +02:00 [INF] Executing OkObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[DentalHub.Application.Common.PagedResult`1[[DentalHub.Application.DTOs.Doctors.DoctorlistDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-14 15:53:51.855 +02:00 [INF] Executed action DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API) in 3799.0145ms
+2026-02-14 15:53:51.863 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 15:53:51.876 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - 200 null application/json; charset=utf-8 3902.5107ms
+2026-02-14 16:13:59.699 +02:00 [INF] DB tables already exist. Exit install
+2026-02-14 16:13:59.796 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-14 16:14:00.037 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-14 16:14:00.055 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-14 16:14:00.233 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-14 16:14:00.270 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-14 16:14:00.272 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-14 16:14:00.282 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-14 16:14:00.302 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-14 16:14:00.340 +02:00 [INF] Hosting environment: Development
+2026-02-14 16:14:00.341 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-14 16:14:00.582 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-14 16:14:00.662 +02:00 [INF] Server mrrobot:3984:a213f94f successfully announced in 344.3378 ms
+2026-02-14 16:14:00.666 +02:00 [INF] Server mrrobot:3984:a213f94f is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-14 16:14:00.686 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 104.2254ms
+2026-02-14 16:14:00.688 +02:00 [INF] Server mrrobot:3984:a213f94f all the dispatchers started
+2026-02-14 16:14:00.749 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-14 16:14:00.775 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 25.1969ms
+2026-02-14 16:14:00.826 +02:00 [INF] 1 servers were removed due to timeout
+2026-02-14 16:14:01.070 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-14 16:14:01.215 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 144.4452ms
+2026-02-14 16:14:33.012 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - null null
+2026-02-14 16:14:33.075 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 16:14:33.122 +02:00 [INF] Route matched with {action = "GetAll", controller = "Doctors"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[DentalHub.Application.Common.PagedResult`1[DentalHub.Application.DTOs.Doctors.DoctorlistDto]]]] GetAll(Int32, Int32, System.String, System.String) on controller DentalHub.API.Controllers.DoctorsController (DentalHub.API).
+2026-02-14 16:14:33.136 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-02-14 16:14:35.302 +02:00 [INF] Executed DbCommand (83ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `d0`.`UserId`, `a`.`FullName`, `a`.`Email`, `d0`.`Name`, `d0`.`Specialty`, `d0`.`UniversityId`, `d0`.`CreateAt`
+FROM (
+    SELECT `d`.`UserId`, `d`.`CreateAt`, `d`.`Name`, `d`.`Specialty`, `d`.`UniversityId`
+    FROM `Doctors` AS `d`
+    WHERE `d`.`DeleteAt` IS NULL
+    ORDER BY `d`.`CreateAt` DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS `d0`
+INNER JOIN `AspNetUsers` AS `a` ON `d0`.`UserId` = `a`.`Id`
+ORDER BY `d0`.`CreateAt` DESC
+2026-02-14 16:14:35.491 +02:00 [INF] Executed DbCommand (73ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Doctors` AS `d`
+WHERE `d`.`DeleteAt` IS NULL
+2026-02-14 16:14:35.514 +02:00 [INF] Executing OkObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[DentalHub.Application.Common.PagedResult`1[[DentalHub.Application.DTOs.Doctors.DoctorlistDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-14 16:14:35.541 +02:00 [INF] Executed action DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API) in 2404.8416ms
+2026-02-14 16:14:35.547 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.DoctorsController.GetAll (DentalHub.API)'
+2026-02-14 16:14:35.558 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/api/Doctors?page=1&pageSize=10 - 200 null application/json; charset=utf-8 2546.2529ms
+2026-02-14 16:14:59.531 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/api/Students?page=1&pageSize=10 - null null
+2026-02-14 16:14:59.593 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.StudentsController.GetAll (DentalHub.API)'
+2026-02-14 16:14:59.608 +02:00 [INF] Route matched with {action = "GetAll", controller = "Students"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[DentalHub.Application.Common.PagedResult`1[DentalHub.Application.DTOs.Students.StudentDto]]]] GetAll(Int32, Int32) on controller DentalHub.API.Controllers.StudentsController (DentalHub.API).
+2026-02-14 16:15:00.215 +02:00 [INF] Executed DbCommand (86ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `s0`.`UserId`, `a`.`FullName`, `a`.`Email`, `s0`.`University`, `s0`.`UniversityId`, `s0`.`Level`, `s0`.`CreateAt`, (
+    SELECT COUNT(*)
+    FROM `CaseRequests` AS `c`
+    WHERE `c`.`DeleteAt` IS NULL AND (`s0`.`UserId` = `c`.`StudentId`)) AS `TotalRequests`, (
+    SELECT COUNT(*)
+    FROM `CaseRequests` AS `c0`
+    WHERE (`c0`.`DeleteAt` IS NULL AND (`s0`.`UserId` = `c0`.`StudentId`)) AND (`c0`.`Status` = 1)) AS `ApprovedRequests`
+FROM (
+    SELECT `s`.`UserId`, `s`.`CreateAt`, `s`.`Level`, `s`.`University`, `s`.`UniversityId`
+    FROM `Students` AS `s`
+    WHERE `s`.`DeleteAt` IS NULL
+    ORDER BY `s`.`CreateAt` DESC
+    LIMIT @__p_1 OFFSET @__p_0
+) AS `s0`
+INNER JOIN `AspNetUsers` AS `a` ON `s0`.`UserId` = `a`.`Id`
+ORDER BY `s0`.`CreateAt` DESC
+2026-02-14 16:15:00.374 +02:00 [INF] Executed DbCommand (73ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Students` AS `s`
+WHERE `s`.`DeleteAt` IS NULL
+2026-02-14 16:15:00.383 +02:00 [INF] Executing OkObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[DentalHub.Application.Common.PagedResult`1[[DentalHub.Application.DTOs.Students.StudentDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-14 16:15:00.395 +02:00 [INF] Executed action DentalHub.API.Controllers.StudentsController.GetAll (DentalHub.API) in 777.798ms
+2026-02-14 16:15:00.400 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.StudentsController.GetAll (DentalHub.API)'
+2026-02-14 16:15:00.404 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/api/Students?page=1&pageSize=10 - 200 null application/json; charset=utf-8 873.4802ms

@@ -16,4 +16,5 @@ namespace DentalHub.Application.DTOs.Doctors
         public int PendingRequests { get; set; }
         public int ApprovedRequests { get; set; }
     }
+  
 }

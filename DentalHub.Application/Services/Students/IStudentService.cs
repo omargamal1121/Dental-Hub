@@ -8,12 +8,12 @@ namespace DentalHub.Application.Services.Students
     {
         // Student Profile
         Task<Result<StudentDto>> GetStudentByIdAsync(Guid userId);
-        Task<Result<List<StudentDto>>> GetAllStudentsAsync(int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<StudentDto>>> GetAllStudentsAsync(int page = 1, int pageSize = 10);
         Task<Result<StudentDto>> UpdateStudentAsync(UpdateStudentDto dto);
         Task<Result> DeleteStudentAsync(Guid userId);
 
         // Available Cases for Student
-        Task<Result<List<PatientCaseDto>>> GetAvailableCasesForStudentAsync(
+        Task<Result<PagedResult<PatientCaseDto>>> GetAvailableCasesForStudentAsync(
             Guid studentId, int page = 1, int pageSize = 10);
 
         // Student Statistics

@@ -3,6 +3,7 @@ using DentalHub.Application.DTOs.UniversityMember;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
+using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.UniversityMembers
@@ -48,7 +49,7 @@ namespace DentalHub.Application.Services.UniversityMembers
                 return Result<UniversityMemberDto>.Failure("Error retrieving university member data", 500);
             }
         }
-        public async Task<Result<List<UniversityMemberDto>>> GetAllUniversityMembersAsync(int page = 1, int pageSize = 10, string? name = null, string? department = null)
+        public async Task<Result<PagedResult<UniversityMemberDto>>> GetAllUniversityMembersAsync(int page = 1, int pageSize = 10, string? name = null, string? department = null)
         {
             try
             {
@@ -67,14 +68,22 @@ namespace DentalHub.Application.Services.UniversityMembers
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderBy(u => u.FullName);
 
-                var members = await _unitOfWork.UniversityMembers.GetAllAsync(spec);
+				var membersList = await _unitOfWork.UniversityMembers.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.UniversityMembers.CountAsync(spec);
 
-                return Result<List<UniversityMemberDto>>.Success(members);
+				var pagedResult = PaginationFactory<UniversityMemberDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: membersList
+				);
+
+				return Result<PagedResult<UniversityMemberDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting all university members");
-                return Result<List<UniversityMemberDto>>.Failure("Error retrieving university members data", 500);
+                return Result<PagedResult<UniversityMemberDto>>.Failure("Error retrieving university members data", 500);
             }
         }
     }

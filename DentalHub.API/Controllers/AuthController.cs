@@ -3,6 +3,7 @@ using DentalHub.Application.DTOs.Auth;
 using DentalHub.Application.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using DentalHub.Application.DTOs.Shared;
@@ -21,6 +22,8 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost("login")]
+        [ProducesResponseType(typeof(ApiResponse<TokensDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<TokensDto>>> Login([FromBody] LoginCommand command)
         {
             var result = await _mediator.Send(command);
@@ -37,6 +40,8 @@ namespace DentalHub.API.Controllers
 
         [Authorize]
         [HttpPost("logout")]
+        [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<bool>>> Logout()
         {
             var userId = GetUserId();
@@ -47,6 +52,8 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost("forgot-password")]
+        [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ApiResponse<bool>>> ForgotPassword([FromBody] ForgotPasswordCommand command)
         {
             var result = await _mediator.Send(command);
@@ -54,6 +61,8 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost("reset-password")]
+        [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ApiResponse<bool>>> ResetPassword([FromBody] ResetPasswordCommand command)
         {
             var result = await _mediator.Send(command);
@@ -62,6 +71,9 @@ namespace DentalHub.API.Controllers
 
         [Authorize]
         [HttpPost("change-password")]
+        [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<bool>>> ChangePassword([FromBody] ChangePasswordRequestDto request)
         {
             var userId = GetUserId();

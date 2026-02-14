@@ -4,6 +4,7 @@ using DentalHub.Application.DTOs.Students;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
+using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.Students
@@ -60,7 +61,7 @@ namespace DentalHub.Application.Services.Students
         }
 
      
-        public async Task<Result<List<StudentDto>>> GetAllStudentsAsync(int page = 1, int pageSize = 10)
+        public async Task<Result<PagedResult<StudentDto>>> GetAllStudentsAsync(int page = 1, int pageSize = 10)
         {
             try
             {
@@ -83,14 +84,22 @@ namespace DentalHub.Application.Services.Students
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(s => s.CreateAt);
 
-                var students = await _unitOfWork.Students.GetAllAsync(spec);
+				var studentsList = await _unitOfWork.Students.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.Students.CountAsync(spec);
 
-                return Result<List<StudentDto>>.Success(students);
+				var pagedResult = PaginationFactory<StudentDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: studentsList
+				);
+
+				return Result<PagedResult<StudentDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting all students");
-                return Result<List<StudentDto>>.Failure("Error retrieving students");
+                return Result<PagedResult<StudentDto>>.Failure("Error retrieving students");
             }
         }
 
@@ -174,7 +183,7 @@ namespace DentalHub.Application.Services.Students
         #region Available Cases
 
      
-        public async Task<Result<List<PatientCaseDto>>> GetAvailableCasesForStudentAsync(
+        public async Task<Result<PagedResult<PatientCaseDto>>> GetAvailableCasesForStudentAsync(
             Guid studentId, int page = 1, int pageSize = 10)
         {
             try
@@ -184,7 +193,7 @@ namespace DentalHub.Application.Services.Students
 
                 if (student == null)
                 {
-                    return Result<List<PatientCaseDto>>.Failure("Student not found");
+                    return Result<PagedResult<PatientCaseDto>>.Failure("Student not found");
                 }
 
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
@@ -203,18 +212,26 @@ namespace DentalHub.Application.Services.Students
                     }
                 );
 
-           
+            
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(pc => pc.CreateAt);
 
-                var cases = await _unitOfWork.PatientCases.GetAllAsync(spec);
+				var casesList = await _unitOfWork.PatientCases.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.PatientCases.CountAsync(spec);
 
-                return Result<List<PatientCaseDto>>.Success(cases);
+				var pagedResult = PaginationFactory<PatientCaseDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: casesList
+				);
+
+				return Result<PagedResult<PatientCaseDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting available cases for student: {StudentId}", studentId);
-                return Result<List<PatientCaseDto>>.Failure("Error retrieving available cases");
+                return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving available cases");
             }
         }
 

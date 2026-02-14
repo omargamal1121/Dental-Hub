@@ -11,7 +11,7 @@ namespace DentalHub.Application.Services.Admins
 
         // Admin Profile
         Task<Result<AdminDto>> GetAdminByIdAsync(Guid userId);
-        Task<Result<List<AdminDto>>> GetAllAdminsAsync(int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<AdminDto>>> GetAllAdminsAsync(int page = 1, int pageSize = 10);
         Task<Result<AdminDto>> UpdateAdminAsync(UpdateAdminDto dto);
         Task<Result> DeleteAdminAsync(Guid userId);
 
@@ -19,10 +19,10 @@ namespace DentalHub.Application.Services.Admins
         Task<Result<AdminStatsDto>> GetAdminStatisticsAsync(Guid adminId);
 
         // Get admins by role
-        Task<Result<List<AdminDto>>> GetAdminsByRoleAsync(string role, int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<AdminDto>>> GetAdminsByRoleAsync(string role, int page = 1, int pageSize = 10);
 
         // Get super admins only
-        Task<Result<List<AdminDto>>> GetSuperAdminsAsync(int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<AdminDto>>> GetSuperAdminsAsync(int page = 1, int pageSize = 10);
     }
 
     /// DTO for admin statistics

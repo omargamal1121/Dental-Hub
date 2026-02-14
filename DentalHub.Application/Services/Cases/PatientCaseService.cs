@@ -4,6 +4,7 @@ using DentalHub.Application.DTOs.CaseTypes;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
+using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.Cases
@@ -112,8 +113,8 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        /// Get all cases with pagination
-        public async Task<Result<List<PatientCaseDto>>> GetAllCasesAsync(int page = 1, int pageSize = 10)
+        
+        public async Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(int page = 1, int pageSize = 10)
         {
             try
             {
@@ -132,20 +133,25 @@ namespace DentalHub.Application.Services.Cases
                     }
                 );
 
-                spec.AddInclude("Patient.User");
-                spec.AddInclude("Sessions");
-                spec.AddInclude("CaseRequests");
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(pc => pc.CreateAt);
 
-                var cases = await _unitOfWork.PatientCases.GetAllAsync(spec);
+				var casesList = await _unitOfWork.PatientCases.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.PatientCases.CountAsync(spec);
 
-                return Result<List<PatientCaseDto>>.Success(cases);
+				var pagedResult = PaginationFactory<PatientCaseDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: casesList
+				);
+
+				return Result<PagedResult<PatientCaseDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting all cases");
-                return Result<List<PatientCaseDto>>.Failure("Error retrieving cases");
+                return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving cases");
             }
         }
 
@@ -216,7 +222,7 @@ namespace DentalHub.Application.Services.Cases
         #region Query Operations
 
         /// Get cases by status
-        public async Task<Result<List<PatientCaseDto>>> GetCasesByStatusAsync(
+        public async Task<Result<PagedResult<PatientCaseDto>>> GetCasesByStatusAsync(
             string status, int page = 1, int pageSize = 10)
         {
             try
@@ -224,7 +230,7 @@ namespace DentalHub.Application.Services.Cases
                 // Parse status
                 if (!Enum.TryParse<CaseStatus>(status, out var caseStatus))
                 {
-                    return Result<List<PatientCaseDto>>.Failure("Invalid status");
+                    return Result<PagedResult<PatientCaseDto>>.Failure("Invalid status");
                 }
 
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
@@ -249,19 +255,27 @@ namespace DentalHub.Application.Services.Cases
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(pc => pc.CreateAt);
 
-                var cases = await _unitOfWork.PatientCases.GetAllAsync(spec);
+				var casesList = await _unitOfWork.PatientCases.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.PatientCases.CountAsync(spec);
 
-                return Result<List<PatientCaseDto>>.Success(cases);
+				var pagedResult = PaginationFactory<PatientCaseDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: casesList
+				);
+
+				return Result<PagedResult<PatientCaseDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting cases by status: {Status}", status);
-                return Result<List<PatientCaseDto>>.Failure("Error retrieving cases");
+                return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving cases");
             }
         }
 
         /// Get all cases for a specific patient
-        public async Task<Result<List<PatientCaseDto>>> GetPatientCasesAsync(
+        public async Task<Result<PagedResult<PatientCaseDto>>> GetPatientCasesAsync(
             Guid patientId, int page = 1, int pageSize = 10)
         {
             try
@@ -288,14 +302,22 @@ namespace DentalHub.Application.Services.Cases
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(pc => pc.CreateAt);
 
-                var cases = await _unitOfWork.PatientCases.GetAllAsync(spec);
+				var casesList = await _unitOfWork.PatientCases.GetAllAsync(spec);
+				var totalCount = await _unitOfWork.PatientCases.CountAsync(spec);
 
-                return Result<List<PatientCaseDto>>.Success(cases);
+				var pagedResult = PaginationFactory<PatientCaseDto>.Create(
+					count: totalCount,
+					page: page,
+					pageSize: pageSize,
+					data: casesList
+				);
+
+				return Result<PagedResult<PatientCaseDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting patient cases: {PatientId}", patientId);
-                return Result<List<PatientCaseDto>>.Failure("Error retrieving cases");
+                return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving cases");
             }
         }
 

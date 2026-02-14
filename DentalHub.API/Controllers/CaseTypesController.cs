@@ -5,6 +5,7 @@ using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.Queries.CaseTypes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace DentalHub.API.Controllers
 {
@@ -20,7 +21,8 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ApiResponse<List<CaseTypeDto>>>> GetAll(
+        [ProducesResponseType(typeof(ApiResponse<PagedResult<CaseTypeDto>>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<ApiResponse<PagedResult<CaseTypeDto>>>> GetAll(
             [FromQuery] int page = 1,
             [FromQuery] int pageSize = 10,
             [FromQuery] string? search = null)
@@ -30,6 +32,8 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ApiResponse<CaseTypeDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ApiResponse<CaseTypeDto>>> GetById(Guid id)
         {
             var result = await _mediator.Send(new GetCaseTypeByIdQuery(id));
@@ -37,6 +41,8 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(ApiResponse<CaseTypeDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ApiResponse<CaseTypeDto>>> Create([FromBody] CreateCaseTypeCommand command)
         {
             var result = await _mediator.Send(command);
@@ -44,6 +50,9 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(ApiResponse<CaseTypeDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ApiResponse<CaseTypeDto>>> Update(Guid id, [FromBody] UpdateCaseTypeCommand command)
         {
             if (id != command.Id)
@@ -55,6 +64,8 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ApiResponse<object>>> Delete(Guid id)
         {
             var result = await _mediator.Send(new DeleteCaseTypeCommand(id));

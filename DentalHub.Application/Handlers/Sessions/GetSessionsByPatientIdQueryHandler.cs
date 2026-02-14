@@ -6,7 +6,7 @@ using MediatR;
 
 namespace DentalHub.Application.Handlers.Sessions
 {
-    public class GetSessionsByPatientIdQueryHandler : IRequestHandler<GetSessionsByPatientIdQuery, Result<List<SessionDto>>>
+    public class GetSessionsByPatientIdQueryHandler : IRequestHandler<GetSessionsByPatientIdQuery, Result<PagedResult<SessionDto>>>
     {
         private readonly ISessionService _service;
 
@@ -15,7 +15,7 @@ namespace DentalHub.Application.Handlers.Sessions
             _service = service;
         }
 
-        public async Task<Result<List<SessionDto>>> Handle(GetSessionsByPatientIdQuery request, CancellationToken ct)
+        public async Task<Result<PagedResult<SessionDto>>> Handle(GetSessionsByPatientIdQuery request, CancellationToken ct)
         {
             return await _service.GetSessionsByPatientIdAsync(request.PatientId, request.Page, request.PageSize);
         }
