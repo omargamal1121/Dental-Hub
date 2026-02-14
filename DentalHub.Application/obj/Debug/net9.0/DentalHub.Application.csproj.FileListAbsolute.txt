@@ -34,3 +34,12 @@ D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\b
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Infrastructure.pdb
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHu.CADDDB1E.Up2Date
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\ref\DentalHub.Application.dll
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.csproj.AssemblyReference.cache
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.GeneratedMSBuildEditorConfig.editorconfig
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.AssemblyInfoInputs.cache
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.AssemblyInfo.cs
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.csproj.CoreCompileInputs.cache
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.sourcelink.json
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.dll
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\refint\DentalHub.Application.dll
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.pdb

@@ -1,14 +1,20 @@
 ﻿using DentalHub.API.Middleware;
 using DentalHub.Application.Extensions;
+using DentalHub.Application.Interfaces;
 using DentalHub.Application.Services.Auth;
 using DentalHub.Domain.Entities;
+using DentalHub.Infrastructure.Configurations;
 using DentalHub.Infrastructure.ContextAndConfig;
 using DentalHub.Infrastructure.Extensions;
+using DentalHub.Infrastructure.Services;
 using Hangfire;
 using Hangfire.MySql;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Serilog;
+
+
+
 
 namespace DentalHub.API
 {
@@ -49,6 +55,11 @@ namespace DentalHub.API
 				)
 			)
 		);
+
+            builder.Services.Configure<CloudinarySettings>(
+                builder.Configuration.GetSection("CloudinarySettings")
+                );
+            builder.Services.AddScoped<IMediaService, MediaService>();
 
             builder.Services.AddHangfireServer();
 
