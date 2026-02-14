@@ -444,3 +444,15 @@ D:\projects\DentalHub\DentalHub.API\bin\Debug\net9.0\System.Text.Json.dll
 D:\projects\DentalHub\DentalHub.API\bin\Debug\net9.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\projects\DentalHub\DentalHub.API\bin\Debug\net9.0\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
 D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.csproj.AssemblyReference.cache
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\rpswa.dswa.cache.json
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.GeneratedMSBuildEditorConfig.editorconfig
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.AssemblyInfoInputs.cache
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.AssemblyInfo.cs
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.csproj.CoreCompileInputs.cache
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.MvcApplicationPartsAssemblyInfo.cs
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.MvcApplicationPartsAssemblyInfo.cache
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.sourcelink.json
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.dll
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\refint\DentalHub.API.dll
+I:\The LastVirsion OF project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.pdb
