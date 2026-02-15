@@ -1,4 +1,4 @@
-using DentalHub.Application.Common;
+﻿using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Identity;
 using DentalHub.Application.Exceptions;
 using DentalHub.Domain.Entities;
