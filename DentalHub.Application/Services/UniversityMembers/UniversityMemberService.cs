@@ -1,9 +1,10 @@
 using DentalHub.Application.Common;
+using DentalHub.Application.DTOs.Identity;
 using DentalHub.Application.DTOs.UniversityMember;
+using DentalHub.Application.Factories;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
-using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.UniversityMembers
@@ -19,6 +20,7 @@ namespace DentalHub.Application.Services.UniversityMembers
             _logger = logger;
         }
 
+        // Get member by university ID
         public async Task<Result<UniversityMemberDto>> GetUniversityMemberByUniversityIdAsync(string universityId)
         {
             try
@@ -49,6 +51,73 @@ namespace DentalHub.Application.Services.UniversityMembers
                 return Result<UniversityMemberDto>.Failure("Error retrieving university member data", 500);
             }
         }
+
+        // Register a student (role assigned automatically)
+        // Register a student (role assigned automatically)
+        public async Task<Result<UniversityMemberDto>> RegisterStudentAsync(RegisterStudentDto dto)
+        {
+            try
+            {
+                var student = new UniversityMember
+                {
+                    FullName = dto.FullName,
+                    UniversityId = dto.UniversityId,
+                    IsStudent = true
+                };
+
+                await _unitOfWork.UniversityMembers.AddAsync(student);
+                await _unitOfWork.SaveChangesAsync();
+
+                var dtoResult = new UniversityMemberDto
+                {
+                    UniversityId = student.UniversityId,
+                    Name = student.FullName,
+                    Department = student.Department,
+                    Role = student.Role
+                };
+
+                return Result<UniversityMemberDto>.Success(dtoResult, "Student registered successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error registering student: {FullName}", dto.FullName);
+                return Result<UniversityMemberDto>.Failure("Error registering student");
+            }
+        }
+
+        // Register a doctor (role assigned automatically)
+        public async Task<Result<UniversityMemberDto>> RegisterDoctorAsync(RegisterDoctorDto dto)
+        {
+            try
+            {
+                var doctor = new UniversityMember
+                {
+                    FullName = dto.FullName,
+                    UniversityId = dto.UniversityId,
+                    IsDoctor = true
+                };
+
+                await _unitOfWork.UniversityMembers.AddAsync(doctor);
+                await _unitOfWork.SaveChangesAsync();
+
+                var dtoResult = new UniversityMemberDto
+                {
+                    UniversityId = doctor.UniversityId,
+                    Name = doctor.FullName,
+                    Department = doctor.Department,
+                    Role = doctor.Role
+                };
+
+                return Result<UniversityMemberDto>.Success(dtoResult, "Doctor registered successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error registering doctor: {FullName}", dto.FullName);
+                return Result<UniversityMemberDto>.Failure("Error registering doctor");
+            }
+        }
+
+        // Get all members with paging
         public async Task<Result<PagedResult<UniversityMemberDto>>> GetAllUniversityMembersAsync(int page = 1, int pageSize = 10, string? name = null, string? department = null)
         {
             try
@@ -68,17 +137,17 @@ namespace DentalHub.Application.Services.UniversityMembers
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderBy(u => u.FullName);
 
-				var membersList = await _unitOfWork.UniversityMembers.GetAllAsync(spec);
-				var totalCount = await _unitOfWork.UniversityMembers.CountAsync(spec);
+                var membersList = await _unitOfWork.UniversityMembers.GetAllAsync(spec);
+                var totalCount = await _unitOfWork.UniversityMembers.CountAsync(spec);
 
-				var pagedResult = PaginationFactory<UniversityMemberDto>.Create(
-					count: totalCount,
-					page: page,
-					pageSize: pageSize,
-					data: membersList
-				);
+                var pagedResult = PaginationFactory<UniversityMemberDto>.Create(
+                    count: totalCount,
+                    page: page,
+                    pageSize: pageSize,
+                    data: membersList
+                );
 
-				return Result<PagedResult<UniversityMemberDto>>.Success(pagedResult);
+                return Result<PagedResult<UniversityMemberDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {

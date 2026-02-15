@@ -32,5 +32,6 @@ namespace DentalHub.Application.DTOs.Identity
         [Required(ErrorMessage = "University ID is required")]
        
         public string UniversityId { get; set; }
+        public string Role { get; internal set; }
     }
 }
