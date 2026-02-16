@@ -3,13 +3,7 @@ using CloudinaryDotNet.Actions;
 using DentalHub.Application.Interfaces;
 using DentalHub.Infrastructure.Configurations;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 namespace DentalHub.Infrastructure.Services
 {
     public class MediaService : IMediaService

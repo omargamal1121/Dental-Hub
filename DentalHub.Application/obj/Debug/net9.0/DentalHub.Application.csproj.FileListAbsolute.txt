@@ -2,9 +2,7 @@ D:\projects\DentalHub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Applicati
 D:\projects\DentalHub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Application.dll
 D:\projects\DentalHub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Application.pdb
 D:\projects\DentalHub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Domain.dll
-D:\projects\DentalHub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Infrastructure.dll
 D:\projects\DentalHub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Domain.pdb
-D:\projects\DentalHub\DentalHub.Application\bin\Debug\net9.0\DentalHub.Infrastructure.pdb
 D:\projects\DentalHub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.csproj.AssemblyReference.cache
 D:\projects\DentalHub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.GeneratedMSBuildEditorConfig.editorconfig
 D:\projects\DentalHub\DentalHub.Application\obj\Debug\net9.0\DentalHub.Application.AssemblyInfoInputs.cache

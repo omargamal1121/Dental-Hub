@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DentalHub.Domain\DentalHub.Domain.csproj" />
+
   </ItemGroup>
 
 </Project>

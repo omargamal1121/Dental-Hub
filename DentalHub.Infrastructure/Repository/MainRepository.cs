@@ -1,5 +1,5 @@
+using DentalHub.Application.Specification.Comman;
 using DentalHub.Infrastructure.ContextAndConfig;
-using DentalHub.Infrastructure.Specification;
 using Microsoft.EntityFrameworkCore;
 
 namespace DentalHub.Infrastructure.Repository

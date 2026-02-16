@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace DentalHub.Infrastructure.Specification
+namespace DentalHub.Application.Specification.Comman
 {
     public class BaseSpecificationWithProjection<T, TResult> : BaseSpecification<T>,
         ISpecificationWithProjection<T, TResult> where T : class

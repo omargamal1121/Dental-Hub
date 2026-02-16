@@ -2,10 +2,10 @@ using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Cases;
 using DentalHub.Application.DTOs.Students;
 using DentalHub.Domain.Entities;
-using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
 using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
+using DentalHub.Application.Specification.Comman;
 
 namespace DentalHub.Application.Services.Students
 {

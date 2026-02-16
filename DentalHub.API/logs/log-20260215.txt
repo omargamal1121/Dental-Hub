@@ -1,0 +1,72 @@
+2026-02-15 14:15:15.777 +02:00 [INF] DB tables already exist. Exit install
+2026-02-15 14:15:15.926 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-15 14:15:16.487 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-15 14:15:16.492 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-15 14:15:16.684 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-15 14:15:16.707 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-15 14:15:16.710 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-15 14:15:16.720 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-15 14:15:16.743 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-15 14:15:16.747 +02:00 [INF] Hosting environment: Development
+2026-02-15 14:15:16.755 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-15 14:15:17.791 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-15 14:15:17.908 +02:00 [INF] Server mrrobot:1472:23f494c1 successfully announced in 1147.0962 ms
+2026-02-15 14:15:18.063 +02:00 [INF] Server mrrobot:1472:23f494c1 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-15 14:15:18.129 +02:00 [INF] Server mrrobot:1472:23f494c1 all the dispatchers started
+2026-02-15 14:15:18.316 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-15 14:15:18.328 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-15 14:15:18.331 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-15 14:15:18.343 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 0 null 561.6018ms
+2026-02-15 14:15:18.509 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-15 14:15:18.556 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-15 14:15:18.637 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 127.8991ms
+2026-02-15 14:15:18.807 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 250.8651ms
+2026-02-15 14:15:18.930 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-15 14:15:19.066 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 135.8289ms
+2026-02-15 14:39:41.122 +02:00 [INF] DB tables already exist. Exit install
+2026-02-15 14:39:41.235 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-15 14:39:41.493 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-15 14:39:41.500 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-15 14:39:41.633 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-15 14:39:41.635 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-15 14:39:41.636 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-15 14:39:41.638 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-15 14:39:41.655 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-15 14:39:41.657 +02:00 [INF] Hosting environment: Development
+2026-02-15 14:39:41.659 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-15 14:39:41.792 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-15 14:39:41.965 +02:00 [INF] Server mrrobot:18632:8fc4dd4e successfully announced in 297.0012 ms
+2026-02-15 14:39:41.971 +02:00 [INF] Server mrrobot:18632:8fc4dd4e is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-15 14:39:41.993 +02:00 [INF] Server mrrobot:18632:8fc4dd4e all the dispatchers started
+2026-02-15 14:39:42.021 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 230.446ms
+2026-02-15 14:39:42.094 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-15 14:39:42.115 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 21.1336ms
+2026-02-15 14:39:42.133 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-15 14:39:42.184 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 51.5003ms
+2026-02-15 14:39:42.765 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-15 14:39:42.910 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 145.3692ms
+2026-02-15 14:41:25.109 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-15 14:41:25.314 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 204.7406ms
+2026-02-15 14:41:25.476 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-15 14:41:25.477 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-15 14:41:25.502 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 26.5256ms
+2026-02-15 14:41:25.556 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 79.2578ms
+2026-02-15 14:41:25.955 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-15 14:41:26.145 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 189.3549ms
+2026-02-15 14:44:08.991 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-15 14:44:09.007 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 16.1714ms
+2026-02-15 14:44:09.128 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-15 14:44:09.134 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-15 14:44:09.214 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 80.977ms
+2026-02-15 14:44:09.250 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 116.0638ms
+2026-02-15 14:44:09.561 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-15 14:44:09.621 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 59.7564ms
+2026-02-15 14:44:42.301 +02:00 [INF] 1 servers were removed due to timeout

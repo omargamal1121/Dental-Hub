@@ -1,0 +1,36 @@
+2026-02-16 16:50:21.076 +02:00 [INF] DB tables already exist. Exit install
+2026-02-16 16:50:21.213 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-16 16:50:21.885 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-16 16:50:21.900 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-16 16:50:22.265 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-16 16:50:22.412 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-16 16:50:22.627 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-16 16:50:22.696 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-16 16:50:22.810 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-16 16:50:23.359 +02:00 [INF] Hosting environment: Development
+2026-02-16 16:50:24.292 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-16 16:50:24.317 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-16 16:50:24.420 +02:00 [INF] Server mrrobot:12248:44e999b0 successfully announced in 1530.8314 ms
+2026-02-16 16:50:24.454 +02:00 [INF] Server mrrobot:12248:44e999b0 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-16 16:50:25.083 +02:00 [INF] Server mrrobot:12248:44e999b0 all the dispatchers started
+2026-02-16 16:50:25.143 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-16 16:50:25.340 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-16 16:50:25.354 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-16 16:50:25.367 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 0 null 1082.3279ms
+2026-02-16 16:50:25.684 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-16 16:50:25.998 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-16 16:50:26.966 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 1282.1612ms
+2026-02-16 16:50:27.252 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 1254.3633ms
+2026-02-16 16:50:27.557 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-16 16:50:27.969 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 412.7715ms
+2026-02-16 16:50:30.761 +02:00 [WRN] Stopping the server due to DomainUnload or ProcessExit event...
+2026-02-16 16:50:30.766 +02:00 [INF] Server mrrobot:12248:44e999b0 caught stopping signal...
+2026-02-16 16:50:30.771 +02:00 [INF] Server mrrobot:12248:44e999b0 caught stopped signal...
+2026-02-16 16:50:30.784 +02:00 [INF] Server mrrobot:12248:44e999b0 All dispatchers stopped
+2026-02-16 16:50:30.785 +02:00 [WRN] Server mrrobot:12248:44e999b0 caught shutdown signal...
+2026-02-16 16:50:31.250 +02:00 [INF] Server mrrobot:12248:44e999b0 successfully reported itself as stopped in 455.0627 ms
+2026-02-16 16:50:31.270 +02:00 [INF] Server mrrobot:12248:44e999b0 has been stopped in total 498.897 ms

@@ -5,6 +5,7 @@ using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
 using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
+using DentalHub.Application.Specification.Comman;
 
 namespace DentalHub.Application.Services.Cases
 {

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.28.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.12">
@@ -25,7 +26,9 @@
 
   <ItemGroup>
 
+
     <ProjectReference Include="..\DentalHub.Application\DentalHub.Application.csproj" />
+
 
     <ProjectReference Include="..\DentalHub.Domain\DentalHub.Domain.csproj" />
 

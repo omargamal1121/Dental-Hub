@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "I:\\The LastVirsion OF project\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj": {}
+    "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj": {}
   },
   "projects": {
-    "I:\\The LastVirsion OF project\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj": {
+    "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "I:\\The LastVirsion OF project\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj",
+        "projectUniqueName": "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj",
         "projectName": "DentalHub.Application",
-        "projectPath": "I:\\The LastVirsion OF project\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj",
-        "packagesPath": "C:\\Users\\hayth\\.nuget\\packages\\",
-        "outputPath": "I:\\The LastVirsion OF project\\Dental-Hub\\DentalHub.Application\\obj\\",
+        "projectPath": "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\DentalHub\\DentalHub.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hayth\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "I:\\The LastVirsion OF project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
-                "projectPath": "I:\\The LastVirsion OF project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj"
+              "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
+                "projectPath": "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj"
               }
             }
           }
@@ -119,20 +120,20 @@
         }
       }
     },
-    "I:\\The LastVirsion OF project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
+    "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "I:\\The LastVirsion OF project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
+        "projectUniqueName": "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj",
         "projectName": "DentalHub.Domain",
-        "projectPath": "I:\\The LastVirsion OF project\\Dental-Hub\\DentalHub.Domain\\DentalHub.Domain.csproj",
-        "packagesPath": "C:\\Users\\hayth\\.nuget\\packages\\",
-        "outputPath": "I:\\The LastVirsion OF project\\Dental-Hub\\DentalHub.Domain\\obj\\",
+        "projectPath": "D:\\projects\\DentalHub\\DentalHub.Domain\\DentalHub.Domain.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\DentalHub\\DentalHub.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hayth\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -141,6 +142,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

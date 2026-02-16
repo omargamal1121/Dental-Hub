@@ -1,4 +1,4 @@
-using DentalHub.Infrastructure.Specification;
+using DentalHub.Application.Specification.Comman;
 
 namespace DentalHub.Infrastructure.Repository
 {

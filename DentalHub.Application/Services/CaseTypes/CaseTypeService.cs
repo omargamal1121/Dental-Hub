@@ -3,10 +3,10 @@ using DentalHub.Application.DTOs.CaseTypes;
 using DentalHub.Domain.Entities;
 using DentalHub.Domain.Factories;
 using DentalHub.Domain.DomainExceptions;
-using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
 using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
+using DentalHub.Application.Specification.Comman;
 
 namespace DentalHub.Application.Services.CaseTypes
 {

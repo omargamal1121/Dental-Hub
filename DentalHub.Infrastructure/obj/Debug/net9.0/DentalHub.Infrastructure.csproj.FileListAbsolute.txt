@@ -43,3 +43,5 @@ I:\The LastVirsion OF project\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9
 I:\The LastVirsion OF project\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.dll
 I:\The LastVirsion OF project\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\refint\DentalHub.Infrastructure.dll
 I:\The LastVirsion OF project\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.pdb
+D:\projects\DentalHub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Application.dll
+D:\projects\DentalHub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Application.pdb

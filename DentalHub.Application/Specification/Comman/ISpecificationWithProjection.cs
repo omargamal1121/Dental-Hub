@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace DentalHub.Infrastructure.Specification
+namespace DentalHub.Application.Specification.Comman
 {
     public interface ISpecificationWithProjection<T, TResult> : ISpecification<T>
     {

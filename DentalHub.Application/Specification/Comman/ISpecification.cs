@@ -1,6 +1,7 @@
+using DentalHub.Infrastructure.Specification;
 using System.Linq.Expressions;
 
-namespace DentalHub.Infrastructure.Specification
+namespace DentalHub.Application.Specification.Comman
 {
     public interface ISpecification<T>
     {
