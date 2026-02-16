@@ -31,6 +31,7 @@ namespace DentalHub.Application.Features.Admins.Commands.CreateAdmin
                     FullName = request.FullName,
                     Email = request.Email,
                     Password = request.Password,
+                    Role = request.Role,
                     Phone = request.Phone,
                     IsSuperAdmin = request.IsSuperAdmin
                 };

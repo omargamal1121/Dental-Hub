@@ -3,8 +3,6 @@
     public class Session : BaseEntitiy
 	{
         public Guid Id { get; set; }
-        public Guid DoctorId { get; set; }
-        public Doctor Doctor { get; set; }
         public Guid CaseId { get; set; }
         public Guid StudentId { get; set; }
 		public Student  Student { get; set; }
