@@ -17,6 +17,9 @@ namespace DentalHub.Domain.Entities
 		public string FullName { get; set; } = null!;
 		public string Faculty { get; set; } = null!;
 		public string Department { get; set; } =null ;
-		public string Role { get; set; } = null!;
-	}
+        public bool IsDoctor { get; set; } = false;
+        public bool IsStudent { get; set; } = false;
+
+        public string Role => IsDoctor ? "Doctor" : IsStudent ? "Student" : "Unknown";
+    }
 }

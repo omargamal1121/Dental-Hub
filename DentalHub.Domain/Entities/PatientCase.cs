@@ -3,6 +3,8 @@
     public class PatientCase : BaseEntitiy
 	{
         public Guid Id { get; set; }
+        public Guid StudentId { get; set; }
+        public Student Student { get; set; } = null!;
         public Guid PatientId { get; set; }
 		public Guid CaseTypeId { get; set; }
 

@@ -32,5 +32,6 @@ namespace DentalHub.Application.DTOs.Identity
         [Required(ErrorMessage = "Level is required")]
         [Range(1, 5, ErrorMessage = "Level must be between 1 and 5")]
         public int Level { get; set; }
+        public string Role { get; internal set; }
     }
 }
