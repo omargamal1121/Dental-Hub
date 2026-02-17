@@ -17,7 +17,7 @@ namespace DentalHub.Application.Handlers.CaseTypes
 
         public async Task<Result<CaseTypeDto>> Handle(GetCaseTypeByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _service.GetCaseTypeByIdAsync(request.Id);
+            return await _service.GetCaseTypeByPublicIdAsync(request.Id);
         }
     }
 }

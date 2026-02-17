@@ -16,3 +16,5 @@ D:\projects\DentalHub\DentalHub.Infrastructure\obj\Release\net9.0\refint\DentalH
 D:\projects\DentalHub\DentalHub.Infrastructure\obj\Release\net9.0\DentalHub.Infrastructure.pdb
 D:\projects\DentalHub\DentalHub.Infrastructure\obj\Release\net9.0\DentalHub.Infrastructure.genruntimeconfig.cache
 D:\projects\DentalHub\DentalHub.Infrastructure\obj\Release\net9.0\ref\DentalHub.Infrastructure.dll
+D:\projects\DentalHub\DentalHub.Infrastructure\bin\Release\net9.0\DentalHub.Application.dll
+D:\projects\DentalHub\DentalHub.Infrastructure\bin\Release\net9.0\DentalHub.Application.pdb

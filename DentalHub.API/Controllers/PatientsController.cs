@@ -6,6 +6,7 @@ using DentalHub.Application.Queries.Patient;
 using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.DTOs.Patients;
 using DentalHub.Application.Common;
+using DentalHub.Application.Services;
 
 namespace DentalHub.API.Controllers
 {
@@ -21,9 +22,9 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<Guid>>> Create([FromBody] CreatePatientCommand command)
+        public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] CreatePatientCommand command)
         {
             var result = await _mediator.Send(command);
             return HandleResult(result);
@@ -32,7 +33,7 @@ namespace DentalHub.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Delete(Guid id)
+        public async Task<ActionResult<ApiResponse<bool>>> Delete(string id)
         {
             var result = await _mediator.Send(new DeletePatientCommand(id));
             return HandleResult(result);
@@ -41,7 +42,7 @@ namespace DentalHub.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiResponse<PatientDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<PatientDto>>> GetById(Guid id)
+        public async Task<ActionResult<ApiResponse<PatientDto>>> GetById(string id)
         {
             var result = await _mediator.Send(new GetPatientByIdQuery(id));
             return HandleResult(result);
@@ -50,10 +51,11 @@ namespace DentalHub.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<PatientDto>>), StatusCodes.Status200OK)]
         public async Task<ActionResult<ApiResponse<PagedResult<PatientDto>>>> GetAll(
-            [FromQuery] int page = 1,
+            [FromQuery] FilterPatientDto filter,
+            [FromQuery] int pageNumber = 1,
             [FromQuery] int pageSize = 10)
         {
-            var result = await _mediator.Send(new GetAllPatientsQuery(page, pageSize));
+            var result = await _mediator.Send(new GetAllPatientsQuery(filter, pageNumber, pageSize));
             return HandleResult(result);
         }
 
@@ -61,9 +63,9 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Update(Guid id, [FromBody] UpdatePatientCommand command)
+        public async Task<ActionResult<ApiResponse<bool>>> Update(string id, [FromBody] UpdatePatientCommand command)
         {
-             if (id != command.UserId)
+             if (id != command.PublicId)
             {
                 return CreateErrorResponse<bool>("Id mismatch", 400); 
             }

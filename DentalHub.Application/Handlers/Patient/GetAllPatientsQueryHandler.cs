@@ -1,7 +1,7 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Patients;
 using DentalHub.Application.Queries.Patient;
-using DentalHub.Application.Services.Patients;
+using DentalHub.Application.Services;
 using MediatR;
 
 namespace DentalHub.Application.Handlers.Patient
@@ -17,7 +17,7 @@ namespace DentalHub.Application.Handlers.Patient
 
         public async Task<Result<PagedResult<PatientDto>>> Handle(GetAllPatientsQuery request, CancellationToken ct)
         {
-            return await _service.GetAllPatientsAsync(request.PageNumber, request.PageSize);
+            return await _service.GetAllPatientsAsync(request.FilterPatientDto ?? new FilterPatientDto(), request.PageNumber, request.PageSize);
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿using DentalHub.Application.Services.Admins;
+﻿using DentalHub.Application.Interfaces;
+using DentalHub.Application.Services.Admins;
 using DentalHub.Application.Services.Cases;
 using DentalHub.Application.Services.CaseTypes;
 using DentalHub.Application.Services.Doctors;
 using DentalHub.Application.Services.Identity;
-using DentalHub.Application.Services.Patients;
+using DentalHub.Application.Services;
 using DentalHub.Application.Services.Sessions;
 using DentalHub.Application.Services.Students;
 using DentalHub.Application.Services.UniversityMembers;
@@ -19,7 +20,7 @@ namespace DentalHub.Application.Extensions
             this IServiceCollection services)
         {
             // Register Authentication & Identity Services
-            services.AddScoped<IUserManagementService, AuthService>();
+            services.AddScoped<IUserManagementService, UserManagementService>();
 
             // Register User Management Services
             services.AddScoped<IPatientService, PatientService>();
@@ -31,6 +32,7 @@ namespace DentalHub.Application.Extensions
             services.AddScoped<IPatientCaseService, PatientCaseService>();
             services.AddScoped<ICaseRequestService, CaseRequestService>();
             services.AddScoped<ICaseTypeService, CaseTypeService>();
+          
 
             // Register Session Management Services
             services.AddScoped<ISessionService, SessionService>();

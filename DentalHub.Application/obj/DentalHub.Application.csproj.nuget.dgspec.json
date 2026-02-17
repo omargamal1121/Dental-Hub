@@ -59,6 +59,10 @@
               "target": "Package",
               "version": "[1.8.22, )"
             },
+            "LinqKit": {
+              "target": "Package",
+              "version": "[1.3.11, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[14.0.0, )"

@@ -21,15 +21,15 @@ namespace DentalHub.Application.Services.CaseTypes
             _logger = logger;
         }
 
-        public async Task<Result<CaseTypeDto>> GetCaseTypeByIdAsync(Guid id)
+        public async Task<Result<CaseTypeDto>> GetCaseTypeByPublicIdAsync(string publicId)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<CaseType, CaseTypeDto>(
-                    ct => ct.Id == id,
+                    ct => ct.PublicId == publicId,
                     ct => new CaseTypeDto
                     {
-                        Id = ct.Id,
+                        Id = ct.PublicId,
                         Name = ct.Name,
                         Description = ct.Description
                     }
@@ -46,7 +46,7 @@ namespace DentalHub.Application.Services.CaseTypes
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting case type by ID: {Id}", id);
+                _logger.LogError(ex, "Error getting case type by public ID: {PublicId}", publicId);
                 return Result<CaseTypeDto>.Failure("Error retrieving case type", 500);
             }
         }
@@ -59,7 +59,7 @@ namespace DentalHub.Application.Services.CaseTypes
                     ct => string.IsNullOrEmpty(search) || ct.Name.Contains(search) || ct.Description.Contains(search),
                     ct => new CaseTypeDto
                     {
-                        Id = ct.Id,
+                        Id = ct.PublicId,
                         Name = ct.Name,
                         Description = ct.Description
                     }
@@ -105,7 +105,7 @@ namespace DentalHub.Application.Services.CaseTypes
                 await _unitOfWork.CaseTypes.AddAsync(caseType);
                 await _unitOfWork.SaveChangesAsync();
 
-                return await GetCaseTypeByIdAsync(caseType.Id);
+                return await GetCaseTypeByPublicIdAsync(caseType.PublicId);
             }
             catch (DomainException ex)
             {
@@ -122,7 +122,7 @@ namespace DentalHub.Application.Services.CaseTypes
         {
             try
             {
-                var caseType = await _unitOfWork.CaseTypes.GetByIdAsync(dto.Id);
+                var caseType = await _unitOfWork.CaseTypes.GetByIdAsync(new BaseSpecification<CaseType>(ct => ct.PublicId == dto.Id));
 
                 if (caseType == null)
                 {
@@ -133,7 +133,7 @@ namespace DentalHub.Application.Services.CaseTypes
                 {
                      // Check if name exists (excluding current)
                     var existing = await _unitOfWork.CaseTypes.GetByIdAsync(
-                        new BaseSpecification<CaseType>(ct => ct.Name == dto.Name && ct.Id != dto.Id));
+                        new BaseSpecification<CaseType>(ct => ct.Name == dto.Name && ct.PublicId != dto.Id));
 
                     if (existing != null)
                     {
@@ -150,7 +150,7 @@ namespace DentalHub.Application.Services.CaseTypes
                 _unitOfWork.CaseTypes.Update(caseType);
                 await _unitOfWork.SaveChangesAsync();
 
-                return await GetCaseTypeByIdAsync(dto.Id);
+                return await GetCaseTypeByPublicIdAsync(caseType.PublicId);
             }
             catch (DomainException ex)
             {
@@ -163,11 +163,12 @@ namespace DentalHub.Application.Services.CaseTypes
             }
         }
 
-        public async Task<Result> DeleteCaseTypeAsync(Guid id)
+        public async Task<Result> DeleteCaseTypeAsync(string publicId)
         {
             try
             {
-                var caseType = await _unitOfWork.CaseTypes.GetByIdAsync(id);
+                var caseType = await _unitOfWork.CaseTypes.GetByIdAsync(
+                    new BaseSpecification<CaseType>(ct => ct.PublicId == publicId));
 
                 if (caseType == null)
                 {
@@ -186,7 +187,7 @@ namespace DentalHub.Application.Services.CaseTypes
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting case type: {Id}", id);
+                _logger.LogError(ex, "Error deleting case type by public ID: {PublicId}", publicId);
 
                 return Result.Failure("Error deleting case type", 500);
             }

@@ -1,7 +1,7 @@
 using DentalHub.Application.Commands.Patient;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Patients;
-using DentalHub.Application.Services.Patients;
+using DentalHub.Application.Services;
 using MediatR;
 
 namespace DentalHub.Application.Handlers.Patient
@@ -19,7 +19,7 @@ namespace DentalHub.Application.Handlers.Patient
         {
             var dto = new UpdatePatientDto
             {
-                UserId = request.UserId,
+                PublicId = request.PublicId,
                 FullName = request.FullName,
                 Phone = request.PhoneNumber,
                 NationalId = request.NationalId,

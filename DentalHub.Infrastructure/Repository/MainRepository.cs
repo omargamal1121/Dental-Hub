@@ -1,6 +1,7 @@
 using DentalHub.Application.Specification.Comman;
 using DentalHub.Infrastructure.ContextAndConfig;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace DentalHub.Infrastructure.Repository
 {
@@ -76,7 +77,7 @@ namespace DentalHub.Infrastructure.Repository
 
             return await query.AnyAsync();
         }
-
+      
 
         public async Task<T> AddAsync(T item)
         {

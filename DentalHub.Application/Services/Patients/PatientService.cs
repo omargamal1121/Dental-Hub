@@ -1,94 +1,101 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Patients;
-using DentalHub.Application.Exceptions;
 using DentalHub.Domain.Entities;
-using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
 using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 using DentalHub.Application.Specification.Comman;
+using DentalHub.Application.DTOs.Cases;
 
-namespace DentalHub.Application.Services.Patients
+namespace DentalHub.Application.Services
 {
-    public class PatientService : IPatientService
-    {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<PatientService> _logger;
+	public class PatientService : IPatientService
+	{
+		private readonly IUnitOfWork _unitOfWork;
+		private readonly ILogger<PatientService> _logger;
 
-        public PatientService(IUnitOfWork unitOfWork, ILogger<PatientService> logger)
-        {
-            _unitOfWork = unitOfWork;
-            _logger = logger;
-        }
+		public PatientService(IUnitOfWork unitOfWork, ILogger<PatientService> logger)
+		{
+			_unitOfWork = unitOfWork;
+			_logger = logger;
+		}
 
-        /// Get patient by user ID with projection to DTO
-        public async Task<Result<PatientDto>> GetPatientByIdAsync(Guid userId)
-        {
-            try
-            {
-                // Create specification with projection
-                var spec = new BaseSpecificationWithProjection<Patient, PatientDto>(
-                    p => p.UserId == userId,
-                    p => new PatientDto
-                    {
-                        UserId = p.UserId,
-                        FullName = p.User.FullName,
-                        Email = p.User.Email!,
-                        Phone = p.Phone,
-                        Age = p.Age,
-                        CreateAt = p.CreateAt,
-                        TotalCases = p.PatientCases.Count,
-                        ActiveCases = p.PatientCases.Count(c => c.Status == CaseStatus.InProgress)
-                    }
-                );
+		public async Task<Result<PatientDto>> GetPatientByPublicIdAsync(string publicId)
+		{
+			try
+			{
+				var spec = new BaseSpecificationWithProjection<Patient, PatientDto>(
+					p => new PatientDto
+					{
+						PublicId = p.PublicId,
+						FullName = p.User.FullName,
+						Email = p.User.Email!,
+						Phone = p.Phone,
+						Age = p.Age,
+						CreateAt = p.CreateAt,
+						PatientCases = p.PatientCases
+							.Select(pc => new PatientCaseSimpleDataDto
+							{
+								Id = pc.PublicId,
+								Name = pc.CaseType.Name,
+								Status = pc.Status,
+								CreateAt = pc.CreateAt
+							})
+							.ToList()
+					}
+				);
 
-                // Add includes for User navigation
-                spec.AddInclude(p => p.User);
-                spec.AddInclude(p => p.PatientCases);
+				var patient = await _unitOfWork.Patients.GetPatientByPublicId(publicId, spec);
 
-                var patient = await _unitOfWork.Patients.GetByIdAsync(spec);
+				if (patient == null)
+					return Result<PatientDto>.Failure("Patient not found");
 
-                if (patient == null)
-                {
-                    return Result<PatientDto>.Failure("Patient not found");
-                }
+				return Result<PatientDto>.Success(patient);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Error getting patient by public ID: {PublicId}", publicId);
+				return Result<PatientDto>.Failure("Error retrieving patient data");
+			}
+		}
 
-                return Result<PatientDto>.Success(patient);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error getting patient: {UserId}", userId);
-                return Result<PatientDto>.Failure("Error retrieving patient data");
-            }
-        }
+		public async Task<Result<PagedResult<PatientDto>>> GetAllPatientsAsync(FilterPatientDto filterPatientDto, int page = 1, int pageSize = 10)
+		{
+			try
+			{
+				var spec = new BaseSpecificationWithProjection<Patient, PatientDto>(
+					p => filterPatientDto.Name == null || p.User.FullName.Contains(filterPatientDto.Name),
+					p => new PatientDto
+					{
+						PublicId = p.PublicId,
+						FullName = p.User.FullName,
+						Email = p.User.Email!,
+						Phone = p.Phone,
+						Age = p.Age,
+						CreateAt = p.CreateAt,
+						
+						PatientCases = p.PatientCases
+							.Where(pc => filterPatientDto.CaseStatus == null || pc.Status == filterPatientDto.CaseStatus.Value)
+							.Where(pc => string.IsNullOrEmpty(filterPatientDto.CaseType) || pc.CaseType.Name.Contains(filterPatientDto.CaseType!))
+							.Select(pc => new PatientCaseSimpleDataDto
+							{
+								Id = pc.PublicId,
+								Name = pc.CaseType.Name,
+								Status = pc.Status,
+								CreateAt = pc.CreateAt
+							})
+							.ToList()
+					}
+				);
 
-        /// Get all patients with pagination
-        public async Task<Result<PagedResult<PatientDto>>> GetAllPatientsAsync(int page = 1, int pageSize = 10)
-        {
-            try
-            {
-                var spec = new BaseSpecificationWithProjection<Patient, PatientDto>(
-                    p => new PatientDto
-                    {
-                        UserId = p.UserId,
-                        FullName = p.User.FullName,
-                        Email = p.User.Email!,
-                        Phone = p.Phone,
-                        Age = p.Age,
-                        CreateAt = p.CreateAt,
-                        TotalCases = p.PatientCases.Count,
-                        ActiveCases = p.PatientCases.Count(c => c.Status == CaseStatus.InProgress)
-                    }
-                );
-
-                spec.AddInclude(p => p.User);
-                spec.AddInclude(p => p.PatientCases);
-                spec.ApplyPaging(page, pageSize);
-                spec.ApplyOrderByDescending(p => p.CreateAt);
+				spec.AddInclude(p => p.User);
+				spec.AddInclude(p => p.PatientCases);
+				spec.AddInclude("PatientCases.CaseType");
+				spec.ApplyPaging(page, pageSize);
+				spec.ApplyOrderByDescending(p => p.CreateAt);
 
 				var patientsList = await _unitOfWork.Patients.GetAllAsync(spec);
 				var totalCount = await _unitOfWork.Patients.CountAsync(spec);
-
 
 				var pagedResult = PaginationFactory<PatientDto>.Create(
 					count: totalCount,
@@ -97,92 +104,87 @@ namespace DentalHub.Application.Services.Patients
 					data: patientsList
 				);
 
-                return Result<PagedResult<PatientDto>>.Success(pagedResult);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error getting all patients");
-                return Result<PagedResult<PatientDto>>.Failure("Error retrieving patients");
-            }
-        }
+				return Result<PagedResult<PatientDto>>.Success(pagedResult);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Error getting all patients");
+				return Result<PagedResult<PatientDto>>.Failure("Error retrieving patients");
+			}
+		}
 
-        /// Update patient information
-        public async Task<Result<PatientDto>> UpdatePatientAsync(UpdatePatientDto dto)
-        {
-            try
-            {
-                // Get patient
-                var spec = new BaseSpecification<Patient>(p => p.UserId == dto.UserId);
-                spec.AddInclude(p => p.User);
+		public async Task<Result<PatientDto>> UpdatePatientAsync(UpdatePatientDto dto)
+		{
+			try
+			{
+				var spec = new BaseSpecification<Patient>(p => p.PublicId == dto.PublicId);
+				spec.AddInclude(p => p.User);
 
-                var patient = await _unitOfWork.Patients.GetByIdAsync(spec);
+				var patient = await _unitOfWork.Patients.GetByIdAsync(spec);
 
-                if (patient == null)
-                {
-                    return Result<PatientDto>.Failure("Patient not found");
-                }
+				if (patient == null)
+					return Result<PatientDto>.Failure("Patient not found");
 
-                // Update fields if provided
-                if (!string.IsNullOrWhiteSpace(dto.FullName))
-                {
-                    patient.User.FullName = dto.FullName;
-                }
+				if (!string.IsNullOrWhiteSpace(dto.FullName))
+					patient.User.FullName = dto.FullName;
 
-                if (!string.IsNullOrWhiteSpace(dto.Phone))
-                {
-                    patient.Phone = dto.Phone;
-                    patient.User.PhoneNumber = dto.Phone;
-                }
+				if (!string.IsNullOrWhiteSpace(dto.Phone))
+				{
+					patient.Phone = dto.Phone;
+					patient.User.PhoneNumber = dto.Phone;
+				}
 
-                if (dto.Age.HasValue)
-                {
-                    patient.Age = dto.Age.Value;
-                }
+				if (dto.Age.HasValue)
+					patient.Age = dto.Age.Value;
 
-                patient.UpdateAt = DateTime.UtcNow;
+				patient.UpdateAt = DateTime.UtcNow;
 
-                _unitOfWork.Patients.Update(patient);
-                await _unitOfWork.SaveChangesAsync();
+				_unitOfWork.Patients.Update(patient);
+				await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Patient updated successfully: {UserId}", dto.UserId);
+				_logger.LogInformation("Patient updated successfully: {PublicId}", dto.PublicId);
 
-                // Return updated patient
-                return await GetPatientByIdAsync(dto.UserId);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error updating patient: {UserId}", dto.UserId);
-                return Result<PatientDto>.Failure("Error updating patient");
-            }
-        }
+				
+				return Result<PatientDto>.Success(new PatientDto
+				{
+					 PublicId = patient.PublicId,
+					FullName = patient.User.FullName,
+					Email = patient.User.Email!,
+					Phone = patient.Phone,
+					Age = patient.Age,
+					CreateAt = patient.CreateAt,
+				
+				});
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Error updating patient: {PublicId}", dto.PublicId);
+				return Result<PatientDto>.Failure("Error updating patient");
+			}
+		}
 
-        /// Soft delete patient (set DeleteAt)
-        public async Task<Result> DeletePatientAsync(Guid userId)
-        {
-            try
-            {
-                var patient = await _unitOfWork.Patients.GetByIdAsync(
-                    new BaseSpecification<Patient>(p => p.UserId == userId));
+		public async Task<Result> DeletePatientAsync(string publicId)
+		{
+			try
+			{
+				var patient = await _unitOfWork.Patients.GetByIdAsync(
+					new BaseSpecification<Patient>(p => p.PublicId == publicId));
 
-                if (patient == null)
-                {
-                    return Result.Failure("Patient not found");
-                }
+				if (patient == null)
+					return Result.Failure("Patient not found");
 
-                // Soft delete
-                patient.DeleteAt = DateTime.UtcNow;
-                _unitOfWork.Patients.Update(patient);
-                await _unitOfWork.SaveChangesAsync();
+				patient.DeleteAt = DateTime.UtcNow;
+				_unitOfWork.Patients.Update(patient);
+				await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Patient deleted: {UserId}", userId);
-
-                return Result.Success("Patient deleted successfully");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error deleting patient: {UserId}", userId);
-                return Result.Failure("Error deleting patient");
-            }
-        }
-    }
+				_logger.LogInformation("Patient deleted: {PublicId}", publicId);
+				return Result.Success("Patient deleted successfully");
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Error deleting patient: {PublicId}", publicId);
+				return Result.Failure("Error deleting patient");
+			}
+		}
+	}
 }

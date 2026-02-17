@@ -24,7 +24,6 @@ namespace DentalHub.Domain.Factories
 
             return new User
             {
-                Id = Guid.CreateVersion7(),
                 FullName = fullName,
                 UserName = email,
                 Email = email,

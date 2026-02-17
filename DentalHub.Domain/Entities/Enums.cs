@@ -4,14 +4,17 @@ public enum CaseStatus
     Pending,
     InProgress,
     Completed,
-    Cancelled
+    Cancelled,
+	UnderReview
 }
 
 public enum RequestStatus
 {
     Pending,
-    Approved,
-    Rejected
+	UnderReview,
+	Approved,
+    Rejected,
+    Taken,
 }
 
 public enum SessionStatus

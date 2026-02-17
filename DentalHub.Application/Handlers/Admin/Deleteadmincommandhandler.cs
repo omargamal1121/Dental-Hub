@@ -25,7 +25,7 @@ namespace DentalHub.Application.Features.Admins.Commands.DeleteAdmin
             try
             {
                 // Call Service
-                var result = await _adminService.DeleteAdminAsync(request.UserId);
+                var result = await _adminService.DeleteAdminByPublicIdAsync(request.UserId);
 
                 // Convert Result to Response
                 return new DeleteAdminCommandResponse

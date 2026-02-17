@@ -25,13 +25,11 @@ namespace DentalHub.Domain.Factories
                 status = RequestStatus.Pending;
             return new CaseRequest
             {
-                Id = Guid.NewGuid(),
                 StudentId = studentId,
                 DoctorId = doctorId,
                 PatientCaseId = patientCaseId,
                 Description = description,
-                Status = status,
-                CreateAt = DateTime.UtcNow
+                Status = status
             };
         }
     }

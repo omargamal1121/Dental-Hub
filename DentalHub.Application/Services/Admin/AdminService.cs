@@ -82,7 +82,7 @@ namespace DentalHub.Application.Services.Admins
                 _logger.LogInformation("Admin created successfully: {Email}", dto.Email);
 
                 // STEP 5: Return Response
-                return await GetAdminByIdAsync(user.Id);
+                return await GetAdminByPublicIdAsync(user.PublicId);
             }
             catch (Exception ex)
             {
@@ -95,16 +95,16 @@ namespace DentalHub.Application.Services.Admins
 
         #region Admin Profile
 
-        /// Get admin by user ID
-        public async Task<Result<AdminDto>> GetAdminByIdAsync(Guid userId)
+        /// Get admin by public ID
+        public async Task<Result<AdminDto>> GetAdminByPublicIdAsync(string publicId)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<Admin, AdminDto>(
-                    a => a.UserId == userId,
+                    a => a.PublicId == publicId,
                     a => new AdminDto
                     {
-                        UserId = a.UserId,
+                        PublicId = a.PublicId,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
                     
@@ -127,7 +127,7 @@ namespace DentalHub.Application.Services.Admins
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting admin: {UserId}", userId);
+                _logger.LogError(ex, "Error getting admin by public ID: {PublicId}", publicId);
                 return Result<AdminDto>.Failure("Error retrieving admin data");
             }
         }
@@ -140,7 +140,7 @@ namespace DentalHub.Application.Services.Admins
                 var spec = new BaseSpecificationWithProjection<Admin, AdminDto>(
                     a => new AdminDto
                     {
-                        UserId = a.UserId,
+                        PublicId = a.PublicId,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
                        
@@ -187,7 +187,7 @@ namespace DentalHub.Application.Services.Admins
 					 a => a.User.UserRoles.Any(ur => ur.RoleId == adminRoleId),
 					a => new AdminDto
                     {
-                        UserId = a.UserId,
+                        PublicId = a.PublicId,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
                         Phone = a.Phone,
@@ -228,7 +228,7 @@ namespace DentalHub.Application.Services.Admins
                     a => a.IsSuperAdmin == true,
                     a => new AdminDto
                     {
-                        UserId = a.UserId,
+                        PublicId = a.PublicId,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
                    
@@ -266,7 +266,7 @@ namespace DentalHub.Application.Services.Admins
         {
             try
             {
-                var spec = new BaseSpecification<Admin>(a => a.UserId == dto.UserId);
+                var spec = new BaseSpecification<Admin>(a => a.PublicId == dto.PublicId);
                 spec.AddInclude(a => a.User);
 
                 var admin = await _unitOfWork.Admins.GetByIdAsync(spec);
@@ -300,24 +300,24 @@ namespace DentalHub.Application.Services.Admins
                 _unitOfWork.Admins.Update(admin);
                 await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Admin updated successfully: {UserId}", dto.UserId);
+                _logger.LogInformation("Admin updated successfully: {PublicId}", dto.PublicId);
 
-                return await GetAdminByIdAsync(dto.UserId);
+                return await GetAdminByPublicIdAsync(dto.PublicId);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating admin: {UserId}", dto.UserId);
+                _logger.LogError(ex, "Error updating admin by public ID: {PublicId}", dto.PublicId);
                 return Result<AdminDto>.Failure("Error updating admin");
             }
         }
 
         /// Soft delete admin
-        public async Task<Result> DeleteAdminAsync(Guid userId)
+        public async Task<Result> DeleteAdminByPublicIdAsync(string publicId)
         {
             try
             {
                 var admin = await _unitOfWork.Admins.GetByIdAsync(
-                    new BaseSpecification<Admin>(a => a.UserId == userId));
+                    new BaseSpecification<Admin>(a => a.PublicId == publicId));
 
                 if (admin == null)
                 {
@@ -328,13 +328,13 @@ namespace DentalHub.Application.Services.Admins
                 _unitOfWork.Admins.Update(admin);
                 await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Admin deleted: {UserId}", userId);
+                _logger.LogInformation("Admin deleted: {PublicId}", publicId);
 
                 return Result.Success("Admin deleted successfully");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting admin: {UserId}", userId);
+                _logger.LogError(ex, "Error deleting admin by public ID: {PublicId}", publicId);
                 return Result.Failure("Error deleting admin");
             }
         }
@@ -345,11 +345,11 @@ namespace DentalHub.Application.Services.Admins
 
         /// Get admin statistics
         /// System-wide statistics visible to admin
-        public async Task<Result<AdminStatsDto>> GetAdminStatisticsAsync(Guid adminId)
+        public async Task<Result<AdminStatsDto>> GetAdminStatisticsAsync(string adminPublicId)
         {
             try
             {
-                var spec = new BaseSpecification<Admin>(a => a.UserId == adminId);
+                var spec = new BaseSpecification<Admin>(a => a.PublicId == adminPublicId);
                 var admin = await _unitOfWork.Admins.GetByIdAsync(spec);
 
                 if (admin == null)
@@ -407,7 +407,7 @@ namespace DentalHub.Application.Services.Admins
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting admin statistics: {AdminId}", adminId);
+                _logger.LogError(ex, "Error getting admin statistics for public ID: {PublicId}", adminPublicId);
                 return Result<AdminStatsDto>.Failure("Error retrieving statistics");
             }
         }

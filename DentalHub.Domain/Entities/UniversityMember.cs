@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace DentalHub.Domain.Entities
 {
-	public class UniversityMember
+	public class UniversityMember 
 	{
+
+
 		public int Id { get; set; }
-		
-
-
 		public string UniversityId { get; set; } = null!;
 		public string FullName { get; set; } = null!;
 		public string Faculty { get; set; } = null!;

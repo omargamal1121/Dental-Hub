@@ -6,7 +6,7 @@ namespace DentalHub.Application.Features.Admins.Commands.UpdateAdmin
     /// Command to update admin information
     public class UpdateAdminCommand : IRequest<UpdateAdminCommandResponse>
     {
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public string? FullName { get; set; }
         public string? Role { get; set; }
         public string? Phone { get; set; }

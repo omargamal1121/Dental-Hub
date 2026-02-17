@@ -19,11 +19,10 @@ namespace DentalHub.Application.Handlers.Doctor
         {
             var dto = new UpdateDoctorDto
             {
-                UserId = request.Id,
+                UserId = request.PublicId,
                 Name = request.Name,
                 Specialty = request.Specialty,
                 UniversityId = request.UniversityId,
-               
                 
             };
 

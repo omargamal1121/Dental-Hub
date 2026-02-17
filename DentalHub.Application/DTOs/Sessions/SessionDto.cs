@@ -3,12 +3,12 @@ namespace DentalHub.Application.DTOs.Sessions
     /// DTO for session information
     public class SessionDto
     {
-        public Guid Id { get; set; }
-        public Guid CaseId { get; set; }
+        public string Id { get; set; }
+        public string CaseId { get; set; }
         public string TreatmentType { get; set; } = string.Empty;
-        public Guid PatientId { get; set; }
+        public string PatientId { get; set; }
         public string PatientName { get; set; } = string.Empty;
-        public Guid StudentId { get; set; }
+        public string StudentId { get; set; }
         public string StudentName { get; set; } = string.Empty;
         public DateTime ScheduledAt { get; set; }
         public string Status { get; set; } = string.Empty;

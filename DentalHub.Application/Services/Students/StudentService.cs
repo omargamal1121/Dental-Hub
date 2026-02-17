@@ -22,15 +22,15 @@ namespace DentalHub.Application.Services.Students
 
         #region Student Profile
 
-        public async Task<Result<StudentDto>> GetStudentByIdAsync(Guid userId)
+        public async Task<Result<StudentDto>> GetStudentByPublicIdAsync(string publicId)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<Student, StudentDto>(
-                    s => s.UserId == userId,
+                    s => s.PublicId == publicId,
                     s => new StudentDto
                     {
-                        UserId = s.UserId,
+                        PublicId = s.PublicId,
                         FullName = s.User.FullName,
                         Email = s.User.Email!,
                         University = s.University,
@@ -55,7 +55,7 @@ namespace DentalHub.Application.Services.Students
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting student: {UserId}", userId);
+                _logger.LogError(ex, "Error getting student by public ID: {PublicId}", publicId);
                 return Result<StudentDto>.Failure("Error retrieving student data");
             }
         }
@@ -68,7 +68,7 @@ namespace DentalHub.Application.Services.Students
                 var spec = new BaseSpecificationWithProjection<Student, StudentDto>(
                     s => new StudentDto
                     {
-                        UserId = s.UserId,
+                        PublicId = s.PublicId,
                         FullName = s.User.FullName,
                         Email = s.User.Email!,
                         University = s.University,
@@ -108,7 +108,7 @@ namespace DentalHub.Application.Services.Students
         {
             try
             {
-                var spec = new BaseSpecification<Student>(s => s.UserId == dto.UserId);
+                var spec = new BaseSpecification<Student>(s => s.PublicId == dto.PublicId);
                 spec.AddInclude(s => s.User);
 
                 var student = await _unitOfWork.Students.GetByIdAsync(spec);
@@ -139,24 +139,24 @@ namespace DentalHub.Application.Services.Students
                 _unitOfWork.Students.Update(student);
                 await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Student updated successfully: {UserId}", dto.UserId);
+                _logger.LogInformation("Student updated successfully: {PublicId}", dto.PublicId);
 
-                return await GetStudentByIdAsync(dto.UserId);
+                return await GetStudentByPublicIdAsync(dto.PublicId);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating student: {UserId}", dto.UserId);
+                _logger.LogError(ex, "Error updating student: {PublicId}", dto.PublicId);
                 return Result<StudentDto>.Failure("Error updating student");
             }
         }
 
   
-        public async Task<Result> DeleteStudentAsync(Guid userId)
+        public async Task<Result> DeleteStudentByPublicIdAsync(string publicId)
         {
             try
             {
                 var student = await _unitOfWork.Students.GetByIdAsync(
-                    new BaseSpecification<Student>(s => s.UserId == userId));
+                    new BaseSpecification<Student>(s => s.PublicId == publicId));
 
                 if (student == null)
                 {
@@ -167,13 +167,13 @@ namespace DentalHub.Application.Services.Students
                 //_unitOfWork.Students.Update(student);
                 await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Student deleted: {UserId}", userId);
+                _logger.LogInformation("Student deleted: {PublicId}", publicId);
 
                 return Result.Success("Student deleted successfully");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting student: {UserId}", userId);
+                _logger.LogError(ex, "Error deleting student by public ID: {PublicId}", publicId);
                 return Result.Failure("Error deleting student");
             }
         }
@@ -184,12 +184,12 @@ namespace DentalHub.Application.Services.Students
 
      
         public async Task<Result<PagedResult<PatientCaseDto>>> GetAvailableCasesForStudentAsync(
-            Guid studentId, int page = 1, int pageSize = 10)
+            string studentPublicId, int page = 1, int pageSize = 10)
         {
             try
             {
                 var student = await _unitOfWork.Students.GetByIdAsync(
-                    new BaseSpecification<Student>(s => s.UserId == studentId));
+                    new BaseSpecification<Student>(s => s.PublicId == studentPublicId));
 
                 if (student == null)
                 {
@@ -200,11 +200,11 @@ namespace DentalHub.Application.Services.Students
                     pc => pc.Status == CaseStatus.Pending,
                     pc => new PatientCaseDto
                     {
-                        Id = pc.Id,
-                        PatientId = pc.PatientId,
+                        Id = pc.PublicId,
+                        PatientId = pc.Patient.PublicId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                       
+                        CaseType = new DTOs.CaseTypes.CaseTypeDto { Id = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
@@ -230,7 +230,7 @@ namespace DentalHub.Application.Services.Students
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting available cases for student: {StudentId}", studentId);
+                _logger.LogError(ex, "Error getting available cases for student: {StudentId}", studentPublicId);
                 return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving available cases");
             }
         }
@@ -239,11 +239,11 @@ namespace DentalHub.Application.Services.Students
 
         #region Statistics
 
-        public async Task<Result<StudentStatsDto>> GetStudentStatisticsAsync(Guid studentId)
+        public async Task<Result<StudentStatsDto>> GetStudentStatisticsAsync(string studentPublicId)
         {
             try
             {
-                var spec = new BaseSpecification<Student>(s => s.UserId == studentId);
+                var spec = new BaseSpecification<Student>(s => s.PublicId == studentPublicId);
                
 
                 var student = await _unitOfWork.Students.GetByIdAsync(spec);
@@ -254,7 +254,7 @@ namespace DentalHub.Application.Services.Students
                 }
 
               
-                var sessionsSpec = new BaseSpecification<Session>(s => s.StudentId == studentId);
+                var sessionsSpec = new BaseSpecification<Session>(s => s.Student.PublicId == studentPublicId);
                 var sessions = await _unitOfWork.Sessions.GetAllAsync(sessionsSpec);
 
 
@@ -277,7 +277,7 @@ namespace DentalHub.Application.Services.Students
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting student statistics: {StudentId}", studentId);
+                _logger.LogError(ex, "Error getting student statistics for public ID: {PublicId}", studentPublicId);
                 return Result<StudentStatsDto>.Failure("Error retrieving statistics");
             }
         }

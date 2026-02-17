@@ -5,8 +5,8 @@ namespace DentalHub.Application.DTOs.Students
     /// DTO for updating student information
     public class UpdateStudentDto
     {
-        [Required(ErrorMessage = "User ID is required")]
-        public Guid UserId { get; set; }
+        [Required(ErrorMessage = "Student public ID is required")]
+        public string PublicId { get; set; }
 
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Full name must be between 3 and 100 characters")]
         [RegularExpression(@"^[a-zA-Z\u0621-\u064A\s]+$", ErrorMessage = "Full name can only contain letters and spaces")]

@@ -11,10 +11,7 @@ namespace DentalHub.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "TreatmentType",
-                table: "PatientCases",
-                newName: "Description");
+            
 
             migrationBuilder.AddColumn<Guid>(
                 name: "CaseTypeId",
@@ -104,10 +101,7 @@ namespace DentalHub.Infrastructure.Migrations
                 name: "CaseTypeId",
                 table: "Medias");
 
-            migrationBuilder.RenameColumn(
-                name: "Description",
-                table: "PatientCases",
-                newName: "TreatmentType");
+         
         }
     }
 }

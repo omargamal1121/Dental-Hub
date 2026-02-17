@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Auth;
 using DentalHub.Domain.Entities;
@@ -87,18 +88,14 @@ namespace DentalHub.Application.Services.Auth
             }
         }
 
-        public async Task<Result<bool>> LogoutAsync(string userId)
+        public async Task<Result<bool>> LogoutAsync(string publicId)
         {
             _logger.LogInformation("Executing {Method}", nameof(LogoutAsync));
 
-            //var refreshToken = GetRefreshCookie();
-            //if (refreshToken != null)
-            //    _backgroundJobClient.Enqueue<IAuthenticationService>(s => s.RemoveRefreshTokenAsync(refreshToken));
-
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.PublicId == publicId);
             if (user == null)
             {
-                _logger.LogError("No user found with ID: {UserId}", userId);
+                _logger.LogError("No user found with PublicId: {PublicId}", publicId);
                 return Result<bool>.Failure("Invalid user ID");
             }
 
@@ -106,7 +103,7 @@ namespace DentalHub.Application.Services.Auth
             if (!updateResult.Succeeded)
             {
                 var errors = string.Join(", ", updateResult.Errors.Select(e => e.Description));
-                _logger.LogError("Failed to update security stamp for user {UserId}: {Errors}", userId, errors);
+                _logger.LogError("Failed to update security stamp for user {PublicId}: {Errors}", publicId, errors);
             }
             ExpireRefreshCookie();
             return Result<bool>.Success(true, "Logout Successful");

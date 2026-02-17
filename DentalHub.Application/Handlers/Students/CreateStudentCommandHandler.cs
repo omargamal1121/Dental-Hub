@@ -6,7 +6,7 @@ using MediatR;
 
 namespace DentalHub.Application.Handlers.Students
 {
-    public class CreateStudentCommandHandler : IRequestHandler<CreateStudentCommand, Result<Guid>>
+    public class CreateStudentCommandHandler : IRequestHandler<CreateStudentCommand, Result<string>>
     {
         private readonly IUserManagementService _userManagementService;
 
@@ -15,7 +15,7 @@ namespace DentalHub.Application.Handlers.Students
             _userManagementService = userManagementService;
         }
 
-        public async Task<Result<Guid>> Handle(CreateStudentCommand request, CancellationToken ct)
+        public async Task<Result<string>> Handle(CreateStudentCommand request, CancellationToken ct)
         {
             var registerDto = new RegisterStudentDto
             {
@@ -23,17 +23,17 @@ namespace DentalHub.Application.Handlers.Students
                 Email = request.Email,
                 Password = request.Password,
                 UniversityId = request.UniversityId,
-                
+                Level = request.Level
             };
 
             var result = await _userManagementService.RegisterStudentAsync(registerDto);
 
             if (!result.IsSuccess)
             {
-                return Result<Guid>.Failure(result.Errors ?? new List<string> { result.Message ?? "Student creation failed" }, result.Status);
+                return Result<string>.Failure(result.Errors ?? new List<string> { result.Message ?? "Student creation failed" }, result.Status);
             }
 
-            return Result<Guid>.Success(result.Data.UserId, result.Message, result.Status);
+            return Result<string>.Success(result.Data.PublicId, result.Message, result.Status);
         }
     }
 }

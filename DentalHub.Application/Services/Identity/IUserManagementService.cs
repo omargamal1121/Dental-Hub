@@ -17,6 +17,6 @@ namespace DentalHub.Application.Services.Identity
 
         // User Management
         Task<Result<bool>> CheckEmailExistsAsync(string email);
-        Task<Result> DeleteUserAsync(Guid userId);
+        Task<Result> DeleteUserAsync(string publicId);
     }
 }

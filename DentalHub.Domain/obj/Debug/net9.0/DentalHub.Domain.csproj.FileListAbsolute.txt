@@ -1,18 +1,3 @@
-D:\projects\DentalHub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.deps.json
-D:\projects\DentalHub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.runtimeconfig.json
-D:\projects\DentalHub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.dll
-D:\projects\DentalHub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.pdb
-D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.csproj.AssemblyReference.cache
-D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.GeneratedMSBuildEditorConfig.editorconfig
-D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.AssemblyInfoInputs.cache
-D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.AssemblyInfo.cs
-D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.csproj.CoreCompileInputs.cache
-D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.sourcelink.json
-D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.dll
-D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\refint\DentalHub.Domain.dll
-D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.pdb
-D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.genruntimeconfig.cache
-D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\ref\DentalHub.Domain.dll
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.deps.json
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.runtimeconfig.json
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.dll
@@ -43,3 +28,18 @@ I:\The LastVirsion OF project\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\refin
 I:\The LastVirsion OF project\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.pdb
 I:\The LastVirsion OF project\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.genruntimeconfig.cache
 I:\The LastVirsion OF project\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\ref\DentalHub.Domain.dll
+D:\projects\DentalHub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.deps.json
+D:\projects\DentalHub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.runtimeconfig.json
+D:\projects\DentalHub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.dll
+D:\projects\DentalHub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.pdb
+D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.csproj.AssemblyReference.cache
+D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.AssemblyInfoInputs.cache
+D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.AssemblyInfo.cs
+D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.csproj.CoreCompileInputs.cache
+D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.sourcelink.json
+D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.dll
+D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\refint\DentalHub.Domain.dll
+D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.pdb
+D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.genruntimeconfig.cache
+D:\projects\DentalHub\DentalHub.Domain\obj\Debug\net9.0\ref\DentalHub.Domain.dll

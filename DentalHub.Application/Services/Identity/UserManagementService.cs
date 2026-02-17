@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Identity;
 using DentalHub.Application.Exceptions;
@@ -9,18 +10,18 @@ using Microsoft.Extensions.Logging;
 namespace DentalHub.Application.Services.Identity
 {
   
-    public class AuthService : IUserManagementService
+    public class UserManagementService : IUserManagementService
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<AuthService> _logger;
+        private readonly ILogger<UserManagementService> _logger;
 
-        public AuthService(
+        public UserManagementService(
             UserManager<User> userManager,
             RoleManager<IdentityRole<Guid>> roleManager,
             IUnitOfWork unitOfWork,
-            ILogger<AuthService> logger)
+            ILogger<UserManagementService> logger)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -67,11 +68,13 @@ namespace DentalHub.Application.Services.Identity
             
                 var patient = new Patient
                 {
+                    
                     UserId = user.Id, 
                     Age = dto.Age,
                     Phone = dto.Phone,
                     CreateAt = DateTime.UtcNow
                 };
+                patient.Id=user.Id;
 
                 await _unitOfWork.Patients.AddAsync(patient);
                 await _unitOfWork.SaveChangesAsync();
@@ -80,7 +83,7 @@ namespace DentalHub.Application.Services.Identity
 
                 return Result<AuthResponseDto>.Success(new AuthResponseDto
                 {
-                    UserId = user.Id,
+                    PublicId = user.PublicId,
                     Email = user.Email!,
                     FullName = user.FullName,
                     Role = "Patient"
@@ -136,7 +139,7 @@ namespace DentalHub.Application.Services.Identity
                     Level = dto.Level,
                     CreateAt = DateTime.UtcNow
                 };
-
+                student.Id=user.Id;
                 await _unitOfWork.Students.AddAsync(student);
                 await _unitOfWork.SaveChangesAsync();
 
@@ -144,7 +147,7 @@ namespace DentalHub.Application.Services.Identity
 
                 return Result<AuthResponseDto>.Success(new AuthResponseDto
                 {
-                    UserId = user.Id,
+                    PublicId = user.PublicId,
                     Email = user.Email!,
                     FullName = user.FullName,
                     Role = "Student"
@@ -203,7 +206,7 @@ namespace DentalHub.Application.Services.Identity
                     UniversityId = dto.UniversityId,
                     CreateAt = DateTime.UtcNow
                 };
-
+                doctor.Id = user.Id;
                 await _unitOfWork.Doctors.AddAsync(doctor);
                 await _unitOfWork.SaveChangesAsync();
 
@@ -211,7 +214,7 @@ namespace DentalHub.Application.Services.Identity
 
                 return Result<AuthResponseDto>.Success(new AuthResponseDto
                 {
-                    UserId = user.Id,
+                    PublicId = user.PublicId,
                     Email = user.Email!,
                     FullName = user.FullName,
                     Role = "Doctor"
@@ -244,11 +247,11 @@ namespace DentalHub.Application.Services.Identity
         }
 
     
-        public async Task<Result> DeleteUserAsync(Guid userId)
+        public async Task<Result> DeleteUserAsync(string publicId)
         {
             try
             {
-                var user = await _userManager.FindByIdAsync(userId.ToString());
+                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.PublicId == publicId);
                 if (user == null)
                 {
                     return Result.Failure("User not found");
@@ -265,7 +268,7 @@ namespace DentalHub.Application.Services.Identity
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting user: {UserId}", userId);
+                _logger.LogError(ex, "Error deleting user with public ID: {PublicId}", publicId);
                 return Result.Failure("An error occurred while deleting user");
             }
         }

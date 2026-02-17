@@ -16,7 +16,7 @@ namespace DentalHub.Application.Handlers.Sessions
 
         public async Task<Result<bool>> Handle(DeleteSessionCommand request, CancellationToken ct)
         {
-            var result = await _service.DeleteSessionAsync(request.Id);
+            var result = await _service.DeleteSessionByPublicIdAsync(request.Id);
             if (!result.IsSuccess)
             {
                 return Result<bool>.Failure(result.Errors ?? new List<string> { result.Message ?? "Delete failed" }, result.Status);

@@ -5,10 +5,10 @@ namespace DentalHub.Application.Services.CaseTypes
 {
     public interface ICaseTypeService
     {
-        Task<Result<CaseTypeDto>> GetCaseTypeByIdAsync(Guid id);
+        Task<Result<CaseTypeDto>> GetCaseTypeByPublicIdAsync(string publicId);
         Task<Result<PagedResult<CaseTypeDto>>> GetAllCaseTypesAsync(int page = 1, int pageSize = 10, string? search = null);
         Task<Result<CaseTypeDto>> CreateCaseTypeAsync(CreateCaseTypeDto dto);
         Task<Result<CaseTypeDto>> UpdateCaseTypeAsync(UpdateCaseTypeDto dto);
-        Task<Result> DeleteCaseTypeAsync(Guid id);
+        Task<Result> DeleteCaseTypeAsync(string publicId);
     }
 }

@@ -5,7 +5,7 @@ namespace DentalHub.Application.Features.Admins.Commands.DeleteAdmin
     /// Command to delete an admin
     public class DeleteAdminCommand : IRequest<DeleteAdminCommandResponse>
     {
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
     }
 
     /// Response for delete admin command

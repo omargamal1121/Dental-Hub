@@ -34,7 +34,7 @@ namespace DentalHub.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiResponse<CaseTypeDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<CaseTypeDto>>> GetById(Guid id)
+        public async Task<ActionResult<ApiResponse<CaseTypeDto>>> GetById(string id)
         {
             var result = await _mediator.Send(new GetCaseTypeByIdQuery(id));
             return HandleResult(result);
@@ -53,7 +53,7 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<CaseTypeDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<CaseTypeDto>>> Update(Guid id, [FromBody] UpdateCaseTypeCommand command)
+        public async Task<ActionResult<ApiResponse<CaseTypeDto>>> Update(string id, [FromBody] UpdateCaseTypeCommand command)
         {
             if (id != command.Id)
             {
@@ -66,7 +66,7 @@ namespace DentalHub.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<object>>> Delete(Guid id)
+        public async Task<ActionResult<ApiResponse<object>>> Delete(string id)
         {
             var result = await _mediator.Send(new DeleteCaseTypeCommand(id));
             return HandleResult(result);

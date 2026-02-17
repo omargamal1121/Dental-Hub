@@ -5,8 +5,8 @@ namespace DentalHub.Application.DTOs.Admins
     /// DTO for updating admin information
     public class UpdateAdminDto
     {
-        [Required]
-        public Guid UserId { get; set; }
+        [Required(ErrorMessage = "Admin public ID is required")]
+        public string PublicId { get; set; }
 
         [StringLength(100, MinimumLength = 3)]
         public string? FullName { get; set; }

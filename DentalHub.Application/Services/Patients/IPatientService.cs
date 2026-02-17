@@ -1,13 +1,16 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Patients;
+using static DentalHub.Application.Services.PatientService;
 
-namespace DentalHub.Application.Services.Patients
+namespace DentalHub.Application.Services
 {
     public interface IPatientService
     {
-        Task<Result<PatientDto>> GetPatientByIdAsync(Guid userId);
-        Task<Result<PagedResult<PatientDto>>> GetAllPatientsAsync(int page = 1, int pageSize = 10);
-        Task<Result<PatientDto>> UpdatePatientAsync(UpdatePatientDto dto);
-        Task<Result> DeletePatientAsync(Guid userId);
+        Task<Result<PatientDto>> GetPatientByPublicIdAsync(string publicId);
+        Task<Result<PagedResult<PatientDto>>> GetAllPatientsAsync(FilterPatientDto filterPatientDto, int page = 1, int pageSize = 10);
+
+
+		Task<Result<PatientDto>> UpdatePatientAsync(UpdatePatientDto dto);
+        Task<Result> DeletePatientAsync(string publicId);
     }
 }

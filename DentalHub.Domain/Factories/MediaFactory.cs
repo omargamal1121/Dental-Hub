@@ -16,11 +16,9 @@ namespace DentalHub.Domain.Factories
 
             return new Media
             {
-                Id = Guid.NewGuid(),
                 PatientId = patientId,
                 MediaUrl = mediaUrl,
-                SessionId = sessionId,
-                CreateAt = DateTime.UtcNow
+                SessionId = sessionId
             };
         }
     }

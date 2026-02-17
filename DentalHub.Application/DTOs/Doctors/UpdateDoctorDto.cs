@@ -6,7 +6,7 @@ namespace DentalHub.Application.DTOs.Doctors
     public class UpdateDoctorDto
     {
         [Required(ErrorMessage = "User ID is required")]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Full name must be between 3 and 100 characters")]
         [RegularExpression(@"^[a-zA-Z\u0621-\u064A\s]+$", ErrorMessage = "Full name can only contain letters and spaces")]

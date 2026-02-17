@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DentalHub.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7a297864e04f57d59de314790515845bba68997")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ee8498d83e97b7f5ebd6b341db056b9495732d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("DentalHub.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DentalHub.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

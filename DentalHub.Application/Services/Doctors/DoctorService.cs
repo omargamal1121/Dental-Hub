@@ -22,15 +22,15 @@ namespace DentalHub.Application.Services.Doctors
 
         #region Doctor Profile
 
-        public async Task<Result<DoctorDto>> GetDoctorByIdAsync(Guid userId)
+        public async Task<Result<DoctorDto>> GetDoctorByPublicIdAsync(string publicId)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<Doctor, DoctorDto>(
-                    d => d.UserId == userId,
+                    d => d.PublicId == publicId,
                     d => new DoctorDto
                     {
-                        UserId = d.UserId,
+                        PublicId = d.PublicId,
                         FullName = d.User.FullName,
                         Email = d.User.Email!,
                         Name = d.Name,
@@ -38,8 +38,6 @@ namespace DentalHub.Application.Services.Doctors
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
                         TotalStudents = d.CaseRequests
-                            
-                  
                             .Count(cr => cr.Status == RequestStatus.Approved),
                         PendingRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
                         ApprovedRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved)
@@ -59,7 +57,7 @@ namespace DentalHub.Application.Services.Doctors
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting doctor: {UserId}", userId);
+                _logger.LogError(ex, "Error getting doctor by public ID: {PublicId}", publicId);
                 return Result<DoctorDto>.Failure("Error retrieving doctor data");
             }
         }
@@ -74,7 +72,7 @@ namespace DentalHub.Application.Services.Doctors
                          (string.IsNullOrEmpty(spec) || d.Specialty.Contains(spec)),
                     d => new DoctorlistDto
                     {
-                        UserId = d.UserId,
+                        PublicId = d.PublicId,
                         FullName = d.User.FullName,
                         Email = d.User.Email!,
                         Name = d.Name,
@@ -120,7 +118,7 @@ namespace DentalHub.Application.Services.Doctors
                     d => d.UniversityId == universityId,
                     d => new DoctorDto
                     {
-                        UserId = d.UserId,
+                         PublicId = d.PublicId,
                         FullName = d.User.FullName,
                         Email = d.User.Email!,
                         Name = d.Name,
@@ -160,7 +158,7 @@ namespace DentalHub.Application.Services.Doctors
         {
             try
             {
-                var spec = new BaseSpecification<Doctor>(d => d.UserId == dto.UserId);
+                var spec = new BaseSpecification<Doctor>(d => d.PublicId == dto.UserId);
                 spec.AddInclude(d => d.User);
 
                 var doctor = await _unitOfWork.Doctors.GetByIdAsync(spec);
@@ -193,7 +191,7 @@ namespace DentalHub.Application.Services.Doctors
 
                 _logger.LogInformation("Doctor updated successfully: {UserId}", dto.UserId);
 
-                return await GetDoctorByIdAsync(dto.UserId);
+                return await GetDoctorByPublicIdAsync(dto.UserId);
             }
             catch (Exception ex)
             {
@@ -202,12 +200,12 @@ namespace DentalHub.Application.Services.Doctors
             }
         }
 
-        public async Task<Result> DeleteDoctorAsync(Guid userId)
+        public async Task<Result> DeleteDoctorAsync(string publicId)
         {
             try
             {
                 var doctor = await _unitOfWork.Doctors.GetByIdAsync(
-                    new BaseSpecification<Doctor>(d => d.UserId == userId));
+                    new BaseSpecification<Doctor>(d => d.PublicId == publicId));
 
                 if (doctor == null)
                 {
@@ -218,13 +216,13 @@ namespace DentalHub.Application.Services.Doctors
                 _unitOfWork.Doctors.Update(doctor);
                 await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Doctor deleted: {UserId}", userId);
+                _logger.LogInformation("Doctor deleted: {PublicId}", publicId);
 
                 return Result.Success("Doctor deleted successfully");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting doctor: {UserId}", userId);
+                _logger.LogError(ex, "Error deleting doctor: {PublicId}", publicId);
                 return Result.Failure("Error deleting doctor");
             }
         }
@@ -234,11 +232,11 @@ namespace DentalHub.Application.Services.Doctors
         #region Statistics
 
         /// Get doctor statistics
-        public async Task<Result<DoctorStatsDto>> GetDoctorStatisticsAsync(Guid doctorId)
+        public async Task<Result<DoctorStatsDto>> GetDoctorStatisticsAsync(string publicId)
         {
             try
             {
-                var spec = new BaseSpecification<Doctor>(d => d.UserId == doctorId);
+                var spec = new BaseSpecification<Doctor>(d => d.PublicId == publicId);
                 spec.AddInclude(d => d.CaseRequests);
 
                 var doctor = await _unitOfWork.Doctors.GetByIdAsync(spec);
@@ -281,7 +279,7 @@ namespace DentalHub.Application.Services.Doctors
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting doctor statistics: {DoctorId}", doctorId);
+                _logger.LogError(ex, "Error getting doctor statistics by public ID: {PublicId}", publicId);
                 return Result<DoctorStatsDto>.Failure("Error retrieving statistics");
             }
         }

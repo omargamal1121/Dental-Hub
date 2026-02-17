@@ -19,10 +19,10 @@ namespace DentalHub.Application.Handlers.Students
         {
             var dto = new UpdateStudentDto
             {
-                UserId = request.UserId,
+                PublicId = request.PublicId,
                 FullName = request.FullName,
                 University = request.University,
-               
+                Level = request.Level
             };
 
             var result = await _service.UpdateStudentAsync(dto);

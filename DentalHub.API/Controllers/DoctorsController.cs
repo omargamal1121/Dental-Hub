@@ -21,9 +21,9 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<Guid>>> Create([FromBody] CreateDoctorCommand command)
+        public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] CreateDoctorCommand command)
         {
             var result = await _mediator.Send(command);
             return HandleResult(result);
@@ -32,7 +32,7 @@ namespace DentalHub.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Delete(Guid id)
+        public async Task<ActionResult<ApiResponse<bool>>> Delete(string id)
         {
             var result = await _mediator.Send(new DeleteDoctorCommand(id));
             return HandleResult(result);
@@ -41,7 +41,7 @@ namespace DentalHub.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiResponse<DoctorDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<DoctorDto>>> GetById(Guid id)
+        public async Task<ActionResult<ApiResponse<DoctorDto>>> GetById(string id)
         {
             var result = await _mediator.Send(new GetDoctorByIdQuery(id));
             return HandleResult(result);
@@ -63,9 +63,9 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Update(Guid id, [FromBody] UpdateDoctorCommand command)
+        public async Task<ActionResult<ApiResponse<bool>>> Update(string id, [FromBody] UpdateDoctorCommand command)
         {
-            if (id != command.Id)
+            if (id != command.PublicId)
             {
                 return CreateErrorResponse<bool>("Id mismatch", 400);
             }

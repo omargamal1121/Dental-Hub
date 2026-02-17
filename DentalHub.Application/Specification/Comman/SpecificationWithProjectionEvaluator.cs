@@ -39,5 +39,9 @@ namespace DentalHub.Application.Specification.Comman
 
             return projectedQuery;
         }
+        public static IQueryable<TResult> ProjectionOnly(IQueryable<T> query, ISpecificationWithProjection<T, TResult> spec)
+        {
+            return query.Select(spec.Projection);
+        }
     }
 }

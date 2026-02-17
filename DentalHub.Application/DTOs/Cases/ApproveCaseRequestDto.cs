@@ -5,18 +5,11 @@ namespace DentalHub.Application.DTOs.Cases
     /// DTO for approving/rejecting a case request
     public class ApproveCaseRequestDto
     {
-        [Required(ErrorMessage = "Request ID is required")]
-        public Guid RequestId { get; set; }
+        [Required(ErrorMessage = "Request public ID is required")]
+        public string RequestId { get; set; }
 
-        [Required(ErrorMessage = "Doctor ID is required")]
-        public Guid DoctorId { get; set; }
-
-        [Required(ErrorMessage = "Approval status is required")]
-        public bool IsApproved { get; set; }
-
-        [StringLength(500, MinimumLength = 10, ErrorMessage = "Rejection reason must be between 10 and 500 characters")]
-        [RequiredIf(nameof(IsApproved), false, ErrorMessage = "Rejection reason is required when rejecting a request")]
-        public string? RejectionReason { get; set; }
+        [Required(ErrorMessage = "Doctor public ID is required")]
+        public string DoctorId { get; set; }
     }
 
     /// Custom validation attribute for conditional required fields

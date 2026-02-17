@@ -1,3 +1,4 @@
+using DentalHub.Application.Interfaces;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.ContextAndConfig;
 using DentalHub.Infrastructure.Repository;
@@ -17,11 +18,11 @@ namespace DentalHub.Infrastructure.UnitOfWork
         // Repositories
         public IMainRepository<User> Users { get; }
         public IMainRepository<Student> Students { get; }
-        public IMainRepository<Patient> Patients { get; }
+        public IPatientRepository Patients { get; }
         public IMainRepository<Doctor> Doctors { get; }
         public IMainRepository<Admin> Admins { get; }
-        public IMainRepository<PatientCase> PatientCases { get; }
-        public IMainRepository<CaseRequest> CaseRequests { get; }
+        public IPatientCaseRepository PatientCases { get; }
+        public ICaseRequestRepository CaseRequests { get; }
         public IMainRepository<Session> Sessions { get; }
         public IMainRepository<SessionNote> SessionNotes { get; }
         public IMainRepository<Media> Medias { get; }
@@ -31,11 +32,11 @@ namespace DentalHub.Infrastructure.UnitOfWork
         public UnitOfWork(
             IMainRepository<User> users,
             IMainRepository<Student> students,
-            IMainRepository<Patient> patients,
+			IPatientRepository patients,
             IMainRepository<Doctor> doctors,
             IMainRepository<Admin> admins,
-            IMainRepository<PatientCase> patientCases,
-            IMainRepository<CaseRequest> caseRequests,
+            IPatientCaseRepository patientCases,
+            ICaseRequestRepository caseRequests,
             IMainRepository<Session> sessions,
             IMainRepository<SessionNote> sessionNotes,
             IMainRepository<Media> medias,

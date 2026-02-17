@@ -11,5 +11,5 @@ namespace DentalHub.Application.Commands.Patient
         string NationalId,
         DateTime BirthDate,
         Gender Gender
-    ) : IRequest<Result<Guid>>;
+    ) : IRequest<Result<string>>;
 }

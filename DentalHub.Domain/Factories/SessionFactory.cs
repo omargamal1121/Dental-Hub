@@ -19,12 +19,10 @@ namespace DentalHub.Domain.Factories
 
             return new Session
             {
-                Id = Guid.NewGuid(),
                 CaseId = caseId,
                 StudentId = studentId,
                 ScheduledAt = scheduledAt,
-                Status = status,
-                CreateAt = DateTime.UtcNow
+                Status = status
             };
         }
     }

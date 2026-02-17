@@ -10,13 +10,13 @@ namespace DentalHub.Application.Services.Admins
         Task<Result<AdminDto>> RegisterAdminAsync(RegisterAdminDto dto);
 
         // Admin Profile
-        Task<Result<AdminDto>> GetAdminByIdAsync(Guid userId);
+        Task<Result<AdminDto>> GetAdminByPublicIdAsync(string publicId);
         Task<Result<PagedResult<AdminDto>>> GetAllAdminsAsync(int page = 1, int pageSize = 10);
         Task<Result<AdminDto>> UpdateAdminAsync(UpdateAdminDto dto);
-        Task<Result> DeleteAdminAsync(Guid userId);
+        Task<Result> DeleteAdminByPublicIdAsync(string publicId);
 
         // Admin Statistics
-        Task<Result<AdminStatsDto>> GetAdminStatisticsAsync(Guid adminId);
+        Task<Result<AdminStatsDto>> GetAdminStatisticsAsync(string adminPublicId);
 
         // Get admins by role
         Task<Result<PagedResult<AdminDto>>> GetAdminsByRoleAsync(string role, int page = 1, int pageSize = 10);

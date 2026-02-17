@@ -16,10 +16,8 @@ namespace DentalHub.Domain.Factories
 
             return new SessionNote
             {
-                Id = Guid.NewGuid(),
                 SessionId = sessionId,
-                Note = note,
-                CreateAt = DateTime.UtcNow
+                Note = note
             };
         }
     }

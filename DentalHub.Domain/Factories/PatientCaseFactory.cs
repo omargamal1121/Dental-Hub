@@ -17,14 +17,12 @@ namespace DentalHub.Domain.Factories
 
             return new PatientCase
             {
-                Id = Guid.NewGuid(),
                 PatientId = patientId,
                 CaseTypeId = casetypeid,
                 Description = Description,
 
 
-                Status = CaseStatus.Pending,
-                CreateAt = DateTime.UtcNow
+                Status = CaseStatus.Pending
             };
         }
     }

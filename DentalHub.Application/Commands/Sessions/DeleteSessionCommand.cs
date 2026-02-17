@@ -3,5 +3,5 @@ using DentalHub.Application.Common;
 
 namespace DentalHub.Application.Commands.Sessions
 {
-    public record DeleteSessionCommand(Guid Id) : IRequest<Result<bool>>;
+    public record DeleteSessionCommand(string Id) : IRequest<Result<bool>>;
 }

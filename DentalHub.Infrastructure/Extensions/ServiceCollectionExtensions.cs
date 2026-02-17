@@ -1,5 +1,9 @@
+using DentalHub.Application.Interfaces;
 using DentalHub.Infrastructure.ContextAndConfig;
 using DentalHub.Infrastructure.Repository;
+using DentalHub.Infrastructure.Repository.PatientCaseRepo;
+using DentalHub.Infrastructure.Repository.PatientRepo;
+using DentalHub.Infrastructure.Repository.RequestRepo;
 using DentalHub.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +29,9 @@ namespace DentalHub.Infrastructure.Extensions
 
             // Register Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
+            services.AddScoped<ICaseRequestRepository, CaseRequestRepository>();
+            services.AddScoped<IPatientCaseRepository, PatientCaseRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
 
             return services;
         }

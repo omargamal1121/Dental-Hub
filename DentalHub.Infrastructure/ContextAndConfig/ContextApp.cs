@@ -28,6 +28,23 @@ namespace DentalHub.Infrastructure.ContextAndConfig
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ContextApp).Assembly);
+
+            // Configure PublicId for all entities that have it
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                var publicIdProperty = entity.FindProperty("PublicId");
+                if (publicIdProperty != null && publicIdProperty.ClrType == typeof(string))
+                {
+                    modelBuilder.Entity(entity.ClrType)
+                        .Property("PublicId")
+                        .IsRequired()
+                        .HasMaxLength(30); // Base62 for 128-bit is ~22 chars
+
+                    modelBuilder.Entity(entity.ClrType)
+                        .HasIndex("PublicId")
+                        .IsUnique();
+                }
+            }
         }
     }
 }

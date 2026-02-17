@@ -4,9 +4,9 @@ using DentalHub.Application.Common;
 namespace DentalHub.Application.Commands.Students
 {
     public record UpdateStudentCommand(
-        Guid UserId,
+        string PublicId,
         string FullName,
         string University,
-        int Grade
+        int Level
     ) : IRequest<Result<bool>>;
 }

@@ -4,7 +4,6 @@ namespace DentalHub.Domain.Entities
 {
     public class CaseRequest:BaseEntitiy
     {
-        public Guid Id { get; set; }
         public Guid StudentId { get; set; }
         public string Description { get; set; }
         public RequestStatus Status { get; set; }

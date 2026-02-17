@@ -13,10 +13,8 @@ namespace DentalHub.Domain.Factories
 
             return new CaseType
             {
-                Id = Guid.NewGuid(),
                 Name = name,
-                Description = description,
-                CreateAt = DateTime.UtcNow
+                Description = description
             };
         }
     }

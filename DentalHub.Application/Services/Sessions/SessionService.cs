@@ -28,7 +28,7 @@ namespace DentalHub.Application.Services.Sessions
             try
             {
                 // VALIDATION 1: Check if case exists and is InProgress
-                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(dto.CaseId);
+                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.PublicId == dto.CaseId));
                 if (patientCase == null)
                 {
                     return Result<SessionDto>.Failure("Patient case not found");
@@ -41,14 +41,15 @@ namespace DentalHub.Application.Services.Sessions
                 }
 
                 // VALIDATION 2: Verify patient
-                if (patientCase.PatientId != dto.PatientId)
+                var patient = await _unitOfWork.Patients.GetByIdAsync(new BaseSpecification<Patient>(p => p.PublicId == dto.PatientId));
+                if (patient == null || patientCase.PatientId != patient.UserId)
                 {
-                    return Result<SessionDto>.Failure("Patient ID does not match the case");
+                    return Result<SessionDto>.Failure("Patient ID does not match the case or patient not found");
                 }
 
                 // VALIDATION 3: Check if student exists
                 var student = await _unitOfWork.Students.GetByIdAsync(
-                    new BaseSpecification<Student>(s => s.UserId == dto.StudentId));
+                    new BaseSpecification<Student>(s => s.PublicId == dto.StudentId));
                 if (student == null)
                 {
                     return Result<SessionDto>.Failure("Student not found");
@@ -56,8 +57,8 @@ namespace DentalHub.Application.Services.Sessions
 
                 // BUSINESS RULE 1: Verify student has approved request for this case
                 var approvedRequestSpec = new BaseSpecification<CaseRequest>(cr =>
-                    cr.PatientCaseId == dto.CaseId &&
-                    cr.StudentId == dto.StudentId &&
+                    cr.PatientCaseId == patientCase.Id &&
+                    cr.StudentId == student.UserId &&
                     cr.Status == RequestStatus.Approved);
 
                 var approvedRequest = await _unitOfWork.CaseRequests.GetByIdAsync(approvedRequestSpec);
@@ -72,7 +73,7 @@ namespace DentalHub.Application.Services.Sessions
                 var scheduledHour = dto.ScheduledAt.Hour;
 
                 var overlappingSessionSpec = new BaseSpecification<Session>(s =>
-                    s.StudentId == dto.StudentId &&
+                    s.StudentId == student.UserId &&
                     s.ScheduledAt.Date == scheduledDate &&
                     s.ScheduledAt.Hour == scheduledHour &&
                     s.Status != SessionStatus.Cancelled);
@@ -93,23 +94,21 @@ namespace DentalHub.Application.Services.Sessions
                 // Create the session
                 var session = new Session
                 {
-                    Id = Guid.NewGuid(),
-                    CaseId = dto.CaseId,
-                    StudentId = dto.StudentId,
-                    PatientId = dto.PatientId,
+                    CaseId = patientCase.Id,
+                    StudentId = student.UserId,
+                    PatientId = patient.UserId,
                     ScheduledAt = dto.ScheduledAt,
-                    Status = SessionStatus.Scheduled,
-                    CreateAt = DateTime.UtcNow
+                    Status = SessionStatus.Scheduled
                 };
 
                 await _unitOfWork.Sessions.AddAsync(session);
                 await _unitOfWork.SaveChangesAsync();
 
                 _logger.LogInformation(
-                    "Session created: {SessionId} - Student: {StudentId}, Case: {CaseId}, Scheduled: {ScheduledAt}",
-                    session.Id, dto.StudentId, dto.CaseId, dto.ScheduledAt);
+                    "Session created: {PublicId} - Student: {StudentPublicId}, Case: {CasePublicId}, Scheduled: {ScheduledAt}",
+                    session.PublicId, dto.StudentId, dto.CaseId, dto.ScheduledAt);
 
-                return await GetSessionByIdAsync(session.Id);
+                return await GetSessionByPublicIdAsync(session.PublicId);
             }
             catch (Exception ex)
             {
@@ -118,21 +117,21 @@ namespace DentalHub.Application.Services.Sessions
             }
         }
 
-        /// Get session by ID
-        public async Task<Result<SessionDto>> GetSessionByIdAsync(Guid sessionId)
+        /// Get session by public ID
+        public async Task<Result<SessionDto>> GetSessionByPublicIdAsync(string publicId)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<Session, SessionDto>(
-                    s => s.Id == sessionId,
+                    s => s.PublicId == publicId,
                     s => new SessionDto
                     {
-                        Id = s.Id,
-                        CaseId = s.CaseId,
+                        Id = s.PublicId,
+                        CaseId = s.PatientCase.PublicId,
                       
-                        PatientId = s.PatientId,
+                        PatientId = s.Patient.PublicId,
                         PatientName = s.Patient.User.FullName,
-                        StudentId = s.StudentId,
+                        StudentId = s.Student.PublicId,
                         StudentName = s.Student.User.FullName,
                         ScheduledAt = s.ScheduledAt,
                         Status = s.Status.ToString(),
@@ -159,7 +158,7 @@ namespace DentalHub.Application.Services.Sessions
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting session: {SessionId}", sessionId);
+                _logger.LogError(ex, "Error getting session by public ID: {PublicId}", publicId);
                 return Result<SessionDto>.Failure("Error retrieving session");
             }
         }
@@ -172,12 +171,12 @@ namespace DentalHub.Application.Services.Sessions
                 var spec = new BaseSpecificationWithProjection<Session, SessionDto>(
                     s => new SessionDto
                     {
-                        Id = s.Id,
-                        CaseId = s.CaseId,
+                        Id = s.PublicId,
+                        CaseId = s.PatientCase.PublicId,
                        
-                        PatientId = s.PatientId,
+                        PatientId = s.Patient.PublicId,
                         PatientName = s.Patient.User.FullName,
-                        StudentId = s.StudentId,
+                        StudentId = s.Student.PublicId,
                         StudentName = s.Student.User.FullName,
                         ScheduledAt = s.ScheduledAt,
                         Status = s.Status.ToString(),
@@ -215,11 +214,11 @@ namespace DentalHub.Application.Services.Sessions
         }
 
         /// Soft delete session
-        public async Task<Result> DeleteSessionAsync(Guid sessionId)
+        public async Task<Result> DeleteSessionByPublicIdAsync(string publicId)
         {
             try
             {
-                var session = await _unitOfWork.Sessions.GetByIdAsync(sessionId);
+                var session = await _unitOfWork.Sessions.GetByIdAsync(new BaseSpecification<Session>(s => s.PublicId == publicId));
 
                 if (session == null)
                 {
@@ -236,13 +235,13 @@ namespace DentalHub.Application.Services.Sessions
                 _unitOfWork.Sessions.Update(session);
                 await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Session deleted: {SessionId}", sessionId);
+                _logger.LogInformation("Session deleted: {PublicId}", publicId);
 
                 return Result.Success("Session deleted successfully");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting session: {SessionId}", sessionId);
+                _logger.LogError(ex, "Error deleting session by public ID: {PublicId}", publicId);
                 return Result.Failure("Error deleting session");
             }
         }
@@ -252,21 +251,21 @@ namespace DentalHub.Application.Services.Sessions
         #region Filter Queries
 
         /// Get sessions by student ID
-        public async Task<Result<PagedResult<SessionDto>>> GetSessionsByStudentIdAsync(
-            Guid studentId, int page = 1, int pageSize = 10)
+        public async Task<Result<PagedResult<SessionDto>>> GetSessionsByStudentPublicIdAsync(
+            string studentPublicId, int page = 1, int pageSize = 10)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<Session, SessionDto>(
-                    s => s.StudentId == studentId,
+                    s => s.Student.PublicId == studentPublicId,
                     s => new SessionDto
                     {
-                        Id = s.Id,
-                        CaseId = s.CaseId,
+                        Id = s.PublicId,
+                        CaseId = s.PatientCase.PublicId,
                      
-                        PatientId = s.PatientId,
+                        PatientId = s.Patient.PublicId,
                         PatientName = s.Patient.User.FullName,
-                        StudentId = s.StudentId,
+                        StudentId = s.Student.PublicId,
                         StudentName = s.Student.User.FullName,
                         ScheduledAt = s.ScheduledAt,
                         Status = s.Status.ToString(),
@@ -298,27 +297,27 @@ namespace DentalHub.Application.Services.Sessions
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting sessions for student: {StudentId}", studentId);
+                _logger.LogError(ex, "Error getting sessions for student by public ID: {StudentPublicId}", studentPublicId);
                 return Result<PagedResult<SessionDto>>.Failure("Error retrieving sessions");
             }
         }
 
         /// Get sessions by patient ID
-        public async Task<Result<PagedResult<SessionDto>>> GetSessionsByPatientIdAsync(
-            Guid patientId, int page = 1, int pageSize = 10)
+        public async Task<Result<PagedResult<SessionDto>>> GetSessionsByPatientPublicIdAsync(
+            string patientPublicId, int page = 1, int pageSize = 10)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<Session, SessionDto>(
-                    s => s.PatientId == patientId,
+                    s => s.Patient.PublicId == patientPublicId,
                     s => new SessionDto
                     {
-                        Id = s.Id,
-                        CaseId = s.CaseId,
+                        Id = s.PublicId,
+                        CaseId = s.PatientCase.PublicId,
                        
-                        PatientId = s.PatientId,
+                        PatientId = s.Patient.PublicId,
                         PatientName = s.Patient.User.FullName,
-                        StudentId = s.StudentId,
+                        StudentId = s.Student.PublicId,
                         StudentName = s.Student.User.FullName,
                         ScheduledAt = s.ScheduledAt,
                         Status = s.Status.ToString(),
@@ -346,27 +345,27 @@ namespace DentalHub.Application.Services.Sessions
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting sessions for patient: {PatientId}", patientId);
+                _logger.LogError(ex, "Error getting sessions for patient by public ID: {PatientPublicId}", patientPublicId);
                 return Result<PagedResult<SessionDto>>.Failure("Error retrieving sessions");
             }
         }
 
         /// Get sessions by case ID
-        public async Task<Result<PagedResult<SessionDto>>> GetSessionsByCaseIdAsync(
-            Guid caseId, int page = 1, int pageSize = 10)
+        public async Task<Result<PagedResult<SessionDto>>> GetSessionsByCasePublicIdAsync(
+            string casePublicId, int page = 1, int pageSize = 10)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<Session, SessionDto>(
-                    s => s.CaseId == caseId,
+                    s => s.PatientCase.PublicId == casePublicId,
                     s => new SessionDto
                     {
-                        Id = s.Id,
-                        CaseId = s.CaseId,
+                        Id = s.PublicId,
+                        CaseId = s.PatientCase.PublicId,
                        
-                        PatientId = s.PatientId,
+                        PatientId = s.Patient.PublicId,
                         PatientName = s.Patient.User.FullName,
-                        StudentId = s.StudentId,
+                        StudentId = s.Student.PublicId,
                         StudentName = s.Student.User.FullName,
                         ScheduledAt = s.ScheduledAt,
                         Status = s.Status.ToString(),
@@ -398,7 +397,7 @@ namespace DentalHub.Application.Services.Sessions
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting sessions for case: {CaseId}", caseId);
+                _logger.LogError(ex, "Error getting sessions for case by public ID: {CasePublicId}", casePublicId);
                 return Result<PagedResult<SessionDto>>.Failure("Error retrieving sessions");
             }
         }
@@ -408,7 +407,7 @@ namespace DentalHub.Application.Services.Sessions
         #region Status Management
 
         /// Update session status (Scheduled → Done / Cancelled)
-        public async Task<Result<SessionDto>> UpdateSessionStatusAsync(Guid sessionId, string newStatus)
+        public async Task<Result<SessionDto>> UpdateSessionStatusAsync(string publicId, string newStatus)
         {
             try
             {
@@ -418,7 +417,7 @@ namespace DentalHub.Application.Services.Sessions
                     return Result<SessionDto>.Failure("Invalid status");
                 }
 
-                var session = await _unitOfWork.Sessions.GetByIdAsync(sessionId);
+                var session = await _unitOfWork.Sessions.GetByIdAsync(new BaseSpecification<Session>(s => s.PublicId == publicId));
 
                 if (session == null)
                 {
@@ -438,13 +437,13 @@ namespace DentalHub.Application.Services.Sessions
                 _unitOfWork.Sessions.Update(session);
                 await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Session status updated: {SessionId} to {Status}", sessionId, newStatus);
+                _logger.LogInformation("Session status updated: {PublicId} to {Status}", publicId, newStatus);
 
-                return await GetSessionByIdAsync(sessionId);
+                return await GetSessionByPublicIdAsync(publicId);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating session status: {SessionId}", sessionId);
+                _logger.LogError(ex, "Error updating session status by public ID: {PublicId}", publicId);
                 return Result<SessionDto>.Failure("Error updating session status");
             }
         }
@@ -479,7 +478,7 @@ namespace DentalHub.Application.Services.Sessions
             try
             {
                 // Verify session exists
-                var session = await _unitOfWork.Sessions.GetByIdAsync(dto.SessionId);
+                var session = await _unitOfWork.Sessions.GetByIdAsync(new BaseSpecification<Session>(s => s.PublicId == dto.SessionId));
                 if (session == null)
                 {
                     return Result<SessionNoteDto>.Failure("Session not found");
@@ -488,8 +487,7 @@ namespace DentalHub.Application.Services.Sessions
                 // Create note
                 var note = new SessionNote
                 {
-                    Id = Guid.NewGuid(),
-                    SessionId = dto.SessionId,
+                    SessionId = session.Id,
                     Note = dto.Note,
                     CreateAt = DateTime.UtcNow
                 };
@@ -497,12 +495,12 @@ namespace DentalHub.Application.Services.Sessions
                 await _unitOfWork.SessionNotes.AddAsync(note);
                 await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Session note added: {NoteId} for session {SessionId}", note.Id, dto.SessionId);
+                _logger.LogInformation("Session note added: {PublicId} for session {SessionPublicId}", note.PublicId, dto.SessionId);
 
                 return Result<SessionNoteDto>.Success(new SessionNoteDto
                 {
-                    Id = note.Id,
-                    SessionId = note.SessionId,
+                    Id = note.PublicId,
+                    SessionId = dto.SessionId,
                     Note = note.Note,
                     CreateAt = note.CreateAt
                 });
@@ -515,16 +513,16 @@ namespace DentalHub.Application.Services.Sessions
         }
 
         /// Get all notes for a session
-        public async Task<Result<List<SessionNoteDto>>> GetSessionNotesAsync(Guid sessionId)
+        public async Task<Result<List<SessionNoteDto>>> GetSessionNotesAsync(string sessionPublicId)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<SessionNote, SessionNoteDto>(
-                    sn => sn.SessionId == sessionId,
+                    sn => sn.Session.PublicId == sessionPublicId,
                     sn => new SessionNoteDto
                     {
-                        Id = sn.Id,
-                        SessionId = sn.SessionId,
+                        Id = sn.PublicId,
+                        SessionId = sn.Session.PublicId,
                         Note = sn.Note,
                         CreateAt = sn.CreateAt
                     }
@@ -538,7 +536,7 @@ namespace DentalHub.Application.Services.Sessions
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting session notes: {SessionId}", sessionId);
+                _logger.LogError(ex, "Error getting session notes for session by public ID: {SessionPublicId}", sessionPublicId);
                 return Result<List<SessionNoteDto>>.Failure("Error retrieving notes");
             }
         }

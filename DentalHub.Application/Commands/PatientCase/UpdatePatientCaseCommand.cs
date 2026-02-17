@@ -4,7 +4,7 @@ using DentalHub.Application.Common;
 namespace DentalHub.Application.Commands.PatientCase
 {
     public record UpdatePatientCaseCommand(
-        Guid Id,
+        string Id,
         string Title,
         string Description,
         int CaseTypeId,

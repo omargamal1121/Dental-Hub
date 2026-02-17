@@ -28,7 +28,7 @@ namespace DentalHub.Application.Features.Admins.Commands.UpdateAdmin
                 // Convert Command to DTO
                 var updateDto = new UpdateAdminDto
                 {
-                    UserId = request.UserId,
+                    PublicId = request.UserId,
                     FullName = request.FullName,
                     Role = request.Role,
                     Phone = request.Phone,

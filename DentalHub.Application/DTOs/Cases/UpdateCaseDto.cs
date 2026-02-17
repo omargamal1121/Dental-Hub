@@ -6,7 +6,7 @@ namespace DentalHub.Application.DTOs.Cases
     public class UpdateCaseDto
     {
         [Required]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
       
 
