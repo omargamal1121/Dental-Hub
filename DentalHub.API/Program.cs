@@ -9,8 +9,10 @@ using DentalHub.Infrastructure.Extensions;
 using DentalHub.Infrastructure.Services;
 using Hangfire;
 using Hangfire.MySql;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.OpenApi.Models;
 using Serilog;
 
 
@@ -62,20 +64,51 @@ namespace DentalHub.API
             builder.Services.AddScoped<IMediaService, MediaService>();
 
             builder.Services.AddHangfireServer();
+           
+		   builder.Services.AddSwaggerGen(options =>
+		   {
+			   options.SwaggerDoc("v1", new OpenApiInfo
+			   {
+				   Title = "E-Commerce API",
+				   Version = "v1",
+				   Description = "API Documentation for E-Commerce Project"
+			   });
+
+			   // 🔐 JWT Authentication Support
+			   options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+			   {
+				   Name = "Authorization",
+				   Type = SecuritySchemeType.Http,
+				   Scheme = "bearer",
+				   BearerFormat = "JWT",
+				   In = ParameterLocation.Header,
+				   Description = "Enter JWT token like this: Bearer {your token}"
+			   });
+
+			   // Add security requirement correctly
+			   options.AddSecurityRequirement(new OpenApiSecurityRequirement
+	{
+		{
+        
+            new OpenApiSecurityScheme
+			{
+				Reference = new OpenApiReference
+				{
+					Type = ReferenceType.SecurityScheme,
+					Id = "Bearer"
+				}
+			},
+			Array.Empty<string>()
+        }
+	});
+		   });
 
 
-			// ========== Configure Swagger ==========
-			builder.Services.AddSwaggerGen();
+			builder.Services.AddInfrastructureServices(builder.Configuration);
 
-            // ========== Add Infrastructure Services ==========
-            // This registers: DbContext, Repositories, UnitOfWork
-            builder.Services.AddInfrastructureServices(builder.Configuration);
-
-            // ========== Add Application Services ==========
-            // This registers: All your services (Auth, Patient, Student, etc.)
             builder.Services.AddApplicationServices();
 
-            // ========== Add MediatR ==========
+  
             builder.Services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
@@ -104,16 +137,33 @@ namespace DentalHub.API
             .AddEntityFrameworkStores<ContextApp>()
             .AddDefaultTokenProviders();
 
-            builder.Services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromHours(24);
-                options.LoginPath = "/api/auth/login";
-                options.AccessDeniedPath = "/api/auth/access-denied";
-                options.SlidingExpiration = true;
-            });
+            builder.Services.AddAuthentication(options =>
+              {
+                  options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                  options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                  options.DefaultScheme= JwtBearerDefaults.AuthenticationScheme;
 
-            builder.Services.AddCors(options =>
+			  }
+              ).AddJwtBearer(option=>
+              
+              {
+                  option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                  {
+                      ValidateIssuer = true,
+                      ValidateAudience = true,
+                      ValidateLifetime = true,
+                      ValidateIssuerSigningKey = true,
+                      ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                      ValidAudience = builder.Configuration["Jwt:Audience"],
+                      IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
+                          System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]??throw new InvalidOperationException("JWT Key is not configured"))
+                      ),
+                      ClockSkew = TimeSpan.Zero
+                  };
+
+			  });
+
+			builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
                 {

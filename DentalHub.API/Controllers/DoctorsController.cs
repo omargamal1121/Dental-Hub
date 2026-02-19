@@ -6,6 +6,7 @@ using DentalHub.Application.Queries.Doctor;
 using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.DTOs.Doctors;
 using DentalHub.Application.Common;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DentalHub.API.Controllers
 {

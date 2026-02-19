@@ -21,6 +21,7 @@ D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\LinqKit.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\LinqKit.Core.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\MediatR.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\MediatR.Contracts.dll
+D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -50,6 +51,8 @@ D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.Exte
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.IdentityModel.Abstractions.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.IdentityModel.Logging.dll
+D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.dll
+D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.Net.Http.Headers.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Microsoft.OpenApi.dll
