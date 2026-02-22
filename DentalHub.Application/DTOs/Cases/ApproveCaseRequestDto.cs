@@ -10,6 +10,9 @@ namespace DentalHub.Application.DTOs.Cases
 
         [Required(ErrorMessage = "Doctor public ID is required")]
         public string DoctorId { get; set; }
+        public bool IsApproved { get; set; }
+        public string? RejectionReason { get; set; }
+
     }
 
     /// Custom validation attribute for conditional required fields

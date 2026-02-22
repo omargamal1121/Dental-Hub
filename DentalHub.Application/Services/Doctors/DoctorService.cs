@@ -22,6 +22,7 @@ namespace DentalHub.Application.Services.Doctors
 
         #region Doctor Profile
 
+        // for Admin - search by PublicId
         public async Task<Result<DoctorDto>> GetDoctorByPublicIdAsync(string publicId)
         {
             try
@@ -37,21 +38,16 @@ namespace DentalHub.Application.Services.Doctors
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
-                        TotalStudents = d.CaseRequests
-                            .Count(cr => cr.Status == RequestStatus.Approved),
+                        TotalStudents = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved),
                         PendingRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
                         ApprovedRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved)
                     }
                 );
 
-           
-
                 var doctor = await _unitOfWork.Doctors.GetByIdAsync(spec);
 
                 if (doctor == null)
-                {
                     return Result<DoctorDto>.Failure("Doctor not found");
-                }
 
                 return Result<DoctorDto>.Success(doctor);
             }
@@ -62,6 +58,44 @@ namespace DentalHub.Application.Services.Doctors
             }
         }
 
+        // For the doctor himself - searches by UserId (coming from the JWT token)
+        public async Task<Result<DoctorDto>> GetDoctorByIdAsync(string userId)
+        {
+            try
+            {
+                if (!Guid.TryParse(userId, out var userGuid))
+                    return Result<DoctorDto>.Failure("Invalid user ID");
+
+                var spec = new BaseSpecificationWithProjection<Doctor, DoctorDto>(
+                    d => d.UserId == userGuid,
+                    d => new DoctorDto
+                    {
+                        PublicId = d.PublicId,
+                        FullName = d.User.FullName,
+                        Email = d.User.Email!,
+                        Name = d.Name,
+                        Specialty = d.Specialty,
+                        UniversityId = d.UniversityId,
+                        CreateAt = d.CreateAt,
+                        TotalStudents = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved),
+                        PendingRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
+                        ApprovedRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved)
+                    }
+                );
+
+                var doctor = await _unitOfWork.Doctors.GetByIdAsync(spec);
+
+                if (doctor == null)
+                    return Result<DoctorDto>.Failure("Doctor not found");
+
+                return Result<DoctorDto>.Success(doctor);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting doctor by user ID: {UserId}", userId);
+                return Result<DoctorDto>.Failure("Error retrieving doctor data");
+            }
+        }
 
         public async Task<Result<PagedResult<DoctorlistDto>>> GetAllDoctorsAsync(int page = 1, int pageSize = 10, string? name = null, string? spec = null)
         {
@@ -79,27 +113,23 @@ namespace DentalHub.Application.Services.Doctors
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
-                  
                     }
                 );
 
-             
                 filterSpec.ApplyPaging(page, pageSize);
                 filterSpec.ApplyOrderByDescending(d => d.CreateAt);
-				var doctorsList = await _unitOfWork.Doctors.GetAllAsync(filterSpec);
-				var totalCount = await _unitOfWork.Doctors.CountAsync(filterSpec);
 
+                var doctorsList = await _unitOfWork.Doctors.GetAllAsync(filterSpec);
+                var totalCount = await _unitOfWork.Doctors.CountAsync(filterSpec);
 
+                var pagedResult = PaginationFactory<DoctorlistDto>.Create(
+                    count: totalCount,
+                    page: page,
+                    pageSize: pageSize,
+                    data: doctorsList
+                );
 
-				var pagedResult = PaginationFactory<DoctorlistDto>.Create(
-	   count: totalCount,
-	   page: page,
-	   pageSize: pageSize,
-	   data: doctorsList
-   );
-
-
-				return Result<PagedResult<DoctorlistDto>>.Success(pagedResult);
+                return Result<PagedResult<DoctorlistDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
@@ -108,7 +138,6 @@ namespace DentalHub.Application.Services.Doctors
             }
         }
 
-   
         public async Task<Result<PagedResult<DoctorDto>>> GetDoctorsByUniversityAsync(
             string universityId, int page = 1, int pageSize = 10)
         {
@@ -118,14 +147,13 @@ namespace DentalHub.Application.Services.Doctors
                     d => d.UniversityId == universityId,
                     d => new DoctorDto
                     {
-                         PublicId = d.PublicId,
+                        PublicId = d.PublicId,
                         FullName = d.User.FullName,
                         Email = d.User.Email!,
                         Name = d.Name,
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
-              
                     }
                 );
 
@@ -134,17 +162,17 @@ namespace DentalHub.Application.Services.Doctors
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(d => d.CreateAt);
 
-				var doctorsList = await _unitOfWork.Doctors.GetAllAsync(spec);
-				var totalCount = await _unitOfWork.Doctors.CountAsync(spec);
+                var doctorsList = await _unitOfWork.Doctors.GetAllAsync(spec);
+                var totalCount = await _unitOfWork.Doctors.CountAsync(spec);
 
-				var pagedResult = PaginationFactory<DoctorDto>.Create(
-					count: totalCount,
-					page: page,
-					pageSize: pageSize,
-					data: doctorsList
-				);
+                var pagedResult = PaginationFactory<DoctorDto>.Create(
+                    count: totalCount,
+                    page: page,
+                    pageSize: pageSize,
+                    data: doctorsList
+                );
 
-				return Result<PagedResult<DoctorDto>>.Success(pagedResult);
+                return Result<PagedResult<DoctorDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
@@ -152,7 +180,6 @@ namespace DentalHub.Application.Services.Doctors
                 return Result<PagedResult<DoctorDto>>.Failure("Error retrieving doctors");
             }
         }
-
 
         public async Task<Result<DoctorDto>> UpdateDoctorAsync(UpdateDoctorDto dto)
         {
@@ -164,25 +191,16 @@ namespace DentalHub.Application.Services.Doctors
                 var doctor = await _unitOfWork.Doctors.GetByIdAsync(spec);
 
                 if (doctor == null)
-                {
                     return Result<DoctorDto>.Failure("Doctor not found");
-                }
 
-     
                 if (!string.IsNullOrWhiteSpace(dto.FullName))
-                {
                     doctor.User.FullName = dto.FullName;
-                }
 
                 if (!string.IsNullOrWhiteSpace(dto.Name))
-                {
                     doctor.Name = dto.Name;
-                }
 
                 if (!string.IsNullOrWhiteSpace(dto.Specialty))
-                {
                     doctor.Specialty = dto.Specialty;
-                }
 
                 doctor.UpdateAt = DateTime.UtcNow;
 
@@ -208,9 +226,7 @@ namespace DentalHub.Application.Services.Doctors
                     new BaseSpecification<Doctor>(d => d.PublicId == publicId));
 
                 if (doctor == null)
-                {
                     return Result.Failure("Doctor not found");
-                }
 
                 doctor.DeleteAt = DateTime.UtcNow;
                 _unitOfWork.Doctors.Update(doctor);
@@ -231,37 +247,34 @@ namespace DentalHub.Application.Services.Doctors
 
         #region Statistics
 
-        /// Get doctor statistics
-        public async Task<Result<DoctorStatsDto>> GetDoctorStatisticsAsync(string publicId)
+        // For the doctor himself - searches by UserId (coming from the JWT token)
+        public async Task<Result<DoctorStatsDto>> GetDoctorStatisticsAsync(string userId)
         {
             try
             {
-                var spec = new BaseSpecification<Doctor>(d => d.PublicId == publicId);
+                if (!Guid.TryParse(userId, out var userGuid))
+                    return Result<DoctorStatsDto>.Failure("Invalid user ID");
+
+                var spec = new BaseSpecification<Doctor>(d => d.UserId == userGuid);
                 spec.AddInclude(d => d.CaseRequests);
 
                 var doctor = await _unitOfWork.Doctors.GetByIdAsync(spec);
 
                 if (doctor == null)
-                {
                     return Result<DoctorStatsDto>.Failure("Doctor not found");
-                }
 
-                // Get approved requests
                 var approvedRequests = doctor.CaseRequests
                     .Where(cr => cr.Status == RequestStatus.Approved)
                     .ToList();
 
-                // Get unique students
                 var uniqueStudents = approvedRequests
                     .Select(cr => cr.StudentId)
                     .Distinct()
                     .Count();
 
-                // Get cases from approved requests
                 var caseIds = approvedRequests.Select(cr => cr.PatientCaseId).Distinct().ToList();
-                
-                var casesSpec = new BaseSpecification<PatientCase>(
-                    pc => caseIds.Contains(pc.Id));
+
+                var casesSpec = new BaseSpecification<PatientCase>(pc => caseIds.Contains(pc.Id));
                 var cases = await _unitOfWork.PatientCases.GetAllAsync(casesSpec);
 
                 var stats = new DoctorStatsDto
@@ -279,12 +292,11 @@ namespace DentalHub.Application.Services.Doctors
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting doctor statistics by public ID: {PublicId}", publicId);
+                _logger.LogError(ex, "Error getting doctor statistics by user ID: {UserId}", userId);
                 return Result<DoctorStatsDto>.Failure("Error retrieving statistics");
             }
         }
 
         #endregion
     }
-
 }

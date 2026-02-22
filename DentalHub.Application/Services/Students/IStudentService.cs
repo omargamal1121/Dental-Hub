@@ -8,6 +8,10 @@ namespace DentalHub.Application.Services.Students
     {
         // Student Profile
         Task<Result<StudentDto>> GetStudentByPublicIdAsync(string publicId);
+
+        // For the student himself - searches by UserId (coming from the JWT token)
+        Task<Result<StudentDto>> GetStudentByUserIdAsync(string userId);
+
         Task<Result<PagedResult<StudentDto>>> GetAllStudentsAsync(int page = 1, int pageSize = 10);
         Task<Result<StudentDto>> UpdateStudentAsync(UpdateStudentDto dto);
         Task<Result> DeleteStudentByPublicIdAsync(string publicId);

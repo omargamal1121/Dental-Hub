@@ -1,15 +1,17 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using MediatR;
 using DentalHub.Application.Commands.Patient;
-using DentalHub.Application.Queries.Patient;
-using DentalHub.Application.DTOs.Shared;
-using DentalHub.Application.DTOs.Patients;
 using DentalHub.Application.Common;
+using DentalHub.Application.DTOs.Patients;
+using DentalHub.Application.DTOs.Shared;
+using DentalHub.Application.Queries.Patient;
 using DentalHub.Application.Services;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DentalHub.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PatientsController : BaseController

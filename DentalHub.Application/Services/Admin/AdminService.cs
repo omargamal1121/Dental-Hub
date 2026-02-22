@@ -13,7 +13,7 @@ namespace DentalHub.Application.Services.Admins
     public class AdminService : IAdminService
     {
         private readonly IUnitOfWork _unitOfWork;
-      
+
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly ILogger<AdminService> _logger;
@@ -70,7 +70,7 @@ namespace DentalHub.Application.Services.Admins
                 var admin = new Admin
                 {
                     UserId = user.Id,
-                    
+
                     Phone = dto.Phone,
                     IsSuperAdmin = dto.IsSuperAdmin,
                     CreateAt = DateTime.UtcNow
@@ -107,7 +107,7 @@ namespace DentalHub.Application.Services.Admins
                         PublicId = a.PublicId,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
-                    
+
                         Phone = a.Phone,
                         IsSuperAdmin = a.IsSuperAdmin,
                         CreateAt = a.CreateAt
@@ -132,6 +132,43 @@ namespace DentalHub.Application.Services.Admins
             }
         }
 
+        /// For the admin himself - searches by UserId (coming from the JWT token)
+        public async Task<Result<AdminDto>> GetAdminByUserIdAsync(string userId)
+        {
+            try
+            {
+                if (!Guid.TryParse(userId, out var userGuid))
+                    return Result<AdminDto>.Failure("Invalid user ID");
+
+                var spec = new BaseSpecificationWithProjection<Admin, AdminDto>(
+                    a => a.UserId == userGuid,
+                    a => new AdminDto
+                    {
+                        PublicId = a.PublicId,
+                        FullName = a.User.FullName,
+                        Email = a.User.Email!,
+                        Phone = a.Phone,
+                        IsSuperAdmin = a.IsSuperAdmin,
+                        CreateAt = a.CreateAt
+                    }
+                );
+
+                spec.AddInclude(a => a.User);
+
+                var admin = await _unitOfWork.Admins.GetByIdAsync(spec);
+
+                if (admin == null)
+                    return Result<AdminDto>.Failure("Admin not found");
+
+                return Result<AdminDto>.Success(admin);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting admin by user ID: {UserId}", userId);
+                return Result<AdminDto>.Failure("Error retrieving admin data");
+            }
+        }
+
         /// Get all admins with pagination
         public async Task<Result<PagedResult<AdminDto>>> GetAllAdminsAsync(int page = 1, int pageSize = 10)
         {
@@ -143,7 +180,7 @@ namespace DentalHub.Application.Services.Admins
                         PublicId = a.PublicId,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
-                       
+
                         Phone = a.Phone,
                         IsSuperAdmin = a.IsSuperAdmin,
                         CreateAt = a.CreateAt
@@ -154,17 +191,17 @@ namespace DentalHub.Application.Services.Admins
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(a => a.CreateAt);
 
-				var adminsList = await _unitOfWork.Admins.GetAllAsync(spec);
-				var totalCount = await _unitOfWork.Admins.CountAsync(spec);
+                var adminsList = await _unitOfWork.Admins.GetAllAsync(spec);
+                var totalCount = await _unitOfWork.Admins.CountAsync(spec);
 
-				var pagedResult = PaginationFactory<AdminDto>.Create(
-					count: totalCount,
-					page: page,
-					pageSize: pageSize,
-					data: adminsList
-				);
+                var pagedResult = PaginationFactory<AdminDto>.Create(
+                    count: totalCount,
+                    page: page,
+                    pageSize: pageSize,
+                    data: adminsList
+                );
 
-				return Result<PagedResult<AdminDto>>.Success(pagedResult);
+                return Result<PagedResult<AdminDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
@@ -179,13 +216,13 @@ namespace DentalHub.Application.Services.Admins
         {
             try
             {
-				var adminRole = await _roleManager.FindByNameAsync("Admin");
+                var adminRole = await _roleManager.FindByNameAsync("Admin");
                 if (adminRole == null)
                     return Result<PagedResult<AdminDto>>.Failure("No Admin Role", 500);
-				var adminRoleId = adminRole.Id;
-				var spec = new BaseSpecificationWithProjection<Admin, AdminDto>(
-					 a => a.User.UserRoles.Any(ur => ur.RoleId == adminRoleId),
-					a => new AdminDto
+                var adminRoleId = adminRole.Id;
+                var spec = new BaseSpecificationWithProjection<Admin, AdminDto>(
+                     a => a.User.UserRoles.Any(ur => ur.RoleId == adminRoleId),
+                    a => new AdminDto
                     {
                         PublicId = a.PublicId,
                         FullName = a.User.FullName,
@@ -200,17 +237,17 @@ namespace DentalHub.Application.Services.Admins
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(a => a.CreateAt);
 
-				var adminsList = await _unitOfWork.Admins.GetAllAsync(spec);
-				var totalCount = await _unitOfWork.Admins.CountAsync(spec);
+                var adminsList = await _unitOfWork.Admins.GetAllAsync(spec);
+                var totalCount = await _unitOfWork.Admins.CountAsync(spec);
 
-				var pagedResult = PaginationFactory<AdminDto>.Create(
-					count: totalCount,
-					page: page,
-					pageSize: pageSize,
-					data: adminsList
-				);
+                var pagedResult = PaginationFactory<AdminDto>.Create(
+                    count: totalCount,
+                    page: page,
+                    pageSize: pageSize,
+                    data: adminsList
+                );
 
-				return Result<PagedResult<AdminDto>>.Success(pagedResult);
+                return Result<PagedResult<AdminDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
@@ -231,7 +268,7 @@ namespace DentalHub.Application.Services.Admins
                         PublicId = a.PublicId,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
-                   
+
                         Phone = a.Phone,
                         IsSuperAdmin = a.IsSuperAdmin,
                         CreateAt = a.CreateAt
@@ -242,17 +279,17 @@ namespace DentalHub.Application.Services.Admins
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(a => a.CreateAt);
 
-				var adminsList = await _unitOfWork.Admins.GetAllAsync(spec);
-				var totalCount = await _unitOfWork.Admins.CountAsync(spec);
+                var adminsList = await _unitOfWork.Admins.GetAllAsync(spec);
+                var totalCount = await _unitOfWork.Admins.CountAsync(spec);
 
-				var pagedResult = PaginationFactory<AdminDto>.Create(
-					count: totalCount,
-					page: page,
-					pageSize: pageSize,
-					data: adminsList
-				);
+                var pagedResult = PaginationFactory<AdminDto>.Create(
+                    count: totalCount,
+                    page: page,
+                    pageSize: pageSize,
+                    data: adminsList
+                );
 
-				return Result<PagedResult<AdminDto>>.Success(pagedResult);
+                return Result<PagedResult<AdminDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
@@ -282,7 +319,7 @@ namespace DentalHub.Application.Services.Admins
                     admin.User.FullName = dto.FullName;
                 }
 
-              
+
 
                 if (!string.IsNullOrWhiteSpace(dto.Phone))
                 {

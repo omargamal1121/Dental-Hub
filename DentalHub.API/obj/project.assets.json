@@ -1977,6 +1977,22 @@
           "buildMultiTargeting/Swashbuckle.AspNetCore.props": {}
         }
       },
+      "Swashbuckle.AspNetCore.Annotations/7.3.2": {
+        "type": "package",
+        "dependencies": {
+          "Swashbuckle.AspNetCore.SwaggerGen": "7.3.2"
+        },
+        "compile": {
+          "lib/net9.0/Swashbuckle.AspNetCore.Annotations.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Swashbuckle.AspNetCore.Annotations.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore.Swagger/7.3.2": {
         "type": "package",
         "dependencies": {
@@ -3210,6 +3226,8 @@
           "Microsoft.Extensions.Configuration": "10.0.2",
           "Microsoft.Extensions.Identity.Core": "9.0.12",
           "StackExchange.Redis": "2.10.1",
+          "Swashbuckle.AspNetCore": "7.3.2",
+          "Swashbuckle.AspNetCore.Annotations": "7.3.2",
           "System.IdentityModel.Tokens.Jwt": "8.15.0"
         },
         "compile": {
@@ -3225,7 +3243,9 @@
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore": "9.0.12",
-          "Microsoft.Extensions.Identity.Core": "9.0.12"
+          "Microsoft.Extensions.Identity.Core": "9.0.12",
+          "Swashbuckle.AspNetCore": "7.3.2",
+          "Swashbuckle.AspNetCore.Annotations": "7.3.2"
         },
         "compile": {
           "bin/placeholder/DentalHub.Domain.dll": {}
@@ -3246,7 +3266,9 @@
           "Microsoft.EntityFrameworkCore": "9.0.12",
           "Microsoft.Extensions.Identity.Core": "9.0.12",
           "MySql.EntityFrameworkCore": "10.0.1",
-          "Pomelo.EntityFrameworkCore.MySql": "9.0.0"
+          "Pomelo.EntityFrameworkCore.MySql": "9.0.0",
+          "Swashbuckle.AspNetCore": "7.3.2",
+          "Swashbuckle.AspNetCore.Annotations": "7.3.2"
         },
         "compile": {
           "bin/placeholder/DentalHub.Infrastructure.dll": {}
@@ -6871,6 +6893,30 @@
         "swashbuckle.aspnetcore.nuspec"
       ]
     },
+    "Swashbuckle.AspNetCore.Annotations/7.3.2": {
+      "sha512": "JaGYVVuiHzv3WWanFh/Fzx8ZYOtayNAhso5rwmHdxVYxn3AYJLYdijIBvQaEt4MIcsN0I1zXZfC/YKh47y3ocQ==",
+      "type": "package",
+      "path": "swashbuckle.aspnetcore.annotations/7.3.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net6.0/Swashbuckle.AspNetCore.Annotations.dll",
+        "lib/net6.0/Swashbuckle.AspNetCore.Annotations.pdb",
+        "lib/net6.0/Swashbuckle.AspNetCore.Annotations.xml",
+        "lib/net8.0/Swashbuckle.AspNetCore.Annotations.dll",
+        "lib/net8.0/Swashbuckle.AspNetCore.Annotations.pdb",
+        "lib/net8.0/Swashbuckle.AspNetCore.Annotations.xml",
+        "lib/net9.0/Swashbuckle.AspNetCore.Annotations.dll",
+        "lib/net9.0/Swashbuckle.AspNetCore.Annotations.pdb",
+        "lib/net9.0/Swashbuckle.AspNetCore.Annotations.xml",
+        "lib/netstandard2.0/Swashbuckle.AspNetCore.Annotations.dll",
+        "lib/netstandard2.0/Swashbuckle.AspNetCore.Annotations.pdb",
+        "lib/netstandard2.0/Swashbuckle.AspNetCore.Annotations.xml",
+        "package-readme.md",
+        "swashbuckle.aspnetcore.annotations.7.3.2.nupkg.sha512",
+        "swashbuckle.aspnetcore.annotations.nuspec"
+      ]
+    },
     "Swashbuckle.AspNetCore.Swagger/7.3.2": {
       "sha512": "39Z2N3cLHDcDinu2IW5IaQO9wGPKTbc+vKbjIT/6gN3jFYypWY5U3O8i7Y9rmYDgxkm6niICnkcFZ3hEvikIHA==",
       "type": "package",
@@ -9979,27 +10025,28 @@
       "Serilog.Extensions.Logging >= 10.0.0",
       "Serilog.Sinks.Console >= 6.1.1",
       "Serilog.Sinks.File >= 7.0.0",
-      "Swashbuckle.AspNetCore >= 7.3.2"
+      "Swashbuckle.AspNetCore >= 7.3.2",
+      "Swashbuckle.AspNetCore.Annotations >= 7.3.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DELL\\.nuget\\packages\\": {},
+    "C:\\Users\\Saga.Mohamed\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projects\\DentalHub\\DentalHub.API\\DentalHub.API.csproj",
+      "projectUniqueName": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.API\\DentalHub.API.csproj",
       "projectName": "DentalHub.API",
-      "projectPath": "D:\\projects\\DentalHub\\DentalHub.API\\DentalHub.API.csproj",
-      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "D:\\projects\\DentalHub\\DentalHub.API\\obj\\",
+      "projectPath": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.API\\DentalHub.API.csproj",
+      "packagesPath": "C:\\Users\\Saga.Mohamed\\.nuget\\packages\\",
+      "outputPath": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Saga.Mohamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -10008,18 +10055,17 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj": {
-              "projectPath": "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj"
+            "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj": {
+              "projectPath": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Application\\DentalHub.Application.csproj"
             },
-            "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj": {
-              "projectPath": "D:\\projects\\DentalHub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj"
+            "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj": {
+              "projectPath": "D:\\Sajaaa\\Visual Studio PROJECTS\\Grad Project\\Dental-Hub\\DentalHub.Infrastructure\\DentalHub.Infrastructure.csproj"
             }
           }
         }
@@ -10097,6 +10143,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[7.3.2, )"
+          },
+          "Swashbuckle.AspNetCore.Annotations": {
+            "target": "Package",
+            "version": "[7.3.2, )"
           }
         },
         "imports": [
@@ -10118,7 +10168,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

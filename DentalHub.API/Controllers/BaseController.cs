@@ -2,6 +2,7 @@ using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace DentalHub.API.Controllers
 {
@@ -9,7 +10,7 @@ namespace DentalHub.API.Controllers
     public abstract class BaseController : ControllerBase
     {
         protected readonly ILinkBuilder? _linkBuilder;
-       
+
         protected BaseController(ILinkBuilder? linkBuilder = null)
         {
             _linkBuilder = linkBuilder;
@@ -39,8 +40,42 @@ namespace DentalHub.API.Controllers
         protected string GetUserId() =>
             HttpContext?.Items?["UserId"]?.ToString() ?? string.Empty;
 
+        /// Extract UserId from JWT Token Claims
+        protected Guid? GetUserIdFromToken()
+        {
+            var userIdClaim = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdClaim))
+                return null;
+
+            if (Guid.TryParse(userIdClaim, out var userId))
+                return userId;
+
+            return null;
+        }
+
+        /// Extract User Role from JWT Token Claims
+        protected string? GetUserRoleFromToken()
+        {
+            return User?.FindFirst(ClaimTypes.Role)?.Value;
+        }
+
+        /// Check if user is in specific role
+        protected bool IsInRole(string role)
+        {
+            return User?.IsInRole(role) == true;
+        }
+
+        /// Check if current user is a Doctor
+        protected bool IsDoctor() => IsInRole("Doctor");
+
+        /// Check if current user is a Student
+        protected bool IsStudent() => IsInRole("Student");
+
+        /// Check if current user is a Patient
+        protected bool IsPatient() => IsInRole("Patient");
+
         protected bool HasManagementRole() =>
-            User?.IsInRole("Admin") == true || User?.IsInRole("SuperAdmin") == true || User?.IsInRole("DeliveryCompany") == true;
+            User?.IsInRole("Admin") == true || User?.IsInRole("SuperAdmin") == true;
 
         protected ActionResult<ApiResponse<T>> HandleResult<T>(
           Result<T> result,
@@ -57,7 +92,7 @@ namespace DentalHub.API.Controllers
                     result.Message ?? "Success",
                     result.Data,
                     result.Status,
-                    warnings: null, // Result<T> in DentalHub doesn't have warnings
+                    warnings: null,
                     links: links);
             }
             else
@@ -87,14 +122,14 @@ namespace DentalHub.API.Controllers
                 _ => StatusCode(result.Status, apiResponse)
             };
         }
-        
+
         // Overload for non-generic Result
-         protected ActionResult<ApiResponse<object>> HandleResult(
-          Result result,
-          string apiName = "",
-          int? id = null)
+        protected ActionResult<ApiResponse<object>> HandleResult(
+         Result result,
+         string apiName = "",
+         int? id = null)
         {
-             var links = _linkBuilder?.MakeRelSelf(_linkBuilder.GenerateLinks(id), apiName);
+            var links = _linkBuilder?.MakeRelSelf(_linkBuilder.GenerateLinks(id), apiName);
 
             ApiResponse<object> apiResponse;
 
@@ -130,7 +165,7 @@ namespace DentalHub.API.Controllers
                 403 => Forbid(),
                 404 => NotFound(apiResponse),
                 409 => Conflict(apiResponse),
-                 500 => StatusCode(500, apiResponse),
+                500 => StatusCode(500, apiResponse),
                 _ => StatusCode(result.Status, apiResponse)
             };
         }
