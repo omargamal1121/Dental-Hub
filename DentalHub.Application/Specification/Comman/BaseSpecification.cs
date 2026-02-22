@@ -9,7 +9,7 @@ namespace DentalHub.Application.Specification.Comman
         public Pagination? Paging { get; set; }
         public Expression<Func<T, object>>? OrderBy { get; set; }
         public Expression<Func<T, object>>? OrderByDescending { get; set; }
-        public List<Expression<Func<T, object>>> Includes { get; set; } = new();
+        public List<Expression<Func<T, object>>>? Includes { get; set; } = new();
         public List<string> IncludeStrings { get; set; } = new();
 
         public BaseSpecification()

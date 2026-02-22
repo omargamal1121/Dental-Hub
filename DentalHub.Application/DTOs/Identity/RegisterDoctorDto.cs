@@ -5,6 +5,8 @@ namespace DentalHub.Application.DTOs.Identity
     /// DTO for doctor registration
     public class RegisterDoctorDto
     {
+        public string UserId { get; set; } = string.Empty;
+
         [Required(ErrorMessage = "Full name is required")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Full name must be between 3 and 100 characters")]
         [RegularExpression(@"^[a-zA-Z\u0621-\u064A\s]+$", ErrorMessage = "Full name can only contain letters and spaces")]

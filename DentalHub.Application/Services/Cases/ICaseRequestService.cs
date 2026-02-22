@@ -19,7 +19,9 @@ namespace DentalHub.Application.Services.Cases
         Task<Result> CancelRequestAsync(string publicId, string studentPublicId);
 
 		Task<Result<bool>> ApproveRequstAsync(ApproveCaseRequestDto dto);
-		Task<Result<bool>> RejectRequestAsync(string publicId, string doctorPublicId);
+        Task<Result<bool>> ApproveOrRejectRequestAsync(Guid id, ApproveCaseRequestDto dto);
+
+        Task<Result<bool>> RejectRequestAsync(string publicId, string doctorPublicId);
 
 		Task<Result<bool>> RejectAllRequestsForCaseAsync(string casePublicId);
 		Task<Result<bool>> MarkAllRequestsTakenForCaseAsync(string casePublicId, string approvedRequestPublicId);

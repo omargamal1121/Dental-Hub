@@ -7,6 +7,7 @@ namespace DentalHub.Application.Services.Doctors
     {
         // Doctor Profile
         Task<Result<DoctorDto>> GetDoctorByPublicIdAsync(string publicId);
+        Task<Result<DoctorDto>> GetDoctorByIdAsync(string id); 
         Task<Result<PagedResult<DoctorlistDto>>> GetAllDoctorsAsync(int page = 1, int pageSize = 10, string? name = null, string? spec = null);
         Task<Result<DoctorDto>> UpdateDoctorAsync(UpdateDoctorDto dto);
         Task<Result> DeleteDoctorAsync(string publicId);

@@ -24,7 +24,8 @@ namespace DentalHub.Application.Handlers.Doctor
                 Password = request.Password,
                 Name = request.Name,
                 Specialty = request.Specialty,
-                UniversityId = request.UniversityId
+                UniversityId = request.UniversityId,
+                UserId = request.UserId
             };
 
             var result = await _userManagementService.RegisterDoctorAsync(registerDto);

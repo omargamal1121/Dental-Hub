@@ -326,8 +326,6 @@ namespace DentalHub.Application.Services.Cases
 		}
 
 
-
-
 		public async Task<Result<bool>> RejectRequestAsync(string publicId, string doctorPublicId)
 		{
 			_logger.LogInformation("Starting reject process for RequestId: {PublicId}", publicId);
@@ -404,11 +402,45 @@ namespace DentalHub.Application.Services.Cases
 			}
 		}
 
+        public async Task<Result<bool>> ApproveOrRejectRequestAsync(Guid id, ApproveCaseRequestDto dto)
+        {
+            try
+            {
+                var spec = new BaseSpecification<CaseRequest>(cr => cr.Id == id);
+                var request = await _unitOfWork.CaseRequests.GetByIdAsync(spec);
 
-		#region Cancel Request
+                if (request == null)
+                    return Result<bool>.Failure("Request not found");
+
+                if (dto.IsApproved)
+                {
+                    // call approve logic
+                    var approveDto = new ApproveCaseRequestDto
+                    {
+                        RequestId = request.PublicId,
+                        DoctorId = dto.DoctorId,
+                        IsApproved = true
+                    };
+                    return await ApproveRequstAsync(approveDto);
+                }
+                else
+                {
+                    // Reject
+                    return await RejectRequestAsync(request.PublicId, dto.DoctorId);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error in ApproveOrRejectRequestAsync");
+                return Result<bool>.Failure("Error processing request");
+            }
+        }
 
 
-		public async Task<Result> CancelRequestAsync(string publicId, string studentPublicId)
+        #region Cancel Request
+
+
+        public async Task<Result> CancelRequestAsync(string publicId, string studentPublicId)
         {
             try
             {
@@ -555,8 +587,8 @@ namespace DentalHub.Application.Services.Cases
     {
         public bool IsExsist { get; set; }
         public bool IsPending { get; set; }
-        public string DoctorPublicId { get; set; }
-		public Guid CaseId { get; set; }
+        public string? DoctorPublicId { get; set; }
+        public Guid CaseId { get; set; }
 		public Guid StudentId { get; set; }
         public Guid RequestId { get; set; }
 	}
@@ -564,9 +596,10 @@ namespace DentalHub.Application.Services.Cases
     public class RejectCheckDto
     {
         public RequestStatus status { get; set; }
-        public string DoctorPublicId { get; set; }
+        public string? DoctorPublicId { get; set; }
         public Guid CaseId { get; set; }
         public Guid StudentId { get; set; }
         public Guid RequestId { get; set; }
     }
 }
+
