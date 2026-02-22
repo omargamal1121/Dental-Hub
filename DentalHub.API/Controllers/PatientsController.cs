@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DentalHub.API.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PatientsController : BaseController

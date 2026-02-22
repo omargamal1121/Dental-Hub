@@ -11,7 +11,6 @@ using DentalHub.Application.Common;
 
 namespace DentalHub.API.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class DoctorsController : BaseController

@@ -924,3 +924,214 @@ LIMIT 1
 2026-02-22 22:22:55.359 +02:00 [INF] Server saja-mohamed:20684:10b6dd22 caught stopped signal...
 2026-02-22 22:22:55.361 +02:00 [INF] Server saja-mohamed:20684:10b6dd22 All dispatchers stopped
 2026-02-22 22:22:55.361 +02:00 [WRN] Server saja-mohamed:20684:10b6dd22 caught shutdown signal...
+2026-02-22 22:47:13.051 +02:00 [INF] DB tables already exist. Exit install
+2026-02-22 22:47:13.097 +02:00 [INF] User profile is available. Using 'C:\Users\Saga.Mohamed\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-22 22:47:13.202 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-22 22:47:13.204 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-22 22:47:13.266 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-22 22:47:13.268 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-22 22:47:13.269 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-22 22:47:13.270 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-22 22:47:13.276 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-22 22:47:13.278 +02:00 [INF] Hosting environment: Development
+2026-02-22 22:47:13.279 +02:00 [INF] Content root path: D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.API
+2026-02-22 22:47:13.578 +02:00 [INF] Server saja-mohamed:14436:dd143178 successfully announced in 294.9002 ms
+2026-02-22 22:47:13.581 +02:00 [INF] Server saja-mohamed:14436:dd143178 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-22 22:47:13.586 +02:00 [INF] Server saja-mohamed:14436:dd143178 all the dispatchers started
+2026-02-22 22:47:13.790 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-22 22:47:13.915 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-22 22:47:13.919 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-22 22:47:13.920 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-22 22:47:13.923 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 null null 133.5206ms
+2026-02-22 22:47:13.941 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-22 22:47:13.988 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 46.4194ms
+2026-02-22 22:47:14.061 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-22 22:47:14.061 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.js - null null
+2026-02-22 22:47:14.069 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.js - 200 null application/javascript;charset=utf-8 7.912ms
+2026-02-22 22:47:14.071 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 10.3345ms
+2026-02-22 22:47:14.137 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-22 22:47:14.196 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 59.3079ms
+2026-02-22 22:47:14.308 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-22 22:47:14.368 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 60.6403ms
+2026-02-22 22:48:21.413 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7267/api/Patients - application/json 199
+2026-02-22 22:48:21.424 +02:00 [INF] CORS policy execution successful.
+2026-02-22 22:48:21.431 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-02-22 22:48:21.437 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-02-22 22:48:21.439 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7267/api/Patients - 401 0 null 26.2552ms
+2026-02-22 22:48:23.802 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7267/api/Patients - application/json 199
+2026-02-22 22:48:23.809 +02:00 [INF] CORS policy execution successful.
+2026-02-22 22:48:23.812 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-02-22 22:48:23.814 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-02-22 22:48:23.815 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7267/api/Patients - 401 0 null 12.4211ms
+2026-02-22 22:50:16.086 +02:00 [INF] DB tables already exist. Exit install
+2026-02-22 22:50:16.134 +02:00 [INF] User profile is available. Using 'C:\Users\Saga.Mohamed\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-22 22:50:16.245 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-22 22:50:16.246 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-22 22:50:16.307 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-22 22:50:16.308 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-22 22:50:16.309 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-22 22:50:16.309 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-22 22:50:16.316 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-22 22:50:16.317 +02:00 [INF] Hosting environment: Development
+2026-02-22 22:50:16.319 +02:00 [INF] Content root path: D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.API
+2026-02-22 22:50:16.613 +02:00 [INF] Server saja-mohamed:26176:5c57e35c successfully announced in 290.4569 ms
+2026-02-22 22:50:16.618 +02:00 [INF] Server saja-mohamed:26176:5c57e35c is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-22 22:50:16.625 +02:00 [INF] Server saja-mohamed:26176:5c57e35c all the dispatchers started
+2026-02-22 22:50:16.732 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-22 22:50:16.817 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-22 22:50:16.821 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-22 22:50:16.823 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-22 22:50:16.826 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 null null 94.1041ms
+2026-02-22 22:50:16.848 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-22 22:50:16.900 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 51.7833ms
+2026-02-22 22:50:16.939 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-22 22:50:16.939 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.js - null null
+2026-02-22 22:50:16.944 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.js - 200 null application/javascript;charset=utf-8 4.6241ms
+2026-02-22 22:50:16.947 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 7.4475ms
+2026-02-22 22:50:17.026 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-22 22:50:17.048 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 21.882ms
+2026-02-22 22:50:17.185 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-22 22:50:17.247 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 61.6531ms
+2026-02-22 22:50:53.033 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7267/api/Patients - application/json 199
+2026-02-22 22:50:53.041 +02:00 [INF] CORS policy execution successful.
+2026-02-22 22:50:53.043 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.PatientsController.Create (DentalHub.API)'
+2026-02-22 22:50:53.060 +02:00 [INF] Route matched with {action = "Create", controller = "Patients"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[System.String]]] Create(DentalHub.Application.Commands.Patient.CreatePatientCommand) on controller DentalHub.API.Controllers.PatientsController (DentalHub.API).
+2026-02-22 22:50:53.066 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-02-22 22:50:55.170 +02:00 [INF] Executed DbCommand (122ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`PublicId`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `AspNetUsers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+2026-02-22 22:50:55.543 +02:00 [INF] Executed DbCommand (142ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`PublicId`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `AspNetUsers` AS `a`
+WHERE `a`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1
+2026-02-22 22:50:55.782 +02:00 [INF] Executed DbCommand (118ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`PublicId`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `AspNetUsers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+2026-02-22 22:50:56.130 +02:00 [INF] Executed DbCommand (120ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (Size = 4000), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 30), @p14='?' (Size = 4000), @p15='?' (DbType = Boolean), @p16='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `AspNetUsers` (`Id`, `AccessFailedCount`, `ConcurrencyStamp`, `Email`, `EmailConfirmed`, `FullName`, `LockoutEnabled`, `LockoutEnd`, `NormalizedEmail`, `NormalizedUserName`, `PasswordHash`, `PhoneNumber`, `PhoneNumberConfirmed`, `PublicId`, `SecurityStamp`, `TwoFactorEnabled`, `UserName`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16);
+2026-02-22 22:50:56.372 +02:00 [INF] Executed DbCommand (113ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-22 22:50:56.615 +02:00 [INF] Executed DbCommand (113ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedRoleName_0
+LIMIT 2
+2026-02-22 22:50:56.877 +02:00 [INF] Executed DbCommand (117ms) [Parameters=[@__p_0='?' (DbType = Guid), @__p_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`UserId`, `a`.`RoleId`
+FROM `AspNetUserRoles` AS `a`
+WHERE (`a`.`UserId` = @__p_0) AND (`a`.`RoleId` = @__p_1)
+LIMIT 1
+2026-02-22 22:50:57.109 +02:00 [INF] Executed DbCommand (114ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedRoleName_0
+LIMIT 2
+2026-02-22 22:50:57.357 +02:00 [INF] Executed DbCommand (120ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`PublicId`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `AspNetUsers` AS `a`
+WHERE `a`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1
+2026-02-22 22:50:57.596 +02:00 [INF] Executed DbCommand (119ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`PublicId`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `AspNetUsers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+2026-02-22 22:50:57.983 +02:00 [INF] Executed DbCommand (123ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p18='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p19='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (Size = 4000), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTimeOffset), @p9='?' (Size = 256), @p10='?' (Size = 256), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 30), @p15='?' (Size = 4000), @p16='?' (DbType = Boolean), @p17='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO `AspNetUserRoles` (`RoleId`, `UserId`)
+VALUES (@p0, @p1);
+UPDATE `AspNetUsers` SET `AccessFailedCount` = @p2, `ConcurrencyStamp` = @p3, `Email` = @p4, `EmailConfirmed` = @p5, `FullName` = @p6, `LockoutEnabled` = @p7, `LockoutEnd` = @p8, `NormalizedEmail` = @p9, `NormalizedUserName` = @p10, `PasswordHash` = @p11, `PhoneNumber` = @p12, `PhoneNumberConfirmed` = @p13, `PublicId` = @p14, `SecurityStamp` = @p15, `TwoFactorEnabled` = @p16, `UserName` = @p17
+WHERE `Id` = @p18 AND `ConcurrencyStamp` = @p19;
+SELECT ROW_COUNT();
+2026-02-22 22:50:58.377 +02:00 [INF] Executed DbCommand (117ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime), @p3='?' (DbType = DateTime), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 30), @p7='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `Patients` (`UserId`, `Age`, `CreateAt`, `DeleteAt`, `Id`, `Phone`, `PublicId`, `UpdateAt`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-02-22 22:50:58.381 +02:00 [INF] Patient registered successfully: ahmed567@gmail.com
+2026-02-22 22:50:58.388 +02:00 [INF] Executing OkObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-22 22:50:58.401 +02:00 [INF] Executed action DentalHub.API.Controllers.PatientsController.Create (DentalHub.API) in 5333.8563ms
+2026-02-22 22:50:58.403 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.PatientsController.Create (DentalHub.API)'
+2026-02-22 22:50:58.407 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7267/api/Patients - 200 null application/json; charset=utf-8 5374.4016ms
+2026-02-22 22:51:18.899 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7267/api/Auth/Login - application/json 62
+2026-02-22 22:51:18.906 +02:00 [INF] CORS policy execution successful.
+2026-02-22 22:51:18.909 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.AuthController.Login (DentalHub.API)'
+2026-02-22 22:51:18.915 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[DentalHub.Application.DTOs.Auth.TokensDto]]] Login(DentalHub.Application.Commands.Auth.LoginCommand) on controller DentalHub.API.Controllers.AuthController (DentalHub.API).
+2026-02-22 22:51:19.636 +02:00 [INF] Executed DbCommand (119ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`PublicId`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `AspNetUsers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+2026-02-22 22:51:19.713 +02:00 [INF] Generating Access Token for User ID: "019c871e-9852-7363-a721-aaf301db2201"
+2026-02-22 22:51:19.718 +02:00 [INF] Generating Access Token for User ID: "019c871e-9852-7363-a721-aaf301db2201"
+2026-02-22 22:51:19.971 +02:00 [INF] Executed DbCommand (115ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a0`.`Name`
+FROM `AspNetUserRoles` AS `a`
+INNER JOIN `AspNetRoles` AS `a0` ON `a`.`RoleId` = `a0`.`Id`
+WHERE `a`.`UserId` = @__userId_0
+2026-02-22 22:51:20.214 +02:00 [INF] Executed DbCommand (114ms) [Parameters=[@__user_Id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ClaimType`, `a`.`ClaimValue`, `a`.`UserId`
+FROM `AspNetUserClaims` AS `a`
+WHERE `a`.`UserId` = @__user_Id_0
+2026-02-22 22:51:20.233 +02:00 [INF] Access Token generated successfully for User ID: "019c871e-9852-7363-a721-aaf301db2201", expires at "2026-02-22T21:01:20.2189266Z"
+2026-02-22 22:51:20.465 +02:00 [INF] Executed DbCommand (115ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a0`.`Name`
+FROM `AspNetUserRoles` AS `a`
+INNER JOIN `AspNetRoles` AS `a0` ON `a`.`RoleId` = `a0`.`Id`
+WHERE `a`.`UserId` = @__userId_0
+2026-02-22 22:51:20.470 +02:00 [INF] Executing OkObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[DentalHub.Application.DTOs.Auth.TokensDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-22 22:51:20.474 +02:00 [INF] Executed action DentalHub.API.Controllers.AuthController.Login (DentalHub.API) in 1557.1436ms
+2026-02-22 22:51:20.475 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.AuthController.Login (DentalHub.API)'
+2026-02-22 22:51:20.478 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7267/api/Auth/Login - 200 null application/json; charset=utf-8 1579.0539ms
+2026-02-22 22:51:35.957 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/api/Auth/My-Profile - null null
+2026-02-22 22:51:36.001 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.AuthController.GetMyProfile (DentalHub.API)'
+2026-02-22 22:51:36.005 +02:00 [INF] Route matched with {action = "GetMyProfile", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[System.Object]]] GetMyProfile() on controller DentalHub.API.Controllers.AuthController (DentalHub.API).
+2026-02-22 22:51:36.802 +02:00 [INF] Executed DbCommand (128ms) [Parameters=[@__userGuid_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`PublicId`, `s`.`FullName`, `s`.`Email`, `s`.`Phone`, `s`.`Age`, `s`.`CreateAt`, `s`.`UserId`, `s`.`Id`, `s0`.`Id`, `s0`.`Name`, `s0`.`Status`, `s0`.`CreateAt`, `s0`.`Id0`, `s0`.`Id1`
+FROM (
+    SELECT `p`.`PublicId`, `a`.`FullName`, `a`.`Email`, `p`.`Phone`, `p`.`Age`, `p`.`CreateAt`, `p`.`UserId`, `a`.`Id`
+    FROM `Patients` AS `p`
+    INNER JOIN `AspNetUsers` AS `a` ON `p`.`UserId` = `a`.`Id`
+    WHERE `p`.`DeleteAt` IS NULL AND (`p`.`UserId` = @__userGuid_0)
+    LIMIT 1
+) AS `s`
+LEFT JOIN (
+    SELECT `p0`.`PublicId` AS `Id`, `c0`.`Name`, `p0`.`Status`, `p0`.`CreateAt`, `p0`.`Id` AS `Id0`, `c0`.`Id` AS `Id1`, `p0`.`PatientId`
+    FROM `PatientCases` AS `p0`
+    INNER JOIN (
+        SELECT `c`.`Id`, `c`.`Name`
+        FROM `CaseTypes` AS `c`
+        WHERE `c`.`DeleteAt` IS NULL
+    ) AS `c0` ON `p0`.`CaseTypeId` = `c0`.`Id`
+    WHERE `p0`.`DeleteAt` IS NULL
+) AS `s0` ON `s`.`UserId` = `s0`.`PatientId`
+ORDER BY `s`.`UserId`, `s`.`Id`, `s0`.`Id0`
+2026-02-22 22:51:36.809 +02:00 [INF] Executing OkObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-22 22:51:36.814 +02:00 [INF] Executed action DentalHub.API.Controllers.AuthController.GetMyProfile (DentalHub.API) in 807.234ms
+2026-02-22 22:51:36.816 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.AuthController.GetMyProfile (DentalHub.API)'
+2026-02-22 22:51:36.818 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/api/Auth/My-Profile - 200 null application/json; charset=utf-8 861.021ms
+2026-02-22 22:51:46.617 +02:00 [WRN] Stopping the server due to DomainUnload or ProcessExit event...
+2026-02-22 22:51:46.618 +02:00 [INF] Server saja-mohamed:26176:5c57e35c caught stopping signal...
+2026-02-22 22:51:46.619 +02:00 [INF] Server saja-mohamed:26176:5c57e35c caught stopped signal...
+2026-02-22 22:51:46.620 +02:00 [WRN] Server saja-mohamed:26176:5c57e35c caught shutdown signal...
+2026-02-22 22:51:46.620 +02:00 [INF] Server saja-mohamed:26176:5c57e35c All dispatchers stopped
+2026-02-22 22:51:47.283 +02:00 [INF] Server saja-mohamed:26176:5c57e35c successfully reported itself as stopped in 661.7869 ms
+2026-02-22 22:51:47.285 +02:00 [INF] Server saja-mohamed:26176:5c57e35c has been stopped in total 666.0911 ms
