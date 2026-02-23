@@ -11,6 +11,9 @@ namespace DentalHub.Application.Services.Admins
 
         // Admin Profile
         Task<Result<AdminDto>> GetAdminByPublicIdAsync(string publicId);
+
+        // For the admin himself - searches by UserId (coming from the JWT token)
+        Task<Result<AdminDto>> GetAdminByUserIdAsync(string userId);
         Task<Result<PagedResult<AdminDto>>> GetAllAdminsAsync(int page = 1, int pageSize = 10);
         Task<Result<AdminDto>> UpdateAdminAsync(UpdateAdminDto dto);
         Task<Result> DeleteAdminByPublicIdAsync(string publicId);

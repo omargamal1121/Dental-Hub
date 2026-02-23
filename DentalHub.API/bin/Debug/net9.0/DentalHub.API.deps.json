@@ -23,7 +23,8 @@
           "Serilog.Extensions.Logging": "10.0.0",
           "Serilog.Sinks.Console": "6.1.1",
           "Serilog.Sinks.File": "7.0.0",
-          "Swashbuckle.AspNetCore": "7.3.2"
+          "Swashbuckle.AspNetCore": "7.3.2",
+          "Swashbuckle.AspNetCore.Annotations": "7.3.2"
         },
         "runtime": {
           "DentalHub.API.dll": {}
@@ -1240,6 +1241,17 @@
           "Swashbuckle.AspNetCore.SwaggerUI": "7.3.2"
         }
       },
+      "Swashbuckle.AspNetCore.Annotations/7.3.2": {
+        "dependencies": {
+          "Swashbuckle.AspNetCore.SwaggerGen": "7.3.2"
+        },
+        "runtime": {
+          "lib/net9.0/Swashbuckle.AspNetCore.Annotations.dll": {
+            "assemblyVersion": "7.3.2.0",
+            "fileVersion": "7.3.2.1170"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore.Swagger/7.3.2": {
         "dependencies": {
           "Microsoft.OpenApi": "1.6.22"
@@ -1500,6 +1512,8 @@
           "Microsoft.Extensions.Configuration": "10.0.2",
           "Microsoft.Extensions.Identity.Core": "9.0.12",
           "StackExchange.Redis": "2.10.1",
+          "Swashbuckle.AspNetCore": "7.3.2",
+          "Swashbuckle.AspNetCore.Annotations": "7.3.2",
           "System.IdentityModel.Tokens.Jwt": "8.15.0"
         },
         "runtime": {
@@ -1513,7 +1527,9 @@
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.12",
           "Microsoft.EntityFrameworkCore": "9.0.12",
-          "Microsoft.Extensions.Identity.Core": "9.0.12"
+          "Microsoft.Extensions.Identity.Core": "9.0.12",
+          "Swashbuckle.AspNetCore": "7.3.2",
+          "Swashbuckle.AspNetCore.Annotations": "7.3.2"
         },
         "runtime": {
           "DentalHub.Domain.dll": {
@@ -1531,7 +1547,9 @@
           "Microsoft.EntityFrameworkCore": "9.0.12",
           "Microsoft.Extensions.Identity.Core": "9.0.12",
           "MySql.EntityFrameworkCore": "10.0.1",
-          "Pomelo.EntityFrameworkCore.MySql": "9.0.0"
+          "Pomelo.EntityFrameworkCore.MySql": "9.0.0",
+          "Swashbuckle.AspNetCore": "7.3.2",
+          "Swashbuckle.AspNetCore.Annotations": "7.3.2"
         },
         "runtime": {
           "DentalHub.Infrastructure.dll": {
@@ -2128,6 +2146,13 @@
       "sha512": "sha512-WEkW7Cl8bexT75eURuqrqM/TQx+ftWKOWlCHzmw3Fl3oAmxiBO/lDVOuuqZsaBCHQIBcZxA6BbyiG5dv2mD2tw==",
       "path": "swashbuckle.aspnetcore/7.3.2",
       "hashPath": "swashbuckle.aspnetcore.7.3.2.nupkg.sha512"
+    },
+    "Swashbuckle.AspNetCore.Annotations/7.3.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JaGYVVuiHzv3WWanFh/Fzx8ZYOtayNAhso5rwmHdxVYxn3AYJLYdijIBvQaEt4MIcsN0I1zXZfC/YKh47y3ocQ==",
+      "path": "swashbuckle.aspnetcore.annotations/7.3.2",
+      "hashPath": "swashbuckle.aspnetcore.annotations.7.3.2.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore.Swagger/7.3.2": {
       "type": "package",
