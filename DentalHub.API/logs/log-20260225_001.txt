@@ -1,0 +1,504 @@
+2026-02-25 00:18:42.783 +02:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-02-25 00:18:44.399 +02:00 [INF] Executed DbCommand (1,271ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db39102_EFMigrationsLock', 259200)
+2026-02-25 00:18:45.381 +02:00 [INF] Executed DbCommand (464ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-02-25 00:19:00.591 +02:00 [INF] Executed DbCommand (1,227ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
+2026-02-25 00:19:01.134 +02:00 [INF] Executed DbCommand (538ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-02-25 00:19:01.167 +02:00 [INF] Applying migration '20260224221617_add-media-for-patient-case'.
+2026-02-25 00:19:01.697 +02:00 [ERR] Failed executing DbCommand (331ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `UniversityMembers` DROP INDEX `IX_UniversityMembers_PublicId`;
+2026-02-25 00:21:38.685 +02:00 [INF] DB tables already exist. Exit install
+2026-02-25 00:21:47.035 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-25 00:21:52.379 +02:00 [INF] Executed DbCommand (747ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-25 00:21:55.685 +02:00 [INF] Executed DbCommand (1,997ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-25 00:21:56.937 +02:00 [INF] Executed DbCommand (666ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-25 00:21:57.979 +02:00 [INF] Executed DbCommand (113ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-25 00:21:58.266 +02:00 [INF] Executed DbCommand (109ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `UniversityMembers` AS `u`)
+2026-02-25 00:21:58.932 +02:00 [INF] Executed DbCommand (212ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Doctors` AS `d`)
+2026-02-25 00:22:00.275 +02:00 [INF] Executed DbCommand (1,111ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Students` AS `s`)
+2026-02-25 00:22:00.902 +02:00 [INF] Executed DbCommand (159ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Patients` AS `p`)
+2026-02-25 00:22:01.754 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-25 00:22:01.768 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-25 00:22:02.423 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-25 00:22:02.620 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-25 00:22:03.317 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-25 00:22:03.548 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-25 00:22:03.957 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-25 00:22:04.373 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-02-25 00:22:04.387 +02:00 [INF] Hosting environment: Development
+2026-02-25 00:22:04.496 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-25 00:22:05.219 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-02-25 00:22:05.251 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-02-25 00:22:05.260 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-02-25 00:22:05.282 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 0 null 909.2324ms
+2026-02-25 00:22:05.348 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-25 00:22:05.715 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 365.9019ms
+2026-02-25 00:22:05.958 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-25 00:22:06.054 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.js - null null
+2026-02-25 00:22:06.070 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-25 00:22:06.425 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 466.799ms
+2026-02-25 00:22:06.425 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.js - 200 null application/javascript;charset=utf-8 370.7458ms
+2026-02-25 00:22:06.788 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 717.8373ms
+2026-02-25 00:22:06.894 +02:00 [INF] Server mrrobot:21264:71dd887d successfully announced in 2817.8826 ms
+2026-02-25 00:22:07.018 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-25 00:22:07.855 +02:00 [INF] Server mrrobot:21264:71dd887d is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-25 00:22:08.005 +02:00 [INF] Server mrrobot:21264:71dd887d all the dispatchers started
+2026-02-25 00:22:08.556 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 1538.0912ms
+2026-02-25 00:22:08.894 +02:00 [INF] 1 servers were removed due to timeout
+2026-02-25 00:23:56.261 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/api/CaseTypes?page=1&pageSize=10 - null null
+2026-02-25 00:23:57.154 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.CaseTypesController.GetAll (DentalHub.API)'
+2026-02-25 00:23:57.659 +02:00 [INF] Route matched with {action = "GetAll", controller = "CaseTypes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[DentalHub.Application.Common.PagedResult`1[DentalHub.Application.DTOs.CaseTypes.CaseTypeDto]]]] GetAll(Int32, Int32, System.String) on controller DentalHub.API.Controllers.CaseTypesController (DentalHub.API).
+2026-02-25 00:23:57.822 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-02-25 00:24:00.397 +02:00 [INF] Executed DbCommand (355ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`PublicId` AS `publicId`, `c`.`Name`, `c`.`Description`
+FROM `CaseTypes` AS `c`
+WHERE `c`.`DeleteAt` IS NULL
+ORDER BY `c`.`Name`
+LIMIT @__p_1 OFFSET @__p_0
+2026-02-25 00:24:01.842 +02:00 [INF] Executed DbCommand (413ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `CaseTypes` AS `c`
+WHERE `c`.`DeleteAt` IS NULL
+2026-02-25 00:24:02.094 +02:00 [INF] Executing OkObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[DentalHub.Application.Common.PagedResult`1[[DentalHub.Application.DTOs.CaseTypes.CaseTypeDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 00:24:02.228 +02:00 [INF] Executed action DentalHub.API.Controllers.CaseTypesController.GetAll (DentalHub.API) in 4478.3588ms
+2026-02-25 00:24:02.256 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.CaseTypesController.GetAll (DentalHub.API)'
+2026-02-25 00:24:02.503 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/api/CaseTypes?page=1&pageSize=10 - 200 null application/json; charset=utf-8 6242.2801ms
+2026-02-25 00:24:20.262 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7267/api/Cases - multipart/form-data; boundary=----WebKitFormBoundaryIUBnYPkTjJx8MvCx 5936
+2026-02-25 00:24:20.509 +02:00 [INF] CORS policy execution successful.
+2026-02-25 00:24:20.527 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.CasesController.Create (DentalHub.API)'
+2026-02-25 00:24:20.573 +02:00 [INF] Route matched with {action = "Create", controller = "Cases"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[System.String]]] Create(DentalHub.Application.Commands.PatientCase.CreatePatientCaseCommand) on controller DentalHub.API.Controllers.CasesController (DentalHub.API).
+2026-02-25 00:24:22.987 +02:00 [INF] Executed DbCommand (167ms) [Parameters=[@__dto_PatientId_0='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`UserId`, `p`.`Age`, `p`.`CreateAt`, `p`.`DeleteAt`, `p`.`Id`, `p`.`Phone`, `p`.`PublicId`, `p`.`UpdateAt`
+FROM `Patients` AS `p`
+WHERE `p`.`DeleteAt` IS NULL AND (`p`.`PublicId` = @__dto_PatientId_0)
+LIMIT 1
+2026-02-25 00:24:23.893 +02:00 [INF] Executed DbCommand (99ms) [Parameters=[@__dto_CaseTypeId_0='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreateAt`, `c`.`DeleteAt`, `c`.`Description`, `c`.`Name`, `c`.`PublicId`, `c`.`UpdateAt`
+FROM `CaseTypes` AS `c`
+WHERE `c`.`DeleteAt` IS NULL AND (`c`.`PublicId` = @__dto_CaseTypeId_0)
+LIMIT 1
+2026-02-25 00:24:25.417 +02:00 [INF] Executed DbCommand (93ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime), @p4='?' (DbType = DateTime), @p5='?' (Size = 4000), @p6='?' (DbType = Guid), @p7='?' (Size = 30), @p8='?' (DbType = Int32), @p9='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `PatientCases` (`Id`, `AssignedStudentId`, `CaseTypeId`, `CreateAt`, `DeleteAt`, `Description`, `PatientId`, `PublicId`, `Status`, `UpdateAt`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+2026-02-25 00:24:25.508 +02:00 [INF] Uploading media for Case with ID "019c91c0-e680-7589-9649-30193b2b87d6"
+2026-02-25 00:24:28.043 +02:00 [ERR] Failed executing DbCommand (156ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (Size = 4000), @p3='?' (DbType = DateTime), @p4='?' (DbType = DateTime), @p5='?' (Size = 4000), @p6='?' (DbType = Guid), @p7='?' (DbType = Guid), @p8='?' (Size = 30), @p9='?' (DbType = Guid), @p10='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `Medias` (`Id`, `CaseTypeId`, `CloudinaryPublicId`, `CreateAt`, `DeleteAt`, `MediaUrl`, `PatientCaseId`, `PatientId`, `PublicId`, `SessionId`, `UpdateAt`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+2026-02-25 00:24:28.372 +02:00 [ERR] An exception occurred in the database while saving changes for context type 'DentalHub.Infrastructure.ContextAndConfig.ContextApp'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> MySqlConnector.MySqlException (0x80004005): Unknown column 'CloudinaryPublicId' in 'INSERT INTO'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> MySqlConnector.MySqlException (0x80004005): Unknown column 'CloudinaryPublicId' in 'INSERT INTO'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-02-25 00:24:28.904 +02:00 [ERR] Database update error occurred
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> MySqlConnector.MySqlException (0x80004005): Unknown column 'CloudinaryPublicId' in 'INSERT INTO'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at DentalHub.Infrastructure.UnitOfWork.UnitOfWork.SaveChangesAsync() in D:\projects\DentalHub\DentalHub.Infrastructure\UnitOfWork\UnitOfWork.cs:line 70
+2026-02-25 00:24:29.305 +02:00 [ERR] Error saving media for Case "019c91c0-e680-7589-9649-30193b2b87d6"
+System.InvalidOperationException: An error occurred while saving to the database. Please check your data and try again.
+ ---> Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> MySqlConnector.MySqlException (0x80004005): Unknown column 'CloudinaryPublicId' in 'INSERT INTO'
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at DentalHub.Infrastructure.UnitOfWork.UnitOfWork.SaveChangesAsync() in D:\projects\DentalHub\DentalHub.Infrastructure\UnitOfWork\UnitOfWork.cs:line 70
+   --- End of inner exception stack trace ---
+   at DentalHub.Infrastructure.UnitOfWork.UnitOfWork.SaveChangesAsync() in D:\projects\DentalHub\DentalHub.Infrastructure\UnitOfWork\UnitOfWork.cs:line 127
+   at DentalHub.Infrastructure.Services.MediaService.SaveMediaAndLinkToEntityAsync(IFormFile file, String folderName, Guid entityId, String entityType) in D:\projects\DentalHub\DentalHub.Infrastructure\Services\MediaService.cs:line 136
+2026-02-25 00:24:29.470 +02:00 [WRN] Failed to upload image during case creation: Internal error: An error occurred while saving to the database. Please check your data and try again.
+2026-02-25 00:24:29.489 +02:00 [INF] Patient case created: 6Wo84xI7UG1MT9QhofTdb6 for patient 1BUIFp6vXxCoQW2zl8GEQv
+2026-02-25 00:24:30.501 +02:00 [INF] Executed DbCommand (115ms) [Parameters=[@__publicId_0='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT `s0`.`PublicId`, `s0`.`PublicId0`, `s0`.`FullName`, `s0`.`Age`, `s0`.`PublicId1`, `s0`.`Name`, `s0`.`Description`, `s0`.`c`, `s0`.`CreateAt`, `s0`.`c0`, `s0`.`c1`, `s0`.`Id`, `s0`.`UserId`, `s0`.`Id0`, `s0`.`Id1`, `m0`.`MediaUrl`, `m0`.`Id`
+FROM (
+    SELECT `p`.`PublicId`, `p1`.`PublicId` AS `PublicId0`, `a`.`FullName`, `p1`.`Age`, `c0`.`PublicId` AS `PublicId1`, `c0`.`Name`, `c0`.`Description`, CASE `p`.`Status`
+        WHEN 0 THEN 'Pending'
+        WHEN 1 THEN 'InProgress'
+        WHEN 2 THEN 'Completed'
+        WHEN 3 THEN 'Cancelled'
+        WHEN 4 THEN 'UnderReview'
+        ELSE CAST(`p`.`Status` AS char)
+    END AS `c`, `p`.`CreateAt`, (
+        SELECT COUNT(*)
+        FROM `Sessions` AS `s`
+        WHERE `s`.`DeleteAt` IS NULL AND (`p`.`Id` = `s`.`CaseId`)) AS `c0`, (
+        SELECT COUNT(*)
+        FROM `CaseRequests` AS `c1`
+        WHERE (`c1`.`DeleteAt` IS NULL AND (`p`.`Id` = `c1`.`PatientCaseId`)) AND (`c1`.`Status` = 0)) AS `c1`, `p`.`Id`, `p1`.`UserId`, `a`.`Id` AS `Id0`, `c0`.`Id` AS `Id1`
+    FROM `PatientCases` AS `p`
+    INNER JOIN (
+        SELECT `p0`.`UserId`, `p0`.`Age`, `p0`.`PublicId`
+        FROM `Patients` AS `p0`
+        WHERE `p0`.`DeleteAt` IS NULL
+    ) AS `p1` ON `p`.`PatientId` = `p1`.`UserId`
+    INNER JOIN `AspNetUsers` AS `a` ON `p1`.`UserId` = `a`.`Id`
+    INNER JOIN (
+        SELECT `c`.`Id`, `c`.`Description`, `c`.`Name`, `c`.`PublicId`
+        FROM `CaseTypes` AS `c`
+        WHERE `c`.`DeleteAt` IS NULL
+    ) AS `c0` ON `p`.`CaseTypeId` = `c0`.`Id`
+    WHERE `p`.`DeleteAt` IS NULL AND (`p`.`PublicId` = @__publicId_0)
+    LIMIT 1
+) AS `s0`
+LEFT JOIN (
+    SELECT `m`.`MediaUrl`, `m`.`Id`, `m`.`PatientCaseId`
+    FROM `Medias` AS `m`
+    WHERE `m`.`DeleteAt` IS NULL
+) AS `m0` ON `s0`.`Id` = `m0`.`PatientCaseId`
+ORDER BY `s0`.`Id`, `s0`.`UserId`, `s0`.`Id0`, `s0`.`Id1`
+2026-02-25 00:24:31.044 +02:00 [INF] Executing OkObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-25 00:24:31.138 +02:00 [INF] Executed action DentalHub.API.Controllers.CasesController.Create (DentalHub.API) in 10510.2506ms
+2026-02-25 00:24:31.395 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.CasesController.Create (DentalHub.API)'
+2026-02-25 00:24:31.658 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7267/api/Cases - 200 null application/json; charset=utf-8 11395.7947ms
+2026-02-25 00:25:49.635 +02:00 [INF] DB tables already exist. Exit install
+2026-02-25 00:25:52.595 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-25 00:26:06.743 +02:00 [INF] Executed DbCommand (1,661ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-25 00:26:09.546 +02:00 [INF] Executed DbCommand (1,587ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-25 00:26:11.783 +02:00 [INF] Executed DbCommand (161ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-25 00:26:12.020 +02:00 [INF] Executed DbCommand (91ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-25 00:26:12.331 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `UniversityMembers` AS `u`)
+2026-02-25 00:26:19.194 +02:00 [INF] Executed DbCommand (650ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Doctors` AS `d`)
+2026-02-25 00:26:21.373 +02:00 [INF] Executed DbCommand (79ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Students` AS `s`)
+2026-02-25 00:26:21.660 +02:00 [INF] Executed DbCommand (79ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Patients` AS `p`)
+2026-02-25 00:26:23.098 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-25 00:26:23.122 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-25 00:26:23.960 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-25 00:26:24.130 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-25 00:26:24.228 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-25 00:26:24.258 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-25 00:26:24.426 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-25 00:26:24.557 +02:00 [INF] Hosting environment: Development
+2026-02-25 00:26:24.855 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-25 00:26:26.003 +02:00 [INF] Server mrrobot:26984:79bfc0bb successfully announced in 1561.2864 ms
+2026-02-25 00:26:26.027 +02:00 [INF] Server mrrobot:26984:79bfc0bb is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-25 00:26:26.126 +02:00 [INF] Server mrrobot:26984:79bfc0bb all the dispatchers started
+2026-02-25 00:26:26.715 +02:00 [INF] 2 servers were removed due to timeout
+2026-02-25 00:26:30.210 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-02-25 00:26:31.711 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 1510.8243ms
+2026-02-25 00:26:32.097 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-02-25 00:26:32.098 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.js - null null
+2026-02-25 00:26:32.110 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-02-25 00:26:32.343 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 246.8433ms
+2026-02-25 00:26:32.378 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.js - 200 null application/javascript;charset=utf-8 279.4931ms
+2026-02-25 00:26:32.661 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 550.3301ms
+2026-02-25 00:26:32.932 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-02-25 00:26:34.521 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 1588.6004ms
+2026-02-25 00:27:28.969 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7267/api/Cases - multipart/form-data; boundary=----WebKitFormBoundarypqrGxE5NABmS75pm 5936
+2026-02-25 00:27:29.244 +02:00 [INF] CORS policy execution successful.
+2026-02-25 00:27:29.425 +02:00 [INF] Executing endpoint 'DentalHub.API.Controllers.CasesController.Create (DentalHub.API)'
+2026-02-25 00:27:29.592 +02:00 [INF] Route matched with {action = "Create", controller = "Cases"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[DentalHub.Application.DTOs.Shared.ApiResponse`1[System.String]]] Create(DentalHub.Application.Commands.PatientCase.CreatePatientCaseCommand) on controller DentalHub.API.Controllers.CasesController (DentalHub.API).
+2026-02-25 00:27:29.646 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-02-25 00:27:31.811 +02:00 [INF] Executed DbCommand (88ms) [Parameters=[@__dto_PatientId_0='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`UserId`, `p`.`Age`, `p`.`CreateAt`, `p`.`DeleteAt`, `p`.`Id`, `p`.`Phone`, `p`.`PublicId`, `p`.`UpdateAt`
+FROM `Patients` AS `p`
+WHERE `p`.`DeleteAt` IS NULL AND (`p`.`PublicId` = @__dto_PatientId_0)
+LIMIT 1
+2026-02-25 00:27:32.223 +02:00 [INF] Executed DbCommand (114ms) [Parameters=[@__dto_CaseTypeId_0='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreateAt`, `c`.`DeleteAt`, `c`.`Description`, `c`.`Name`, `c`.`PublicId`, `c`.`UpdateAt`
+FROM `CaseTypes` AS `c`
+WHERE `c`.`DeleteAt` IS NULL AND (`c`.`PublicId` = @__dto_CaseTypeId_0)
+LIMIT 1
+2026-02-25 00:27:33.549 +02:00 [INF] Executed DbCommand (91ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime), @p4='?' (DbType = DateTime), @p5='?' (Size = 4000), @p6='?' (DbType = Guid), @p7='?' (Size = 30), @p8='?' (DbType = Int32), @p9='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `PatientCases` (`Id`, `AssignedStudentId`, `CaseTypeId`, `CreateAt`, `DeleteAt`, `Description`, `PatientId`, `PublicId`, `Status`, `UpdateAt`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+2026-02-25 00:27:33.634 +02:00 [INF] Uploading media for Case with ID "019c91c3-c589-7f1e-8e44-d26bd5d58e0d"
+2026-02-25 00:27:37.712 +02:00 [ERR] Failed executing DbCommand (502ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (Size = 4000), @p3='?' (DbType = DateTime), @p4='?' (DbType = DateTime), @p5='?' (Size = 4000), @p6='?' (DbType = Guid), @p7='?' (DbType = Guid), @p8='?' (Size = 30), @p9='?' (DbType = Guid), @p10='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `Medias` (`Id`, `CaseTypeId`, `CloudinaryPublicId`, `CreateAt`, `DeleteAt`, `MediaUrl`, `PatientCaseId`, `PatientId`, `PublicId`, `SessionId`, `UpdateAt`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+2026-02-25 00:27:37.866 +02:00 [ERR] An exception occurred in the database while saving changes for context type 'DentalHub.Infrastructure.ContextAndConfig.ContextApp'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> MySqlConnector.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`db39102`.`medias`, CONSTRAINT `FK_Medias_Patients_PatientId` FOREIGN KEY (`PatientId`) REFERENCES `patients` (`UserId`) ON DELETE CASCADE)
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> MySqlConnector.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`db39102`.`medias`, CONSTRAINT `FK_Medias_Patients_PatientId` FOREIGN KEY (`PatientId`) REFERENCES `patients` (`UserId`) ON DELETE CASCADE)
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-02-25 00:27:38.298 +02:00 [ERR] Database update error occurred
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> MySqlConnector.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`db39102`.`medias`, CONSTRAINT `FK_Medias_Patients_PatientId` FOREIGN KEY (`PatientId`) REFERENCES `patients` (`UserId`) ON DELETE CASCADE)
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at DentalHub.Infrastructure.UnitOfWork.UnitOfWork.SaveChangesAsync() in D:\projects\DentalHub\DentalHub.Infrastructure\UnitOfWork\UnitOfWork.cs:line 70
+2026-02-25 00:27:38.434 +02:00 [ERR] Error saving media for Case "019c91c3-c589-7f1e-8e44-d26bd5d58e0d"
+System.InvalidOperationException: Cannot save changes. The referenced record does not exist.
+ ---> Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> MySqlConnector.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`db39102`.`medias`, CONSTRAINT `FK_Medias_Patients_PatientId` FOREIGN KEY (`PatientId`) REFERENCES `patients` (`UserId`) ON DELETE CASCADE)
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at DentalHub.Infrastructure.UnitOfWork.UnitOfWork.SaveChangesAsync() in D:\projects\DentalHub\DentalHub.Infrastructure\UnitOfWork\UnitOfWork.cs:line 70
+   --- End of inner exception stack trace ---
+   at DentalHub.Infrastructure.UnitOfWork.UnitOfWork.SaveChangesAsync() in D:\projects\DentalHub\DentalHub.Infrastructure\UnitOfWork\UnitOfWork.cs:line 102
+   at DentalHub.Infrastructure.Services.MediaService.SaveMediaAndLinkToEntityAsync(IFormFile file, String folderName, Guid entityId, String entityType) in D:\projects\DentalHub\DentalHub.Infrastructure\Services\MediaService.cs:line 136
+2026-02-25 00:27:38.515 +02:00 [WRN] Failed to upload image during case creation: Internal error: Cannot save changes. The referenced record does not exist.
+2026-02-25 00:27:38.532 +02:00 [INF] Patient case created: PaAv9oI5yhaRsZE5NAUiZ for patient 1BUIFp6vXxCoQW2zl8GEQv
+2026-02-25 00:27:39.251 +02:00 [INF] Executed DbCommand (94ms) [Parameters=[@__publicId_0='?' (Size = 30)], CommandType='"Text"', CommandTimeout='30']
+SELECT `s0`.`PublicId`, `s0`.`PublicId0`, `s0`.`FullName`, `s0`.`Age`, `s0`.`PublicId1`, `s0`.`Name`, `s0`.`Description`, `s0`.`c`, `s0`.`CreateAt`, `s0`.`c0`, `s0`.`c1`, `s0`.`Id`, `s0`.`UserId`, `s0`.`Id0`, `s0`.`Id1`, `m0`.`MediaUrl`, `m0`.`Id`
+FROM (
+    SELECT `p`.`PublicId`, `p1`.`PublicId` AS `PublicId0`, `a`.`FullName`, `p1`.`Age`, `c0`.`PublicId` AS `PublicId1`, `c0`.`Name`, `c0`.`Description`, CASE `p`.`Status`
+        WHEN 0 THEN 'Pending'
+        WHEN 1 THEN 'InProgress'
+        WHEN 2 THEN 'Completed'
+        WHEN 3 THEN 'Cancelled'
+        WHEN 4 THEN 'UnderReview'
+        ELSE CAST(`p`.`Status` AS char)
+    END AS `c`, `p`.`CreateAt`, (
+        SELECT COUNT(*)
+        FROM `Sessions` AS `s`
+        WHERE `s`.`DeleteAt` IS NULL AND (`p`.`Id` = `s`.`CaseId`)) AS `c0`, (
+        SELECT COUNT(*)
+        FROM `CaseRequests` AS `c1`
+        WHERE (`c1`.`DeleteAt` IS NULL AND (`p`.`Id` = `c1`.`PatientCaseId`)) AND (`c1`.`Status` = 0)) AS `c1`, `p`.`Id`, `p1`.`UserId`, `a`.`Id` AS `Id0`, `c0`.`Id` AS `Id1`
+    FROM `PatientCases` AS `p`
+    INNER JOIN (
+        SELECT `p0`.`UserId`, `p0`.`Age`, `p0`.`PublicId`
+        FROM `Patients` AS `p0`
+        WHERE `p0`.`DeleteAt` IS NULL
+    ) AS `p1` ON `p`.`PatientId` = `p1`.`UserId`
+    INNER JOIN `AspNetUsers` AS `a` ON `p1`.`UserId` = `a`.`Id`
+    INNER JOIN (
+        SELECT `c`.`Id`, `c`.`Description`, `c`.`Name`, `c`.`PublicId`
+        FROM `CaseTypes` AS `c`
+        WHERE `c`.`DeleteAt` IS NULL
+    ) AS `c0` ON `p`.`CaseTypeId` = `c0`.`Id`
+    WHERE `p`.`DeleteAt` IS NULL AND (`p`.`PublicId` = @__publicId_0)
+    LIMIT 1
+) AS `s0`
+LEFT JOIN (
+    SELECT `m`.`MediaUrl`, `m`.`Id`, `m`.`PatientCaseId`
+    FROM `Medias` AS `m`
+    WHERE `m`.`DeleteAt` IS NULL
+) AS `m0` ON `s0`.`Id` = `m0`.`PatientCaseId`
+ORDER BY `s0`.`Id`, `s0`.`UserId`, `s0`.`Id0`, `s0`.`Id1`
+2026-02-25 00:27:39.316 +02:00 [INF] Executing OkObjectResult, writing value of type 'DentalHub.Application.DTOs.Shared.ApiResponse`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-25 00:27:39.378 +02:00 [INF] Executed action DentalHub.API.Controllers.CasesController.Create (DentalHub.API) in 9728.5709ms
+2026-02-25 00:27:39.410 +02:00 [INF] Executed endpoint 'DentalHub.API.Controllers.CasesController.Create (DentalHub.API)'
+2026-02-25 00:27:39.427 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7267/api/Cases - 200 null application/json; charset=utf-8 10459.6511ms

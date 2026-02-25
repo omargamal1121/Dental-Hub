@@ -81,7 +81,7 @@ namespace DentalHub.API.Controllers
             return HandleResult(result);
         }
 
-        /// Get my profile — returns different schema based on the Role in JWT Token:
+      
         [Authorize]
         [HttpGet("My-Profile")]
         [SwaggerResponse(StatusCodes.Status200OK, "Doctor profile", typeof(ApiResponse<DoctorDto>))]
@@ -100,11 +100,10 @@ namespace DentalHub.API.Controllers
             if (string.IsNullOrEmpty(role))
                 return CreateErrorResponse<object>("Unauthorized: Role not found in token", 401);
 
-            var result = await _mediator.Send(new GetMyProfileQuery(userId.Value.ToString(), role));
+            var result = await _mediator.Send(new GetMyProfileQuery(userId, role));
             return HandleResult(result);
         }
 
-        /// Get my statistics — available for Doctor and Student only:
         [Authorize(Roles = "Doctor,Student")]
         [HttpGet("me/Statistics")]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
@@ -120,7 +119,7 @@ namespace DentalHub.API.Controllers
             if (string.IsNullOrEmpty(role))
                 return CreateErrorResponse<object>("Unauthorized: Role not found in token", 401);
 
-            var result = await _mediator.Send(new GetMyStatisticsQuery(userId.Value.ToString(), role));
+            var result = await _mediator.Send(new GetMyStatisticsQuery(userId.ToString(), role));
             return HandleResult(result);
         }
     }

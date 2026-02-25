@@ -19,7 +19,7 @@ namespace DentalHub.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -206,6 +206,9 @@ namespace DentalHub.API
 
             // Redirect root to Swagger
             app.MapGet("/", () => Results.Redirect("/swagger"));
+
+            // ── Seed initial data ─────────────────────────────────────────────────
+            await DataSeeder.SeedAsync(app.Services);
 
             // Run the application
             app.Run();

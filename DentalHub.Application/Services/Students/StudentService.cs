@@ -60,16 +60,14 @@ namespace DentalHub.Application.Services.Students
             }
         }
 
-        // For the student himself - searches by UserId (coming from the JWT token)
+        
         public async Task<Result<StudentDto>> GetStudentByUserIdAsync(string userId)
         {
             try
             {
-                if (!Guid.TryParse(userId, out var userGuid))
-                    return Result<StudentDto>.Failure("Invalid user ID");
-
+          
                 var spec = new BaseSpecificationWithProjection<Student, StudentDto>(
-                    s => s.UserId == userGuid,
+                    s => s.PublicId == userId,
                     s => new StudentDto
                     {
                         PublicId = s.PublicId,
@@ -218,50 +216,120 @@ namespace DentalHub.Application.Services.Students
 
         #endregion
 
-        #region Available Cases
+        #region Cases
 
-
-        public async Task<Result<PagedResult<PatientCaseDto>>> GetAvailableCasesForStudentAsync(
-            string studentPublicId, int page = 1, int pageSize = 10)
+        /// Returns cases on which the student has already placed at least one CaseRequest.
+        public async Task<Result<PagedResult<PatientCaseDto>>> GetMyCasesForStudentAsync(
+            string studentPublicId,string Casetype ,int page = 1, int pageSize = 10)
         {
             try
             {
-                var student = await _unitOfWork.Students.GetByIdAsync(
-                    new BaseSpecification<Student>(s => s.PublicId == studentPublicId));
+             
+                var studentid = await _unitOfWork.Students.GetByIdAsync(
+                    new BaseSpecificationWithProjection<Student,Guid>(s => s.PublicId == studentPublicId,s=>s.Id));
 
-                if (student == null)
-                {
-                    return Result<PagedResult<PatientCaseDto>>.Failure("Student not found");
-                }
+                if (Guid.Empty== studentid)
+                    return Result<PagedResult<PatientCaseDto>>.Failure("Student not found", 404);
 
+                var studentGuid = studentid;
+ 
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
-                    pc => pc.Status == CaseStatus.Pending,
+                    pc => pc.CaseRequests.Any(cr => cr.StudentId == studentGuid&&cr.Status==RequestStatus.Approved)&&(
+                    string.IsNullOrEmpty(Casetype)||pc.CaseType.Name.Contains(Casetype)||pc.CaseType.Description.Contains(Casetype)),
                     pc => new PatientCaseDto
                     {
-                        Id = pc.PublicId,
-                        PatientId = pc.Patient.PublicId,
-                        PatientName = pc.Patient.User.FullName,
-                        PatientAge = pc.Patient.Age,
-                        CaseType = new DTOs.CaseTypes.CaseTypeDto { Id = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
-                        Status = pc.Status.ToString(),
-                        CreateAt = pc.CreateAt,
-                        TotalSessions = pc.Sessions.Count,
-                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending)
+                        Id              = pc.PublicId,
+                        PatientId       = pc.Patient.PublicId,
+                        PatientName     = pc.Patient.User.FullName,
+                        PatientAge      = pc.Patient.Age,
+                        CaseType        = new DTOs.CaseTypes.CaseTypeDto
+                        {
+                            publicId    = pc.CaseType.PublicId,
+                            Name        = pc.CaseType.Name,
+                            Description = pc.CaseType.Description
+                        },
+                        Status          = pc.Status.ToString(),
+                        CreateAt        = pc.CreateAt,
+                        TotalSessions   = pc.Sessions.Count,
+                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
+                        ImageUrls       = pc.Medias.Select(m => m.MediaUrl).ToList()
                     }
                 );
-
 
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(pc => pc.CreateAt);
 
-                var casesList = await _unitOfWork.PatientCases.GetAllAsync(spec);
+                var casesList  = await _unitOfWork.PatientCases.GetAllAsync(spec);
                 var totalCount = await _unitOfWork.PatientCases.CountAsync(spec);
 
                 var pagedResult = PaginationFactory<PatientCaseDto>.Create(
-                    count: totalCount,
-                    page: page,
+                    count:    totalCount,
+                    page:     page,
                     pageSize: pageSize,
-                    data: casesList
+                    data:     casesList
+                );
+
+                return Result<PagedResult<PatientCaseDto>>.Success(pagedResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting my cases for student: {StudentId}", studentPublicId);
+                return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving cases");
+            }
+        }
+
+      
+        public async Task<Result<PagedResult<PatientCaseDto>>> GetAvailableCasesForStudentAsync(
+            string studentPublicId,string? CaseName=null, int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                var studentid = await _unitOfWork.Students.GetByIdAsync(
+                    new BaseSpecificationWithProjection<Student,Guid>(s => s.PublicId == studentPublicId,s=>s.Id));
+
+                if (studentid==Guid.Empty)
+                    return Result<PagedResult<PatientCaseDto>>.Failure("Student not found", 404);
+
+                var studentGuid = studentid;
+
+                
+                var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
+                    pc => pc.Status == CaseStatus.Pending &&
+                          !pc.CaseRequests.Any(cr => cr.StudentId == studentGuid)
+                          &&(
+                          string.IsNullOrEmpty(CaseName) ||
+						  pc.CaseType.Name.Contains(CaseName)||pc.CaseType.Description.Contains(CaseName)),
+                    pc => new PatientCaseDto
+                    {
+                        Id              = pc.PublicId,
+                        PatientId       = pc.Patient.PublicId,
+                        PatientName     = pc.Patient.User.FullName,
+                        PatientAge      = pc.Patient.Age,
+                        CaseType        = new DTOs.CaseTypes.CaseTypeDto
+                        {
+                            publicId    = pc.CaseType.PublicId,
+                            Name        = pc.CaseType.Name,
+                            Description = pc.CaseType.Description
+                        },
+                        Status          = pc.Status.ToString(),
+                        CreateAt        = pc.CreateAt,
+                        TotalSessions   = pc.Sessions.Count,
+                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
+                        ImageUrls       = pc.Medias.Select(m => m.MediaUrl).ToList()
+                    }
+                );
+
+                spec.ApplyPaging(page, pageSize);
+                spec.ApplyOrderByDescending(pc => pc.CreateAt);
+
+                var casesList  = await _unitOfWork.PatientCases.GetAllAsync(spec);
+                var totalCount = await _unitOfWork.PatientCases.CountAsync(spec);
+
+                var pagedResult = PaginationFactory<PatientCaseDto>.Create(
+                    count:    totalCount,
+                    page:     page,
+                    pageSize: pageSize,
+                    data:     casesList
                 );
 
                 return Result<PagedResult<PatientCaseDto>>.Success(pagedResult);

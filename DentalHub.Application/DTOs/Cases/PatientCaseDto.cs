@@ -14,6 +14,7 @@ namespace DentalHub.Application.DTOs.Cases
         public DateTime CreateAt { get; set; }
         public int TotalSessions { get; set; }
         public int PendingRequests { get; set; }
+        public List<string> ImageUrls { get; set; } = new List<string>();
     }
 
 }

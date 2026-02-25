@@ -24,7 +24,7 @@ namespace DentalHub.Application.Handlers.PatientCase
                 
               
                 Description = request.Description,
-             
+                Images = request.Images
             };
 
             var result = await _service.CreateCaseAsync(dto);

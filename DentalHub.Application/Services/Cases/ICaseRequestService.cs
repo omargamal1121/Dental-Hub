@@ -13,7 +13,7 @@ namespace DentalHub.Application.Services.Cases
             string doctorPublicId, int page = 1, int pageSize = 10);
 
         Task<Result<PagedResult<CaseRequestDto>>> GetRequestsByStudentIdAsync(
-            string studentPublicId, int page = 1, int pageSize = 10);
+            string studentPublicId, RequestStatus? status = null, int page = 1, int pageSize = 10);
 
         Task<Result<CaseRequestDto>> GetRequestByPublicIdAsync(string publicId);
 

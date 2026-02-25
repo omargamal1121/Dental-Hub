@@ -439,6 +439,13 @@
             }
           },
           {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/RequestStatus"
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {
@@ -760,20 +767,114 @@
       }
     },
     "/api/Cases": {
+      "get": {
+        "tags": [
+          "Cases"
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientCaseDtoPagedResultApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "Cases"
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CreatePatientCaseCommand"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatePatientCaseCommand"
+                "type": "object",
+                "properties": {
+                  "PatientId": {
+                    "type": "string"
+                  },
+                  "Title": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "CaseTypeId": {
+                    "type": "string"
+                  },
+                  "Images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "PatientId": {
+                  "style": "form"
+                },
+                "Title": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "CaseTypeId": {
+                  "style": "form"
+                },
+                "Images": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -1241,12 +1342,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateDoctorCommand"
+                "$ref": "#/components/schemas/RegisterDoctorDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateDoctorCommand"
+                "$ref": "#/components/schemas/RegisterDoctorDto"
               }
             }
           }
@@ -2338,12 +2439,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateStudentCommand"
+                "$ref": "#/components/schemas/RegisterStudentDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateStudentCommand"
+                "$ref": "#/components/schemas/RegisterStudentDto"
               }
             }
           }
@@ -2546,16 +2647,15 @@
         }
       }
     },
-    "/api/Students/{id}/available-cases": {
+    "/api/Students/my-cases": {
       "get": {
         "tags": [
           "Students"
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
+            "name": "caseType",
+            "in": "query",
             "schema": {
               "type": "string"
             }
@@ -2590,8 +2690,120 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Students/available-cases": {
+      "get": {
+        "tags": [
+          "Students"
+        ],
+        "parameters": [
+          {
+            "name": "caseType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientCaseDtoPagedResultApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Students/my-requests": {
+      "get": {
+        "tags": [
+          "Students"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseRequestDtoPagedResultApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "schema": {
@@ -2908,7 +3120,7 @@
             "type": "string",
             "nullable": true
           },
-          "patientCaseId": {
+          "patientCasePublicId": {
             "type": "string",
             "nullable": true
           },
@@ -2920,7 +3132,7 @@
             "type": "string",
             "nullable": true
           },
-          "studentId": {
+          "studentPublicId": {
             "type": "string",
             "nullable": true
           },
@@ -3107,7 +3319,7 @@
       "CaseTypeDto": {
         "type": "object",
         "properties": {
-          "id": {
+          "publicId": {
             "type": "string",
             "nullable": true
           },
@@ -3276,54 +3488,6 @@
         },
         "additionalProperties": false
       },
-      "CreateDoctorCommand": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "specialty": {
-            "type": "string",
-            "nullable": true
-          },
-          "universityId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CreatePatientCaseCommand": {
-        "type": "object",
-        "properties": {
-          "patientId": {
-            "type": "string",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "caseTypeId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "CreatePatientCommand": {
         "type": "object",
         "properties": {
@@ -3379,32 +3543,6 @@
         },
         "additionalProperties": false
       },
-      "CreateStudentCommand": {
-        "type": "object",
-        "properties": {
-          "fullName": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "universityId": {
-            "type": "string",
-            "nullable": true
-          },
-          "level": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
       "DoctorDto": {
         "type": "object",
         "properties": {
@@ -3417,10 +3555,6 @@
             "nullable": true
           },
           "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
             "type": "string",
             "nullable": true
           },
@@ -3735,6 +3869,13 @@
           "pendingRequests": {
             "type": "integer",
             "format": "int32"
+          },
+          "imageUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3987,6 +4128,118 @@
           },
           "links": {
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterDoctorDto": {
+        "required": [
+          "email",
+          "fullName",
+          "password",
+          "phone",
+          "specialty",
+          "universityId",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "maxLength": 100,
+            "minLength": 3,
+            "pattern": "^[a-zA-Z\\u0621-\\u064A\\s]+$",
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "maxLength": 100,
+            "minLength": 8,
+            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$",
+            "type": "string"
+          },
+          "specialty": {
+            "maxLength": 100,
+            "minLength": 3,
+            "type": "string"
+          },
+          "universityId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "username": {
+            "minLength": 1,
+            "pattern": "^(?=.{3,20}$)(?!.*__)[a-z][a-z0-9_]*[a-z0-9]$",
+            "type": "string"
+          },
+          "phone": {
+            "minLength": 1,
+            "pattern": "^\\+?[1-9]\\d{7,14}$",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterStudentDto": {
+        "required": [
+          "email",
+          "fullName",
+          "level",
+          "password",
+          "phone",
+          "university",
+          "universityId",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "maxLength": 100,
+            "minLength": 3,
+            "pattern": "^[a-zA-Z\\u0621-\\u064A\\s]+$",
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "maxLength": 100,
+            "minLength": 8,
+            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$",
+            "type": "string"
+          },
+          "university": {
+            "maxLength": 200,
+            "minLength": 3,
+            "type": "string"
+          },
+          "universityId": {
+            "minLength": 4,
+            "type": "string"
+          },
+          "username": {
+            "minLength": 1,
+            "pattern": "^(?=.{3,20}$)(?!.*__)[a-z][a-z0-9_]*[a-z0-9]$",
+            "type": "string"
+          },
+          "level": {
+            "maximum": 7,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "phone": {
+            "minLength": 1,
+            "pattern": "^(010|011|012|015)\\d{8}$",
+            "type": "string",
+            "format": "tel"
           }
         },
         "additionalProperties": false
@@ -4486,6 +4739,10 @@
             "items": {
               "type": "string"
             },
+            "nullable": true
+          },
+          "publicId": {
+            "type": "string",
             "nullable": true
           }
         },

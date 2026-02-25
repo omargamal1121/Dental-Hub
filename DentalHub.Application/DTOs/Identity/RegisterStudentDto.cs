@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DentalHub.Application.DTOs.Identity
 {
-    /// DTO for student registration
     public class RegisterStudentDto
     {
         [Required(ErrorMessage = "Full name is required")]
@@ -26,11 +25,22 @@ namespace DentalHub.Application.DTOs.Identity
         public string University { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "University ID is required")]
-        [Range(1, int.MaxValue, ErrorMessage = "University ID must be a positive number")]
-        public string UniversityId { get; set; }
+        [MinLength(4, ErrorMessage = "Invalid University ID Must Be More than 4 char ")]
+        public string UniversityId { get; set; } = null!;
 
-        [Required(ErrorMessage = "Level is required")]
-        [Range(1, 5, ErrorMessage = "Level must be between 1 and 5")]
-        public int Level { get; set; }
-    }
+        [Required(ErrorMessage = "UserName required")]
+		[RegularExpression(@"^(?=.{3,20}$)(?!.*__)[a-z][a-z0-9_]*[a-z0-9]$",
+	    ErrorMessage = "Invalid username format")]
+
+        
+        public string Username { get; set; } = null!;
+        [Required(ErrorMessage ="Level is required")]
+        [Range(1,7,ErrorMessage ="Level must be between 1 and 7")]
+
+		public int Level { get; set; }
+		[Required(ErrorMessage = "Phone is required")]
+		[Phone(ErrorMessage = "Invalid phone number")]
+		[RegularExpression(@"^(010|011|012|015)\d{8}$", ErrorMessage = "Phone must be a valid Egyptian number")]
+		public string Phone { get; set; }
+	}
 }

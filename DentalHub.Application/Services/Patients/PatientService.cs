@@ -59,16 +59,13 @@ namespace DentalHub.Application.Services
             }
         }
 
-        // For the patient himself - searches by UserId (coming from the JWT token)
+
         public async Task<Result<PatientDto>> GetPatientByUserIdAsync(string userId)
         {
             try
             {
-                if (!Guid.TryParse(userId, out var userGuid))
-                    return Result<PatientDto>.Failure("Invalid user ID");
-
                 var spec = new BaseSpecificationWithProjection<Patient, PatientDto>(
-                    p => p.UserId == userGuid,
+                    p => p.PublicId == userId,
                     p => new PatientDto
                     {
                         PublicId = p.PublicId,

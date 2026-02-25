@@ -10,7 +10,7 @@ namespace DentalHub.Domain.Entities
         public User()
         {
             Id = Guid.CreateVersion7();
-            PublicId = DentalHub.Domain.Utils.Base62Converter.Encode(Id);
+            PublicId = Utils.Base62Converter.Encode(Id);
         }
 
         public string FullName { get; set; }

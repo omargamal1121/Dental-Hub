@@ -2,7 +2,15 @@
 {
     public class Doctor:BaseEntitiy 
     {
-        public string Name {  get; set; }
+		public Doctor()
+		{
+			
+		}
+		public Doctor(Guid id,string publicId):base(id,publicId)
+		{
+			UserId=id;	
+		}
+		public string Name {  get; set; }
         public Guid UserId { get; set; }
         public string Specialty { get; set; }
 		public string UniversityId { get; set; }

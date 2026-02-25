@@ -72,6 +72,7 @@ D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Serilog.Sinks.
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Serilog.Sinks.Debug.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Serilog.Sinks.File.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\StackExchange.Redis.dll
+D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Swashbuckle.AspNetCore.Annotations.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll

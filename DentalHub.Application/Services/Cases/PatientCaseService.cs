@@ -6,6 +6,7 @@ using DentalHub.Infrastructure.UnitOfWork;
 using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 using DentalHub.Application.Specification.Comman;
+using DentalHub.Application.Interfaces;
 
 namespace DentalHub.Application.Services.Cases
 {
@@ -13,11 +14,13 @@ namespace DentalHub.Application.Services.Cases
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<PatientCaseService> _logger;
+        private readonly IMediaService _mediaService;
 
-        public PatientCaseService(IUnitOfWork unitOfWork, ILogger<PatientCaseService> logger)
+        public PatientCaseService(IUnitOfWork unitOfWork, ILogger<PatientCaseService> logger, IMediaService mediaService)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _mediaService = mediaService;
         }
 
         #region CRUD Operations
@@ -52,6 +55,19 @@ namespace DentalHub.Application.Services.Cases
                 await _unitOfWork.PatientCases.AddAsync(patientCase);
                 await _unitOfWork.SaveChangesAsync();
 
+          
+                if (dto.Images != null && dto.Images.Any())
+                {
+                    foreach (var image in dto.Images)
+                    {
+                        var uploadResult = await _mediaService.SaveCaseMediaAsync(image, patientCase.Id);
+                        if (!uploadResult.IsSuccess)
+                        {
+                            _logger.LogWarning("Failed to upload image during case creation: {Error}", string.Join(", ", uploadResult.Errors ?? new List<string>()));
+                        }
+                    }
+                }
+
                 _logger.LogInformation("Patient case created: {PublicId} for patient {PatientPublicId}",
                     patientCase.PublicId, dto.PatientId);
 
@@ -77,12 +93,13 @@ namespace DentalHub.Application.Services.Cases
                         PatientId = pc.Patient.PublicId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        CaseType = new CaseTypeDto { Id = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
+                        CaseType = new CaseTypeDto { publicId = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
                         
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
-                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending)
+                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
+                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
                     }
                 );
                 var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(spec);
@@ -113,11 +130,12 @@ namespace DentalHub.Application.Services.Cases
                         PatientId = pc.Patient.PublicId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        CaseType = new CaseTypeDto { Id = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
+                        CaseType = new CaseTypeDto { publicId = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
-                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending)
+                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
+                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
                     }
                 );
 
@@ -142,6 +160,74 @@ namespace DentalHub.Application.Services.Cases
                 return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving cases");
             }
         }
+
+        public async Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(
+            string? search, string? status, int page = 1, int pageSize = 10)
+        {
+            try
+            {
+               
+                CaseStatus? parsedStatus = null;
+                if (!string.IsNullOrWhiteSpace(status))
+                {
+                    if (!Enum.TryParse<CaseStatus>(status, ignoreCase: true, out var s))
+                        return Result<PagedResult<PatientCaseDto>>.Failure(
+                            $"Invalid status '{status}'. Valid values: {string.Join(", ", Enum.GetNames<CaseStatus>())}", 400);
+                    parsedStatus = s;
+                }
+
+                var searchLower = search?.Trim().ToLower();
+
+                var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
+                    pc =>
+                      
+                        (parsedStatus == null || pc.Status == parsedStatus) &&
+                     
+                        (searchLower == null ||
+                         pc.CaseType.Description.ToLower().Contains(searchLower) ||
+                         pc.CaseType.Name.ToLower().Contains(searchLower)),
+                    pc => new PatientCaseDto
+                    {
+                        Id             = pc.PublicId,
+                        PatientId      = pc.Patient.PublicId,
+                        PatientName    = pc.Patient.User.FullName,
+                        PatientAge     = pc.Patient.Age,
+                        CaseType       = new CaseTypeDto
+                        {
+                            publicId    = pc.CaseType.PublicId,
+                            Name        = pc.CaseType.Name,
+                            Description = pc.CaseType.Description
+                        },
+                        Status         = pc.Status.ToString(),
+                        CreateAt       = pc.CreateAt,
+                        TotalSessions  = pc.Sessions.Count,
+                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
+                        ImageUrls      = pc.Medias.Select(m => m.MediaUrl).ToList()
+                    }
+                );
+
+                spec.ApplyPaging(page, pageSize);
+                spec.ApplyOrderByDescending(pc => pc.CreateAt);
+
+                var casesList  = await _unitOfWork.PatientCases.GetAllAsync(spec);
+                var totalCount = await _unitOfWork.PatientCases.CountAsync(spec);
+
+                var pagedResult = PaginationFactory<PatientCaseDto>.Create(
+                    count:    totalCount,
+                    page:     page,
+                    pageSize: pageSize,
+                    data:     casesList
+                );
+
+                return Result<PagedResult<PatientCaseDto>>.Success(pagedResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting all cases (search={Search}, status={Status})", search, status);
+                return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving cases");
+            }
+        }
+
 
         /// Update case information
         public async Task<Result<PatientCaseDto>> UpdateCaseAsync(UpdateCaseDto dto)
@@ -215,7 +301,7 @@ namespace DentalHub.Application.Services.Cases
         {
             try
             {
-                // Parse status
+              
                 if (!Enum.TryParse<CaseStatus>(status, out var caseStatus))
                 {
                     return Result<PagedResult<PatientCaseDto>>.Failure("Invalid status");
@@ -229,17 +315,16 @@ namespace DentalHub.Application.Services.Cases
                         PatientId = pc.Patient.PublicId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        CaseType = new CaseTypeDto { Id = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
+                        CaseType = new CaseTypeDto { publicId = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
-                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending)
+                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
+                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
                     }
                 );
 
-                spec.AddInclude("Patient.User");
-                spec.AddInclude("Sessions");
-                spec.AddInclude("CaseRequests");
+             
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(pc => pc.CreateAt);
 
@@ -276,11 +361,12 @@ namespace DentalHub.Application.Services.Cases
                         PatientId = pc.Patient.PublicId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        CaseType = new CaseTypeDto { Id = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
+                        CaseType = new CaseTypeDto { publicId = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
-                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending)
+                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
+                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
                     }
                 );
 

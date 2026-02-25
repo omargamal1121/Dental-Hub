@@ -17,7 +17,7 @@ namespace DentalHub.Application.Handlers.Students
 
         public async Task<Result<PagedResult<PatientCaseDto>>> Handle(GetAvailableCasesForStudentQuery request, CancellationToken ct)
         {
-            return await _service.GetAvailableCasesForStudentAsync(request.StudentPublicId, request.PageNumber, request.PageSize);
+            return await _service.GetAvailableCasesForStudentAsync(request.StudentPublicId,request.CaseType ,request.PageNumber, request.PageSize);
         }
     }
 }

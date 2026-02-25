@@ -29,7 +29,7 @@ namespace DentalHub.Application.Services.CaseTypes
                     ct => ct.PublicId == publicId,
                     ct => new CaseTypeDto
                     {
-                        Id = ct.PublicId,
+						publicId = ct.PublicId,
                         Name = ct.Name,
                         Description = ct.Description
                     }
@@ -59,7 +59,7 @@ namespace DentalHub.Application.Services.CaseTypes
                     ct => string.IsNullOrEmpty(search) || ct.Name.Contains(search) || ct.Description.Contains(search),
                     ct => new CaseTypeDto
                     {
-                        Id = ct.PublicId,
+						publicId = ct.PublicId,
                         Name = ct.Name,
                         Description = ct.Description
                     }

@@ -20,11 +20,16 @@ namespace DentalHub.Application.Handlers.Students
             var registerDto = new RegisterStudentDto
             {
                 FullName = request.FullName,
-                Email = request.Email,
+                Phone= request.Phone,
+                
+				Email = request.Email,
                 Password = request.Password,
                 UniversityId = request.UniversityId,
+                Username= request.Username,
                 Level = request.Level
-            };
+            
+
+			};
 
             var result = await _userManagementService.RegisterStudentAsync(registerDto);
 

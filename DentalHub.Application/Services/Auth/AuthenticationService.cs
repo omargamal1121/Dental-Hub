@@ -79,7 +79,7 @@ namespace DentalHub.Application.Services.Auth
                 //}
 
                 var roles = (await _userManager.GetRolesAsync(user)).ToList();
-                return Result<TokensDto>.Success(new TokensDto { Token = tokenResult.Data, Roles = roles }, "Login successfully");
+                return Result<TokensDto>.Success(new TokensDto { Token = tokenResult.Data, Roles = roles ,PublicId=user.PublicId }, "Login successfully");
             }
             catch (Exception ex)
             {
@@ -87,6 +87,7 @@ namespace DentalHub.Application.Services.Auth
                 return Result<TokensDto>.Failure("An error occurred during login.");
             }
         }
+
 
         public async Task<Result<bool>> LogoutAsync(string publicId)
         {

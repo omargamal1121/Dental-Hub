@@ -25,7 +25,8 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                    .WithMany(x => x.PatientCases)
                    .HasForeignKey(x => x.CaseTypeId);
 			builder.HasQueryFilter(cr => cr.DeleteAt == null);
-           
+            builder.HasMany(cr=>cr.Medias).WithOne(m=>m.PatientCase).HasForeignKey(m=>m.PatientCaseId);
+
 
 		}
 	}

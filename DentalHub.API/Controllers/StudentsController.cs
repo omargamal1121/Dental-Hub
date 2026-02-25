@@ -1,8 +1,10 @@
 using DentalHub.Application.Commands.Students;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Cases;
+using DentalHub.Application.DTOs.Identity;
 using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.DTOs.Students;
+using DentalHub.Application.Queries.CaseRequests;
 using DentalHub.Application.Queries.Students;
 using DentalHub.Application.Services.Students;
 using MediatR;
@@ -26,9 +28,12 @@ namespace DentalHub.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] CreateStudentCommand command)
+        public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] RegisterStudentDto  registerStudent)
         {
-            var result = await _mediator.Send(command);
+            var command = new CreateStudentCommand(registerStudent.FullName, registerStudent.Email, registerStudent.Password, registerStudent.University,
+                registerStudent.Level, registerStudent.Username, registerStudent.Phone);
+         
+			var result = await _mediator.Send(command);
             return HandleResult(result);
         }
 
@@ -72,12 +77,68 @@ namespace DentalHub.API.Controllers
             return HandleResult(result);
         }
 
-        [HttpGet("{id}/available-cases")]
+       
+        [HttpGet("my-cases")]
+        [Authorize(Roles = "Student")]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<PatientCaseDto>>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<PagedResult<PatientCaseDto>>>> GetAvailableCases(string id, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<ApiResponse<PagedResult<PatientCaseDto>>>> GetMyCases(
+            [FromQuery] string? caseType = null,
+            [FromQuery] int     page     = 1,
+            [FromQuery] int     pageSize = 10)
         {
-            var result = await _mediator.Send(new GetAvailableCasesForStudentQuery(id, page, pageSize));
+            var studentPublicId = GetUserIdFromToken();
+            if (string.IsNullOrEmpty(studentPublicId))
+                return CreateErrorResponse<PagedResult<PatientCaseDto>>("Unauthorized", 401);
+
+            var result = await _mediator.Send(new GetMyCasesForStudentQuery(studentPublicId, caseType, page, pageSize));
+            return HandleResult(result);
+        }
+
+        [HttpGet("available-cases")]
+        [Authorize(Roles = "Student")]
+        [ProducesResponseType(typeof(ApiResponse<PagedResult<PatientCaseDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<ApiResponse<PagedResult<PatientCaseDto>>>> GetAvailableCases(
+            [FromQuery] string? caseType = null,
+            [FromQuery] int     page     = 1,
+            [FromQuery] int     pageSize = 10)
+        {
+            var studentPublicId = GetUserIdFromToken();
+            if (string.IsNullOrEmpty(studentPublicId))
+                return CreateErrorResponse<PagedResult<PatientCaseDto>>("Unauthorized", 401);
+
+            var result = await _mediator.Send(new GetAvailableCasesForStudentQuery(studentPublicId, caseType, page, pageSize));
+            return HandleResult(result);
+        }
+
+        [HttpGet("my-requests")]
+        [Authorize(Roles = "Student")]
+        [ProducesResponseType(typeof(ApiResponse<PagedResult<CaseRequestDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetMyRequests(
+            [FromQuery] string? status = null,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10)
+        {
+            var studentPublicId = GetUserIdFromToken();
+            if (string.IsNullOrEmpty(studentPublicId))
+                return CreateErrorResponse<PagedResult<CaseRequestDto>>("Unauthorized", 401);
+
+            RequestStatus? requestStatus = null;
+            if (!string.IsNullOrEmpty(status))
+            {
+                if (Enum.TryParse<RequestStatus>(status, true, out var parsedStatus))
+                {
+                    requestStatus = parsedStatus;
+                }
+                else
+                {
+                    return CreateErrorResponse<PagedResult<CaseRequestDto>>($"Invalid status: {status}", 400);
+                }
+            }
+
+            var result = await _mediator.Send(new GetCaseRequestsByStudentIdQuery(studentPublicId, requestStatus, page, pageSize));
             return HandleResult(result);
         }
 

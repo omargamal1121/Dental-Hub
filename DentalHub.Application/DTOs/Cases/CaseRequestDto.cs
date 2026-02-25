@@ -6,10 +6,10 @@ namespace DentalHub.Application.DTOs.Cases
     public class CaseRequestDto
     {
         public string Id { get; set; }
-        public string PatientCaseId { get; set; }
+        public string PatientCasePublicId { get; set; }
         public string PatientName { get; set; } = string.Empty;
 		public string CaseName { get; set; }
-		public string StudentId { get; set; }
+		public string StudentPublicId { get; set; }
         public string StudentName { get; set; } = string.Empty;
         public string University { get; set; } = string.Empty;
         public int Level { get; set; }

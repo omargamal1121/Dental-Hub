@@ -1,0 +1,116 @@
+2026-02-24 23:37:42.934 +02:00 [INF] Executed DbCommand (161ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
+2026-02-24 23:37:43.398 +02:00 [INF] Executed DbCommand (78ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-02-24 23:38:13.018 +02:00 [INF] DB tables already exist. Exit install
+2026-02-24 23:38:14.302 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-24 23:38:19.140 +02:00 [INF] Executed DbCommand (251ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-24 23:38:19.730 +02:00 [INF] Executed DbCommand (208ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-24 23:38:20.456 +02:00 [INF] Executed DbCommand (590ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-24 23:38:20.775 +02:00 [INF] Executed DbCommand (201ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-24 23:38:23.427 +02:00 [INF] Executed DbCommand (182ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `UniversityMembers` AS `u`)
+2026-02-24 23:38:26.719 +02:00 [INF] Executed DbCommand (111ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Doctors` AS `d`)
+2026-02-24 23:38:26.995 +02:00 [INF] Executed DbCommand (128ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Students` AS `s`)
+2026-02-24 23:38:27.264 +02:00 [INF] Executed DbCommand (105ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Patients` AS `p`)
+2026-02-24 23:38:28.929 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-24 23:38:28.959 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-24 23:38:29.535 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-24 23:38:29.632 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-24 23:38:29.647 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-24 23:38:29.649 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-24 23:38:29.733 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-24 23:38:29.872 +02:00 [INF] Hosting environment: Development
+2026-02-24 23:38:29.891 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-24 23:38:31.704 +02:00 [INF] Server mrrobot:22544:dbb18ff6 successfully announced in 1924.8216 ms
+2026-02-24 23:38:31.900 +02:00 [INF] Server mrrobot:22544:dbb18ff6 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-24 23:38:32.154 +02:00 [INF] Server mrrobot:22544:dbb18ff6 all the dispatchers started
+2026-02-24 23:38:32.185 +02:00 [INF] 1 servers were removed due to timeout
+2026-02-24 23:38:57.642 +02:00 [INF] DB tables already exist. Exit install
+2026-02-24 23:38:59.661 +02:00 [INF] User profile is available. Using 'C:\Users\DELL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-24 23:39:11.847 +02:00 [INF] Executed DbCommand (318ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-24 23:39:12.338 +02:00 [INF] Executed DbCommand (119ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-24 23:39:12.656 +02:00 [INF] Executed DbCommand (150ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-24 23:39:13.266 +02:00 [INF] Executed DbCommand (337ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-02-24 23:39:14.219 +02:00 [INF] Executed DbCommand (557ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `UniversityMembers` AS `u`)
+2026-02-24 23:39:14.465 +02:00 [INF] Executed DbCommand (95ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Doctors` AS `d`)
+2026-02-24 23:39:14.673 +02:00 [INF] Executed DbCommand (89ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Students` AS `s`)
+2026-02-24 23:39:14.917 +02:00 [INF] Executed DbCommand (121ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Patients` AS `p`)
+2026-02-24 23:39:15.423 +02:00 [INF] Now listening on: https://localhost:7267
+2026-02-24 23:39:15.435 +02:00 [INF] Now listening on: http://localhost:5045
+2026-02-24 23:39:15.700 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-02-24 23:39:15.756 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-02-24 23:39:15.763 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-02-24 23:39:15.777 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-02-24 23:39:15.831 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-24 23:39:15.860 +02:00 [INF] Hosting environment: Development
+2026-02-24 23:39:15.869 +02:00 [INF] Content root path: D:\projects\DentalHub\DentalHub.API
+2026-02-24 23:39:16.299 +02:00 [INF] Server mrrobot:1708:087a6a77 successfully announced in 447.5309 ms
+2026-02-24 23:39:16.306 +02:00 [INF] Server mrrobot:1708:087a6a77 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-02-24 23:39:16.523 +02:00 [INF] Server mrrobot:1708:087a6a77 all the dispatchers started
+2026-02-24 23:39:16.619 +02:00 [INF] 1 servers were removed due to timeout

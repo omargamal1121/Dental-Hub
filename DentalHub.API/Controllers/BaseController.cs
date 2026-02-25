@@ -40,20 +40,19 @@ namespace DentalHub.API.Controllers
         protected string GetUserId() =>
             HttpContext?.Items?["UserId"]?.ToString() ?? string.Empty;
 
-        /// Extract UserId from JWT Token Claims
-        protected Guid? GetUserIdFromToken()
+    
+        protected string? GetUserIdFromToken()
         {
             var userIdClaim = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userIdClaim))
                 return null;
 
-            if (Guid.TryParse(userIdClaim, out var userId))
-                return userId;
+           
 
-            return null;
+            return userIdClaim;
         }
 
-        /// Extract User Role from JWT Token Claims
+      
         protected string? GetUserRoleFromToken()
         {
             return User?.FindFirst(ClaimTypes.Role)?.Value;

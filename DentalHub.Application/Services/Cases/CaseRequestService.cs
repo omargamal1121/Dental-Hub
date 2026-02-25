@@ -30,7 +30,7 @@ namespace DentalHub.Application.Services.Cases
 			try
 			{
 
-				// 1️⃣ Get PatientCase Id
+				
 				var patientCaseId = await _unitOfWork.PatientCases.GetByIdAsync(
 					new BaseSpecificationWithProjection<PatientCase, Guid>(
 						pc => pc.PublicId == dto.PatientCasePublicId
@@ -41,7 +41,7 @@ namespace DentalHub.Application.Services.Cases
 					return Result<CaseRequestDto>. Failure("Patient case not found or taken");
 
 
-				// 2️⃣ Get Doctor Id
+				
 				var doctorId = await _unitOfWork.Doctors.GetByIdAsync(
 					new BaseSpecificationWithProjection<Doctor, Guid>(
 						d => d.PublicId == dto.DoctorPublicId,
@@ -51,7 +51,7 @@ namespace DentalHub.Application.Services.Cases
 					return Result<CaseRequestDto>.Failure("Doctor not found");
 
 
-				// 3️⃣ Get Student Id
+				
 				var studentId = await _unitOfWork.Students.GetByIdAsync(
 					new BaseSpecificationWithProjection<Student, Guid>(
 						s => s.PublicId == dto.StudentPublicId,
@@ -61,7 +61,7 @@ namespace DentalHub.Application.Services.Cases
 					return Result<CaseRequestDto>.Failure("Student not found");
 
 
-				// 4️⃣ Check duplicate
+				
 				var duplicate = await _unitOfWork.CaseRequests.AnyAsync(
 					new BaseSpecification<CaseRequest>(cr =>
 						cr.PatientCaseId == patientCaseId &&
@@ -72,7 +72,7 @@ namespace DentalHub.Application.Services.Cases
 					return Result<CaseRequestDto>.Failure("You already have a request for this case");
 
 
-				// 5️⃣ Create
+				
 				var caseRequest = new CaseRequest
 				{
 					PatientCaseId = patientCaseId,
@@ -114,10 +114,10 @@ namespace DentalHub.Application.Services.Cases
                     cr => new CaseRequestDto
                     {
                         Id = cr.PublicId,
-                        PatientCaseId = cr.PatientCase.PublicId,
+                        PatientCasePublicId = cr.PatientCase.PublicId,
                         PatientName = cr.PatientCase.Patient.User.FullName,
                    
-                        StudentId = cr.Student.PublicId,
+                        StudentPublicId = cr.Student.PublicId,
                         StudentName = cr.Student.User.FullName,
                         University = cr.Student.University,
                         Level = cr.Student.Level,
@@ -153,19 +153,19 @@ namespace DentalHub.Application.Services.Cases
         }
 
         public async Task<Result<PagedResult<CaseRequestDto>>> GetRequestsByStudentIdAsync(
-            string studentPublicId, int page = 1, int pageSize = 10)
+            string studentPublicId, RequestStatus? status = null, int page = 1, int pageSize = 10)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<CaseRequest, CaseRequestDto>(
-                    cr => cr.Student.PublicId == studentPublicId,
+                    cr => cr.Student.PublicId == studentPublicId && (!status.HasValue || cr.Status == status.Value),
                     cr => new CaseRequestDto
                     {
                         Id = cr.PublicId,
-                        PatientCaseId = cr.PatientCase.PublicId,
+                        PatientCasePublicId = cr.PatientCase.PublicId,
                         PatientName = cr.PatientCase.Patient.User.FullName,
                         CaseName=cr.PatientCase.CaseType.Name,
-                        StudentId = cr.Student.PublicId,
+                        StudentPublicId = cr.Student.PublicId,
                         StudentName = cr.Student.User.FullName,
                         University = cr.Student.University,
                         Level = cr.Student.Level,
@@ -208,10 +208,10 @@ namespace DentalHub.Application.Services.Cases
                     cr => new CaseRequestDto
                     {
                         Id = cr.PublicId,
-                        PatientCaseId = cr.PatientCase.PublicId,
+                        PatientCasePublicId = cr.PatientCase.PublicId,
                         PatientName = cr.PatientCase.Patient.User.FullName,
                         CaseName=  cr.PatientCase.CaseType.Name,
-                        StudentId = cr.Student.PublicId,
+                        StudentPublicId = cr.Student.PublicId,
                         StudentName = cr.Student.User.FullName,
                         University = cr.Student.University,
                         Level = cr.Student.Level,
@@ -501,10 +501,10 @@ namespace DentalHub.Application.Services.Cases
 					cr => new CaseRequestDto
 					{
 						Id = cr.PublicId,
-						PatientCaseId = cr.PatientCase.PublicId,
+						PatientCasePublicId = cr.PatientCase.PublicId,
 						PatientName = cr.PatientCase.Patient.User.FullName,
 						CaseName = cr.PatientCase.CaseType.Name,
-						StudentId = cr.Student.PublicId,
+						StudentPublicId = cr.Student.PublicId,
 						StudentName = cr.Student.User.FullName,
 						University = cr.Student.University,
 						Level = cr.Student.Level,

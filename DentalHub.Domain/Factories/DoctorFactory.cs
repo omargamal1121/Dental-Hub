@@ -17,9 +17,9 @@ namespace DentalHub.Domain.Factories
             if (string.IsNullOrEmpty( universityId))
                 throw new DomainException("UniversityId Can't Be Empty ");
 
-            return new Doctor
+            return new Doctor()
             {
-                UserId = userId,
+           
                 Specialty = specialty,
                 UniversityId = universityId,
                 CreateAt = DateTime.UtcNow

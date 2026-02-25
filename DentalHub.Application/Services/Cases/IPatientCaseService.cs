@@ -9,6 +9,7 @@ namespace DentalHub.Application.Services.Cases
         Task<Result<PatientCaseDto>> CreateCaseAsync(CreateCaseDto dto);
         Task<Result<PatientCaseDto>> GetCaseByPublicIdAsync(string publicId);
         Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(string? search, string? status, int page = 1, int pageSize = 10);
         Task<Result<PatientCaseDto>> UpdateCaseAsync(UpdateCaseDto dto);
         Task<Result> DeleteCaseByPublicIdAsync(string publicId);
 

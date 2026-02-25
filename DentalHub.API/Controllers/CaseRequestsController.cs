@@ -50,9 +50,9 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("student/{studentId}")]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<CaseRequestDto>>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetRequestsByStudent(string studentId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetRequestsByStudent(string studentId,RequestStatus? status=null, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            var result = await _mediator.Send(new GetCaseRequestsByStudentIdQuery(studentId, page, pageSize));
+            var result = await _mediator.Send(new GetCaseRequestsByStudentIdQuery(studentId, status,page, pageSize));
             return HandleResult(result);
         }
 

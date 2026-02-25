@@ -22,8 +22,12 @@ namespace DentalHub.Application.Handlers.Doctor
                 FullName = request.Name,
                 Email = request.Email,
                 Password = request.Password,
-                Name = request.Name,
-                Specialty = request.Specialty,
+                Phone
+                = request.Phone,
+                Username= request.Username,
+                
+
+				Specialty = request.Specialty,
                 UniversityId = request.UniversityId
             };
 

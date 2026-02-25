@@ -21,8 +21,6 @@ namespace DentalHub.Application.Services.Doctors
         }
 
         #region Doctor Profile
-
-        // for Admin - search by PublicId
         public async Task<Result<DoctorDto>> GetDoctorByPublicIdAsync(string publicId)
         {
             try
@@ -34,7 +32,7 @@ namespace DentalHub.Application.Services.Doctors
                         PublicId = d.PublicId,
                         FullName = d.User.FullName,
                         Email = d.User.Email!,
-                        Name = d.Name,
+                     
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
@@ -58,22 +56,21 @@ namespace DentalHub.Application.Services.Doctors
             }
         }
 
-        // For the doctor himself - searches by UserId (coming from the JWT token)
+      
         public async Task<Result<DoctorDto>> GetDoctorByIdAsync(string userId)
         {
             try
             {
-                if (!Guid.TryParse(userId, out var userGuid))
-                    return Result<DoctorDto>.Failure("Invalid user ID");
+                
 
                 var spec = new BaseSpecificationWithProjection<Doctor, DoctorDto>(
-                    d => d.UserId == userGuid,
+                    d => d.PublicId == userId,
                     d => new DoctorDto
                     {
                         PublicId = d.PublicId,
                         FullName = d.User.FullName,
                         Email = d.User.Email!,
-                        Name = d.Name,
+                    
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
@@ -150,7 +147,7 @@ namespace DentalHub.Application.Services.Doctors
                         PublicId = d.PublicId,
                         FullName = d.User.FullName,
                         Email = d.User.Email!,
-                        Name = d.Name,
+                
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,

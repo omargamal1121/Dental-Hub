@@ -21,10 +21,6 @@ namespace DentalHub.Application.DTOs.Identity
             ErrorMessage = "Password must contain at least one uppercase letter, one lowercase letter, and one number")]
         public string Password { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Name is required")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 100 characters")]
-        public string Name { get; set; } = string.Empty;
-
         [Required(ErrorMessage = "Specialty is required")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Specialty must be between 3 and 100 characters")]
         public string Specialty { get; set; } = string.Empty;
@@ -32,5 +28,16 @@ namespace DentalHub.Application.DTOs.Identity
         [Required(ErrorMessage = "University ID is required")]
        
         public string UniversityId { get; set; }
-    }
+		[Required(ErrorMessage = "UserName required")]
+		[RegularExpression(@"^(?=.{3,20}$)(?!.*__)[a-z][a-z0-9_]*[a-z0-9]$",
+	    ErrorMessage = "Invalid username format")]
+
+
+		public string Username { get; set; } = null!;
+
+		[Required(ErrorMessage = "Phone number is required")]
+		[RegularExpression(@"^\+?[1-9]\d{7,14}$",
+	 ErrorMessage = "Invalid phone number format")]
+		public string Phone { get; set; }= null!;
+	}
 }

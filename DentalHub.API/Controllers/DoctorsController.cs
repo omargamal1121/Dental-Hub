@@ -1,13 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authorization;
-using MediatR;
 using DentalHub.Application.Commands.Doctor;
-using DentalHub.Application.Queries.Doctor;
-using DentalHub.Application.DTOs.Shared;
-using DentalHub.Application.DTOs.Doctors;
-using DentalHub.Application.DTOs.Cases;
 using DentalHub.Application.Common;
+using DentalHub.Application.DTOs.Cases;
+using DentalHub.Application.DTOs.Doctors;
+using DentalHub.Application.DTOs.Identity;
+using DentalHub.Application.DTOs.Shared;
+using DentalHub.Application.Queries.Doctor;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DentalHub.API.Controllers
 {
@@ -27,9 +28,16 @@ namespace DentalHub.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] CreateDoctorCommand command)
+        public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] RegisterDoctorDto registerDoctor)
         {
-            var result = await _mediator.Send(command);
+            var registerCommand = new CreateDoctorCommand(registerDoctor.FullName
+                ,registerDoctor.Email
+                ,registerDoctor.Password,
+                registerDoctor.Specialty,
+                registerDoctor.UniversityId,
+                registerDoctor.Username,
+                registerDoctor.Phone);
+			var result = await _mediator.Send(registerCommand);
             return HandleResult(result);
         }
 
@@ -93,7 +101,7 @@ namespace DentalHub.API.Controllers
             if (doctorId == null)
                 return CreateErrorResponse<PagedResult<CaseRequestDto>>("Unauthorized: Invalid token", 401);
 
-            var result = await _mediator.Send(new GetMyRequestsQuery(doctorId.Value.ToString(), page, pageSize));
+            var result = await _mediator.Send(new GetMyRequestsQuery(doctorId.ToString(), page, pageSize));
             return HandleResult(result);
         }
 
@@ -110,7 +118,7 @@ namespace DentalHub.API.Controllers
             if (doctorId == null)
                 return CreateErrorResponse<bool>("Unauthorized: Invalid token", 401);
 
-            var result = await _mediator.Send(new ApproveMyRequestCommand(requestId, doctorId.Value.ToString()));
+            var result = await _mediator.Send(new ApproveMyRequestCommand(requestId, doctorId.ToString()));
             return HandleResult(result);
         }
 
@@ -127,7 +135,7 @@ namespace DentalHub.API.Controllers
             if (doctorId == null)
                 return CreateErrorResponse<bool>("Unauthorized: Invalid token", 401);
 
-            var result = await _mediator.Send(new RejectMyRequestCommand(requestId, doctorId.Value.ToString()));
+            var result = await _mediator.Send(new RejectMyRequestCommand(requestId, doctorId.ToString()));
             return HandleResult(result);
         }
 

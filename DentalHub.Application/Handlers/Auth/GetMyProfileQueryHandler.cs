@@ -8,8 +8,7 @@ using MediatR;
 
 namespace DentalHub.Application.Handlers.Auth
 {
-    /// Handler for GetMyProfileQuery.
-    /// Routes to the correct service based on the user's Role from JWT.
+   
     public class GetMyProfileQueryHandler : IRequestHandler<GetMyProfileQuery, Result<object>>
     {
         private readonly IDoctorService _doctorService;
@@ -43,7 +42,7 @@ namespace DentalHub.Application.Handlers.Auth
 
         private async Task<Result<object>> GetDoctorProfile(string userId)
         {
-            // GetDoctorByIdAsync searches by UserId (Guid from JWT)
+           
             var result = await _doctorService.GetDoctorByIdAsync(userId);
             if (!result.IsSuccess)
                 return Result<object>.Failure(result.Errors ?? new List<string> { result.Message ?? "Doctor not found" }, result.Status);

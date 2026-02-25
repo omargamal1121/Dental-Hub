@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace DentalHub.Application.DTOs.Cases
 {
@@ -14,5 +16,7 @@ namespace DentalHub.Application.DTOs.Cases
 
 		[StringLength(1000, MinimumLength = 10, ErrorMessage = "Description must be between 10 and 1000 characters")]
         public string? Description { get; set; }
+
+        public List<IFormFile>? Images { get; set; }
     }
 }

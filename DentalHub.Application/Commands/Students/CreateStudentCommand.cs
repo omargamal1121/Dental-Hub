@@ -8,6 +8,8 @@ namespace DentalHub.Application.Commands.Students
         string Email,
         string Password,
         string UniversityId,
-        int Level
-    ) : IRequest<Result<string>>;
+        int Level,
+        string Username,
+        string Phone
+	) : IRequest<Result<string>>;
 }

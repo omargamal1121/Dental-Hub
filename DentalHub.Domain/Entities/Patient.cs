@@ -2,7 +2,16 @@
 {
     public class Patient : BaseEntitiy
 	{
-        public Guid UserId { get; set; }
+		public Patient()
+		{
+			
+		}
+		public Patient(Guid id,string publicid):base(id,publicid)
+		{
+            UserId =id;
+			
+		}
+		public Guid UserId { get; set; }
         public int Age { get; set; }
         public string Phone { get; set; }
         public User User { get; set; }

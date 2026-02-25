@@ -82,7 +82,7 @@ namespace DentalHub.Application.Services.Auth
             var claims = new List<Claim>
             {
                 new(JwtRegisteredClaimNames.Jti, jti),
-                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new(ClaimTypes.NameIdentifier, user.PublicId),
                 new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
             };
 
