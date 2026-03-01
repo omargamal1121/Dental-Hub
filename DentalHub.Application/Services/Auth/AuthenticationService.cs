@@ -79,7 +79,10 @@ namespace DentalHub.Application.Services.Auth
                 //}
 
                 var roles = (await _userManager.GetRolesAsync(user)).ToList();
-                return Result<TokensDto>.Success(new TokensDto { Token = tokenResult.Data, Roles = roles ,PublicId=user.PublicId }, "Login successfully");
+           
+          
+                    return Result<TokensDto>.Success(new TokensDto { Token = tokenResult.Data, Roles = roles, PublicId = user.PublicId }, "Login successfully");
+				
             }
             catch (Exception ex)
             {

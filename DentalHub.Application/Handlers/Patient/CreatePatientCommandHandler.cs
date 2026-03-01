@@ -20,7 +20,8 @@ namespace DentalHub.Application.Handlers.Patient
             var registerDto = new RegisterPatientDto
             {
                 FullName = request.FullName,
-                Email = request.Email,
+                City= request.City,
+              
                 Password = request.Password,
                 Phone = request.PhoneNumber,
                 NationalId = request.NationalId,

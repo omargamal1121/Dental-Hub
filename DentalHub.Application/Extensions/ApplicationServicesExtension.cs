@@ -8,6 +8,8 @@ using DentalHub.Application.Services;
 using DentalHub.Application.Services.Sessions;
 using DentalHub.Application.Services.Students;
 using DentalHub.Application.Services.UniversityMembers;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalHub.Application.Extensions
@@ -39,6 +41,12 @@ namespace DentalHub.Application.Extensions
 
             // Register University Member Service
             services.AddScoped<IUniversityMemberService, UniversityMemberService>();
+
+            // Register FluentValidation
+            services.AddValidatorsFromAssembly(typeof(ApplicationServicesExtension).Assembly);
+
+            // Register MediatR Pipeline Behaviors
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(DentalHub.Application.Common.Behaviors.ValidationBehavior<,>));
 
             return services;
         }

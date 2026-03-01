@@ -9,5 +9,5 @@ namespace DentalHub.Application.Queries.Students
         string? CaseType = null,
 		int PageNumber = 1,
         int PageSize = 10
-    ) : IRequest<Result<PagedResult<PatientCaseDto>>>;
+    ) : IRequest<Result<PagedResult<AvailableCasesDto>>>;
 }

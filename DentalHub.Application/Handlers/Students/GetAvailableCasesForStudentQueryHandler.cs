@@ -6,7 +6,7 @@ using MediatR;
 
 namespace DentalHub.Application.Handlers.Students
 {
-    public class GetAvailableCasesForStudentQueryHandler : IRequestHandler<GetAvailableCasesForStudentQuery, Result<PagedResult<PatientCaseDto>>>
+    public class GetAvailableCasesForStudentQueryHandler : IRequestHandler<GetAvailableCasesForStudentQuery, Result<PagedResult<AvailableCasesDto>>>
     {
         private readonly IStudentService _service;
 
@@ -15,7 +15,7 @@ namespace DentalHub.Application.Handlers.Students
             _service = service;
         }
 
-        public async Task<Result<PagedResult<PatientCaseDto>>> Handle(GetAvailableCasesForStudentQuery request, CancellationToken ct)
+        public async Task<Result<PagedResult<AvailableCasesDto>>> Handle(GetAvailableCasesForStudentQuery request, CancellationToken ct)
         {
             return await _service.GetAvailableCasesForStudentAsync(request.StudentPublicId,request.CaseType ,request.PageNumber, request.PageSize);
         }

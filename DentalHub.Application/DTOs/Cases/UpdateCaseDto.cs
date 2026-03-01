@@ -1,16 +1,9 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace DentalHub.Application.DTOs.Cases
 {
-    /// DTO for updating a patient case
     public class UpdateCaseDto
     {
-        [Required]
-        public string Id { get; set; }
+        public string Id { get; set; } = string.Empty;
 
-      
-
-        [StringLength(1000)]
         public string? Description { get; set; }
     }
 }

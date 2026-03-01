@@ -279,7 +279,7 @@ namespace DentalHub.Application.Services.Students
         }
 
       
-        public async Task<Result<PagedResult<PatientCaseDto>>> GetAvailableCasesForStudentAsync(
+        public async Task<Result<PagedResult<AvailableCasesDto>>> GetAvailableCasesForStudentAsync(
             string studentPublicId,string? CaseName=null, int page = 1, int pageSize = 10)
         {
             try
@@ -288,18 +288,18 @@ namespace DentalHub.Application.Services.Students
                     new BaseSpecificationWithProjection<Student,Guid>(s => s.PublicId == studentPublicId,s=>s.Id));
 
                 if (studentid==Guid.Empty)
-                    return Result<PagedResult<PatientCaseDto>>.Failure("Student not found", 404);
+                    return Result<PagedResult<AvailableCasesDto>>.Failure("Student not found", 404);
 
                 var studentGuid = studentid;
 
                 
-                var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
+                var spec = new BaseSpecificationWithProjection<PatientCase, AvailableCasesDto>(
                     pc => pc.Status == CaseStatus.Pending &&
                           !pc.CaseRequests.Any(cr => cr.StudentId == studentGuid)
                           &&(
                           string.IsNullOrEmpty(CaseName) ||
 						  pc.CaseType.Name.Contains(CaseName)||pc.CaseType.Description.Contains(CaseName)),
-                    pc => new PatientCaseDto
+                    pc => new AvailableCasesDto
                     {
                         Id              = pc.PublicId,
                         PatientId       = pc.Patient.PublicId,
@@ -313,8 +313,6 @@ namespace DentalHub.Application.Services.Students
                         },
                         Status          = pc.Status.ToString(),
                         CreateAt        = pc.CreateAt,
-                        TotalSessions   = pc.Sessions.Count,
-                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
                         ImageUrls       = pc.Medias.Select(m => m.MediaUrl).ToList()
                     }
                 );
@@ -325,19 +323,19 @@ namespace DentalHub.Application.Services.Students
                 var casesList  = await _unitOfWork.PatientCases.GetAllAsync(spec);
                 var totalCount = await _unitOfWork.PatientCases.CountAsync(spec);
 
-                var pagedResult = PaginationFactory<PatientCaseDto>.Create(
+                var pagedResult = PaginationFactory<AvailableCasesDto>.Create(
                     count:    totalCount,
                     page:     page,
                     pageSize: pageSize,
                     data:     casesList
                 );
 
-                return Result<PagedResult<PatientCaseDto>>.Success(pagedResult);
+                return Result<PagedResult<AvailableCasesDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting available cases for student: {StudentId}", studentPublicId);
-                return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving available cases");
+                return Result<PagedResult<AvailableCasesDto>>.Failure("Error retrieving available cases");
             }
         }
 

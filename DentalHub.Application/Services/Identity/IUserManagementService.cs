@@ -3,10 +3,10 @@ using DentalHub.Application.DTOs.Identity;
 
 namespace DentalHub.Application.Services.Identity
 {
-    /// Interface for authentication and user management services
+    
     public interface IUserManagementService
     {
-        // Registration
+        
         Task<Result<AuthResponseDto>> RegisterPatientAsync(RegisterPatientDto dto);
         Task<Result<AuthResponseDto>> RegisterStudentAsync(RegisterStudentDto dto);
         Task<Result<AuthResponseDto>> RegisterDoctorAsync(RegisterDoctorDto dto);

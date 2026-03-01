@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "R0eyNcMrVf4=",
+  "dgSpecHash": "+pmUX8HO4qs=",
   "success": true,
   "projectFilePath": "D:\\projects\\DentalHub\\DentalHub.Application\\DentalHub.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\entityframework\\6.5.1\\entityframework.6.5.1.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.1.1\\fluentvalidation.dependencyinjectionextensions.12.1.1.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\hangfire.aspnetcore\\1.8.22\\hangfire.aspnetcore.1.8.22.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\hangfire.core\\1.8.22\\hangfire.core.1.8.22.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\hangfire.netcore\\1.8.22\\hangfire.netcore.1.8.22.nupkg.sha512",

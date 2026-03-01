@@ -47,7 +47,7 @@ namespace DentalHub.Application.Services.Identity
 
                 if (age < 5||age>100)
                 { 
-                    await _unitOfWork.RollbackTransactionAsync();
+                  
 				    return Result<AuthResponseDto>.Failure("Invalid Age Must Be Greater than 5 years and less than 100",400);
 
 				}
@@ -55,7 +55,7 @@ namespace DentalHub.Application.Services.Identity
 				await _unitOfWork.BeginTransactionAsync();
 
 	
-				var userName = !string.IsNullOrWhiteSpace(dto.Email) ? dto.Email : dto.Phone;
+				var userName = dto.Phone;
 
 				var user = new User
 				{
@@ -63,7 +63,8 @@ namespace DentalHub.Application.Services.Identity
 					Email = dto.Email,
 					FullName = dto.FullName,
 					PhoneNumber = dto.Phone,
-					EmailConfirmed = !string.IsNullOrWhiteSpace(dto.Email)
+                    PhoneNumberConfirmed=true,
+				
 				};
 
 				var result = await _userManager.CreateAsync(user, dto.Password);
@@ -88,10 +89,7 @@ namespace DentalHub.Application.Services.Identity
 
 				var patient = new Patient(user.Id,user.PublicId)
 				{
-					
-					
 					Age = age,
-                    
 					Phone = dto.Phone,
 					CreateAt = DateTime.UtcNow,
                     

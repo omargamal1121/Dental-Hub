@@ -28,3 +28,16 @@ public enum Gender
     Male,
     Female,
 }
+public enum City
+{
+    Cairo,
+    Giza,
+    Alexandria,
+    Luxor,
+    Aswan,
+    Tanta,
+    Mansoura,
+    Zagazig,
+    Suez,
+    PortSaid
+}

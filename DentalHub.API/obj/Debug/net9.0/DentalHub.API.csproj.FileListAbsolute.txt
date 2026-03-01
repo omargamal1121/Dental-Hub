@@ -474,3 +474,5 @@ D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.API\obj\Debug
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.genruntimeconfig.cache
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\ref\DentalHub.API.dll
 D:\projects\DentalHub\DentalHub.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Annotations.dll
+D:\projects\DentalHub\DentalHub.API\bin\Debug\net9.0\FluentValidation.dll
+D:\projects\DentalHub\DentalHub.API\bin\Debug\net9.0\FluentValidation.DependencyInjectionExtensions.dll

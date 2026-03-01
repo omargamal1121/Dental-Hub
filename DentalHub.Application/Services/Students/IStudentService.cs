@@ -21,7 +21,7 @@ namespace DentalHub.Application.Services.Students
             string studentPublicId, string? casetype = null, int page = 1, int pageSize = 10);
 
  
-        Task<Result<PagedResult<PatientCaseDto>>> GetAvailableCasesForStudentAsync(
+        Task<Result<PagedResult<AvailableCasesDto>>> GetAvailableCasesForStudentAsync(
             string studentPublicId,string? casetype=null, int page = 1, int pageSize = 10);
 
         // Student Statistics

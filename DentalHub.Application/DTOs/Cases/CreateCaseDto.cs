@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 
@@ -7,14 +6,11 @@ namespace DentalHub.Application.DTOs.Cases
     /// DTO for creating a new patient case
     public class CreateCaseDto
     {
-        [Required(ErrorMessage = "Patient public ID is required")]
-        public string PatientId { get; set; }
+        public string PatientId { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Case type public ID is required")]
-		public string CaseTypeId { get; set; }
+		public string CaseTypeId { get; set; } = string.Empty;
 
 
-		[StringLength(1000, MinimumLength = 10, ErrorMessage = "Description must be between 10 and 1000 characters")]
         public string? Description { get; set; }
 
         public List<IFormFile>? Images { get; set; }

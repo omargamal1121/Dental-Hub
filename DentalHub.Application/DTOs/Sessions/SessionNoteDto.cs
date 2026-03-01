@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace DentalHub.Application.DTOs.Sessions
 {
     /// DTO for session note
@@ -14,11 +12,8 @@ namespace DentalHub.Application.DTOs.Sessions
     /// DTO for creating a session note
     public class CreateSessionNoteDto
     {
-        [Required(ErrorMessage = "Session public ID is required")]
-        public string SessionId { get; set; }
+        public string SessionId { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Note content is required")]
-        [StringLength(2000, MinimumLength = 10)]
         public string Note { get; set; } = string.Empty;
     }
 }

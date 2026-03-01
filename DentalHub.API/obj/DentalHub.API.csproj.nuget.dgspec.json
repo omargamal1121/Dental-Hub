@@ -195,6 +195,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[12.1.1, )"
+            },
             "Hangfire.AspNetCore": {
               "target": "Package",
               "version": "[1.8.22, )"
