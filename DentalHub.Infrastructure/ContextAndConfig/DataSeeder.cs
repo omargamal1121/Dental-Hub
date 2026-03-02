@@ -26,8 +26,60 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                     if (!await roleManager.RoleExistsAsync(role))
                         await roleManager.CreateAsync(new IdentityRole<Guid>(role));
                 }
+                // ── 2. Universities ─────────────────────────────
+                if (!await context.Universities.AnyAsync())
+                {
+                    var cairoId = Guid.Parse("11111111-1111-1111-1111-111111111111");
+                    var ainShamsId = Guid.Parse("22222222-2222-2222-2222-222222222222");
+                    var mansouraId = Guid.Parse("33333333-3333-3333-3333-333333333333");
+                    var alexId = Guid.Parse("44444444-4444-4444-4444-444444444444");
+                    var assiutId = Guid.Parse("55555555-5555-5555-5555-555555555555");
+                    var benhaId = Guid.Parse("66666666-6666-6666-6666-666666666666");
 
-                // ── 2. UniversityMembers ──────────────────────────────────────────────
+                    var universities = new List<University>
+                    {
+                       new()
+                       {
+                          Id = cairoId,
+                          Name = "Cairo University",
+                          Email = "info@cu.edu.eg"
+                       },
+                       new()
+                       {
+                          Id = ainShamsId,
+                          Name = "Ain Shams University",
+                          Email = "info@asu.edu.eg"
+                       },
+                       new()
+                       {
+                          Id = mansouraId,
+                          Name = "Mansoura University",
+                          Email = "info@mu.edu.eg"
+                       },
+                       new()
+                       {
+                          Id = alexId,
+                          Name = "Alexandria University",
+                          Email = "info@alexu.edu.eg"
+                       },
+                       new()
+                       {
+                          Id = assiutId,
+                          Name = "Assiut University",
+                          Email = "info@aun.edu.eg"
+                       },
+                       new()
+                       {
+                          Id = benhaId,
+                          Name = "Benha University",
+                          Email = "info@bu.edu.eg"
+                       }
+                    };
+
+                    await context.Universities.AddRangeAsync(universities);
+                    await context.SaveChangesAsync();
+                }
+                // ── 3. UniversityMembers ──────────────────────────────────────────────
                 // These are pre-registered members in the university registry.
                 // Doctors & Students must use one of these UniversityIds.
                 if (!await context.UniversityMembers.AnyAsync())
@@ -37,7 +89,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         new()
                         {
                             Id         = 1,
-                            UniversityId = "UNI-DOC-001",
+                            UniversityId = Guid.Parse("66666666-6666-6666-6666-666666666666"), // Benha University
                             FullName   = "Dr. Ahmed Hassan",
                             Faculty    = "Faculty of Dentistry",
                             Department = "Oral Surgery",
@@ -46,7 +98,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         new()
                         {
                             Id         = 2,
-                            UniversityId = "UNI-DOC-002",
+                            UniversityId = Guid.Parse("55555555-5555-5555-5555-555555555555"), // Assiut University
                             FullName   = "Dr. Sara Mohamed",
                             Faculty    = "Faculty of Dentistry",
                             Department = "Orthodontics",
@@ -55,7 +107,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         new()
                         {
                             Id         = 3,
-                            UniversityId = "UNI-STU-001",
+                            UniversityId = Guid.Parse("11111111-1111-1111-1111-111111111111"), // Cairo University
                             FullName   = "Omar Gamal",
                             Faculty    = "Faculty of Dentistry",
                             Department = "General Dentistry",
@@ -64,7 +116,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         new()
                         {
                             Id         = 4,
-                            UniversityId = "UNI-STU-002",
+                            UniversityId = Guid.Parse("11111111-1111-1111-1111-111111111111"), // Cairo University
                             FullName   = "Nour Ali",
                             Faculty    = "Faculty of Dentistry",
                             Department = "General Dentistry",
@@ -73,7 +125,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         new()
                         {
                             Id         = 5,
-                            UniversityId = "UNI-STU-003",
+                            UniversityId = Guid.Parse("22222222-2222-2222-2222-222222222222"), // Ain Shams University
                             FullName   = "Youssef Ibrahim",
                             Faculty    = "Faculty of Dentistry",
                             Department = "Pediatric Dentistry",
@@ -109,7 +161,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                     {
                         Name         = "Dr. Ahmed Hassan",
                         Specialty    = "Oral Surgery",
-                        UniversityId = "UNI-DOC-001"   
+                        UniversityId = Guid.Parse("66666666-6666-6666-6666-666666666666") // ← Benha University  
                     };
 
                     // -- Doctor 2 --
@@ -131,7 +183,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                     {
                         Name         = "Dr. Sara Mohamed",
                         Specialty    = "Orthodontics",
-                        UniversityId = "UNI-DOC-002"   // ← matches UniversityMember #2
+                        UniversityId = Guid.Parse("55555555-5555-5555-5555-555555555555") // ← Assiut University
                     };
 
                     // Create users via UserManager so password hash is applied correctly
@@ -164,9 +216,8 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
                     var stu1 = new Student(stu1Id, stu1PubId)
                     {
-                        University   = "Cairo University",
                         Level        = 4,
-                        UniversityId = "UNI-STU-001"   // ← matches UniversityMember #3
+                        UniversityId = Guid.Parse("11111111-1111-1111-1111-111111111111") // ← Cairo University
                     };
 
                     // -- Student 2 --
@@ -186,9 +237,8 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
                     var stu2 = new Student(stu2Id, stu2PubId)
                     {
-                        University   = "Cairo University",
                         Level        = 3,
-                        UniversityId = "UNI-STU-002"   // ← matches UniversityMember #4
+                        UniversityId = Guid.Parse("11111111-1111-1111-1111-111111111111") // ← Cairo University
                     };
 
                     // -- Student 3 --
@@ -208,9 +258,8 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
                     var stu3 = new Student(stu3Id, stu3PubId)
                     {
-                        University   = "Ain Shams University",
                         Level        = 5,
-                        UniversityId = "UNI-STU-003"   // ← matches UniversityMember #5
+                        UniversityId = Guid.Parse("22222222-2222-2222-2222-222222222222") // ← Ain Shams University
                     };
 
                     await CreateUserWithRoleAsync(userManager, stu1User, "Student", "Student@123", logger);

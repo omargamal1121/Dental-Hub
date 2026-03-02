@@ -23,6 +23,6 @@ namespace DentalHub.Application.Services.Doctors
 
         // Get doctors by university
         Task<Result<PagedResult<DoctorDto>>> GetDoctorsByUniversityAsync(
-            string universityId, int page = 1, int pageSize = 10);
+             Guid universityId, int page = 1, int pageSize = 10);
     }
 }

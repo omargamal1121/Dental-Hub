@@ -4,5 +4,5 @@ using MediatR;
 
 namespace DentalHub.Application.Queries.UniversityMember
 {
-    public record GetUniversityMemberByUniversityIdQuery(string UniversityId) : IRequest<Result<UniversityMemberDto>>;
+    public record GetUniversityMemberByUniversityIdQuery(Guid UniversityId) : IRequest<Result<UniversityMemberDto>>;
 }

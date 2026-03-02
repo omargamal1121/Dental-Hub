@@ -13,11 +13,10 @@ namespace DentalHub.Domain.Entities
 			UserId=id;
 		}
 		public Guid UserId { get; set; }
-        public string University { get; set; }
         public int Level { get; set; }
-		public string UniversityId { get; set; }
-
-		public ICollection<CaseRequest>  CaseRequests { get; set; }
+        public Guid UniversityId { get; set; }
+        public University University { get; set; } = null!;
+        public ICollection<CaseRequest>  CaseRequests { get; set; }
 		public User User { get; set; }
     }
 }

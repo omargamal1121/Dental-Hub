@@ -1,0 +1,350 @@
+2026-03-02 23:06:20.351 +02:00 [INF] DB tables already exist. Exit install
+2026-03-02 23:06:31.663 +02:00 [INF] User profile is available. Using 'C:\Users\Ahmed-Youssef\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-02 23:06:50.072 +02:00 [INF] Executed DbCommand (346ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-03-02 23:06:50.801 +02:00 [INF] Executed DbCommand (153ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-03-02 23:06:51.239 +02:00 [INF] Executed DbCommand (167ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-03-02 23:06:51.644 +02:00 [INF] Executed DbCommand (161ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-03-02 23:06:52.315 +02:00 [ERR] Failed executing DbCommand (445ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Universities` AS `u`)
+2026-03-02 23:06:53.055 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'DentalHub.Infrastructure.ContextAndConfig.ContextApp'.
+MySqlConnector.MySqlException (0x80004005): Table 'db39102.universities' doesn't exist
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+MySqlConnector.MySqlException (0x80004005): Table 'db39102.universities' doesn't exist
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-03-02 23:06:54.731 +02:00 [ERR] ❌ An error occurred while seeding the database.
+MySqlConnector.MySqlException (0x80004005): Table 'db39102.universities' doesn't exist
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 1081
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 487
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at DentalHub.Infrastructure.ContextAndConfig.DataSeeder.SeedAsync(IServiceProvider serviceProvider) in D:\Dental-Hub\DentalHub.Infrastructure\ContextAndConfig\DataSeeder.cs:line 30
+2026-03-02 23:18:03.277 +02:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-02 23:18:03.731 +02:00 [INF] Executed DbCommand (263ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db39102_EFMigrationsLock', 259200)
+2026-03-02 23:18:05.625 +02:00 [INF] Executed DbCommand (691ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-03-02 23:18:13.667 +02:00 [INF] Executed DbCommand (1,092ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
+2026-03-02 23:18:15.084 +02:00 [INF] Executed DbCommand (1,410ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-03-02 23:18:15.146 +02:00 [INF] Applying migration '20260302211656_AddUniversityAndRelations'.
+2026-03-02 23:18:16.598 +02:00 [INF] Executed DbCommand (1,361ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `UniversityMembers` DROP INDEX `IX_UniversityMembers_UniversityId`;
+2026-03-02 23:18:17.407 +02:00 [INF] Executed DbCommand (806ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Students` DROP COLUMN `University`;
+2026-03-02 23:18:17.725 +02:00 [INF] Executed DbCommand (306ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `UniversityMembers` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NOT NULL;
+2026-03-02 23:18:17.938 +02:00 [INF] Executed DbCommand (208ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Students` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NOT NULL;
+2026-03-02 23:18:18.628 +02:00 [INF] Executed DbCommand (676ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Patients` ADD `City` int NOT NULL DEFAULT 0;
+2026-03-02 23:18:19.411 +02:00 [INF] Executed DbCommand (779ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Doctors` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NOT NULL;
+2026-03-02 23:18:21.066 +02:00 [INF] Executed DbCommand (1,637ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Universities` (
+    `Id` char(36) COLLATE ascii_general_ci NOT NULL,
+    `Name` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+    `Email` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+    `PublicId` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
+    `CreateAt` datetime(6) NOT NULL,
+    `UpdateAt` datetime(6) NULL,
+    `DeleteAt` datetime(6) NULL,
+    CONSTRAINT `PK_Universities` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-03-02 23:18:21.390 +02:00 [INF] Executed DbCommand (318ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_UniversityMembers_UniversityId` ON `UniversityMembers` (`UniversityId`);
+2026-03-02 23:18:21.621 +02:00 [INF] Executed DbCommand (215ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_Students_UniversityId` ON `Students` (`UniversityId`);
+2026-03-02 23:18:21.947 +02:00 [INF] Executed DbCommand (322ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_Doctors_UniversityId` ON `Doctors` (`UniversityId`);
+2026-03-02 23:18:22.585 +02:00 [INF] Executed DbCommand (633ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX `IX_Universities_PublicId` ON `Universities` (`PublicId`);
+2026-03-02 23:18:23.352 +02:00 [ERR] Failed executing DbCommand (756ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Doctors` ADD CONSTRAINT `FK_Doctors_Universities_UniversityId` FOREIGN KEY (`UniversityId`) REFERENCES `Universities` (`Id`) ON DELETE RESTRICT;
+2026-03-02 23:22:37.074 +02:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-02 23:22:37.462 +02:00 [INF] Executed DbCommand (177ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db39102_EFMigrationsLock', 259200)
+2026-03-02 23:22:37.970 +02:00 [INF] Executed DbCommand (140ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-03-02 23:22:39.076 +02:00 [INF] Executed DbCommand (140ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
+2026-03-02 23:22:39.224 +02:00 [INF] Executed DbCommand (139ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-03-02 23:22:39.243 +02:00 [INF] Applying migration '20260302211656_AddUniversityAndRelations'.
+2026-03-02 23:22:39.464 +02:00 [INF] Executed DbCommand (163ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `UniversityMembers` DROP INDEX `IX_UniversityMembers_UniversityId`;
+2026-03-02 23:22:39.686 +02:00 [ERR] Failed executing DbCommand (217ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Students` DROP COLUMN `University`;
+2026-03-02 23:24:53.700 +02:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-02 23:24:53.957 +02:00 [INF] Executed DbCommand (156ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db39102_EFMigrationsLock', 259200)
+2026-03-02 23:24:54.509 +02:00 [INF] Executed DbCommand (201ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-03-02 23:24:56.068 +02:00 [INF] Executed DbCommand (192ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
+2026-03-02 23:24:56.636 +02:00 [INF] Executed DbCommand (558ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-03-02 23:24:56.680 +02:00 [INF] Applying migration '20260302211656_AddUniversityAndRelations'.
+2026-03-02 23:24:56.925 +02:00 [ERR] Failed executing DbCommand (148ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `UniversityMembers` DROP INDEX `IX_UniversityMembers_UniversityId`;
+2026-03-02 23:27:40.908 +02:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-02 23:27:41.356 +02:00 [INF] Executed DbCommand (289ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db39102_EFMigrationsLock', 259200)
+2026-03-02 23:27:42.438 +02:00 [INF] Executed DbCommand (404ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-03-02 23:27:46.144 +02:00 [INF] Executed DbCommand (154ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
+2026-03-02 23:27:46.319 +02:00 [INF] Executed DbCommand (151ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-03-02 23:27:46.350 +02:00 [INF] Applying migration '20260302211656_AddUniversityAndRelations'.
+2026-03-02 23:27:46.718 +02:00 [INF] Executed DbCommand (292ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `UniversityMembers` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NOT NULL;
+2026-03-02 23:27:47.054 +02:00 [INF] Executed DbCommand (332ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Students` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NOT NULL;
+2026-03-02 23:27:47.330 +02:00 [ERR] Failed executing DbCommand (266ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Patients` ADD `City` int NOT NULL DEFAULT 0;
+2026-03-02 23:31:40.408 +02:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-02 23:31:40.651 +02:00 [INF] Executed DbCommand (144ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db39102_EFMigrationsLock', 259200)
+2026-03-02 23:31:41.083 +02:00 [INF] Executed DbCommand (136ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-03-02 23:31:42.732 +02:00 [INF] Executed DbCommand (139ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
+2026-03-02 23:31:42.877 +02:00 [INF] Executed DbCommand (138ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-03-02 23:31:42.926 +02:00 [INF] Applying migration '20260302211656_AddUniversityAndRelations'.
+2026-03-02 23:31:43.184 +02:00 [INF] Executed DbCommand (149ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `UniversityMembers` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NOT NULL;
+2026-03-02 23:31:43.336 +02:00 [INF] Executed DbCommand (145ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Students` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NOT NULL;
+2026-03-02 23:31:43.490 +02:00 [ERR] Failed executing DbCommand (149ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Patients` ADD `City` int NOT NULL DEFAULT 0;
+2026-03-02 23:34:58.330 +02:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-02 23:34:58.626 +02:00 [INF] Executed DbCommand (156ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db39102_EFMigrationsLock', 259200)
+2026-03-02 23:34:59.083 +02:00 [INF] Executed DbCommand (185ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-03-02 23:35:00.430 +02:00 [INF] Executed DbCommand (167ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
+2026-03-02 23:35:00.594 +02:00 [INF] Executed DbCommand (155ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-03-02 23:35:00.638 +02:00 [INF] Applying migration '20260302211656_AddUniversityAndRelations'.
+2026-03-02 23:35:00.875 +02:00 [INF] Executed DbCommand (164ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `UniversityMembers` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NOT NULL;
+2026-03-02 23:35:01.032 +02:00 [INF] Executed DbCommand (152ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Students` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NOT NULL;
+2026-03-02 23:35:01.219 +02:00 [INF] Executed DbCommand (182ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Doctors` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NULL;
+2026-03-02 23:35:01.377 +02:00 [ERR] Failed executing DbCommand (153ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Universities` (
+    `Id` char(36) COLLATE ascii_general_ci NOT NULL,
+    `Name` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+    `Email` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+    `PublicId` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
+    `CreateAt` datetime(6) NOT NULL,
+    `UpdateAt` datetime(6) NULL,
+    `DeleteAt` datetime(6) NULL,
+    CONSTRAINT `PK_Universities` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-03-02 23:44:29.195 +02:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-02 23:44:29.523 +02:00 [INF] Executed DbCommand (157ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db39102_EFMigrationsLock', 259200)
+2026-03-02 23:44:29.973 +02:00 [INF] Executed DbCommand (143ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-03-02 23:44:31.157 +02:00 [INF] Executed DbCommand (145ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
+2026-03-02 23:44:31.307 +02:00 [INF] Executed DbCommand (142ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-03-02 23:44:31.323 +02:00 [INF] Applying migration '20260302211656_AddUniversityAndRelations'.
+2026-03-02 23:44:31.531 +02:00 [INF] Executed DbCommand (164ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `UniversityMembers` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NOT NULL;
+2026-03-02 23:44:31.691 +02:00 [INF] Executed DbCommand (156ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Students` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NOT NULL;
+2026-03-02 23:44:31.850 +02:00 [INF] Executed DbCommand (155ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE `Doctors` MODIFY COLUMN `UniversityId` char(36) COLLATE ascii_general_ci NULL;
+2026-03-02 23:44:32.035 +02:00 [INF] Executed DbCommand (173ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_UniversityMembers_UniversityId` ON `UniversityMembers` (`UniversityId`);
+2026-03-02 23:44:32.497 +02:00 [ERR] Failed executing DbCommand (457ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_Students_UniversityId` ON `Students` (`UniversityId`);
+2026-03-02 23:49:10.661 +02:00 [INF] DB tables already exist. Exit install
+2026-03-02 23:49:12.765 +02:00 [INF] User profile is available. Using 'C:\Users\Ahmed-Youssef\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-02 23:49:16.580 +02:00 [INF] Executed DbCommand (217ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-03-02 23:49:17.050 +02:00 [INF] Executed DbCommand (134ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-03-02 23:49:17.353 +02:00 [INF] Executed DbCommand (140ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-03-02 23:49:17.630 +02:00 [INF] Executed DbCommand (136ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-03-02 23:49:17.928 +02:00 [INF] Executed DbCommand (135ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Universities` AS `u`)
+2026-03-02 23:49:18.638 +02:00 [INF] Executed DbCommand (193ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (Size = 200), @p4='?' (Size = 200), @p5='?' (Size = 30), @p6='?' (DbType = DateTime), @p7='?' (DbType = Guid), @p8='?' (DbType = DateTime), @p9='?' (DbType = DateTime), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (Size = 30), @p13='?' (DbType = DateTime), @p14='?' (DbType = Guid), @p15='?' (DbType = DateTime), @p16='?' (DbType = DateTime), @p17='?' (Size = 200), @p18='?' (Size = 200), @p19='?' (Size = 30), @p20='?' (DbType = DateTime), @p21='?' (DbType = Guid), @p22='?' (DbType = DateTime), @p23='?' (DbType = DateTime), @p24='?' (Size = 200), @p25='?' (Size = 200), @p26='?' (Size = 30), @p27='?' (DbType = DateTime), @p28='?' (DbType = Guid), @p29='?' (DbType = DateTime), @p30='?' (DbType = DateTime), @p31='?' (Size = 200), @p32='?' (Size = 200), @p33='?' (Size = 30), @p34='?' (DbType = DateTime), @p35='?' (DbType = Guid), @p36='?' (DbType = DateTime), @p37='?' (DbType = DateTime), @p38='?' (Size = 200), @p39='?' (Size = 200), @p40='?' (Size = 30), @p41='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `Universities` (`Id`, `CreateAt`, `DeleteAt`, `Email`, `Name`, `PublicId`, `UpdateAt`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6),
+(@p7, @p8, @p9, @p10, @p11, @p12, @p13),
+(@p14, @p15, @p16, @p17, @p18, @p19, @p20),
+(@p21, @p22, @p23, @p24, @p25, @p26, @p27),
+(@p28, @p29, @p30, @p31, @p32, @p33, @p34),
+(@p35, @p36, @p37, @p38, @p39, @p40, @p41);
+2026-03-02 23:49:18.939 +02:00 [INF] Executed DbCommand (136ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `UniversityMembers` AS `u`)
+2026-03-02 23:49:19.239 +02:00 [INF] Executed DbCommand (134ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Doctors` AS `d`)
+2026-03-02 23:49:19.519 +02:00 [INF] Executed DbCommand (132ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Students` AS `s`)
+2026-03-02 23:49:19.801 +02:00 [INF] Executed DbCommand (134ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Patients` AS `p`)
+2026-03-02 23:49:25.234 +02:00 [INF] Now listening on: https://localhost:7267
+2026-03-02 23:49:25.239 +02:00 [INF] Now listening on: http://localhost:5045
+2026-03-02 23:49:25.677 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-03-02 23:49:25.683 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-03-02 23:49:25.686 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-03-02 23:49:25.689 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-03-02 23:49:25.879 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-02 23:49:25.883 +02:00 [INF] Hosting environment: Development
+2026-03-02 23:49:25.885 +02:00 [INF] Content root path: D:\Dental-Hub\DentalHub.API
+2026-03-02 23:49:35.105 +02:00 [INF] Server desktop-l3a70or:3984:8d87be4d successfully announced in 8893.5392 ms
+2026-03-02 23:49:35.148 +02:00 [INF] Server desktop-l3a70or:3984:8d87be4d is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-03-02 23:49:35.379 +02:00 [INF] Server desktop-l3a70or:3984:8d87be4d all the dispatchers started
+2026-03-02 23:49:35.473 +02:00 [INF] 1 servers were removed due to timeout
+2026-03-02 23:50:10.172 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-03-02 23:50:24.784 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-03-02 23:50:24.836 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-03-02 23:50:24.871 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-03-02 23:50:25.069 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 0 null 14901.883ms
+2026-03-02 23:50:27.905 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger - null null
+2026-03-02 23:50:27.918 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger - 301 0 null 14.05ms
+2026-03-02 23:50:35.071 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-03-02 23:50:35.346 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 275.3484ms
+2026-03-02 23:50:36.010 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-03-02 23:50:36.204 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 193.7984ms
+2026-03-02 23:50:41.926 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.js - null null
+2026-03-02 23:50:41.936 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-03-02 23:50:41.955 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.js - 200 null application/javascript;charset=utf-8 29.1845ms
+2026-03-02 23:50:43.563 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 1626.6995ms
+2026-03-02 23:50:43.991 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-03-02 23:50:44.342 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 350.5668ms
+2026-03-02 23:53:49.470 +02:00 [WRN] Stopping the server due to DomainUnload or ProcessExit event...
+2026-03-02 23:53:49.472 +02:00 [INF] Server desktop-l3a70or:3984:8d87be4d caught stopping signal...
+2026-03-02 23:53:49.475 +02:00 [INF] Server desktop-l3a70or:3984:8d87be4d caught stopped signal...
+2026-03-02 23:53:49.476 +02:00 [WRN] Server desktop-l3a70or:3984:8d87be4d caught shutdown signal...
+2026-03-02 23:53:49.499 +02:00 [WRN] Server desktop-l3a70or:3984:8d87be4d stopped non-gracefully due to ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler. Outstanding work on those dispatchers could be aborted, and there can be delays in background processing. This server instance will be incorrectly shown as active for a while. To avoid non-graceful shutdowns, investigate what prevents from stopping gracefully and add CancellationToken support for those methods.

@@ -8,7 +8,7 @@ namespace DentalHub.Application.Commands.Doctor
         string Email,
         string Password,
         string Specialty,
-        string UniversityId,
+        Guid UniversityId,
         string Username,
         string Phone
 

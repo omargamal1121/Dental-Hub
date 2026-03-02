@@ -21,6 +21,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Media> Medias { get; set; }
         public DbSet<SessionNote> SessionNotes { get; set; }
+        public DbSet<University> Universities { get; set; }
         public DbSet<UniversityMember>  UniversityMembers { get; set; }
         public DbSet<CaseType>   CaseTypes { get; set; }
 

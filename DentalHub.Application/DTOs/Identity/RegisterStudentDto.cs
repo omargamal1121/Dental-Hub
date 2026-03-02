@@ -8,9 +8,7 @@ namespace DentalHub.Application.DTOs.Identity
 
         public string Password { get; set; } = string.Empty;
 
-        public string University { get; set; } = string.Empty;
-
-        public string UniversityId { get; set; } = null!;
+        public Guid UniversityId { get; set; }
 
         public string Username { get; set; } = null!;
 

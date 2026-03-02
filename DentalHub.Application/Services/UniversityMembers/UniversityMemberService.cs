@@ -19,7 +19,7 @@ namespace DentalHub.Application.Services.UniversityMembers
             _logger = logger;
         }
 
-        public async Task<Result<UniversityMemberDto>> GetUniversityMemberByUniversityIdAsync(string universityId)
+        public async Task<Result<UniversityMemberDto>> GetUniversityMemberByUniversityIdAsync(Guid universityId)
         {
             try
             {

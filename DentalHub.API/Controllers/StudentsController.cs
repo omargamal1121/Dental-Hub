@@ -30,7 +30,7 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] RegisterStudentDto  registerStudent)
         {
-            var command = new CreateStudentCommand(registerStudent.FullName, registerStudent.Email, registerStudent.Password, registerStudent.University,
+            var command = new CreateStudentCommand(registerStudent.FullName, registerStudent.Email, registerStudent.Password, registerStudent.UniversityId,
                 registerStudent.Level, registerStudent.Username, registerStudent.Phone);
          
 			var result = await _mediator.Send(command);
