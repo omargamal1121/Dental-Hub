@@ -47,3 +47,23 @@ D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Infrastructur
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.pdb
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.genruntimeconfig.cache
 D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\ref\DentalHub.Infrastructure.dll
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.csproj.AssemblyReference.cache
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.AssemblyInfoInputs.cache
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.AssemblyInfo.cs
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.sourcelink.json
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.dll
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\refint\DentalHub.Infrastructure.dll
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.pdb
+D:\Dental-Hub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Infrastructure.deps.json
+D:\Dental-Hub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Infrastructure.runtimeconfig.json
+D:\Dental-Hub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Infrastructure.dll
+D:\Dental-Hub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Infrastructure.pdb
+D:\Dental-Hub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Application.dll
+D:\Dental-Hub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Domain.dll
+D:\Dental-Hub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Application.pdb
+D:\Dental-Hub\DentalHub.Infrastructure\bin\Debug\net9.0\DentalHub.Domain.pdb
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHu.FAA41A6C.Up2Date
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\DentalHub.Infrastructure.genruntimeconfig.cache
+D:\Dental-Hub\DentalHub.Infrastructure\obj\Debug\net9.0\ref\DentalHub.Infrastructure.dll

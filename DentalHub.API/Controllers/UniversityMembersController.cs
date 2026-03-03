@@ -34,7 +34,7 @@ namespace DentalHub.API.Controllers
         [HttpGet("{universityId}")]
         [ProducesResponseType(typeof(ApiResponse<UniversityMemberDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<UniversityMemberDto>>> GetByUniversityId(string universityId)
+        public async Task<ActionResult<ApiResponse<UniversityMemberDto>>> GetByUniversityId(Guid universityId)
         {
             var result = await _mediator.Send(new GetUniversityMemberByUniversityIdQuery(universityId));
             return HandleResult(result);

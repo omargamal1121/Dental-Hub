@@ -16,7 +16,13 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 			.OnDelete(DeleteBehavior.Cascade);
 
 
-			builder.HasQueryFilter(cr => cr.DeleteAt == null);
+            builder.HasOne(d => d.University)
+            .WithMany(u => u.Doctors)
+            .HasForeignKey(d => d.UniversityId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+
+            builder.HasQueryFilter(cr => cr.DeleteAt == null);
 
 		}
 	}

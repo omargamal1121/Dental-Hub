@@ -2741,7 +2741,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PatientCaseDtoPagedResultApiResponse"
+                  "$ref": "#/components/schemas/AvailableCasesDtoPagedResultApiResponse"
                 }
               }
             }
@@ -2918,7 +2918,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3056,25 +3057,125 @@
         "additionalProperties": false
       },
       "ApproveCaseRequestDto": {
-        "required": [
-          "doctorId",
-          "requestId"
-        ],
         "type": "object",
         "properties": {
           "requestId": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "doctorId": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "isApproved": {
             "type": "boolean"
           },
           "rejectionReason": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvailableCasesDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "patientName": {
+            "type": "string",
+            "nullable": true
+          },
+          "patientAge": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "caseType": {
+            "$ref": "#/components/schemas/CaseTypeDto"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "createAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "imageUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvailableCasesDtoPagedResult": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPreviousPage": {
+            "type": "boolean"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvailableCasesDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvailableCasesDtoPagedResultApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AvailableCasesDtoPagedResult"
+          },
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorResponse"
+          },
+          "links": {
             "nullable": true
           }
         },
@@ -3445,31 +3546,40 @@
         },
         "additionalProperties": false
       },
-      "CreateCaseRequestDto": {
-        "required": [
-          "description",
-          "doctorPublicId",
-          "patientCasePublicId",
-          "studentPublicId"
+      "City": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
         ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CreateCaseRequestDto": {
         "type": "object",
         "properties": {
           "patientCasePublicId": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "studentPublicId": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "doctorPublicId": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "description": {
-            "maxLength": 1000,
-            "minLength": 10,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3495,10 +3605,6 @@
             "type": "string",
             "nullable": true
           },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
           "password": {
             "type": "string",
             "nullable": true
@@ -3517,6 +3623,9 @@
           },
           "gender": {
             "$ref": "#/components/schemas/Gender"
+          },
+          "city": {
+            "$ref": "#/components/schemas/City"
           }
         },
         "additionalProperties": false
@@ -3564,7 +3673,7 @@
           },
           "universityId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "createAt": {
             "type": "string",
@@ -3643,7 +3752,7 @@
           },
           "universityId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "createAt": {
             "type": "string",
@@ -4133,113 +4242,69 @@
         "additionalProperties": false
       },
       "RegisterDoctorDto": {
-        "required": [
-          "email",
-          "fullName",
-          "password",
-          "phone",
-          "specialty",
-          "universityId",
-          "username"
-        ],
         "type": "object",
         "properties": {
           "fullName": {
-            "maxLength": 100,
-            "minLength": 3,
-            "pattern": "^[a-zA-Z\\u0621-\\u064A\\s]+$",
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "email": {
-            "maxLength": 100,
-            "minLength": 0,
             "type": "string",
-            "format": "email"
+            "nullable": true
           },
           "password": {
-            "maxLength": 100,
-            "minLength": 8,
-            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$",
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "specialty": {
-            "maxLength": 100,
-            "minLength": 3,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "universityId": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "username": {
-            "minLength": 1,
-            "pattern": "^(?=.{3,20}$)(?!.*__)[a-z][a-z0-9_]*[a-z0-9]$",
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "phone": {
-            "minLength": 1,
-            "pattern": "^\\+?[1-9]\\d{7,14}$",
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "RegisterStudentDto": {
-        "required": [
-          "email",
-          "fullName",
-          "level",
-          "password",
-          "phone",
-          "university",
-          "universityId",
-          "username"
-        ],
         "type": "object",
         "properties": {
           "fullName": {
-            "maxLength": 100,
-            "minLength": 3,
-            "pattern": "^[a-zA-Z\\u0621-\\u064A\\s]+$",
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "email": {
-            "maxLength": 100,
-            "minLength": 0,
             "type": "string",
-            "format": "email"
+            "nullable": true
           },
           "password": {
-            "maxLength": 100,
-            "minLength": 8,
-            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$",
-            "type": "string"
-          },
-          "university": {
-            "maxLength": 200,
-            "minLength": 3,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "universityId": {
-            "minLength": 4,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "username": {
-            "minLength": 1,
-            "pattern": "^(?=.{3,20}$)(?!.*__)[a-z][a-z0-9_]*[a-z0-9]$",
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "level": {
-            "maximum": 7,
-            "minimum": 1,
             "type": "integer",
             "format": "int32"
           },
           "phone": {
-            "minLength": 1,
-            "pattern": "^(010|011|012|015)\\d{8}$",
             "type": "string",
-            "format": "tel"
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4538,7 +4603,7 @@
           },
           "universityId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "level": {
             "type": "integer",
@@ -4744,6 +4809,10 @@
           "publicId": {
             "type": "string",
             "nullable": true
+          },
+          "uinversalId": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4786,7 +4855,7 @@
         "properties": {
           "universityId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "name": {
             "type": "string",

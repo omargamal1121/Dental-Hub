@@ -13,8 +13,9 @@
 		public string Name {  get; set; }
         public Guid UserId { get; set; }
         public string Specialty { get; set; }
-		public string UniversityId { get; set; }
-		public User User { get; set; }
+		public Guid UniversityId { get; set; }
+        public University University { get; set; } = null!;
+        public User User { get; set; }
 		public List<CaseRequest>  CaseRequests { get; set; }
 	}
 }

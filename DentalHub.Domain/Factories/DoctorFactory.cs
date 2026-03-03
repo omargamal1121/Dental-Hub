@@ -6,7 +6,7 @@ namespace DentalHub.Domain.Factories
 {
     public static class DoctorFactory
     {
-        public static Doctor Create(Guid userId, string specialty, string universityId)
+        public static Doctor Create(Guid userId, string specialty, Guid universityId)
         {
             if (userId == Guid.Empty)
                 throw new DomainException("UserId cannot be empty");
@@ -14,12 +14,11 @@ namespace DentalHub.Domain.Factories
             if (string.IsNullOrWhiteSpace(specialty))
                 specialty = "General";
 
-            if (string.IsNullOrEmpty( universityId))
-                throw new DomainException("UniversityId Can't Be Empty ");
+            if (universityId == Guid.Empty)
+                throw new DomainException("UniversityId Can't Be Empty");
 
             return new Doctor()
             {
-           
                 Specialty = specialty,
                 UniversityId = universityId,
                 CreateAt = DateTime.UtcNow

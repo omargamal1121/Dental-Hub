@@ -24,8 +24,7 @@ namespace DentalHub.Application.Validators.Students
                 .WithMessage("Password must contain at least one uppercase letter, one lowercase letter, and one number");
 
             RuleFor(x => x.UniversityId)
-                .NotEmpty().WithMessage("University ID is required")
-                .MinimumLength(4).WithMessage("Invalid University ID Must Be More than 4 char ");
+                .NotEmpty().WithMessage("University ID is required");
 
             RuleFor(x => x.Username)
                 .NotEmpty().WithMessage("UserName required")

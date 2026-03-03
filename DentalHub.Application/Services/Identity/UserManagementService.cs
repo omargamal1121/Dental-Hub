@@ -168,8 +168,6 @@ namespace DentalHub.Application.Services.Identity
 				var student = new Student(user.Id,user.PublicId)
                 {
                     Level = dto.Level,
-				
-                    University = dto.University,
                     UniversityId = dto.UniversityId,
 				
                 };

@@ -12,8 +12,8 @@ namespace DentalHub.Domain.Entities
 
 
 		public int Id { get; set; }
-		public string UniversityId { get; set; } = null!;
-		public string FullName { get; set; } = null!;
+        public Guid UniversityId { get; set; }
+        public University University { get; set; } = null!; public string FullName { get; set; } = null!;
 		public string Faculty { get; set; } = null!;
 		public string Department { get; set; } =null ;
 		public string Role { get; set; } = null!;

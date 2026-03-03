@@ -2050,7 +2050,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[DentalHub.Application.Common.PagedResult\u00601[[DentalHub.Application.DTOs.Cases.PatientCaseDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[DentalHub.Application.Common.PagedResult\u00601[[DentalHub.Application.DTOs.Cases.AvailableCasesDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "application/json"
         ],
@@ -2196,7 +2196,7 @@
     "Parameters": [
       {
         "Name": "universityId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],

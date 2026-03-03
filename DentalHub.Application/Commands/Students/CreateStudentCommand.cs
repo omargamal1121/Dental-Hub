@@ -7,7 +7,7 @@ namespace DentalHub.Application.Commands.Students
         string FullName,
         string Email,
         string Password,
-        string UniversityId,
+        Guid UniversityId,
         int Level,
         string Username,
         string Phone

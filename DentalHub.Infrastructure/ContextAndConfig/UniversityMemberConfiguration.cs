@@ -9,10 +9,14 @@ namespace DentalHub.Infrastructure.ContextAndConfig
         public void Configure(EntityTypeBuilder<UniversityMember> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.HasIndex(um=>um.UniversityId).IsUnique();
+            builder.HasIndex(um => um.UniversityId);
 
+            builder.HasOne(m => m.University)
+                   .WithMany(u => u.Members)
+                   .HasForeignKey(m => m.UniversityId)
+                   .OnDelete(DeleteBehavior.Cascade);
 
-		}
+        }
 	}
 
 }
