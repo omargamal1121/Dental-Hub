@@ -5,9 +5,9 @@ namespace DentalHub.Application.Commands.CaseTypes
 {
     public class DeleteCaseTypeCommand : IRequest<Result>
     {
-        public string Id { get; }
+        public Guid Id { get; }
 
-        public DeleteCaseTypeCommand(string id)
+        public DeleteCaseTypeCommand(Guid id)
         {
             Id = id;
         }

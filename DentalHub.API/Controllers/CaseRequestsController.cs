@@ -22,9 +22,9 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ApiResponse<CaseRequestDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<CaseRequestDto>>> Create([FromBody] CreateCaseRequestDto dto)
+        public async Task<ActionResult<ApiResponse<Guid>>> Create([FromBody] CreateCaseRequestDto dto)
         {
             var command = new CreateCaseRequestCommand(dto.PatientCasePublicId, dto.StudentPublicId, dto.DoctorPublicId, dto.Description);
             var result = await _mediator.Send(command);
@@ -34,7 +34,7 @@ namespace DentalHub.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiResponse<CaseRequestDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<CaseRequestDto>>> GetById(string id)
+        public async Task<ActionResult<ApiResponse<CaseRequestDto>>> GetById(Guid id)
         {
             var result = await _mediator.Send(new GetCaseRequestByIdQuery(id));
             return HandleResult(result);
@@ -42,7 +42,7 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("doctor/{doctorId}")]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<CaseRequestDto>>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetRequestsByDoctor(string doctorId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetRequestsByDoctor(Guid doctorId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             var result = await _mediator.Send(new GetCaseRequestsByDoctorIdQuery(doctorId, page, pageSize));
             return HandleResult(result);
@@ -50,7 +50,7 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("student/{studentId}")]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<CaseRequestDto>>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetRequestsByStudent(string studentId,RequestStatus? status=null, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetRequestsByStudent(Guid studentId,RequestStatus? status=null, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             var result = await _mediator.Send(new GetCaseRequestsByStudentIdQuery(studentId, status,page, pageSize));
             return HandleResult(result);
@@ -70,7 +70,7 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Reject(string id, string doctorId)
+        public async Task<ActionResult<ApiResponse<bool>>> Reject(Guid id, Guid doctorId)
         {
             var result = await _mediator.Send(new RejectCaseRequestCommand(id, doctorId));
             return HandleResult(result);
@@ -79,7 +79,7 @@ namespace DentalHub.API.Controllers
         [HttpDelete("{requestId}/{studentId}")]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<object>>> Cancel(string requestId, string studentId)
+        public async Task<ActionResult<ApiResponse<object>>> Cancel(Guid requestId, Guid studentId)
         {
             var result = await _mediator.Send(new CancelCaseRequestCommand(requestId, studentId));
             return HandleResult(result);
@@ -87,7 +87,7 @@ namespace DentalHub.API.Controllers
 
         [HttpPost("case/{caseId}/reject-all")]
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<bool>>> RejectAllForCase(string caseId)
+        public async Task<ActionResult<ApiResponse<bool>>> RejectAllForCase(Guid caseId)
         {
             var result = await _mediator.Send(new RejectAllRequestsForCaseCommand(caseId));
             return HandleResult(result);
@@ -95,7 +95,7 @@ namespace DentalHub.API.Controllers
 
         [HttpPost("case/{caseId}/mark-taken/{approvedRequestId}")]
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<bool>>> MarkTakenForCase(string caseId, string approvedRequestId)
+        public async Task<ActionResult<ApiResponse<bool>>> MarkTakenForCase(Guid caseId, Guid approvedRequestId)
         {
             var result = await _mediator.Send(new MarkAllRequestsTakenForCaseCommand(caseId, approvedRequestId));
             return HandleResult(result);
@@ -103,7 +103,7 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("case/{caseId}")]
         [ProducesResponseType(typeof(ApiResponse<IEnumerable<CaseRequestDto>>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<IEnumerable<CaseRequestDto>>>> GetByCase(string caseId, [FromQuery] RequestStatus? status = null)
+        public async Task<ActionResult<ApiResponse<IEnumerable<CaseRequestDto>>>> GetByCase(Guid caseId, [FromQuery] RequestStatus? status = null)
         {
             var result = await _mediator.Send(new GetCaseRequestsByCaseIdQuery(caseId, status));
             return HandleResult(result);
@@ -111,7 +111,7 @@ namespace DentalHub.API.Controllers
 
         [HttpPost("student/{studentId}/cancel-all")]
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<bool>>> CancelAllForStudent(string studentId)
+        public async Task<ActionResult<ApiResponse<bool>>> CancelAllForStudent(Guid studentId)
         {
             var result = await _mediator.Send(new CancelAllStudentRequestsCommand(studentId));
             return HandleResult(result);

@@ -5,7 +5,7 @@ using DentalHub.Application.DTOs.Cases;
 namespace DentalHub.Application.Queries.Students
 {
     public record GetAvailableCasesForStudentQuery(
-        string StudentPublicId,
+		Guid StudentPublicId,
         string? CaseType = null,
 		int PageNumber = 1,
         int PageSize = 10

@@ -7,11 +7,11 @@ namespace DentalHub.Application.Services.Cases
     {
         // CRUD Operations
         Task<Result<PatientCaseDto>> CreateCaseAsync(CreateCaseDto dto);
-        Task<Result<PatientCaseDto>> GetCaseByPublicIdAsync(string publicId);
+        Task<Result<PatientCaseDto>> GetCaseByIdAsync(Guid id);
         Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(int page = 1, int pageSize = 10);
         Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(string? search, string? status, int page = 1, int pageSize = 10);
         Task<Result<PatientCaseDto>> UpdateCaseAsync(UpdateCaseDto dto);
-        Task<Result> DeleteCaseByPublicIdAsync(string publicId);
+        Task<Result> DeleteCaseByIdAsync(Guid id);
 
         // Get cases by status
         Task<Result<PagedResult<PatientCaseDto>>> GetCasesByStatusAsync(
@@ -19,17 +19,17 @@ namespace DentalHub.Application.Services.Cases
 
         // Get patient's cases
         Task<Result<PagedResult<PatientCaseDto>>> GetPatientCasesAsync(
-            string patientPublicId, int page = 1, int pageSize = 10);
+			Guid patientId, int page = 1, int pageSize = 10);
 
         // Change case status
-        Task<Result<PatientCaseDto>> UpdateCaseStatusAsync(string publicId, string newStatus);
+        Task<Result<PatientCaseDto>> UpdateCaseStatusAsync(Guid id, string newStatus);
 
         /// <summary>
         /// ADDED: Combined method to update both treatment type and status in one transaction
         /// This prevents double database calls and ensures consistency
         /// </summary>
         Task<Result<PatientCaseDto>> UpdateCaseWithStatusAsync(
-            string publicId,
+			Guid id,
             string? treatmentType,
             CaseStatus newStatus
         );

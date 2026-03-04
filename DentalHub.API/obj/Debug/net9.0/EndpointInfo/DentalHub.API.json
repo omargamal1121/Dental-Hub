@@ -320,7 +320,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CaseRequestDtoApiResponse"
+                  "$ref": "#/components/schemas/GuidApiResponse"
                 }
               }
             }
@@ -349,7 +349,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -388,7 +389,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -435,7 +437,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -542,7 +545,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -550,7 +554,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -599,7 +604,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -607,7 +613,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -646,7 +653,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -675,7 +683,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -683,7 +692,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -712,7 +722,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -748,7 +759,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -839,7 +851,8 @@
                 "type": "object",
                 "properties": {
                   "PatientId": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "uuid"
                   },
                   "Title": {
                     "type": "string"
@@ -848,7 +861,8 @@
                     "type": "string"
                   },
                   "CaseTypeId": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "uuid"
                   },
                   "Images": {
                     "type": "array",
@@ -885,7 +899,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StringApiResponse"
+                  "$ref": "#/components/schemas/GuidApiResponse"
                 }
               }
             }
@@ -914,7 +928,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -951,7 +966,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -988,7 +1004,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1051,7 +1068,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -1195,7 +1213,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1232,7 +1251,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1293,7 +1313,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1358,7 +1379,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StringApiResponse"
+                  "$ref": "#/components/schemas/GuidApiResponse"
                 }
               }
             }
@@ -1438,7 +1459,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1475,7 +1497,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1512,7 +1535,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1624,7 +1648,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1683,7 +1708,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1756,7 +1782,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StringApiResponse"
+                  "$ref": "#/components/schemas/GuidApiResponse"
                 }
               }
             }
@@ -1843,7 +1869,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1880,7 +1907,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1917,7 +1945,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2060,7 +2089,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2097,7 +2127,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2136,7 +2167,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -2183,7 +2215,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -2230,7 +2263,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -2277,7 +2311,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2402,7 +2437,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2455,7 +2491,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StringApiResponse"
+                  "$ref": "#/components/schemas/GuidApiResponse"
                 }
               }
             }
@@ -2521,7 +2557,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2558,7 +2595,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2619,7 +2657,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2826,7 +2865,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2995,7 +3035,7 @@
         "properties": {
           "publicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "fullName": {
             "type": "string",
@@ -3061,11 +3101,11 @@
         "properties": {
           "requestId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "doctorId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "isApproved": {
             "type": "boolean"
@@ -3082,11 +3122,11 @@
         "properties": {
           "id": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "patientId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "patientName": {
             "type": "string",
@@ -3219,11 +3259,11 @@
         "properties": {
           "id": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "patientCasePublicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "patientName": {
             "type": "string",
@@ -3235,7 +3275,7 @@
           },
           "studentPublicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "studentName": {
             "type": "string",
@@ -3251,7 +3291,7 @@
           },
           "doctorId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "doctorName": {
             "type": "string",
@@ -3422,7 +3462,7 @@
         "properties": {
           "publicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "name": {
             "type": "string",
@@ -3567,15 +3607,15 @@
         "properties": {
           "patientCasePublicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "studentPublicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "doctorPublicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "description": {
             "type": "string",
@@ -3635,11 +3675,11 @@
         "properties": {
           "studentId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "patientCaseId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "sessionDate": {
             "type": "string",
@@ -3657,7 +3697,7 @@
         "properties": {
           "publicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "fullName": {
             "type": "string",
@@ -3732,7 +3772,7 @@
         "properties": {
           "publicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "fullName": {
             "type": "string",
@@ -3946,11 +3986,11 @@
         "properties": {
           "id": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "patientId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "patientName": {
             "type": "string",
@@ -4091,7 +4131,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "status": {
             "$ref": "#/components/schemas/CaseStatus"
@@ -4112,7 +4152,7 @@
         "properties": {
           "publicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "fullName": {
             "type": "string",
@@ -4343,11 +4383,11 @@
         "properties": {
           "id": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "caseId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "treatmentType": {
             "type": "string",
@@ -4355,7 +4395,7 @@
           },
           "patientId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "patientName": {
             "type": "string",
@@ -4363,7 +4403,7 @@
           },
           "studentId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "studentName": {
             "type": "string",
@@ -4494,11 +4534,11 @@
         "properties": {
           "id": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "sessionId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "note": {
             "type": "string",
@@ -4548,46 +4588,12 @@
         },
         "additionalProperties": false
       },
-      "StringApiResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "type": "string",
-            "nullable": true
-          },
-          "statusCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "warnings": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "error": {
-            "$ref": "#/components/schemas/ErrorResponse"
-          },
-          "links": {
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "StudentDto": {
         "type": "object",
         "properties": {
           "publicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "fullName": {
             "type": "string",
@@ -4808,7 +4814,7 @@
           },
           "publicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "uinversalId": {
             "type": "string",
@@ -4974,7 +4980,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "name": {
             "type": "string",
@@ -4992,7 +4998,7 @@
         "properties": {
           "publicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "name": {
             "type": "string",
@@ -5014,7 +5020,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "title": {
             "type": "string",
@@ -5040,7 +5046,7 @@
         "properties": {
           "publicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "fullName": {
             "type": "string",
@@ -5069,7 +5075,7 @@
         "properties": {
           "sessionId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "status": {
             "type": "string",
@@ -5083,7 +5089,7 @@
         "properties": {
           "publicId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "fullName": {
             "type": "string",

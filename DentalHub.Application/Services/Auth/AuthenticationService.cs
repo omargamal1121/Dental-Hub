@@ -79,10 +79,15 @@ namespace DentalHub.Application.Services.Auth
                 //}
 
                 var roles = (await _userManager.GetRolesAsync(user)).ToList();
-           
-          
-                    return Result<TokensDto>.Success(new TokensDto { Token = tokenResult.Data, Roles = roles, PublicId = user.PublicId }, "Login successfully");
-				
+
+                return Result<TokensDto>.Success(
+                    new TokensDto
+                    {
+                        Token = tokenResult.Data,
+                        Roles = roles,
+                        PublicId = user.Id
+                    },
+                    "Login successfully");
             }
             catch (Exception ex)
             {
@@ -92,14 +97,14 @@ namespace DentalHub.Application.Services.Auth
         }
 
 
-        public async Task<Result<bool>> LogoutAsync(string publicId)
+        public async Task<Result<bool>> LogoutAsync(Guid userId)
         {
             _logger.LogInformation("Executing {Method}", nameof(LogoutAsync));
 
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.PublicId == publicId);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
             {
-                _logger.LogError("No user found with PublicId: {PublicId}", publicId);
+                _logger.LogError("No user found with Id: {UserId}", userId);
                 return Result<bool>.Failure("Invalid user ID");
             }
 
@@ -107,7 +112,7 @@ namespace DentalHub.Application.Services.Auth
             if (!updateResult.Succeeded)
             {
                 var errors = string.Join(", ", updateResult.Errors.Select(e => e.Description));
-                _logger.LogError("Failed to update security stamp for user {PublicId}: {Errors}", publicId, errors);
+                _logger.LogError("Failed to update security stamp for user {PublicId}: {Errors}", userId, errors);
             }
             ExpireRefreshCookie();
             return Result<bool>.Success(true, "Logout Successful");

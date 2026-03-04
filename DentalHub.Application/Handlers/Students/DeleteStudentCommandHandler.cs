@@ -16,7 +16,7 @@ namespace DentalHub.Application.Handlers.Students
 
         public async Task<Result<bool>> Handle(DeleteStudentCommand request, CancellationToken ct)
         {
-            var result = await _service.DeleteStudentByPublicIdAsync(request.PublicId);
+            var result = await _service.DeleteStudentByIdAsync(request.PublicId);
             if (!result.IsSuccess)
             {
                 return Result<bool>.Failure(result.Errors ?? new List<string> { result.Message ?? "Delete failed" }, result.Status);

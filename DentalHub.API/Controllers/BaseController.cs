@@ -37,19 +37,21 @@ namespace DentalHub.API.Controllers
             return StatusCode(statusCode, errorResponse);
         }
 
-        protected string GetUserId() =>
-            HttpContext?.Items?["UserId"]?.ToString() ?? string.Empty;
+        protected Guid GetUserId() =>
+            Guid.TryParse(HttpContext?.Items?["UserId"]?.ToString(), out var userId) ? userId : Guid.Empty;
 
     
-        protected string? GetUserIdFromToken()
+        protected Guid? GetUserIdFromToken()
         {
             var userIdClaim = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userIdClaim))
                 return null;
 
            
+            if (Guid.TryParse(userIdClaim, out var userId))
+                return userId;
 
-            return userIdClaim;
+            return null;
         }
 
       
@@ -79,7 +81,7 @@ namespace DentalHub.API.Controllers
         protected ActionResult<ApiResponse<T>> HandleResult<T>(
           Result<T> result,
           string apiName = "",
-          int? id = null)
+          Guid? id = null)
         {
             var links = _linkBuilder?.MakeRelSelf(_linkBuilder.GenerateLinks(id), apiName);
 
@@ -126,7 +128,7 @@ namespace DentalHub.API.Controllers
         protected ActionResult<ApiResponse<object>> HandleResult(
          Result result,
          string apiName = "",
-         int? id = null)
+         Guid? id = null)
         {
             var links = _linkBuilder?.MakeRelSelf(_linkBuilder.GenerateLinks(id), apiName);
 

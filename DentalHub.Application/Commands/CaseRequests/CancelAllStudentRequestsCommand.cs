@@ -4,6 +4,6 @@ using DentalHub.Application.Common;
 namespace DentalHub.Application.Commands.CaseRequests
 {
     public record CancelAllStudentRequestsCommand(
-        string StudentPublicId
+		Guid StudentPublicId
     ) : IRequest<Result<bool>>;
 }

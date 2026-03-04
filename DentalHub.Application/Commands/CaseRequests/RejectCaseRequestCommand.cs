@@ -4,7 +4,7 @@ using DentalHub.Application.Common;
 namespace DentalHub.Application.Commands.CaseRequests
 {
     public record RejectCaseRequestCommand(
-        string RequestPublicId,
-        string DoctorPublicId
+		Guid RequestPublicId,
+		Guid DoctorPublicId
     ) : IRequest<Result<bool>>;
 }

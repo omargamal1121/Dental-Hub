@@ -3,7 +3,7 @@ namespace DentalHub.Application.DTOs.Patients
     /// DTO for updating patient information
     public class UpdatePatientDto
     {
-        public string PublicId { get; set; } = string.Empty;
+        public Guid PublicId { get; set; }
 
         public string? FullName { get; set; }
 

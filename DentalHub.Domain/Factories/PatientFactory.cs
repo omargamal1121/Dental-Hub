@@ -24,7 +24,7 @@ namespace DentalHub.Domain.Factories
 
             return new Patient
             {
-                UserId = userId,
+              
                 Age = age,
                 Phone = phone,
                 CreateAt = DateTime.UtcNow

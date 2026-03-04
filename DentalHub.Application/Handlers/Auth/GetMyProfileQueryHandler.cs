@@ -40,7 +40,7 @@ namespace DentalHub.Application.Handlers.Auth
             };
         }
 
-        private async Task<Result<object>> GetDoctorProfile(string userId)
+        private async Task<Result<object>> GetDoctorProfile(Guid userId)
         {
            
             var result = await _doctorService.GetDoctorByIdAsync(userId);
@@ -50,7 +50,7 @@ namespace DentalHub.Application.Handlers.Auth
             return Result<object>.Success(result.Data, result.Message, result.Status);
         }
 
-        private async Task<Result<object>> GetStudentProfile(string userId)
+        private async Task<Result<object>> GetStudentProfile(Guid userId)
         {
             var result = await _studentService.GetStudentByUserIdAsync(userId);
             if (!result.IsSuccess)
@@ -59,7 +59,7 @@ namespace DentalHub.Application.Handlers.Auth
             return Result<object>.Success(result.Data, result.Message, result.Status);
         }
 
-        private async Task<Result<object>> GetPatientProfile(string userId)
+        private async Task<Result<object>> GetPatientProfile(Guid userId)
         {
             var result = await _patientService.GetPatientByUserIdAsync(userId);
             if (!result.IsSuccess)
@@ -68,7 +68,7 @@ namespace DentalHub.Application.Handlers.Auth
             return Result<object>.Success(result.Data, result.Message, result.Status);
         }
 
-        private async Task<Result<object>> GetAdminProfile(string userId)
+        private async Task<Result<object>> GetAdminProfile(Guid userId)
         {
             var result = await _adminService.GetAdminByUserIdAsync(userId);
             if (!result.IsSuccess)

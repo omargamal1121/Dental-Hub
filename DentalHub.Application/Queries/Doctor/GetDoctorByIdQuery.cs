@@ -4,5 +4,5 @@ using DentalHub.Application.DTOs.Doctors;
 
 namespace DentalHub.Application.Queries.Doctor
 {
-    public record GetDoctorByIdQuery(string PublicId) : IRequest<Result<DoctorDto>>;
+    public record GetDoctorByIdQuery(Guid PublicId) : IRequest<Result<DoctorDto>>;
 }

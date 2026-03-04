@@ -23,9 +23,9 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] CreatePatientCommand command)
+        public async Task<ActionResult<ApiResponse<Guid>>> Create([FromBody] CreatePatientCommand command)
         {
             var result = await _mediator.Send(command);
             return HandleResult(result);
@@ -34,7 +34,7 @@ namespace DentalHub.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Delete(string id)
+        public async Task<ActionResult<ApiResponse<bool>>> Delete(Guid id)
         {
             var result = await _mediator.Send(new DeletePatientCommand(id));
             return HandleResult(result);
@@ -43,7 +43,7 @@ namespace DentalHub.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiResponse<PatientDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<PatientDto>>> GetById(string id)
+        public async Task<ActionResult<ApiResponse<PatientDto>>> GetById(Guid id)
         {
             var result = await _mediator.Send(new GetPatientByIdQuery(id));
             return HandleResult(result);
@@ -64,7 +64,7 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Update(string id, [FromBody] UpdatePatientCommand command)
+        public async Task<ActionResult<ApiResponse<bool>>> Update(Guid id, [FromBody] UpdatePatientCommand command)
         {
              if (id != command.PublicId)
             {

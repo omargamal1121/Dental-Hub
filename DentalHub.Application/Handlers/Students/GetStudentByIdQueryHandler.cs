@@ -17,7 +17,7 @@ namespace DentalHub.Application.Handlers.Students
 
         public async Task<Result<StudentDto>> Handle(GetStudentByIdQuery request, CancellationToken ct)
         {
-            return await _service.GetStudentByPublicIdAsync(request.PublicId);
+            return await _service.GetStudentByIdAsync(request.PublicId);
         }
     }
 }

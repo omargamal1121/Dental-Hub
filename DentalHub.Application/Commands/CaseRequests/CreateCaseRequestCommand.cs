@@ -5,9 +5,9 @@ using DentalHub.Application.DTOs.Cases;
 namespace DentalHub.Application.Commands.CaseRequests
 {
     public record CreateCaseRequestCommand(
-        string PatientCasePublicId,
-        string StudentPublicId,
-        string DoctorPublicId,
+		Guid PatientCasePublicId,
+		Guid StudentPublicId,
+		Guid DoctorPublicId,
         string Description
-    ) : IRequest<Result<CaseRequestDto>>;
+    ) : IRequest<Result<Guid>>;
 }

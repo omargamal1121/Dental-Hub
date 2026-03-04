@@ -4,5 +4,5 @@ using DentalHub.Application.DTOs.Sessions;
 
 namespace DentalHub.Application.Queries.Sessions
 {
-    public record GetSessionsByCaseIdQuery(string CaseId, int Page = 1, int PageSize = 10) : IRequest<Result<PagedResult<SessionDto>>>;
+    public record GetSessionsByCaseIdQuery(Guid CaseId, int Page = 1, int PageSize = 10) : IRequest<Result<PagedResult<SessionDto>>>;
 }

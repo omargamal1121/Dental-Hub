@@ -6,15 +6,15 @@ namespace DentalHub.Application.Services
 {
     public interface IPatientService
     {
-        Task<Result<PatientDto>> GetPatientByPublicIdAsync(string publicId);
+        Task<Result<PatientDto>> GetPatientByIdAsync(Guid id);
 
         // For the patient himself - searches by UserId (coming from the JWT token)
-        Task<Result<PatientDto>> GetPatientByUserIdAsync(string userId);
+        Task<Result<PatientDto>> GetPatientByUserIdAsync(Guid userId);
 
         Task<Result<PagedResult<PatientDto>>> GetAllPatientsAsync(FilterPatientDto filterPatientDto, int page = 1, int pageSize = 10);
 
 
         Task<Result<PatientDto>> UpdatePatientAsync(UpdatePatientDto dto);
-        Task<Result> DeletePatientAsync(string publicId);
+        Task<Result> DeletePatientAsync(Guid id);
     }
 }

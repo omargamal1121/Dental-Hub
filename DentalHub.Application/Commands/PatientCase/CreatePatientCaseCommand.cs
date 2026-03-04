@@ -6,10 +6,10 @@ using System.Collections.Generic;
 namespace DentalHub.Application.Commands.PatientCase
 {
     public record CreatePatientCaseCommand(
-        string PatientId,
+        Guid PatientId,
         string Title,
         string Description,
-        string CaseTypeId,
+        Guid CaseTypeId,
         List<IFormFile>? Images = null
-    ) : IRequest<Result<string>>;
+    ) : IRequest<Result<Guid>>;
 }

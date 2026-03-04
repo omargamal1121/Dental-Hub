@@ -6,9 +6,9 @@ namespace DentalHub.Application.Queries.CaseTypes
 {
     public class GetCaseTypeByIdQuery : IRequest<Result<CaseTypeDto>>
     {
-        public string Id { get; }
+        public Guid Id { get; }
 
-        public GetCaseTypeByIdQuery(string id)
+        public GetCaseTypeByIdQuery(Guid id)
         {
             Id = id;
         }

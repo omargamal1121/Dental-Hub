@@ -3,19 +3,15 @@
 	public abstract class BaseEntitiy
 	{
 		public Guid Id { get; set; } 
-		public string PublicId { get; set; }
-
+	
 		public BaseEntitiy()
 		{
 			Id = Guid.CreateVersion7();
-			PublicId = Utils.Base62Converter.Encode(Id);
+		
 		}
-		public BaseEntitiy(Guid id,string publicid)
+		public BaseEntitiy(Guid id)
 		{
 			Id=id;
-			PublicId =publicid;
-
-
 		}
 
 		public DateTime CreateAt { get; set; } = DateTime.UtcNow;

@@ -6,12 +6,12 @@
 		{
 			
 		}
-		public Patient(Guid id,string publicid):base(id,publicid)
+		public Patient(Guid id):base(id)
 		{
-            UserId =id;
+          
 			
 		}
-		public Guid UserId { get; set; }
+	
         public int Age { get; set; }
         public string Phone { get; set; }
         public User User { get; set; }

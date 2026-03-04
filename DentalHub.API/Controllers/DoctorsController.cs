@@ -26,9 +26,9 @@ namespace DentalHub.API.Controllers
         #region Admin Endpoints
 
         [HttpPost]
-        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] RegisterDoctorDto registerDoctor)
+        public async Task<ActionResult<ApiResponse<Guid>>> Create([FromBody] RegisterDoctorDto registerDoctor)
         {
             var registerCommand = new CreateDoctorCommand(registerDoctor.FullName
                 ,registerDoctor.Email
@@ -44,7 +44,7 @@ namespace DentalHub.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Delete(string id)
+        public async Task<ActionResult<ApiResponse<bool>>> Delete(Guid id)
         {
             var result = await _mediator.Send(new DeleteDoctorCommand(id));
             return HandleResult(result);
@@ -53,7 +53,7 @@ namespace DentalHub.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiResponse<DoctorDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<DoctorDto>>> GetById(string id)
+        public async Task<ActionResult<ApiResponse<DoctorDto>>> GetById(Guid id)
         {
             var result = await _mediator.Send(new GetDoctorByIdQuery(id));
             return HandleResult(result);
@@ -75,7 +75,7 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Update(string id, [FromBody] UpdateDoctorCommand command)
+        public async Task<ActionResult<ApiResponse<bool>>> Update(Guid id, [FromBody] UpdateDoctorCommand command)
         {
             if (id != command.PublicId)
                 return CreateErrorResponse<bool>("Id mismatch", 400);
@@ -101,7 +101,7 @@ namespace DentalHub.API.Controllers
             if (doctorId == null)
                 return CreateErrorResponse<PagedResult<CaseRequestDto>>("Unauthorized: Invalid token", 401);
 
-            var result = await _mediator.Send(new GetMyRequestsQuery(doctorId.ToString(), page, pageSize));
+            var result = await _mediator.Send(new GetMyRequestsQuery(doctorId.Value, page, pageSize));
             return HandleResult(result);
         }
 
@@ -112,13 +112,13 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> ApproveRequest(string requestId)
+        public async Task<ActionResult<ApiResponse<bool>>> ApproveRequest(Guid requestId)
         {
             var doctorId = GetUserIdFromToken();
             if (doctorId == null)
                 return CreateErrorResponse<bool>("Unauthorized: Invalid token", 401);
 
-            var result = await _mediator.Send(new ApproveMyRequestCommand(requestId, doctorId.ToString()));
+            var result = await _mediator.Send(new ApproveMyRequestCommand(requestId, doctorId.Value));
             return HandleResult(result);
         }
 
@@ -129,13 +129,13 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> RejectRequest(string requestId)
+        public async Task<ActionResult<ApiResponse<bool>>> RejectRequest(Guid requestId)
         {
             var doctorId = GetUserIdFromToken();
             if (doctorId == null)
                 return CreateErrorResponse<bool>("Unauthorized: Invalid token", 401);
 
-            var result = await _mediator.Send(new RejectMyRequestCommand(requestId, doctorId.ToString()));
+            var result = await _mediator.Send(new RejectMyRequestCommand(requestId, doctorId.Value));
             return HandleResult(result);
         }
 

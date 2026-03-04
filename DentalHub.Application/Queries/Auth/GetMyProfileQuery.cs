@@ -4,5 +4,5 @@ using MediatR;
 namespace DentalHub.Application.Queries.Auth
 {
     
-    public record GetMyProfileQuery(string UserId, string Role) : IRequest<Result<object>>;
+    public record GetMyProfileQuery(Guid UserId, string Role) : IRequest<Result<object>>;
 }

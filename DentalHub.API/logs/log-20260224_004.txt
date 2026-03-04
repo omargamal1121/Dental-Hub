@@ -1,6 +1,0 @@
-2026-02-24 23:44:52.107 +02:00 [INF] Executed DbCommand (153ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
-SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db39102' AND TABLE_NAME='__EFMigrationsHistory';
-2026-02-24 23:44:52.986 +02:00 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
-SELECT `MigrationId`, `ProductVersion`
-FROM `__EFMigrationsHistory`
-ORDER BY `MigrationId`;

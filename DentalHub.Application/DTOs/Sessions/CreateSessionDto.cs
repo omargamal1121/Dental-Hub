@@ -2,11 +2,11 @@ namespace DentalHub.Application.DTOs.Sessions
 {
     public class CreateSessionDto
     {
-        public string CaseId { get; set; } = string.Empty;
+        public Guid CaseId { get; set; } 
 
-        public string StudentId { get; set; } = string.Empty;
+        public Guid StudentId { get; set; } 
 
-        public string PatientId { get; set; } = string.Empty;
+        public Guid PatientId { get; set; } 
 
         public DateTime ScheduledAt { get; set; }
     }

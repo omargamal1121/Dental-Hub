@@ -4,7 +4,7 @@ namespace DentalHub.Application.DTOs.Doctors
 {
     public class DoctorDto
     {
-        public string PublicId { get; set; } = string.Empty;
+        public Guid PublicId { get; set; }
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
     

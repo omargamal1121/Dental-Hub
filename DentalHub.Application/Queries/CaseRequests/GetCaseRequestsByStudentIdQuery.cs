@@ -5,7 +5,7 @@ using DentalHub.Application.DTOs.Cases;
 namespace DentalHub.Application.Queries.CaseRequests
 {
     public record GetCaseRequestsByStudentIdQuery(
-        string StudentPublicId,
+		Guid StudentPublicId,
         RequestStatus? Status = null,
         int Page = 1,
         int PageSize = 10

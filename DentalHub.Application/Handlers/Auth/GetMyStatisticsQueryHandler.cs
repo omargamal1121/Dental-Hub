@@ -29,7 +29,7 @@ namespace DentalHub.Application.Handlers.Auth
             };
         }
 
-        private async Task<Result<object>> GetDoctorStats(string userId)
+        private async Task<Result<object>> GetDoctorStats(Guid userId)
         {
             var result = await _doctorService.GetDoctorStatisticsAsync(userId);
             if (!result.IsSuccess)
@@ -38,7 +38,7 @@ namespace DentalHub.Application.Handlers.Auth
             return Result<object>.Success(result.Data, result.Message, result.Status);
         }
 
-        private async Task<Result<object>> GetStudentStats(string userId)
+        private async Task<Result<object>> GetStudentStats(Guid userId)
         {
             var result = await _studentService.GetStudentStatisticsAsync(userId);
             if (!result.IsSuccess)

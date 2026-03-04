@@ -3,5 +3,5 @@ using DentalHub.Application.Common;
 
 namespace DentalHub.Application.Commands.Students
 {
-    public record DeleteStudentCommand(string PublicId) : IRequest<Result<bool>>;
+    public record DeleteStudentCommand(Guid PublicId) : IRequest<Result<bool>>;
 }

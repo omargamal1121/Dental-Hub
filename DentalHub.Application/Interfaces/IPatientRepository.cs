@@ -6,7 +6,7 @@ namespace DentalHub.Application.Interfaces
 {
 	public interface IPatientRepository:IMainRepository<Patient>
 	{
-		public Task<TResult?> GetPatientByPublicId<TResult>(string publicId, ISpecificationWithProjection<Patient, TResult> spec);
+		public Task<TResult?> GetPatientById<TResult>(Guid id, ISpecificationWithProjection<Patient, TResult> spec);
 
 
 	}

@@ -6,12 +6,12 @@
 		{
 			
 		}
-		public Doctor(Guid id,string publicId):base(id,publicId)
+		public Doctor(Guid id):base(id)
 		{
-			UserId=id;	
+			
 		}
 		public string Name {  get; set; }
-        public Guid UserId { get; set; }
+     
         public string Specialty { get; set; }
 		public Guid UniversityId { get; set; }
         public University University { get; set; } = null!;

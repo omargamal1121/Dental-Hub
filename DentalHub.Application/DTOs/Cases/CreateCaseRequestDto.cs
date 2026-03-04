@@ -2,11 +2,11 @@ namespace DentalHub.Application.DTOs.Cases
 {
     public class CreateCaseRequestDto
     {
-        public string PatientCasePublicId { get; set; } = string.Empty;
+        public Guid PatientCasePublicId { get; set; } 
 
-        public string StudentPublicId { get; set; } = string.Empty;
+        public Guid StudentPublicId { get; set; } 
 
-        public string DoctorPublicId { get; set; } = string.Empty;
+        public Guid DoctorPublicId { get; set; } 
 
         public string Description { get; set; } = string.Empty;
     }

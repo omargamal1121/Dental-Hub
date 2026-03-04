@@ -8,11 +8,11 @@ namespace DentalHub.Domain.Entities
 		{
 			
 		}
-		public Student(Guid id,string publicid):base(id,publicid) 
+		public Student(Guid id):base(id) 
 		{
-			UserId=id;
+			
 		}
-		public Guid UserId { get; set; }
+	
         public int Level { get; set; }
         public Guid UniversityId { get; set; }
         public University University { get; set; } = null!;

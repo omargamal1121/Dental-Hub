@@ -4,5 +4,5 @@ using DentalHub.Application.DTOs.Sessions;
 
 namespace DentalHub.Application.Queries.Sessions
 {
-    public record GetSessionNotesQuery(string GuidSessionId) : IRequest<Result<List<SessionNoteDto>>>;
+    public record GetSessionNotesQuery(Guid GuidSessionId) : IRequest<Result<List<SessionNoteDto>>>;
 }

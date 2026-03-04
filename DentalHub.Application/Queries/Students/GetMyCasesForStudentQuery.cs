@@ -9,7 +9,7 @@ namespace DentalHub.Application.Queries.Students
     /// The student PublicId is resolved in the controller from the JWT token.
     /// </summary>
     public record GetMyCasesForStudentQuery(
-        string StudentPublicId,
+		Guid StudentPublicId,
         string? Casetype = null,
 		int Page     = 1,
         int PageSize = 10

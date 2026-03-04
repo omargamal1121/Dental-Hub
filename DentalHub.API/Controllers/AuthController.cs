@@ -42,7 +42,7 @@ namespace DentalHub.API.Controllers
         public async Task<ActionResult<ApiResponse<bool>>> Logout()
         {
             var userId = GetUserId();
-            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+            if (userId == Guid.Empty) return Unauthorized();
 
             var result = await _mediator.Send(new LogoutCommand(userId));
             return HandleResult(result);
@@ -74,7 +74,7 @@ namespace DentalHub.API.Controllers
         public async Task<ActionResult<ApiResponse<bool>>> ChangePassword([FromBody] ChangePasswordRequestDto request)
         {
             var userId = GetUserId();
-            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+            if (userId == Guid.Empty) return Unauthorized();
 
             var command = new ChangePasswordCommand(userId, request.OldPassword, request.NewPassword);
             var result = await _mediator.Send(command);
@@ -100,7 +100,7 @@ namespace DentalHub.API.Controllers
             if (string.IsNullOrEmpty(role))
                 return CreateErrorResponse<object>("Unauthorized: Role not found in token", 401);
 
-            var result = await _mediator.Send(new GetMyProfileQuery(userId, role));
+            var result = await _mediator.Send(new GetMyProfileQuery(userId.Value, role));
             return HandleResult(result);
         }
 
@@ -119,7 +119,8 @@ namespace DentalHub.API.Controllers
             if (string.IsNullOrEmpty(role))
                 return CreateErrorResponse<object>("Unauthorized: Role not found in token", 401);
 
-            var result = await _mediator.Send(new GetMyStatisticsQuery(userId.ToString(), role));
+            Guid.TryParse(userId.ToString(), out var userGuid);
+			var result = await _mediator.Send(new GetMyStatisticsQuery(userGuid, role));
             return HandleResult(result);
         }
     }

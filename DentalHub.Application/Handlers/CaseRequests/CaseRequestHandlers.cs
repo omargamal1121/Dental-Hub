@@ -9,11 +9,11 @@ namespace DentalHub.Application.Handlers.CaseRequests
 {
     #region Commands
 
-    public class CreateCaseRequestCommandHandler : IRequestHandler<CreateCaseRequestCommand, Result<CaseRequestDto>>
+    public class CreateCaseRequestCommandHandler : IRequestHandler<CreateCaseRequestCommand, Result<Guid>>
     {
         private readonly ICaseRequestService _service;
         public CreateCaseRequestCommandHandler(ICaseRequestService service) => _service = service;
-        public async Task<Result<CaseRequestDto>> Handle(CreateCaseRequestCommand request, CancellationToken ct)
+        public async Task<Result<Guid>> Handle(CreateCaseRequestCommand request, CancellationToken ct)
         {
             return await _service.CreateRequestAsync(new CreateCaseRequestDto
             {
@@ -99,7 +99,7 @@ namespace DentalHub.Application.Handlers.CaseRequests
         public GetCaseRequestByIdQueryHandler(ICaseRequestService service) => _service = service;
         public async Task<Result<CaseRequestDto>> Handle(GetCaseRequestByIdQuery request, CancellationToken ct)
         {
-            return await _service.GetRequestByPublicIdAsync(request.PublicId);
+            return await _service.GetRequestByIdAsync(request.PublicId,Guid.Empty);
         }
     }
 

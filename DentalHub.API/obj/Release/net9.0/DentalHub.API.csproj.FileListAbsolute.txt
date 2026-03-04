@@ -230,3 +230,5 @@ D:\projects\DentalHub\DentalHub.API\bin\Release\net9.0\Microsoft.AspNetCore.Auth
 D:\projects\DentalHub\DentalHub.API\bin\Release\net9.0\Microsoft.IdentityModel.Protocols.dll
 D:\projects\DentalHub\DentalHub.API\bin\Release\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\projects\DentalHub\DentalHub.API\bin\Release\net9.0\Swashbuckle.AspNetCore.Annotations.dll
+D:\projects\DentalHub\DentalHub.API\bin\Release\net9.0\FluentValidation.dll
+D:\projects\DentalHub\DentalHub.API\bin\Release\net9.0\FluentValidation.DependencyInjectionExtensions.dll

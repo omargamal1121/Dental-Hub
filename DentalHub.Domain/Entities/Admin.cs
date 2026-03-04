@@ -2,13 +2,15 @@ namespace DentalHub.Domain.Entities
 {
     public class Admin : BaseEntitiy
     {
-        
-        public Guid UserId { get; set; }
+		public Admin()
+		{
+			
+		}
+		public Admin(Guid id): base(id)
+		{
 
-       
-
-
-        public string Phone { get; set; }
+		}
+		public string Phone { get; set; }
 
         public bool IsSuperAdmin { get; set; }
 

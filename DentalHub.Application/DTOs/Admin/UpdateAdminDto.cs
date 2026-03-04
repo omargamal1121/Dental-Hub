@@ -2,7 +2,7 @@ namespace DentalHub.Application.DTOs.Admins
 {
     public class UpdateAdminDto
     {
-        public string PublicId { get; set; } = string.Empty;
+        public Guid PublicId { get; set; }
 
         public string? FullName { get; set; }
 

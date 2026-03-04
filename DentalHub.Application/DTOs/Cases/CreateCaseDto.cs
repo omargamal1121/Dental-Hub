@@ -6,9 +6,9 @@ namespace DentalHub.Application.DTOs.Cases
     /// DTO for creating a new patient case
     public class CreateCaseDto
     {
-        public string PatientId { get; set; } = string.Empty;
+        public Guid PatientId { get; set; } 
 
-		public string CaseTypeId { get; set; } = string.Empty;
+		public Guid CaseTypeId { get; set; } 
 
 
         public string? Description { get; set; }

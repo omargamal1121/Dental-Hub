@@ -6,34 +6,34 @@ namespace DentalHub.Application.Services.Cases
     public interface ICaseRequestService
     {
         // Create Request
-        Task<Result<CaseRequestDto>> CreateRequestAsync(CreateCaseRequestDto dto);
+        Task<Result<Guid>> CreateRequestAsync(CreateCaseRequestDto dto);
 
         // Get Requests
         Task<Result<PagedResult<CaseRequestDto>>> GetRequestsByDoctorIdAsync(
-            string doctorPublicId, int page = 1, int pageSize = 10);
+            Guid doctorId, int page = 1, int pageSize = 10);
 
         Task<Result<PagedResult<CaseRequestDto>>> GetRequestsByStudentIdAsync(
-            string studentPublicId, RequestStatus? status = null, int page = 1, int pageSize = 10);
+            Guid studentId, RequestStatus? status = null, int page = 1, int pageSize = 10);
 
-        Task<Result<CaseRequestDto>> GetRequestByPublicIdAsync(string publicId);
+        Task<Result<CaseRequestDto>> GetRequestByIdAsync(Guid id, Guid currentUserId, bool isadmin = false);
 
         // Approve/Reject
         Task<Result<bool>> ApproveRequstAsync(ApproveCaseRequestDto dto);
 
-        Task<Result<bool>> RejectRequestAsync(string publicId, string doctorPublicId);
+        Task<Result<bool>> RejectRequestAsync(Guid id, Guid doctorId);
 
         // Cancel Request
-        Task<Result> CancelRequestAsync(string publicId, string studentPublicId);
+        Task<Result> CancelRequestAsync(Guid id, Guid studentId);
 
         // Bulk Operations
-        Task<Result<bool>> RejectAllRequestsForCaseAsync(string casePublicId);
+        Task<Result<bool>> RejectAllRequestsForCaseAsync(Guid caseId);
 
         Task<Result<bool>> MarkAllRequestsTakenForCaseAsync(
-            string casePublicId, string approvedRequestPublicId);
+            Guid caseId, Guid approvedRequestId);
 
         Task<Result<IEnumerable<CaseRequestDto>>> GetRequestsByCaseIdAsync(
-            string casePublicId, RequestStatus? status = null);
+            Guid caseId, RequestStatus? status = null);
 
-        Task<Result<bool>> CancelAllStudentRequestsAsync(string studentPublicId);
+        Task<Result<bool>> CancelAllStudentRequestsAsync(Guid studentId);
     }
 }

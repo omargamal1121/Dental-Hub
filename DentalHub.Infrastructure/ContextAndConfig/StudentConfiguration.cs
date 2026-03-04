@@ -8,11 +8,11 @@ namespace DentalHub.Infrastructure.ContextAndConfig
     {
         public void Configure(EntityTypeBuilder<Student> builder)
         {
-            builder.HasKey(x => x.UserId);
+            builder.HasKey(x => x.Id);
 
             builder.HasOne(x => x.User)
                    .WithOne(x => x.Student)
-                   .HasForeignKey<Student>(x => x.UserId)
+                   .HasForeignKey<Student>(x => x.Id)
                    .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(s => s.University)

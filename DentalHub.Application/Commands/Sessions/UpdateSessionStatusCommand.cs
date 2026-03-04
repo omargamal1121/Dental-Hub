@@ -4,7 +4,7 @@ using DentalHub.Application.Common;
 namespace DentalHub.Application.Commands.Sessions
 {
     public record UpdateSessionStatusCommand(
-        string SessionId,
+        Guid SessionId,
         string Status
     ) : IRequest<Result<bool>>;
 }

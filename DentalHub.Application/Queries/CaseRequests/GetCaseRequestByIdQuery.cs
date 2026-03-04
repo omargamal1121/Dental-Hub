@@ -5,6 +5,6 @@ using DentalHub.Application.DTOs.Cases;
 namespace DentalHub.Application.Queries.CaseRequests
 {
     public record GetCaseRequestByIdQuery(
-        string PublicId
+		Guid PublicId
     ) : IRequest<Result<CaseRequestDto>>;
 }

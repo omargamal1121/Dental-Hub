@@ -23,7 +23,7 @@ namespace DentalHub.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] CreateSessionCommand command)
+        public async Task<ActionResult<ApiResponse<Guid>>> Create([FromBody] CreateSessionCommand command)
         {
             var result = await _mediator.Send(command);
             return HandleResult(result);
@@ -32,7 +32,7 @@ namespace DentalHub.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiResponse<SessionDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<SessionDto>>> GetById(string id)
+        public async Task<ActionResult<ApiResponse<SessionDto>>> GetById(Guid id)
         {
             var result = await _mediator.Send(new GetSessionByIdQuery(id));
             return HandleResult(result);
@@ -49,7 +49,7 @@ namespace DentalHub.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Delete(string id)
+        public async Task<ActionResult<ApiResponse<bool>>> Delete(Guid id)
         {
             var result = await _mediator.Send(new DeleteSessionCommand(id));
             return HandleResult(result);
@@ -57,7 +57,7 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("student/{studentId}")]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<SessionDto>>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<PagedResult<SessionDto>>>> GetByStudent(string    studentId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ApiResponse<PagedResult<SessionDto>>>> GetByStudent(Guid    studentId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             var result = await _mediator.Send(new GetSessionsByStudentIdQuery(studentId, page, pageSize));
             return HandleResult(result);
@@ -65,7 +65,7 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("patient/{patientId}")]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<SessionDto>>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<PagedResult<SessionDto>>>> GetByPatient(string patientId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ApiResponse<PagedResult<SessionDto>>>> GetByPatient(Guid patientId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             var result = await _mediator.Send(new GetSessionsByPatientIdQuery(patientId, page, pageSize));
             return HandleResult(result);
@@ -73,7 +73,7 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("case/{caseId}")]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<SessionDto>>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<PagedResult<SessionDto>>>> GetByCase(string caseId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ApiResponse<PagedResult<SessionDto>>>> GetByCase(Guid caseId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             var result = await _mediator.Send(new GetSessionsByCaseIdQuery(caseId, page, pageSize));
             return HandleResult(result);
@@ -83,7 +83,7 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> UpdateStatus(string id, [FromBody] UpdateSessionStatusCommand command)
+        public async Task<ActionResult<ApiResponse<bool>>> UpdateStatus(Guid id, [FromBody] UpdateSessionStatusCommand command)
         {
             if (id != command.SessionId)
             {
@@ -110,7 +110,7 @@ namespace DentalHub.API.Controllers
         [HttpGet("{id}/notes")]
         [ProducesResponseType(typeof(ApiResponse<List<SessionNoteDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<List<SessionNoteDto>>>> GetNotes(string id)
+        public async Task<ActionResult<ApiResponse<List<SessionNoteDto>>>> GetNotes(Guid id)
         {
             var result = await _mediator.Send(new GetSessionNotesQuery(id));
             return HandleResult(result);

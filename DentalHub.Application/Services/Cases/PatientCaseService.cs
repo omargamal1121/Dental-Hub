@@ -31,13 +31,13 @@ namespace DentalHub.Application.Services.Cases
             try
             {
 
-                var patient = await _unitOfWork.Patients.GetByIdAsync(new BaseSpecification<Patient>(i => i.PublicId == dto.PatientId));
+                var patient = await _unitOfWork.Patients.GetByIdAsync(new BaseSpecification<Patient>(i => i.Id == dto.PatientId));
 
                 if (patient == null)
                 {
                     return Result<PatientCaseDto>.Failure("Patient not found");
                 }
-                var casetype = await _unitOfWork.CaseTypes.GetByIdAsync(new BaseSpecification<CaseType>(i => i.PublicId == dto.CaseTypeId));
+                var casetype = await _unitOfWork.CaseTypes.GetByIdAsync(new BaseSpecification<CaseType>(i => i.Id == dto.CaseTypeId));
 
                 if(casetype == null)
                 {
@@ -46,7 +46,7 @@ namespace DentalHub.Application.Services.Cases
 
 				var patientCase = new PatientCase
                 {
-                    PatientId = patient.UserId,
+                    PatientId = patient.Id,
                     Description =dto.Description??string.Empty,
                     CaseTypeId = casetype.Id,
                     Status = CaseStatus.Pending
@@ -69,9 +69,9 @@ namespace DentalHub.Application.Services.Cases
                 }
 
                 _logger.LogInformation("Patient case created: {PublicId} for patient {PatientPublicId}",
-                    patientCase.PublicId, dto.PatientId);
+                    patientCase.Id, dto.PatientId);
 
-                return await GetCaseByPublicIdAsync(patientCase.PublicId);
+                return await GetCaseByIdAsync(patientCase.Id);
             }
             catch (Exception ex)
             {
@@ -81,19 +81,19 @@ namespace DentalHub.Application.Services.Cases
         }
 
         /// Get case by public ID
-        public async Task<Result<PatientCaseDto>> GetCaseByPublicIdAsync(string publicId)
+        public async Task<Result<PatientCaseDto>> GetCaseByIdAsync(Guid publicId)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
-                    pc => pc.PublicId == publicId,
+                    pc => pc.Id == publicId,
                     pc => new PatientCaseDto
                     {
-                        Id = pc.PublicId,
-                        PatientId = pc.Patient.PublicId,
+                        Id = pc.Id,
+                        PatientId = pc.Patient.Id,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        CaseType = new CaseTypeDto { publicId = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
+                        CaseType = new CaseTypeDto { publicId = pc.PatientId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
                         
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
@@ -126,11 +126,11 @@ namespace DentalHub.Application.Services.Cases
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
                     pc => new PatientCaseDto
                     {
-                        Id = pc.PublicId,
-                        PatientId = pc.Patient.PublicId,
+                        Id = pc.Id,
+                        PatientId = pc.Patient.Id,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        CaseType = new CaseTypeDto { publicId = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
+                        CaseType = new CaseTypeDto { publicId = pc.CaseType.Id, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
@@ -188,13 +188,13 @@ namespace DentalHub.Application.Services.Cases
                          pc.CaseType.Name.ToLower().Contains(searchLower)),
                     pc => new PatientCaseDto
                     {
-                        Id             = pc.PublicId,
-                        PatientId      = pc.Patient.PublicId,
+                        Id             = pc.Id,
+                        PatientId      = pc.Patient.Id,
                         PatientName    = pc.Patient.User.FullName,
                         PatientAge     = pc.Patient.Age,
                         CaseType       = new CaseTypeDto
                         {
-                            publicId    = pc.CaseType.PublicId,
+                            publicId    = pc.CaseType.Id,
                             Name        = pc.CaseType.Name,
                             Description = pc.CaseType.Description
                         },
@@ -234,7 +234,7 @@ namespace DentalHub.Application.Services.Cases
         {
             try
             {
-                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.PublicId == dto.Id));
+                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.Id == dto.Id));
 
                 if (patientCase == null)
                 {
@@ -249,7 +249,7 @@ namespace DentalHub.Application.Services.Cases
 
                 _logger.LogInformation("Case updated: {PublicId}", dto.Id);
 
-                return await GetCaseByPublicIdAsync(patientCase.PublicId);
+                return await GetCaseByIdAsync(patientCase.Id);
             }
             catch (Exception ex)
             {
@@ -259,11 +259,11 @@ namespace DentalHub.Application.Services.Cases
         }
 
         /// Soft delete case
-        public async Task<Result> DeleteCaseByPublicIdAsync(string publicId)
+        public async Task<Result> DeleteCaseByIdAsync(Guid publicId)
         {
             try
             {
-                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.PublicId == publicId));
+                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.Id == publicId));
 
                 if (patientCase == null)
                 {
@@ -311,11 +311,11 @@ namespace DentalHub.Application.Services.Cases
                     pc => pc.Status == caseStatus,
                     pc => new PatientCaseDto
                     {
-                        Id = pc.PublicId,
-                        PatientId = pc.Patient.PublicId,
+                        Id = pc.Id,
+                        PatientId = pc.Patient.Id,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        CaseType = new CaseTypeDto { publicId = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
+                        CaseType = new CaseTypeDto { publicId = pc.CaseType.Id, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
@@ -349,19 +349,19 @@ namespace DentalHub.Application.Services.Cases
 
         /// Get all cases for a specific patient
         public async Task<Result<PagedResult<PatientCaseDto>>> GetPatientCasesAsync(
-            string patientPublicId, int page = 1, int pageSize = 10)
+			Guid patientPublicId, int page = 1, int pageSize = 10)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
-                    pc => pc.Patient.PublicId == patientPublicId,
+                    pc => pc.Patient.Id == patientPublicId,
                     pc => new PatientCaseDto
                     {
-                        Id = pc.PublicId,
-                        PatientId = pc.Patient.PublicId,
+                        Id = pc.Id,
+                        PatientId = pc.PatientId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        CaseType = new CaseTypeDto { publicId = pc.CaseType.PublicId, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
+                        CaseType = new CaseTypeDto { publicId = pc.CaseType.Id, Name = pc.CaseType.Name, Description = pc.CaseType.Description },
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
@@ -401,7 +401,7 @@ namespace DentalHub.Application.Services.Cases
 
         /// Update case status
         /// Change Case (Pending → InProgress → Completed)
-        public async Task<Result<PatientCaseDto>> UpdateCaseStatusAsync(string publicId, string newStatus)
+        public async Task<Result<PatientCaseDto>> UpdateCaseStatusAsync(Guid publicId, string newStatus)
         {
             try
             {
@@ -411,7 +411,7 @@ namespace DentalHub.Application.Services.Cases
                     return Result<PatientCaseDto>.Failure("Invalid status");
                 }
 
-                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.PublicId == publicId));
+                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.Id == publicId));
 
                 if (patientCase == null)
                 {
@@ -432,7 +432,7 @@ namespace DentalHub.Application.Services.Cases
 
                 _logger.LogInformation("Case status updated: {PublicId} to {Status}", publicId, newStatus);
 
-                return await GetCaseByPublicIdAsync(publicId);
+                return await GetCaseByIdAsync(publicId);
             }
             catch (Exception ex)
             {
@@ -444,13 +444,13 @@ namespace DentalHub.Application.Services.Cases
         /// ADDED: Combined method to update both treatment type and status in one transaction
         /// This prevents double database calls and ensures data consistency
         public async Task<Result<PatientCaseDto>> UpdateCaseWithStatusAsync(
-            string publicId,
+			Guid publicId,
             string? treatmentType,
             CaseStatus newStatus)
         {
             try
             {
-                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.PublicId == publicId));
+                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.Id == publicId));
 
                 if (patientCase == null)
                 {
@@ -475,7 +475,7 @@ namespace DentalHub.Application.Services.Cases
                     "Case updated: {PublicId} - TreatmentType: {TreatmentType}, Status: {Status}",
                     publicId, treatmentType ?? "unchanged", newStatus);
 
-                return await GetCaseByPublicIdAsync(publicId);
+                return await GetCaseByIdAsync(publicId);
             }
             catch (Exception ex)
             {

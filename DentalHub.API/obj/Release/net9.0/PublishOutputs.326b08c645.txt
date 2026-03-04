@@ -9,6 +9,8 @@ D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\CloudinaryDotN
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Dapper.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\EntityFramework.SqlServer.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\EntityFramework.dll
+D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\FluentValidation.dll
+D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\FluentValidation.DependencyInjectionExtensions.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Google.Protobuf.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Hangfire.AspNetCore.dll
 D:\projects\DentalHub\DentalHub.API\obj\Release\net9.0\PubTmp\Out\Hangfire.Core.dll

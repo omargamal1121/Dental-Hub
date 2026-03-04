@@ -5,8 +5,8 @@ namespace DentalHub.Application.DTOs.Cases
     /// DTO for patient case information
     public class PatientCaseDto
     {
-        public string Id { get; set; }
-        public string PatientId { get; set; }
+        public Guid Id { get; set; }
+        public Guid PatientId { get; set; }
         public string PatientName { get; set; } = string.Empty;
         public int PatientAge { get; set; }
         public  CaseTypeDto  CaseType { get; set; }

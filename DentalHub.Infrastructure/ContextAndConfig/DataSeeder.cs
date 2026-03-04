@@ -19,6 +19,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
             try
             {
+           
                 // ── 1. Roles ──────────────────────────────────────────────────────────
                 string[] roles = ["Doctor", "Student", "Patient", "Admin"];
                 foreach (var role in roles)
@@ -79,9 +80,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                     await context.Universities.AddRangeAsync(universities);
                     await context.SaveChangesAsync();
                 }
-                // ── 3. UniversityMembers ──────────────────────────────────────────────
-                // These are pre-registered members in the university registry.
-                // Doctors & Students must use one of these UniversityIds.
+         
                 if (!await context.UniversityMembers.AnyAsync())
                 {
                     var universityMembers = new List<UniversityMember>
@@ -138,18 +137,16 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                     logger.LogInformation("✅ Seeded {Count} UniversityMembers.", universityMembers.Count);
                 }
 
-                // ── 3. Doctors ────────────────────────────────────────────────────────
-                // Each doctor's UniversityId must match an existing UniversityMember.UniversityId.
+               
                 if (!await context.Doctors.IgnoreQueryFilters().AnyAsync())
                 {
                     // -- Doctor 1 --
                     var doc1Id    = Guid.Parse("01960000-0000-7000-8000-000000000001");
-                    var doc1PubId = Base62Converter.Encode(doc1Id);
 
                     var doc1User = new User
                     {
                         Id             = doc1Id,
-                        PublicId       = doc1PubId,
+                        
                         FullName       = "Dr. Ahmed Hassan",
                         UserName       = "ahmed.hassan",
                         Email          = "ahmed.hassan@dentalhub.com",
@@ -157,7 +154,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         PhoneNumber    = "01011111111"
                     };
 
-                    var doc1 = new Doctor(doc1Id, doc1PubId)
+                    var doc1 = new Doctor(doc1Id)
                     {
                         Name         = "Dr. Ahmed Hassan",
                         Specialty    = "Oral Surgery",
@@ -166,12 +163,11 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
                     // -- Doctor 2 --
                     var doc2Id    = Guid.Parse("01960000-0000-7000-8000-000000000002");
-                    var doc2PubId = Base62Converter.Encode(doc2Id);
 
                     var doc2User = new User
                     {
                         Id             = doc2Id,
-                        PublicId       = doc2PubId,
+                       
                         FullName       = "Dr. Sara Mohamed",
                         UserName       = "sara.mohamed",
                         Email          = "sara.mohamed@dentalhub.com",
@@ -179,7 +175,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         PhoneNumber    = "01022222222"
                     };
 
-                    var doc2 = new Doctor(doc2Id, doc2PubId)
+                    var doc2 = new Doctor(doc2Id)
                     {
                         Name         = "Dr. Sara Mohamed",
                         Specialty    = "Orthodontics",
@@ -201,12 +197,10 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                 {
                     // -- Student 1 --
                     var stu1Id    = Guid.Parse("01960000-0000-7000-8000-000000000003");
-                    var stu1PubId = Base62Converter.Encode(stu1Id);
 
                     var stu1User = new User
                     {
                         Id             = stu1Id,
-                        PublicId       = stu1PubId,
                         FullName       = "Omar Gamal",
                         UserName       = "omar.gamal",
                         Email          = "omar.gamal@dentalhub.com",
@@ -214,7 +208,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         PhoneNumber    = "01033333333"
                     };
 
-                    var stu1 = new Student(stu1Id, stu1PubId)
+                    var stu1 = new Student(stu1Id)
                     {
                         Level        = 4,
                         UniversityId = Guid.Parse("11111111-1111-1111-1111-111111111111") // ← Cairo University
@@ -222,12 +216,10 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
                     // -- Student 2 --
                     var stu2Id    = Guid.Parse("01960000-0000-7000-8000-000000000004");
-                    var stu2PubId = Base62Converter.Encode(stu2Id);
 
                     var stu2User = new User
                     {
                         Id             = stu2Id,
-                        PublicId       = stu2PubId,
                         FullName       = "Nour Ali",
                         UserName       = "nour.ali",
                         Email          = "nour.ali@dentalhub.com",
@@ -235,7 +227,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         PhoneNumber    = "01044444444"
                     };
 
-                    var stu2 = new Student(stu2Id, stu2PubId)
+                    var stu2 = new Student(stu2Id)
                     {
                         Level        = 3,
                         UniversityId = Guid.Parse("11111111-1111-1111-1111-111111111111") // ← Cairo University
@@ -243,12 +235,10 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
                     // -- Student 3 --
                     var stu3Id    = Guid.Parse("01960000-0000-7000-8000-000000000005");
-                    var stu3PubId = Base62Converter.Encode(stu3Id);
 
                     var stu3User = new User
                     {
                         Id             = stu3Id,
-                        PublicId       = stu3PubId,
                         FullName       = "Youssef Ibrahim",
                         UserName       = "youssef.ibrahim",
                         Email          = "youssef.ibrahim@dentalhub.com",
@@ -256,7 +246,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         PhoneNumber    = "01055555555"
                     };
 
-                    var stu3 = new Student(stu3Id, stu3PubId)
+                    var stu3 = new Student(stu3Id)
                     {
                         Level        = 5,
                         UniversityId = Guid.Parse("22222222-2222-2222-2222-222222222222") // ← Ain Shams University
@@ -276,12 +266,10 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                 {
                     // -- Patient 1 --
                     var pat1Id    = Guid.Parse("01960000-0000-7000-8000-000000000006");
-                    var pat1PubId = Base62Converter.Encode(pat1Id);
 
                     var pat1User = new User
                     {
                         Id             = pat1Id,
-                        PublicId       = pat1PubId,
                         FullName       = "Mona Tarek",
                         UserName       = "mona.tarek",
                         Email          = "mona.tarek@gmail.com",
@@ -289,7 +277,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         PhoneNumber    = "01066666666"
                     };
 
-                    var pat1 = new Patient(pat1Id, pat1PubId)
+                    var pat1 = new Patient(pat1Id)
                     {
                         Age   = 30,
                         Phone = "01066666666"
@@ -297,12 +285,10 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
                     // -- Patient 2 --
                     var pat2Id    = Guid.Parse("01960000-0000-7000-8000-000000000007");
-                    var pat2PubId = Base62Converter.Encode(pat2Id);
 
                     var pat2User = new User
                     {
                         Id             = pat2Id,
-                        PublicId       = pat2PubId,
                         FullName       = "Karim Salah",
                         UserName       = "karim.salah",
                         Email          = "karim.salah@gmail.com",
@@ -310,7 +296,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         PhoneNumber    = "01077777777"
                     };
 
-                    var pat2 = new Patient(pat2Id, pat2PubId)
+                    var pat2 = new Patient(pat2Id)
                     {
                         Age   = 45,
                         Phone = "01077777777"
@@ -318,12 +304,10 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
                     // -- Patient 3 --
                     var pat3Id    = Guid.Parse("01960000-0000-7000-8000-000000000008");
-                    var pat3PubId = Base62Converter.Encode(pat3Id);
 
                     var pat3User = new User
                     {
                         Id             = pat3Id,
-                        PublicId       = pat3PubId,
                         FullName       = "Layla Khaled",
                         UserName       = "layla.khaled",
                         Email          = "layla.khaled@gmail.com",
@@ -331,7 +315,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                         PhoneNumber    = "01088888888"
                     };
 
-                    var pat3 = new Patient(pat3Id, pat3PubId)
+                    var pat3 = new Patient(pat3Id)
                     {
                         Age   = 25,
                         Phone = "01088888888"

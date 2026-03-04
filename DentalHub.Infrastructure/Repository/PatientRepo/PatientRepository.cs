@@ -21,9 +21,9 @@ namespace DentalHub.Infrastructure.Repository.PatientRepo
 
 			}
 		}
-		public async Task< TResult?> GetPatientByPublicId<TResult>(string publicId, ISpecificationWithProjection<Patient, TResult> spec)
+		public async Task< TResult?> GetPatientById<TResult>(Guid id, ISpecificationWithProjection<Patient, TResult> spec)
 		{
-		var query=	patients.AsQueryable().AsNoTracking().Where(p=>p.PublicId==publicId).Include(p => p.PatientCases).ThenInclude(pc => pc.CaseType);
+		var query=	patients.AsQueryable().AsNoTracking().Where(p=>p.Id==id).Include(p => p.PatientCases).ThenInclude(pc => pc.CaseType);
 		 return	await SpecificationWithProjectionEvaluator<Patient,TResult>.ProjectionOnly(query,spec).FirstOrDefaultAsync();
 		}
 	}

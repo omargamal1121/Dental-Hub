@@ -19,8 +19,7 @@ namespace DentalHub.Domain.Factories
 
             return new Student
             {
-                UserId = userId,
-                University = university,
+              
                 UniversityId = universityId,
                 Level = 1,
                 CreateAt = DateTime.UtcNow

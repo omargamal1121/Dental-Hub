@@ -12,5 +12,5 @@ namespace DentalHub.Application.Commands.Doctor
         string Username,
         string Phone
 
-	) : IRequest<Result<string>>;
+	) : IRequest<Result<Guid>>;
 }

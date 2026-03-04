@@ -12,17 +12,17 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
 			builder.HasOne(u => u.Admin)
 				   .WithOne(a => a.User)
-				   .HasForeignKey<Admin>(a => a.UserId)
+				   .HasForeignKey<Admin>(a => a.Id)
 				   .OnDelete(DeleteBehavior.Cascade);
 
 			builder.HasOne(u => u.Student)
 				   .WithOne(s => s.User)
-				   .HasForeignKey<Student>(s => s.UserId)
+				   .HasForeignKey<Student>(s => s.Id)
 				   .OnDelete(DeleteBehavior.Cascade);
 
 			builder.HasOne(u => u.Doctor)
 				   .WithOne(d => d.User)
-				   .HasForeignKey<Doctor>(d => d.UserId)
+				   .HasForeignKey<Doctor>(d => d.Id)
 				   .OnDelete(DeleteBehavior.Cascade);
 
 			builder.HasMany(u => u.UserRoles)

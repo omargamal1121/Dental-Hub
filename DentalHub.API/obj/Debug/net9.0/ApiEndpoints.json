@@ -251,7 +251,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[DentalHub.Application.DTOs.Cases.CaseRequestDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Guid, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "application/json"
         ],
@@ -276,7 +276,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -307,12 +307,12 @@
     "Parameters": [
       {
         "Name": "requestId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
         "Name": "studentId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -381,7 +381,7 @@
     "Parameters": [
       {
         "Name": "caseId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -410,12 +410,12 @@
     "Parameters": [
       {
         "Name": "caseId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
         "Name": "approvedRequestId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -439,7 +439,7 @@
     "Parameters": [
       {
         "Name": "caseId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -463,7 +463,7 @@
     "Parameters": [
       {
         "Name": "doctorId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -497,12 +497,12 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
         "Name": "doctorId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -540,7 +540,7 @@
     "Parameters": [
       {
         "Name": "studentId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -579,7 +579,7 @@
     "Parameters": [
       {
         "Name": "studentId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -649,7 +649,7 @@
     "Parameters": [
       {
         "Name": "PatientId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": false
       },
       {
@@ -664,7 +664,7 @@
       },
       {
         "Name": "CaseTypeId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": false
       },
       {
@@ -675,7 +675,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Guid, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "application/json"
         ],
@@ -700,7 +700,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -731,7 +731,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -762,7 +762,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -805,7 +805,7 @@
     "Parameters": [
       {
         "Name": "patientId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -911,7 +911,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -942,7 +942,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -985,7 +985,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -1022,7 +1022,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Guid, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "application/json"
         ],
@@ -1086,7 +1086,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -1117,7 +1117,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -1148,7 +1148,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -1227,7 +1227,7 @@
     "Parameters": [
       {
         "Name": "requestId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -1272,7 +1272,7 @@
     "Parameters": [
       {
         "Name": "requestId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -1323,7 +1323,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Guid, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "application/json"
         ],
@@ -1392,7 +1392,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -1423,7 +1423,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -1454,7 +1454,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -1557,7 +1557,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -1588,7 +1588,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -1662,7 +1662,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -1693,7 +1693,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -1736,7 +1736,7 @@
     "Parameters": [
       {
         "Name": "caseId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -1770,7 +1770,7 @@
     "Parameters": [
       {
         "Name": "patientId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -1804,7 +1804,7 @@
     "Parameters": [
       {
         "Name": "studentId",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -1844,7 +1844,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Guid, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "application/json"
         ],
@@ -1898,7 +1898,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -1929,7 +1929,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -1972,7 +1972,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -2003,7 +2003,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],

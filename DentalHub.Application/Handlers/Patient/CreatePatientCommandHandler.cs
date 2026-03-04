@@ -6,7 +6,7 @@ using MediatR;
 
 namespace DentalHub.Application.Handlers.Patient
 {
-    public class CreatePatientCommandHandler : IRequestHandler<CreatePatientCommand, Result<string>>
+    public class CreatePatientCommandHandler : IRequestHandler<CreatePatientCommand, Result<Guid>>
     {
         private readonly IUserManagementService _userManagementService;
 
@@ -15,7 +15,7 @@ namespace DentalHub.Application.Handlers.Patient
             _userManagementService = userManagementService;
         }
 
-        public async Task<Result<string>> Handle(CreatePatientCommand request, CancellationToken ct)
+        public async Task<Result<Guid>> Handle(CreatePatientCommand request, CancellationToken ct)
         {
             var registerDto = new RegisterPatientDto
             {
@@ -33,10 +33,10 @@ namespace DentalHub.Application.Handlers.Patient
 
             if (!result.IsSuccess)
             {
-                return Result<string>.Failure(result.Errors ?? new List<string> { result.Message ?? "Patient creation failed" }, result.Status);
+                return Result<Guid>.Failure(result.Errors ?? new List<string> { result.Message ?? "Patient creation failed" }, result.Status);
             }
 
-            return Result<string>.Success(result.Data.PublicId, result.Message, result.Status);
+            return Result<Guid>.Success(result.Data.PublicId, result.Message, result.Status);
         }
     }
 }

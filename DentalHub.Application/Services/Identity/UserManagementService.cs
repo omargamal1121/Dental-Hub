@@ -87,7 +87,7 @@ namespace DentalHub.Application.Services.Identity
 	
 			
 
-				var patient = new Patient(user.Id,user.PublicId)
+				var patient = new Patient(user.Id)
 				{
 					Age = age,
 					Phone = dto.Phone,
@@ -103,9 +103,9 @@ namespace DentalHub.Application.Services.Identity
 
 				_logger.LogInformation("Patient registered successfully: {Phone}", dto.Phone);
 
-				return Result<AuthResponseDto>.Success(new AuthResponseDto
+                return Result<AuthResponseDto>.Success(new AuthResponseDto
 				{
-					PublicId = user.PublicId,
+					PublicId = user.Id,
 					Email = user.Email!,
 					FullName = user.FullName,
 					Role = "Patient"
@@ -165,7 +165,7 @@ namespace DentalHub.Application.Services.Identity
 					return Result<AuthResponseDto>.Failure(errors);
 				}
 
-				var student = new Student(user.Id,user.PublicId)
+				var student = new Student(user.Id)
                 {
                     Level = dto.Level,
                     UniversityId = dto.UniversityId,
@@ -180,7 +180,7 @@ namespace DentalHub.Application.Services.Identity
 
                 return Result<AuthResponseDto>.Success(new AuthResponseDto
                 {
-                    PublicId = user.PublicId,
+                    PublicId = user.Id,
                     Email = user.Email!,
                     FullName = user.FullName,
                     Role = "Student"
@@ -240,7 +240,7 @@ namespace DentalHub.Application.Services.Identity
 					return Result<AuthResponseDto>.Failure(errors);
 				}
 
-				var doctor = new Doctor(user.Id,user.PublicId)
+				var doctor = new Doctor(user.Id)
                 {
                     
                     Name = dto.FullName,
@@ -258,7 +258,7 @@ namespace DentalHub.Application.Services.Identity
 
                 return Result<AuthResponseDto>.Success(new AuthResponseDto
                 {
-                    PublicId = user.PublicId,
+                    PublicId = user.Id,
                     Email = user.Email!,
                     FullName = user.FullName,
                     Role = "Doctor"
@@ -280,11 +280,11 @@ namespace DentalHub.Application.Services.Identity
       
 
     
-        public async Task<Result> DeleteUserAsync(string publicId)
+        public async Task<Result> DeleteUserAsync(Guid userId)
         {
             try
             {
-                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.PublicId == publicId);
+                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
                 if (user == null)
                 {
                     return Result.Failure("User not found");
@@ -301,7 +301,7 @@ namespace DentalHub.Application.Services.Identity
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting user with public ID: {PublicId}", publicId);
+                _logger.LogError(ex, "Error deleting user with Id: {UserId}", userId);
                 return Result.Failure("An error occurred while deleting user");
             }
         }

@@ -20,14 +20,15 @@ namespace DentalHub.Application.Services
             _logger = logger;
         }
 
-        public async Task<Result<PatientDto>> GetPatientByPublicIdAsync(string publicId)
+        public async Task<Result<PatientDto>> GetPatientByIdAsync(Guid id)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<Patient, PatientDto>(
+                    p => p.Id == id,
                     p => new PatientDto
                     {
-                        PublicId = p.PublicId,
+                        PublicId = p.Id,
                         FullName = p.User.FullName,
                         Email = p.User.Email!,
                         Phone = p.Phone,
@@ -36,7 +37,7 @@ namespace DentalHub.Application.Services
                         PatientCases = p.PatientCases
                             .Select(pc => new PatientCaseSimpleDataDto
                             {
-                                Id = pc.PublicId,
+                                Id = pc.Id,
                                 Name = pc.CaseType.Name,
                                 Status = pc.Status,
                                 CreateAt = pc.CreateAt
@@ -45,7 +46,7 @@ namespace DentalHub.Application.Services
                     }
                 );
 
-                var patient = await _unitOfWork.Patients.GetPatientByPublicId(publicId, spec);
+                var patient = await _unitOfWork.Patients.GetByIdAsync(spec);
 
                 if (patient == null)
                     return Result<PatientDto>.Failure("Patient not found");
@@ -54,21 +55,21 @@ namespace DentalHub.Application.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting patient by public ID: {PublicId}", publicId);
+                _logger.LogError(ex, "Error getting patient by ID: {Id}", id);
                 return Result<PatientDto>.Failure("Error retrieving patient data");
             }
         }
 
 
-        public async Task<Result<PatientDto>> GetPatientByUserIdAsync(string userId)
+        public async Task<Result<PatientDto>> GetPatientByUserIdAsync(Guid userId)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<Patient, PatientDto>(
-                    p => p.PublicId == userId,
+                    p => p.Id == userId,
                     p => new PatientDto
                     {
-                        PublicId = p.PublicId,
+                        PublicId = p.Id,
                         FullName = p.User.FullName,
                         Email = p.User.Email!,
                         Phone = p.Phone,
@@ -77,7 +78,7 @@ namespace DentalHub.Application.Services
                         PatientCases = p.PatientCases
                             .Select(pc => new PatientCaseSimpleDataDto
                             {
-                                Id = pc.PublicId,
+                                Id = pc.Id,
                                 Name = pc.CaseType.Name,
                                 Status = pc.Status,
                                 CreateAt = pc.CreateAt
@@ -108,7 +109,7 @@ namespace DentalHub.Application.Services
                     p => filterPatientDto.Name == null || p.User.FullName.Contains(filterPatientDto.Name),
                     p => new PatientDto
                     {
-                        PublicId = p.PublicId,
+                        PublicId = p.Id,
                         FullName = p.User.FullName,
                         Email = p.User.Email!,
                         Phone = p.Phone,
@@ -120,7 +121,7 @@ namespace DentalHub.Application.Services
                             .Where(pc => string.IsNullOrEmpty(filterPatientDto.CaseType) || pc.CaseType.Name.Contains(filterPatientDto.CaseType!))
                             .Select(pc => new PatientCaseSimpleDataDto
                             {
-                                Id = pc.PublicId,
+                                Id = pc.Id,
                                 Name = pc.CaseType.Name,
                                 Status = pc.Status,
                                 CreateAt = pc.CreateAt
@@ -158,7 +159,7 @@ namespace DentalHub.Application.Services
         {
             try
             {
-                var spec = new BaseSpecification<Patient>(p => p.PublicId == dto.PublicId);
+                var spec = new BaseSpecification<Patient>(p => p.Id == dto.PublicId);
                 spec.AddInclude(p => p.User);
 
                 var patient = await _unitOfWork.Patients.GetByIdAsync(spec);
@@ -183,12 +184,12 @@ namespace DentalHub.Application.Services
                 _unitOfWork.Patients.Update(patient);
                 await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Patient updated successfully: {PublicId}", dto.PublicId);
+                _logger.LogInformation("Patient updated successfully: {Id}", dto.PublicId);
 
 
                 return Result<PatientDto>.Success(new PatientDto
                 {
-                    PublicId = patient.PublicId,
+                    PublicId = patient.Id,
                     FullName = patient.User.FullName,
                     Email = patient.User.Email!,
                     Phone = patient.Phone,
@@ -204,12 +205,12 @@ namespace DentalHub.Application.Services
             }
         }
 
-        public async Task<Result> DeletePatientAsync(string publicId)
+        public async Task<Result> DeletePatientAsync(Guid id)
         {
             try
             {
                 var patient = await _unitOfWork.Patients.GetByIdAsync(
-                    new BaseSpecification<Patient>(p => p.PublicId == publicId));
+                    new BaseSpecification<Patient>(p => p.Id == id));
 
                 if (patient == null)
                     return Result.Failure("Patient not found");
@@ -218,12 +219,12 @@ namespace DentalHub.Application.Services
                 _unitOfWork.Patients.Update(patient);
                 await _unitOfWork.SaveChangesAsync();
 
-                _logger.LogInformation("Patient deleted: {PublicId}", publicId);
+                _logger.LogInformation("Patient deleted: {Id}", id);
                 return Result.Success("Patient deleted successfully");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting patient: {PublicId}", publicId);
+                _logger.LogError(ex, "Error deleting patient: {Id}", id);
                 return Result.Failure("Error deleting patient");
             }
         }

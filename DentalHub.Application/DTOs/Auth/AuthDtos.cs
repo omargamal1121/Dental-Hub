@@ -4,7 +4,7 @@ namespace DentalHub.Application.DTOs.Auth
     {
         public string Token { get; set; }
         public IList<string> Roles { get; set; }
-		public string PublicId { get; set; }
+		public Guid PublicId { get; set; }
         public string UinversalId { get; set; }
 	}
 

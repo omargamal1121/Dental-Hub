@@ -2,7 +2,7 @@ namespace DentalHub.Application.Interfaces
 {
     public interface ILinkBuilder
     {
-        object GenerateLinks(int? id);
+        object GenerateLinks(Guid? id);
         object MakeRelSelf(object links, string apiName);
     }
 }

@@ -6,20 +6,20 @@ namespace DentalHub.Application.Services.Doctors
     public interface IDoctorService
     {
         // Doctor Profile - PublicId for Admin
-        Task<Result<DoctorDto>> GetDoctorByPublicIdAsync(string publicId);
+        Task<Result<DoctorDto>> GetDoctorByIdAsync(Guid id);
 
         // Doctor Profile - Token
-        Task<Result<DoctorDto>> GetDoctorByIdAsync(string userId);
+        Task<Result<DoctorDto>> GetDoctorByUserIdAsync(Guid userId);
 
         Task<Result<PagedResult<DoctorlistDto>>> GetAllDoctorsAsync(
             int page = 1, int pageSize = 10, string? name = null, string? spec = null);
 
         Task<Result<DoctorDto>> UpdateDoctorAsync(UpdateDoctorDto dto);
 
-        Task<Result> DeleteDoctorAsync(string publicId);
+        Task<Result> DeleteDoctorAsync(Guid id);
 
         // Doctor Statistics - Token
-        Task<Result<DoctorStatsDto>> GetDoctorStatisticsAsync(string userId);
+        Task<Result<DoctorStatsDto>> GetDoctorStatisticsAsync(Guid userId);
 
         // Get doctors by university
         Task<Result<PagedResult<DoctorDto>>> GetDoctorsByUniversityAsync(

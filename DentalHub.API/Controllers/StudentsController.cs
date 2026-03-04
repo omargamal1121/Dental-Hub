@@ -26,9 +26,9 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<string>>> Create([FromBody] RegisterStudentDto  registerStudent)
+        public async Task<ActionResult<ApiResponse<Guid>>> Create([FromBody] RegisterStudentDto  registerStudent)
         {
             var command = new CreateStudentCommand(registerStudent.FullName, registerStudent.Email, registerStudent.Password, registerStudent.UniversityId,
                 registerStudent.Level, registerStudent.Username, registerStudent.Phone);
@@ -40,7 +40,7 @@ namespace DentalHub.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiResponse<StudentDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<StudentDto>>> GetById(string id)
+        public async Task<ActionResult<ApiResponse<StudentDto>>> GetById(Guid id)
         {
             var result = await _mediator.Send(new GetStudentByIdQuery(id));
             return HandleResult(result);
@@ -58,7 +58,7 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Update(string id, [FromBody] UpdateStudentCommand command)
+        public async Task<ActionResult<ApiResponse<bool>>> Update(Guid id, [FromBody] UpdateStudentCommand command)
         {
             if (id != command.PublicId)
             {
@@ -71,7 +71,7 @@ namespace DentalHub.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Delete(string id)
+        public async Task<ActionResult<ApiResponse<bool>>> Delete(Guid id)
         {
             var result = await _mediator.Send(new DeleteStudentCommand(id));
             return HandleResult(result);
@@ -88,10 +88,10 @@ namespace DentalHub.API.Controllers
             [FromQuery] int     pageSize = 10)
         {
             var studentPublicId = GetUserIdFromToken();
-            if (string.IsNullOrEmpty(studentPublicId))
+            if (studentPublicId == null)
                 return CreateErrorResponse<PagedResult<PatientCaseDto>>("Unauthorized", 401);
 
-            var result = await _mediator.Send(new GetMyCasesForStudentQuery(studentPublicId, caseType, page, pageSize));
+            var result = await _mediator.Send(new GetMyCasesForStudentQuery(studentPublicId.Value, caseType, page, pageSize));
             return HandleResult(result);
         }
 
@@ -105,10 +105,10 @@ namespace DentalHub.API.Controllers
             [FromQuery] int     pageSize = 10)
         {
             var studentPublicId = GetUserIdFromToken();
-            if (string.IsNullOrEmpty(studentPublicId))
+            if (studentPublicId == null)
                 return CreateErrorResponse<PagedResult<AvailableCasesDto>>("Unauthorized", 401);
 
-            var result = await _mediator.Send(new GetAvailableCasesForStudentQuery(studentPublicId, caseType, page, pageSize));
+            var result = await _mediator.Send(new GetAvailableCasesForStudentQuery(studentPublicId.Value, caseType, page, pageSize));
             return HandleResult(result);
         }
 
@@ -122,7 +122,7 @@ namespace DentalHub.API.Controllers
             [FromQuery] int pageSize = 10)
         {
             var studentPublicId = GetUserIdFromToken();
-            if (string.IsNullOrEmpty(studentPublicId))
+            if (studentPublicId == null)
                 return CreateErrorResponse<PagedResult<CaseRequestDto>>("Unauthorized", 401);
 
             RequestStatus? requestStatus = null;
@@ -138,14 +138,14 @@ namespace DentalHub.API.Controllers
                 }
             }
 
-            var result = await _mediator.Send(new GetCaseRequestsByStudentIdQuery(studentPublicId, requestStatus, page, pageSize));
+            var result = await _mediator.Send(new GetCaseRequestsByStudentIdQuery(studentPublicId.Value, requestStatus, page, pageSize));
             return HandleResult(result);
         }
 
         [HttpGet("{id}/statistics")]
         [ProducesResponseType(typeof(ApiResponse<StudentStatsDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<StudentStatsDto>>> GetStatistics(string id)
+        public async Task<ActionResult<ApiResponse<StudentStatsDto>>> GetStatistics(Guid id)
         {
             var result = await _mediator.Send(new GetStudentStatisticsQuery(id));
             return HandleResult(result);

@@ -12,5 +12,5 @@ namespace DentalHub.Application.Commands.Patient
         DateTime BirthDate,
         Gender Gender,
         City City
-    ) : IRequest<Result<string>>;
+    ) : IRequest<Result<Guid>>;
 }

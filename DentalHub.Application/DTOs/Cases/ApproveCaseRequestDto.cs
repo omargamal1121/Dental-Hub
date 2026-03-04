@@ -2,9 +2,9 @@ namespace DentalHub.Application.DTOs.Cases
 {
     public class ApproveCaseRequestDto
     {
-        public string RequestId { get; set; } = string.Empty;
+        public Guid RequestId { get; set; } 
 
-        public string DoctorId { get; set; } = string.Empty;
+        public Guid DoctorId { get; set; } 
 
         public bool IsApproved { get; set; }
 

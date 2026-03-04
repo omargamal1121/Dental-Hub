@@ -7,25 +7,25 @@ namespace DentalHub.Application.Services.Students
     public interface IStudentService
     {
         // Student Profile
-        Task<Result<StudentDto>> GetStudentByPublicIdAsync(string publicId);
+        Task<Result<StudentDto>> GetStudentByIdAsync(Guid id);
 
         // For the student himself - searches by UserId (coming from the JWT token)
-        Task<Result<StudentDto>> GetStudentByUserIdAsync(string userId);
+        Task<Result<StudentDto>> GetStudentByUserIdAsync(Guid userId);
 
         Task<Result<PagedResult<StudentDto>>> GetAllStudentsAsync(int page = 1, int pageSize = 10);
         Task<Result<StudentDto>> UpdateStudentAsync(UpdateStudentDto dto);
-        Task<Result> DeleteStudentByPublicIdAsync(string publicId);
+        Task<Result> DeleteStudentByIdAsync(Guid id);
 
 
         Task<Result<PagedResult<PatientCaseDto>>> GetMyCasesForStudentAsync(
-            string studentPublicId, string? casetype = null, int page = 1, int pageSize = 10);
+            Guid studentId, string? casetype = null, int page = 1, int pageSize = 10);
 
  
         Task<Result<PagedResult<AvailableCasesDto>>> GetAvailableCasesForStudentAsync(
-            string studentPublicId,string? casetype=null, int page = 1, int pageSize = 10);
+            Guid studentId,string? casetype=null, int page = 1, int pageSize = 10);
 
         // Student Statistics
-        Task<Result<StudentStatsDto>> GetStudentStatisticsAsync(string studentPublicId);
+        Task<Result<StudentStatsDto>> GetStudentStatisticsAsync(Guid studentId);
     }
 
     /// DTO for student statistics

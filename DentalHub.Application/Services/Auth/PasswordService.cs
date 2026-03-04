@@ -3,6 +3,7 @@ using DentalHub.Domain.Entities;
 using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using System.Data.Entity;
 
 namespace DentalHub.Application.Services.Auth
 {
@@ -28,11 +29,11 @@ namespace DentalHub.Application.Services.Auth
         //    _refreshTokenService = refreshTokenService;
         }
 
-        public async Task<Result<bool>> ChangePasswordAsync(string userid, string oldPassword, string newPassword)
+        public async Task<Result<bool>> ChangePasswordAsync(Guid userid, string oldPassword, string newPassword)
         {
             try
             {
-                var user = await _userManager.FindByIdAsync(userid);
+                var user = await _userManager.Users.FirstOrDefaultAsync(us => us.Id == userid);
                 if (user == null)
                 {
                     _logger.LogWarning("Change password failed: User {UserId} not found.", userid);

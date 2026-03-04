@@ -1,7 +1,6 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Admins;
 using DentalHub.Domain.Entities;
-using DentalHub.Infrastructure.Specification;
 using DentalHub.Infrastructure.UnitOfWork;
 using DentalHub.Application.Factories;
 using Microsoft.AspNetCore.Identity;
@@ -69,7 +68,7 @@ namespace DentalHub.Application.Services.Admins
                 // STEP 4: Create Admin Record
                 var admin = new Admin
                 {
-                    UserId = user.Id,
+                    Id = user.Id,
 
                     Phone = dto.Phone,
                     IsSuperAdmin = dto.IsSuperAdmin,
@@ -82,7 +81,7 @@ namespace DentalHub.Application.Services.Admins
                 _logger.LogInformation("Admin created successfully: {Email}", dto.Email);
 
                 // STEP 5: Return Response
-                return await GetAdminByPublicIdAsync(user.PublicId);
+                return await GetAdminByIdAsync(user.Id);
             }
             catch (Exception ex)
             {
@@ -96,15 +95,15 @@ namespace DentalHub.Application.Services.Admins
         #region Admin Profile
 
         /// Get admin by public ID
-        public async Task<Result<AdminDto>> GetAdminByPublicIdAsync(string publicId)
+        public async Task<Result<AdminDto>> GetAdminByIdAsync(Guid publicId)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<Admin, AdminDto>(
-                    a => a.PublicId == publicId,
+                    a => a.Id == publicId,
                     a => new AdminDto
                     {
-                        PublicId = a.PublicId,
+                        PublicId = a.Id,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
 
@@ -133,18 +132,17 @@ namespace DentalHub.Application.Services.Admins
         }
 
         /// For the admin himself - searches by UserId (coming from the JWT token)
-        public async Task<Result<AdminDto>> GetAdminByUserIdAsync(string userId)
+        public async Task<Result<AdminDto>> GetAdminByUserIdAsync(Guid userId)
         {
             try
             {
-                if (!Guid.TryParse(userId, out var userGuid))
-                    return Result<AdminDto>.Failure("Invalid user ID");
+              
 
                 var spec = new BaseSpecificationWithProjection<Admin, AdminDto>(
-                    a => a.UserId == userGuid,
+                    a => a.Id == userId,
                     a => new AdminDto
                     {
-                        PublicId = a.PublicId,
+                        PublicId = a.Id,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
                         Phone = a.Phone,
@@ -177,7 +175,7 @@ namespace DentalHub.Application.Services.Admins
                 var spec = new BaseSpecificationWithProjection<Admin, AdminDto>(
                     a => new AdminDto
                     {
-                        PublicId = a.PublicId,
+                        PublicId = a.Id,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
 
@@ -224,7 +222,7 @@ namespace DentalHub.Application.Services.Admins
                      a => a.User.UserRoles.Any(ur => ur.RoleId == adminRoleId),
                     a => new AdminDto
                     {
-                        PublicId = a.PublicId,
+                        PublicId = a.Id,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
                         Phone = a.Phone,
@@ -265,7 +263,7 @@ namespace DentalHub.Application.Services.Admins
                     a => a.IsSuperAdmin == true,
                     a => new AdminDto
                     {
-                        PublicId = a.PublicId,
+                        PublicId = a.Id ,
                         FullName = a.User.FullName,
                         Email = a.User.Email!,
 
@@ -303,7 +301,7 @@ namespace DentalHub.Application.Services.Admins
         {
             try
             {
-                var spec = new BaseSpecification<Admin>(a => a.PublicId == dto.PublicId);
+                var spec = new BaseSpecification<Admin>(a => a.Id == dto.PublicId);
                 spec.AddInclude(a => a.User);
 
                 var admin = await _unitOfWork.Admins.GetByIdAsync(spec);
@@ -339,7 +337,7 @@ namespace DentalHub.Application.Services.Admins
 
                 _logger.LogInformation("Admin updated successfully: {PublicId}", dto.PublicId);
 
-                return await GetAdminByPublicIdAsync(dto.PublicId);
+                return await GetAdminByIdAsync(dto.PublicId);
             }
             catch (Exception ex)
             {
@@ -349,12 +347,12 @@ namespace DentalHub.Application.Services.Admins
         }
 
         /// Soft delete admin
-        public async Task<Result> DeleteAdminByPublicIdAsync(string publicId)
+        public async Task<Result> DeleteAdminByIdAsync(Guid publicId)
         {
             try
             {
                 var admin = await _unitOfWork.Admins.GetByIdAsync(
-                    new BaseSpecification<Admin>(a => a.PublicId == publicId));
+                    new BaseSpecification<Admin>(a => a.Id == publicId));
 
                 if (admin == null)
                 {
@@ -382,11 +380,11 @@ namespace DentalHub.Application.Services.Admins
 
         /// Get admin statistics
         /// System-wide statistics visible to admin
-        public async Task<Result<AdminStatsDto>> GetAdminStatisticsAsync(string adminPublicId)
+        public async Task<Result<AdminStatsDto>> GetAdminStatisticsAsync(Guid adminPublicId)
         {
             try
             {
-                var spec = new BaseSpecification<Admin>(a => a.PublicId == adminPublicId);
+                var spec = new BaseSpecification<Admin>(a => a.Id == adminPublicId);
                 var admin = await _unitOfWork.Admins.GetByIdAsync(spec);
 
                 if (admin == null)

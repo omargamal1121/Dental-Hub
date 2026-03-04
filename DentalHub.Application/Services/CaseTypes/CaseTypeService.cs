@@ -21,15 +21,15 @@ namespace DentalHub.Application.Services.CaseTypes
             _logger = logger;
         }
 
-        public async Task<Result<CaseTypeDto>> GetCaseTypeByPublicIdAsync(string publicId)
+        public async Task<Result<CaseTypeDto>> GetCaseTypeByIdAsync(Guid publicId)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<CaseType, CaseTypeDto>(
-                    ct => ct.PublicId == publicId,
+                    ct => ct.Id == publicId,
                     ct => new CaseTypeDto
                     {
-						publicId = ct.PublicId,
+						publicId = ct.Id,
                         Name = ct.Name,
                         Description = ct.Description
                     }
@@ -59,7 +59,7 @@ namespace DentalHub.Application.Services.CaseTypes
                     ct => string.IsNullOrEmpty(search) || ct.Name.Contains(search) || ct.Description.Contains(search),
                     ct => new CaseTypeDto
                     {
-						publicId = ct.PublicId,
+						publicId = ct.Id    ,
                         Name = ct.Name,
                         Description = ct.Description
                     }
@@ -105,7 +105,7 @@ namespace DentalHub.Application.Services.CaseTypes
                 await _unitOfWork.CaseTypes.AddAsync(caseType);
                 await _unitOfWork.SaveChangesAsync();
 
-                return await GetCaseTypeByPublicIdAsync(caseType.PublicId);
+                return await GetCaseTypeByIdAsync(caseType.Id);
             }
             catch (DomainException ex)
             {
@@ -122,7 +122,7 @@ namespace DentalHub.Application.Services.CaseTypes
         {
             try
             {
-                var caseType = await _unitOfWork.CaseTypes.GetByIdAsync(new BaseSpecification<CaseType>(ct => ct.PublicId == dto.Id));
+                var caseType = await _unitOfWork.CaseTypes.GetByIdAsync(new BaseSpecification<CaseType>(ct => ct.Id == dto.Id));
 
                 if (caseType == null)
                 {
@@ -133,7 +133,7 @@ namespace DentalHub.Application.Services.CaseTypes
                 {
                      // Check if name exists (excluding current)
                     var existing = await _unitOfWork.CaseTypes.GetByIdAsync(
-                        new BaseSpecification<CaseType>(ct => ct.Name == dto.Name && ct.PublicId != dto.Id));
+                        new BaseSpecification<CaseType>(ct => ct.Name == dto.Name && ct.Id != dto.Id));
 
                     if (existing != null)
                     {
@@ -150,7 +150,7 @@ namespace DentalHub.Application.Services.CaseTypes
                 _unitOfWork.CaseTypes.Update(caseType);
                 await _unitOfWork.SaveChangesAsync();
 
-                return await GetCaseTypeByPublicIdAsync(caseType.PublicId);
+                return await GetCaseTypeByIdAsync(caseType.Id);
             }
             catch (DomainException ex)
             {
@@ -163,12 +163,12 @@ namespace DentalHub.Application.Services.CaseTypes
             }
         }
 
-        public async Task<Result> DeleteCaseTypeAsync(string publicId)
+        public async Task<Result> DeleteCaseTypeAsync(Guid publicId)
         {
             try
             {
                 var caseType = await _unitOfWork.CaseTypes.GetByIdAsync(
-                    new BaseSpecification<CaseType>(ct => ct.PublicId == publicId));
+                    new BaseSpecification<CaseType>(ct => ct.Id == publicId));
 
                 if (caseType == null)
                 {

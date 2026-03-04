@@ -9,12 +9,12 @@ namespace DentalHub.Infrastructure.ContextAndConfig
         public void Configure(EntityTypeBuilder<Patient> builder)
         {
            
-            builder.HasKey(x => x.UserId);
+            builder.HasKey(x => x.Id);
 
             
             builder.HasOne(x => x.User)
                    .WithOne(x => x.Patient)
-                   .HasForeignKey<Patient>(x => x.UserId)
+                   .HasForeignKey<Patient>(x => x.Id)
                    .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(x => x.PatientCases)

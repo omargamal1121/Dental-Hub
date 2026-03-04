@@ -5,12 +5,11 @@ namespace DentalHub.Domain.Entities
 {
     public class User : IdentityUser<Guid>
     {
-        public string PublicId { get; set; } = string.Empty;
+      
 
         public User()
         {
             Id = Guid.CreateVersion7();
-            PublicId = Utils.Base62Converter.Encode(Id);
         }
 
         public string FullName { get; set; }

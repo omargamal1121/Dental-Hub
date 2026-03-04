@@ -16,7 +16,6 @@ D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.GeneratedMSBu
 D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.AssemblyInfoInputs.cache
 D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.AssemblyInfo.cs
 D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.csproj.CoreCompileInputs.cache
-D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.MvcApplicationPartsAssemblyInfo.cs
 D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.MvcApplicationPartsAssemblyInfo.cache
 D:\projects\DentalHub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.sourcelink.json
 D:\projects\DentalHub\DentalHub.API\bin\Debug\net9.0\appsettings.Development.json
