@@ -6,7 +6,7 @@ using MediatR;
 
 namespace DentalHub.Application.Handlers.UniversityMember
 {
-    public class GetUniversityMemberByUniversityIdQueryHandler : IRequestHandler<GetUniversityMemberByUniversityIdQuery, Result<UniversityMemberDto>>
+    public class GetUniversityMemberByUniversityIdQueryHandler : IRequestHandler<GetUniversityMemberByUniversityIdQuery, Result<List<UniversityMemberDto>>>
     {
         private readonly IUniversityMemberService _service;
 
@@ -15,7 +15,7 @@ namespace DentalHub.Application.Handlers.UniversityMember
             _service = service;
         }
 
-        public async Task<Result<UniversityMemberDto>> Handle(GetUniversityMemberByUniversityIdQuery request, CancellationToken ct)
+        public async Task<Result<List<UniversityMemberDto>>> Handle(GetUniversityMemberByUniversityIdQuery request, CancellationToken ct)
         {
             return await _service.GetUniversityMemberByUniversityIdAsync(request.UniversityId);
         }

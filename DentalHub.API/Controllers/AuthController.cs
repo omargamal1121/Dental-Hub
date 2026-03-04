@@ -41,7 +41,7 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<bool>>> Logout()
         {
-            var userId = GetUserId();
+            var userId = GetUserIdFromToken();
             if (string.IsNullOrEmpty(userId)) return Unauthorized();
 
             var result = await _mediator.Send(new LogoutCommand(userId));
@@ -73,7 +73,7 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<bool>>> ChangePassword([FromBody] ChangePasswordRequestDto request)
         {
-            var userId = GetUserId();
+            var userId = GetUserIdFromToken();
             if (string.IsNullOrEmpty(userId)) return Unauthorized();
 
             var command = new ChangePasswordCommand(userId, request.OldPassword, request.NewPassword);
@@ -81,7 +81,6 @@ namespace DentalHub.API.Controllers
             return HandleResult(result);
         }
 
-      
         [Authorize]
         [HttpGet("My-Profile")]
         [SwaggerResponse(StatusCodes.Status200OK, "Doctor profile", typeof(ApiResponse<DoctorDto>))]
@@ -105,8 +104,9 @@ namespace DentalHub.API.Controllers
         }
 
         [Authorize(Roles = "Doctor,Student")]
-        [HttpGet("me/Statistics")]
-        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+        [HttpGet("Doctor-Student/Statistics")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Doctor statistics - returns DoctorStatsDto (TotalRequests, PendingRequests, ApprovedRequests, RejectedRequests, TotalStudents, ActiveCases, CompletedCases)", typeof(ApiResponse<object>))]
+        [SwaggerResponse(StatusCodes.Status200OK, "Student statistics - returns StudentStatsDto (TotalRequests, PendingRequests, ApprovedRequests, RejectedRequests, TotalSessions, CompletedSessions, TotalCases)", typeof(ApiResponse<object>))]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ApiResponse<object>>> GetMyStatistics()

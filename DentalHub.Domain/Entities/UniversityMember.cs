@@ -9,8 +9,6 @@ namespace DentalHub.Domain.Entities
 {
 	public class UniversityMember 
 	{
-
-
 		public int Id { get; set; }
         public Guid UniversityId { get; set; }
         public University University { get; set; } = null!; public string FullName { get; set; } = null!;

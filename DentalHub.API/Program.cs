@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Reflection;
 
 namespace DentalHub.API
 {
@@ -79,6 +80,12 @@ namespace DentalHub.API
 
                 // Required for [SwaggerResponse] annotations on endpoints
                 options.EnableAnnotations();
+
+                // Enable XML comments (shows /// summaries and remarks in Swagger UI)
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                if (File.Exists(xmlPath))
+                    options.IncludeXmlComments(xmlPath);
 
                 // JWT Authentication Support
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

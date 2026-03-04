@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using DentalHub.Application.Common;
 using DentalHub.Domain.Entities;
 using Hangfire;
@@ -10,7 +11,7 @@ namespace DentalHub.Application.Services.Auth
     {
         private readonly ILogger<PasswordService> _logger;
         private readonly UserManager<User> _userManager;
-     //   private readonly IRefreshTokenService _refreshTokenService;
+        //   private readonly IRefreshTokenService _refreshTokenService;
         private readonly IBackgroundJobClient _backgroundJobClient;
         private readonly IAccountEmailService _accountEmailService;
 
@@ -25,14 +26,14 @@ namespace DentalHub.Application.Services.Auth
             _backgroundJobClient = backgroundJobClient;
             _logger = logger;
             _userManager = userManager;
-        //    _refreshTokenService = refreshTokenService;
+            //    _refreshTokenService = refreshTokenService;
         }
 
         public async Task<Result<bool>> ChangePasswordAsync(string userid, string oldPassword, string newPassword)
         {
             try
             {
-                var user = await _userManager.FindByIdAsync(userid);
+                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.PublicId == userid);
                 if (user == null)
                 {
                     _logger.LogWarning("Change password failed: User {UserId} not found.", userid);
@@ -53,7 +54,7 @@ namespace DentalHub.Application.Services.Auth
                     return Result<bool>.Failure($"Errors: {errors}");
                 }
 
-            //    _backgroundJobClient.Enqueue(() => _refreshTokenService.RemoveRefreshTokenAsync(userid));
+                //    _backgroundJobClient.Enqueue(() => _refreshTokenService.RemoveRefreshTokenAsync(userid));
                 _backgroundJobClient.Enqueue(() => _accountEmailService.SendEmailAfterChangePassAsync(user.UserName, user.Email));
 
                 _logger.LogInformation("Password changed successfully for user {UserId}", userid);
@@ -113,7 +114,7 @@ namespace DentalHub.Application.Services.Auth
                 }
 
                 _backgroundJobClient.Enqueue(() => _accountEmailService.SendPasswordResetSuccessEmailAsync(email));
-          //      _backgroundJobClient.Enqueue(() => _refreshTokenService.RemoveRefreshTokenAsync(user.Id.ToString()));
+                //      _backgroundJobClient.Enqueue(() => _refreshTokenService.RemoveRefreshTokenAsync(user.Id.ToString()));
 
                 _logger.LogInformation("Password reset successful for user {Email}", email);
                 return Result<bool>.Success(true, "Password has been reset successfully.");

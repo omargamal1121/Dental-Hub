@@ -32,7 +32,7 @@ namespace DentalHub.Application.Services.Doctors
                         PublicId = d.PublicId,
                         FullName = d.User.FullName,
                         Email = d.User.Email!,
-                     
+
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
@@ -56,12 +56,12 @@ namespace DentalHub.Application.Services.Doctors
             }
         }
 
-      
+
         public async Task<Result<DoctorDto>> GetDoctorByIdAsync(string userId)
         {
             try
             {
-                
+
 
                 var spec = new BaseSpecificationWithProjection<Doctor, DoctorDto>(
                     d => d.PublicId == userId,
@@ -70,7 +70,7 @@ namespace DentalHub.Application.Services.Doctors
                         PublicId = d.PublicId,
                         FullName = d.User.FullName,
                         Email = d.User.Email!,
-                    
+
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
@@ -147,7 +147,7 @@ namespace DentalHub.Application.Services.Doctors
                         PublicId = d.PublicId,
                         FullName = d.User.FullName,
                         Email = d.User.Email!,
-                
+
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
                         CreateAt = d.CreateAt,
@@ -249,10 +249,7 @@ namespace DentalHub.Application.Services.Doctors
         {
             try
             {
-                if (!Guid.TryParse(userId, out var userGuid))
-                    return Result<DoctorStatsDto>.Failure("Invalid user ID");
-
-                var spec = new BaseSpecification<Doctor>(d => d.UserId == userGuid);
+                var spec = new BaseSpecification<Doctor>(d => d.PublicId == userId);
                 spec.AddInclude(d => d.CaseRequests);
 
                 var doctor = await _unitOfWork.Doctors.GetByIdAsync(spec);

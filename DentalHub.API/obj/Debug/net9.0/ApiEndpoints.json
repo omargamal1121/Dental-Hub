@@ -55,6 +55,38 @@
   },
   {
     "ContainingType": "DentalHub.API.Controllers.AuthController",
+    "Method": "GetMyStatistics",
+    "RelativePath": "api/Auth/Doctor-Student/Statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "DentalHub.API.Controllers.AuthController",
     "Method": "ForgotPassword",
     "RelativePath": "api/Auth/Forgot-Password",
     "HttpMethod": "POST",
@@ -137,38 +169,6 @@
           "application/json"
         ],
         "StatusCode": 401
-      }
-    ]
-  },
-  {
-    "ContainingType": "DentalHub.API.Controllers.AuthController",
-    "Method": "GetMyStatistics",
-    "RelativePath": "api/Auth/me/Statistics",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 401
-      },
-      {
-        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 400
       }
     ]
   },
@@ -2202,7 +2202,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[DentalHub.Application.DTOs.UniversityMember.UniversityMemberDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "DentalHub.Application.DTOs.Shared.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[DentalHub.Application.DTOs.UniversityMember.UniversityMemberDto, DentalHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "application/json"
         ],
