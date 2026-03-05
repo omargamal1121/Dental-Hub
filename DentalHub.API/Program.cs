@@ -80,6 +80,11 @@ namespace DentalHub.API
                 // Required for [SwaggerResponse] annotations on endpoints
                 options.EnableAnnotations();
 
+                // Include XML comments for Swagger documentation
+                var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+
                 // JWT Authentication Support
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
