@@ -708,3 +708,7 @@ D:\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHu.98D64BB8.Up2Date
 D:\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.genruntimeconfig.cache
 D:\Dental-Hub\DentalHub.API\obj\Debug\net9.0\ref\DentalHub.API.dll
 D:\Dental-Hub\DentalHub.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.API\bin\Debug\net9.0\FluentValidation.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.API\bin\Debug\net9.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.API\bin\Debug\net9.0\DentalHub.API.xml
+D:\Sajaaa\Visual Studio PROJECTS\Grad Project\Dental-Hub\DentalHub.API\obj\Debug\net9.0\DentalHub.API.xml
