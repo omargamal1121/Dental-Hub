@@ -5044,8 +5044,8 @@
             "nullable": true
           },
           "caseTypeId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uuid"
           },
           "status": {
             "type": "string",

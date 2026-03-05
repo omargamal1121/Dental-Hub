@@ -3,11 +3,12 @@ using DentalHub.Application.Common;
 
 namespace DentalHub.Application.Commands.PatientCase
 {
-    public record UpdatePatientCaseCommand(
-		Guid Id,
-        string Title,
-        string Description,
-        int CaseTypeId,
-        string Status
-    ) : IRequest<Result<bool>>;
+    public class UpdatePatientCaseCommand : IRequest<Result<bool>>
+    {
+        public Guid Id { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public Guid CaseTypeId { get; set; }
+        public string? Status { get; set; }
+    }
 }
