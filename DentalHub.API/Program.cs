@@ -132,12 +132,10 @@ namespace DentalHub.API
                 options.Password.RequireUppercase = true;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 6;
-
+                options.User.RequireUniqueEmail = false;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
-
-                options.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<ContextApp>()
             .AddDefaultTokenProviders();
