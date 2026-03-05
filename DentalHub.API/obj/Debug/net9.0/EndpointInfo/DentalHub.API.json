@@ -783,10 +783,12 @@
         "tags": [
           "Cases"
         ],
+        "summary": "Get all patient cases with optional search (patient name / case-type name),\r\noptional status filter, and pagination.",
         "parameters": [
           {
             "name": "search",
             "in": "query",
+            "description": "Partial match on patient full-name or case-type name.",
             "schema": {
               "type": "string"
             }
@@ -794,6 +796,7 @@
           {
             "name": "status",
             "in": "query",
+            "description": "Filter by status: Pending | InProgress | Completed | Cancelled | UnderReview",
             "schema": {
               "type": "string"
             }
@@ -801,6 +804,7 @@
           {
             "name": "page",
             "in": "query",
+            "description": "Page number (default 1).",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -810,6 +814,7 @@
           {
             "name": "pageSize",
             "in": "query",
+            "description": "Items per page (default 10).",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -2899,6 +2904,8 @@
         "tags": [
           "UniversityMembers"
         ],
+        "summary": "Get all university members (Doctor and Student registry).\r\nUse the universityId when creating a Doctor or Student.",
+        "description": "All universities support both Doctor and Student roles:\r\n            \r\n| University            | UniversityId                         |\r\n|-----------------------|--------------------------------------|\r\n| Cairo University      | 11111111-1111-1111-1111-111111111111 |\r\n| Ain Shams University  | 22222222-2222-2222-2222-222222222222 |\r\n| Mansoura University   | 33333333-3333-3333-3333-333333333333 |\r\n| Alexandria University | 44444444-4444-4444-4444-444444444444 |\r\n| Assiut University     | 55555555-5555-5555-5555-555555555555 |\r\n| Benha University      | 66666666-6666-6666-6666-666666666666 |\r\n            \r\nFilter by role using the `name` or `department` query parameters.",
         "parameters": [
           {
             "name": "page",
@@ -2915,7 +2922,7 @@
             "schema": {
               "type": "integer",
               "format": "int32",
-              "default": 10
+              "default": 12
             }
           },
           {
@@ -2952,6 +2959,8 @@
         "tags": [
           "UniversityMembers"
         ],
+        "summary": "Get all university members by UniversityId.",
+        "description": "Available UniversityIds:\r\n            \r\n    11111111-1111-1111-1111-111111111111  → Cairo University\r\n    22222222-2222-2222-2222-222222222222  → Ain Shams University\r\n    33333333-3333-3333-3333-333333333333  → Mansoura University\r\n    44444444-4444-4444-4444-444444444444  → Alexandria University\r\n    55555555-5555-5555-5555-555555555555  → Assiut University\r\n    66666666-6666-6666-6666-666666666666  → Benha University",
         "parameters": [
           {
             "name": "universityId",
@@ -2969,7 +2978,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UniversityMemberDtoApiResponse"
+                  "$ref": "#/components/schemas/UniversityMemberDtoListApiResponse"
                 }
               }
             }
@@ -4878,7 +4887,7 @@
         },
         "additionalProperties": false
       },
-      "UniversityMemberDtoApiResponse": {
+      "UniversityMemberDtoListApiResponse": {
         "type": "object",
         "properties": {
           "success": {
@@ -4889,7 +4898,11 @@
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/UniversityMemberDto"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UniversityMemberDto"
+            },
+            "nullable": true
           },
           "statusCode": {
             "type": "integer",

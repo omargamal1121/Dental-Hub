@@ -19,7 +19,7 @@ namespace DentalHub.Application.Services.UniversityMembers
             _logger = logger;
         }
 
-        public async Task<Result<UniversityMemberDto>> GetUniversityMemberByUniversityIdAsync(Guid universityId)
+        public async Task<Result<List<UniversityMemberDto>>> GetUniversityMemberByUniversityIdAsync(Guid universityId)
         {
             try
             {
@@ -34,21 +34,20 @@ namespace DentalHub.Application.Services.UniversityMembers
                     }
                 );
 
-                var member = await _unitOfWork.UniversityMembers.GetByIdAsync(spec);
+                var members = await _unitOfWork.UniversityMembers.GetAllAsync(spec);
 
-                if (member == null)
-                {
-                    return Result<UniversityMemberDto>.Failure("University member not found", 404);
-                }
+                if (members == null || members.Count == 0)
+                    return Result<List<UniversityMemberDto>>.Failure("No members found for this university", 404);
 
-                return Result<UniversityMemberDto>.Success(member);
+                return Result<List<UniversityMemberDto>>.Success(members);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting university member by university ID: {UniversityId}", universityId);
-                return Result<UniversityMemberDto>.Failure("Error retrieving university member data", 500);
+                _logger.LogError(ex, "Error getting university members by university ID: {UniversityId}", universityId);
+                return Result<List<UniversityMemberDto>>.Failure("Error retrieving university member data", 500);
             }
         }
+
         public async Task<Result<PagedResult<UniversityMemberDto>>> GetAllUniversityMembersAsync(int page = 1, int pageSize = 10, string? name = null, string? department = null)
         {
             try
@@ -68,17 +67,17 @@ namespace DentalHub.Application.Services.UniversityMembers
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderBy(u => u.FullName);
 
-				var membersList = await _unitOfWork.UniversityMembers.GetAllAsync(spec);
-				var totalCount = await _unitOfWork.UniversityMembers.CountAsync(spec);
+                var membersList = await _unitOfWork.UniversityMembers.GetAllAsync(spec);
+                var totalCount = await _unitOfWork.UniversityMembers.CountAsync(spec);
 
-				var pagedResult = PaginationFactory<UniversityMemberDto>.Create(
-					count: totalCount,
-					page: page,
-					pageSize: pageSize,
-					data: membersList
-				);
+                var pagedResult = PaginationFactory<UniversityMemberDto>.Create(
+                    count: totalCount,
+                    page: page,
+                    pageSize: pageSize,
+                    data: membersList
+                );
 
-				return Result<PagedResult<UniversityMemberDto>>.Success(pagedResult);
+                return Result<PagedResult<UniversityMemberDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
