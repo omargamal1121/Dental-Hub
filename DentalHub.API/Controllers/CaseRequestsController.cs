@@ -36,7 +36,9 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ApiResponse<CaseRequestDto>>> GetById(Guid id)
         {
-            var result = await _mediator.Send(new GetCaseRequestByIdQuery(id));
+            var userId = GetUserIdFromToken() ?? Guid.Empty;
+            var isAdmin = HasManagementRole();
+            var result = await _mediator.Send(new GetCaseRequestByIdQuery(id, userId, isAdmin));
             return HandleResult(result);
         }
 
@@ -50,9 +52,9 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("student/{studentId}")]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<CaseRequestDto>>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetRequestsByStudent(Guid studentId,RequestStatus? status=null, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetRequestsByStudent(Guid studentId, RequestStatus? status = null, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            var result = await _mediator.Send(new GetCaseRequestsByStudentIdQuery(studentId, status,page, pageSize));
+            var result = await _mediator.Send(new GetCaseRequestsByStudentIdQuery(studentId, status, page, pageSize));
             return HandleResult(result);
         }
 
