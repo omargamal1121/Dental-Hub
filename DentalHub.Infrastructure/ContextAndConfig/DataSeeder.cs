@@ -105,34 +105,34 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                 // One Doctor per university. UniversityId matches the registry above.
                 if (!await context.Doctors.IgnoreQueryFilters().AnyAsync())
                 {
-                    // Cairo
+                    // Cairo - ID 1
                     var doc1Id = Guid.Parse("01960000-0000-7000-8000-000000000001");
-                    var doc1User = new User { Id = doc1Id, FullName = "Dr. Ahmed Hassan", UserName = "ahmed.hassan", Email = "ahmed.hassan@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01011111111" };
+                    var doc1User = new User { Id = doc1Id, FullName = "Dr. Ahmed Hassan", UserName = "ahmed.hassan", Email = "ahmed.hassan@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000001" };
                     var doc1 = new Doctor(doc1Id) { Name = "Dr. Ahmed Hassan", Specialty = "General Dentistry", UniversityId = cairoId };
 
-                    // Ain Shams
+                    // Ain Shams - ID 3
                     var doc2Id = Guid.Parse("01960000-0000-7000-8000-000000000002");
-                    var doc2User = new User { Id = doc2Id, FullName = "Dr. Sara Mohamed", UserName = "sara.mohamed", Email = "sara.mohamed@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01022222222" };
+                    var doc2User = new User { Id = doc2Id, FullName = "Dr. Sara Mohamed", UserName = "sara.mohamed", Email = "sara.mohamed@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000003" };
                     var doc2 = new Doctor(doc2Id) { Name = "Dr. Sara Mohamed", Specialty = "Pediatric Dentistry", UniversityId = ainShamsId };
 
-                    // Mansoura
+                    // Mansoura - ID 5
                     var doc3Id = Guid.Parse("01960000-0000-7000-8000-000000000009");
-                    var doc3User = new User { Id = doc3Id, FullName = "Dr. Hossam Naguib", UserName = "hossam.naguib", Email = "hossam.naguib@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01099999999" };
+                    var doc3User = new User { Id = doc3Id, FullName = "Dr. Hossam Naguib", UserName = "hossam.naguib", Email = "hossam.naguib@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000005" };
                     var doc3 = new Doctor(doc3Id) { Name = "Dr. Hossam Naguib", Specialty = "Oral Surgery", UniversityId = mansouraId };
 
-                    // Alexandria
+                    // Alexandria - ID 7
                     var doc4Id = Guid.Parse("01960000-0000-7000-8000-000000000010");
-                    var doc4User = new User { Id = doc4Id, FullName = "Dr. Dina Farouk", UserName = "dina.farouk", Email = "dina.farouk@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01010101010" };
+                    var doc4User = new User { Id = doc4Id, FullName = "Dr. Dina Farouk", UserName = "dina.farouk", Email = "dina.farouk@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000007" };
                     var doc4 = new Doctor(doc4Id) { Name = "Dr. Dina Farouk", Specialty = "Orthodontics", UniversityId = alexId };
 
-                    // Assiut
+                    // Assiut - ID 9
                     var doc5Id = Guid.Parse("01960000-0000-7000-8000-000000000011");
-                    var doc5User = new User { Id = doc5Id, FullName = "Dr. Tarek Mostafa", UserName = "tarek.mostafa", Email = "tarek.mostafa@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01011011011" };
+                    var doc5User = new User { Id = doc5Id, FullName = "Dr. Tarek Mostafa", UserName = "tarek.mostafa", Email = "tarek.mostafa@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000009" };
                     var doc5 = new Doctor(doc5Id) { Name = "Dr. Tarek Mostafa", Specialty = "Orthodontics", UniversityId = assiutId };
 
-                    // Benha
+                    // Benha - ID 11
                     var doc6Id = Guid.Parse("01960000-0000-7000-8000-000000000012");
-                    var doc6User = new User { Id = doc6Id, FullName = "Dr. Rania Adel", UserName = "rania.adel", Email = "rania.adel@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01012012012" };
+                    var doc6User = new User { Id = doc6Id, FullName = "Dr. Rania Adel", UserName = "rania.adel", Email = "rania.adel@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000011" };
                     var doc6 = new Doctor(doc6Id) { Name = "Dr. Rania Adel", Specialty = "Oral Surgery", UniversityId = benhaId };
 
                     await CreateUserWithRoleAsync(userManager, doc1User, "Doctor", "Doctor@123", logger);
@@ -144,41 +144,41 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
                     await context.Doctors.AddRangeAsync(doc1, doc2, doc3, doc4, doc5, doc6);
                     await context.SaveChangesAsync();
-                    logger.LogInformation("✅ Seeded 6 Doctors (one per university).");
+                    logger.LogInformation("✅ Seeded 6 Doctors (one per university) with unique numbers.");
                 }
 
                 // ── 5. Students ───────────────────────────────────────────────────────
                 // One Student per university. UniversityId matches the registry above.
                 if (!await context.Students.IgnoreQueryFilters().AnyAsync())
                 {
-                    // Cairo
+                    // Cairo - ID 2
                     var stu1Id = Guid.Parse("01960000-0000-7000-8000-000000000003");
-                    var stu1User = new User { Id = stu1Id, FullName = "Omar Gamal", UserName = "omar.gamal", Email = "omar.gamal@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01033333333" };
+                    var stu1User = new User { Id = stu1Id, FullName = "Omar Gamal", UserName = "omar.gamal", Email = "omar.gamal@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000002" };
                     var stu1 = new Student(stu1Id) { Level = 4, UniversityId = cairoId };
 
-                    // Ain Shams
+                    // Ain Shams - ID 4
                     var stu2Id = Guid.Parse("01960000-0000-7000-8000-000000000004");
-                    var stu2User = new User { Id = stu2Id, FullName = "Nour Ali", UserName = "nour.ali", Email = "nour.ali@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01044444444" };
+                    var stu2User = new User { Id = stu2Id, FullName = "Nour Ali", UserName = "nour.ali", Email = "nour.ali@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000004" };
                     var stu2 = new Student(stu2Id) { Level = 3, UniversityId = ainShamsId };
 
-                    // Mansoura
+                    // Mansoura - ID 6
                     var stu3Id = Guid.Parse("01960000-0000-7000-8000-000000000005");
-                    var stu3User = new User { Id = stu3Id, FullName = "Youssef Ibrahim", UserName = "youssef.ibrahim", Email = "youssef.ibrahim@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01055555555" };
+                    var stu3User = new User { Id = stu3Id, FullName = "Youssef Ibrahim", UserName = "youssef.ibrahim", Email = "youssef.ibrahim@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000006" };
                     var stu3 = new Student(stu3Id) { Level = 5, UniversityId = mansouraId };
 
-                    // Alexandria
+                    // Alexandria - ID 8
                     var stu4Id = Guid.Parse("01960000-0000-7000-8000-000000000013");
-                    var stu4User = new User { Id = stu4Id, FullName = "Farida Samir", UserName = "farida.samir", Email = "farida.samir@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01013013013" };
+                    var stu4User = new User { Id = stu4Id, FullName = "Farida Samir", UserName = "farida.samir", Email = "farida.samir@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000008" };
                     var stu4 = new Student(stu4Id) { Level = 2, UniversityId = alexId };
 
-                    // Assiut
+                    // Assiut - ID 10
                     var stu5Id = Guid.Parse("01960000-0000-7000-8000-000000000014");
-                    var stu5User = new User { Id = stu5Id, FullName = "Mahmoud Essam", UserName = "mahmoud.essam", Email = "mahmoud.essam@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01014014014" };
+                    var stu5User = new User { Id = stu5Id, FullName = "Mahmoud Essam", UserName = "mahmoud.essam", Email = "mahmoud.essam@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000010" };
                     var stu5 = new Student(stu5Id) { Level = 1, UniversityId = assiutId };
 
-                    // Benha
+                    // Benha - ID 12
                     var stu6Id = Guid.Parse("01960000-0000-7000-8000-000000000015");
-                    var stu6User = new User { Id = stu6Id, FullName = "Salma Wael", UserName = "salma.wael", Email = "salma.wael@dentalhub.com", EmailConfirmed = true, PhoneNumber = "01015015015" };
+                    var stu6User = new User { Id = stu6Id, FullName = "Salma Wael", UserName = "salma.wael", Email = "salma.wael@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000012" };
                     var stu6 = new Student(stu6Id) { Level = 4, UniversityId = benhaId };
 
                     await CreateUserWithRoleAsync(userManager, stu1User, "Student", "Student@123", logger);
@@ -190,23 +190,26 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
                     await context.Students.AddRangeAsync(stu1, stu2, stu3, stu4, stu5, stu6);
                     await context.SaveChangesAsync();
-                    logger.LogInformation("✅ Seeded 6 Students (one per university).");
+                    logger.LogInformation("✅ Seeded 6 Students (one per university) with unique numbers.");
                 }
 
                 // ── 6. Patients ───────────────────────────────────────────────────────
                 if (!await context.Patients.IgnoreQueryFilters().AnyAsync())
                 {
+                    // ID 13
                     var pat1Id = Guid.Parse("01960000-0000-7000-8000-000000000006");
-                    var pat1User = new User { Id = pat1Id, FullName = "Mona Tarek", UserName = "mona.tarek", Email = "mona.tarek@gmail.com", EmailConfirmed = true, PhoneNumber = "01066666666" };
-                    var pat1 = new Patient(pat1Id) { Age = 30, Phone = "01066666666" };
+                    var pat1User = new User { Id = pat1Id, FullName = "Mona Tarek", UserName = "mona.tarek", Email = "mona.tarek@gmail.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000013" };
+                    var pat1 = new Patient(pat1Id) { Age = 30, Phone = "01000000013" };
 
+                    // ID 14
                     var pat2Id = Guid.Parse("01960000-0000-7000-8000-000000000007");
-                    var pat2User = new User { Id = pat2Id, FullName = "Karim Salah", UserName = "karim.salah", Email = "karim.salah@gmail.com", EmailConfirmed = true, PhoneNumber = "01077777777" };
-                    var pat2 = new Patient(pat2Id) { Age = 45, Phone = "01077777777" };
+                    var pat2User = new User { Id = pat2Id, FullName = "Karim Salah", UserName = "karim.salah", Email = "karim.salah@gmail.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000014" };
+                    var pat2 = new Patient(pat2Id) { Age = 45, Phone = "01000000014" };
 
+                    // ID 15
                     var pat3Id = Guid.Parse("01960000-0000-7000-8000-000000000008");
-                    var pat3User = new User { Id = pat3Id, FullName = "Layla Khaled", UserName = "layla.khaled", Email = "layla.khaled@gmail.com", EmailConfirmed = true, PhoneNumber = "01088888888" };
-                    var pat3 = new Patient(pat3Id) { Age = 25, Phone = "01088888888" };
+                    var pat3User = new User { Id = pat3Id, FullName = "Layla Khaled", UserName = "layla.khaled", Email = "layla.khaled@gmail.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000015" };
+                    var pat3 = new Patient(pat3Id) { Age = 25, Phone = "01000000015" };
 
                     await CreateUserWithRoleAsync(userManager, pat1User, "Patient", "Patient@123", logger);
                     await CreateUserWithRoleAsync(userManager, pat2User, "Patient", "Patient@123", logger);
@@ -214,7 +217,21 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
                     await context.Patients.AddRangeAsync(pat1, pat2, pat3);
                     await context.SaveChangesAsync();
-                    logger.LogInformation("✅ Seeded 3 Patients.");
+                    logger.LogInformation("✅ Seeded 3 Patients with unique numbers.");
+                }
+
+                // ── 7. Admins ─────────────────────────────────────────────────────────
+                if (!await context.Admins.IgnoreQueryFilters().AnyAsync())
+                {
+                    // ID 16
+                    var adminId = Guid.Parse("01960000-0000-7000-8000-000000000016");
+                    var adminUser = new User { Id = adminId, FullName = "System Admin", UserName = "admin", Email = "admin@dentalhub.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000016" };
+                    var admin = new Admin(adminId) { Phone = "01000000016", IsSuperAdmin = true };
+
+                    await CreateUserWithRoleAsync(userManager, adminUser, "Admin", "Admin@123", logger);
+                    await context.Admins.AddAsync(admin);
+                    await context.SaveChangesAsync();
+                    logger.LogInformation("✅ Seeded Admin Account with unique number.");
                 }
             }
             catch (Exception ex)

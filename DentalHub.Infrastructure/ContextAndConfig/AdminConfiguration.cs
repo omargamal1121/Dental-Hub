@@ -11,6 +11,7 @@ public class AdminConfiguration : IEntityTypeConfiguration<Admin>
                .WithOne(u => u.Admin)
                .HasForeignKey<Admin>(a => a.Id)
                .OnDelete(DeleteBehavior.Cascade);
-        builder.HasQueryFilter(a => a.DeleteAt == null);
-    }
+		builder.HasQueryFilter(cr => !cr.User.IsDeleted);
+
+	}
 }

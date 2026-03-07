@@ -18,5 +18,8 @@ namespace DentalHub.Domain.Entities
         public Doctor? Doctor { get; set; }
         public Admin? Admin { get; set; }
 		public ICollection<IdentityUserRole<Guid>> UserRoles{ get; set; }
+
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? DeletedAt { get; set; } = null;
 	}
 }

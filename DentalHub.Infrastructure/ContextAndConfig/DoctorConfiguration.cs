@@ -22,7 +22,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
             .OnDelete(DeleteBehavior.Restrict);
 
 
-            builder.HasQueryFilter(cr => cr.DeleteAt == null);
+            builder.HasQueryFilter(cr => !cr.User.IsDeleted);
 
 		}
 	}
