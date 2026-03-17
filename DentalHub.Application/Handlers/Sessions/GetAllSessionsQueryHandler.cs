@@ -17,7 +17,7 @@ namespace DentalHub.Application.Handlers.Sessions
 
         public async Task<Result<PagedResult<SessionDto>>> Handle(GetAllSessionsQuery request, CancellationToken ct)
         {
-            return await _service.GetAllSessionsAsync(request.Page, request.PageSize);
+            return await _service.GetAllSessionsAsync(request.Page, request.PageSize, request.Status);
         }
     }
 }

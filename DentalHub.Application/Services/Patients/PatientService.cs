@@ -205,28 +205,43 @@ namespace DentalHub.Application.Services
             }
         }
 
-        public async Task<Result> DeletePatientAsync(Guid id)
+        public async Task<Result> HandleBeforeDeleteAsync(Guid id)
         {
+
             try
             {
-                var patient = await _unitOfWork.Patients.GetByIdAsync(
-                    new BaseSpecification<Patient>(p => p.Id == id));
+                _logger.LogInformation("Attempting to delete patient: {Id}", id);
+				var patient = await _unitOfWork.Patients.GetByIdAsync(
+                    new BaseSpecificationWithProjection<Patient, GetPatientDataById>(p =>  p.Id == id,p=>
+                    new GetPatientDataById
+					{
+                        Id = p.Id,
+                        HasProgressCases = p.PatientCases.Any(pc => pc.Status == CaseStatus.InProgress)
+					}));
 
                 if (patient == null)
                     return Result.Failure("Patient not found");
+                if (patient.HasProgressCases)
+                    return Result.Failure("Cannot delete patient with in-progress cases");
+                
+                 await _unitOfWork.PatientCases.UpdatePatientCasesStatusAsync(patient.Id, CaseStatus.Cancelled);
+                await _unitOfWork.CaseRequests.CancelPendingRequestsForPatientAsync(patient.Id);
 
-                patient.DeleteAt = DateTime.UtcNow;
-                _unitOfWork.Patients.Update(patient);
+				
                 await _unitOfWork.SaveChangesAsync();
-
-                _logger.LogInformation("Patient deleted: {Id}", id);
+				_logger.LogInformation("Patient deleted: {Id}", id);
                 return Result.Success("Patient deleted successfully");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error deleting patient: {Id}", id);
-                return Result.Failure("Error deleting patient");
+				return Result.Failure("Error deleting patient");
             }
         }
     }
+    public class GetPatientDataById
+	{
+        public Guid Id { get; set; }
+		public bool HasProgressCases { get; set; }
+	}
 }

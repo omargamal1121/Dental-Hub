@@ -113,13 +113,13 @@ namespace DentalHub.Application.Services.Cases
                     {
                         Id = cr.Id,
                         PatientCasePublicId = cr.PatientCaseId,
-                        PatientName = cr.PatientCase.Patient.User.FullName,
+                        PatientName = cr.PatientCase.Patient.User.FullName ?? "Patient deleted",
 
                         StudentPublicId = cr.StudentId,
-                        StudentName = cr.Student.User.FullName,
+                        StudentName = cr.Student.User.FullName ?? "Student deleted",
                         Level = cr.Student.Level,
                         DoctorId = cr.DoctorId,
-                        DoctorName = cr.Doctor.User.FullName,
+                        DoctorName = cr.Doctor.User.FullName ?? "Doctor deleted",
                         Description = cr.Description,
                         Status = cr.Status.ToString(),
                         CreateAt = cr.CreateAt

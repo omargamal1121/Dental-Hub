@@ -9,6 +9,7 @@ namespace DentalHub.Infrastructure.Repository.PatientCaseRepo
 	public class PatientCaseRepository : MainRepository<PatientCase>, IPatientCaseRepository
 	{
 		private readonly DbSet<PatientCase> _patientCases;
+	
 		public PatientCaseRepository(ContextApp contextApp): base(contextApp) 
 		{
 				_patientCases = contextApp.PatientCases;
@@ -39,6 +40,18 @@ namespace DentalHub.Infrastructure.Repository.PatientCaseRepo
 
 			return result > 0;
 		}
+		public async Task<bool> UpdatePatientCasesStatusAsync(Guid patientId, CaseStatus newStatus)
+		{
+			var result = await _patientCases
+				.Where(pc => pc.PatientId == patientId && pc.Status == CaseStatus.Pending)
+				.ExecuteUpdateAsync(setter => setter
+					.SetProperty(pc => pc.Status, newStatus)
+					.SetProperty(pc => pc.UpdateAt, DateTime.UtcNow)
+				);
+
+			return result > 0;
+		}
+
 
 
 	}

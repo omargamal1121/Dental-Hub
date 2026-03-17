@@ -15,6 +15,7 @@ public enum RequestStatus
 	Approved,
     Rejected,
     Taken,
+	Cancelled,
 }
 
 public enum SessionStatus

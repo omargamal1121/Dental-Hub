@@ -15,6 +15,6 @@ namespace DentalHub.Application.Services
 
 
         Task<Result<PatientDto>> UpdatePatientAsync(UpdatePatientDto dto);
-        Task<Result> DeletePatientAsync(Guid id);
+        Task<Result> HandleBeforeDeleteAsync(Guid id);
     }
 }

@@ -26,5 +26,6 @@ namespace DentalHub.Infrastructure.Repository.PatientRepo
 		var query=	patients.AsQueryable().AsNoTracking().Where(p=>p.Id==id).Include(p => p.PatientCases).ThenInclude(pc => pc.CaseType);
 		 return	await SpecificationWithProjectionEvaluator<Patient,TResult>.ProjectionOnly(query,spec).FirstOrDefaultAsync();
 		}
+	
 	}
 }

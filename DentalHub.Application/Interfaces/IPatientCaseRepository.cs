@@ -7,5 +7,6 @@ namespace DentalHub.Application.Interfaces
 	{
 		public  Task<bool> AssineStudentToCaseAsync(Guid CaseId, Guid StudentId);
 		Task<bool> UnassignStudentAsync(Guid caseId);
+		public Task<bool> UpdatePatientCasesStatusAsync(Guid patientId, CaseStatus newStatus);
 	}
 }

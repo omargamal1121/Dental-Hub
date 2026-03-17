@@ -291,6 +291,43 @@ namespace DentalHub.Application.Services.Doctors
             }
         }
 
+        public async Task<Result> HandleBeforeDeleteAsync(Guid id)
+        {
+            try
+            {
+                _logger.LogInformation("Attempting to delete doctor: {Id}", id);
+                var doctor = await _unitOfWork.Doctors.GetByIdAsync(
+                    new BaseSpecificationWithProjection<Doctor, GetDoctorDataById>(d => d.Id == id, d =>
+                    new GetDoctorDataById
+                    {
+                        Id = d.Id,
+                        HasProgressCases = d.CaseRequests.Any(cr => cr.Status == RequestStatus.Approved && cr.PatientCase.Status == CaseStatus.InProgress)
+                    }));
+
+                if (doctor == null)
+                    return Result.Failure("Doctor not found");
+                if (doctor.HasProgressCases)
+                    return Result.Failure("Cannot delete doctor with in-progress cases");
+
+                await _unitOfWork.CaseRequests.CancelPendingRequestsForDoctorAsync(doctor.Id);
+
+                await _unitOfWork.SaveChangesAsync();
+                _logger.LogInformation("Doctor deleted preparation done: {Id}", id);
+                return Result.Success("Doctor pre-delete handling successful");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error handling before delete for doctor: {Id}", id);
+                return Result.Failure("Error handling before delete for doctor");
+            }
+        }
+
         #endregion
+    }
+
+    public class GetDoctorDataById
+    {
+        public Guid Id { get; set; }
+        public bool HasProgressCases { get; set; }
     }
 }

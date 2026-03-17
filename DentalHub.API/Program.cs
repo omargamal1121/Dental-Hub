@@ -12,7 +12,9 @@ using Hangfire.MySql;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Scalar.AspNetCore;
 using Serilog;
 
 namespace DentalHub.API
@@ -22,12 +24,13 @@ namespace DentalHub.API
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddOpenApi();
 
-            Log.Logger = new LoggerConfiguration()
-        .MinimumLevel.Information()
-        .WriteTo.Console()
-        .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
-        .CreateLogger();
+			Log.Logger = new LoggerConfiguration()
+           .MinimumLevel.Information()
+            .WriteTo.Console()
+            .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+            .CreateLogger();
 
             // ========== Add Controllers ==========
             // Added default produces/consumes so Swagger shows application/json instead of text/plain
@@ -187,9 +190,10 @@ namespace DentalHub.API
             app.UseHttpsRedirection();
 
             app.UseGlobalExceptionHandler();
+            app.MapOpenApi();
+            app.MapScalarApiReference();
 
-
-            app.UseSwagger();
+			app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "DentalHub API v1");

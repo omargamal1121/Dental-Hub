@@ -57,7 +57,8 @@ namespace DentalHub.Application.Common
             return new Result
             {
                 IsSuccess = true,
-                Message = message
+                Message = message,
+                Status = status
             };
         }
 

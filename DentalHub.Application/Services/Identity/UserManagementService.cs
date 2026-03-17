@@ -1,14 +1,16 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Identity;
 using DentalHub.Application.Exceptions;
+using DentalHub.Application.Services.Doctors;
+using DentalHub.Application.Services.Students;
+using DentalHub.Application.Services;
 using DentalHub.Application.Specification.Comman;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System.Data.Entity;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.Identity
 {
@@ -19,17 +21,26 @@ namespace DentalHub.Application.Services.Identity
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<UserManagementService> _logger;
+        private readonly IPatientService _patientService;
+        private readonly IDoctorService _doctorService;
+        private readonly IStudentService _studentService;
 
-        public UserManagementService(
+		public UserManagementService(
             UserManager<User> userManager,
             RoleManager<IdentityRole<Guid>> roleManager,
             IUnitOfWork unitOfWork,
-            ILogger<UserManagementService> logger)
+            ILogger<UserManagementService> logger,
+            IPatientService patientService,
+            IDoctorService doctorService,
+            IStudentService studentService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _patientService = patientService;
+            _doctorService = doctorService;
+            _studentService = studentService;
         }
 
 		#region Patient Registration
@@ -272,42 +283,65 @@ namespace DentalHub.Application.Services.Identity
             }
         }
 
-        #endregion
+		#endregion
 
-        #region Helper Methods
+		#region Helper Methods
 
- 
-      
 
-    
-        public async Task<Result> DeleteUserAsync(Guid userId)
-        {
-            try
-            {
-                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
-                if (user == null)
-                {
-                    return Result.Failure("User not found");
-                }
 
-                var result = await _userManager.DeleteAsync(user);
-                if (!result.Succeeded)
-                {
-                    var errors = result.Errors.Select(e => e.Description).ToList();
-                    return Result.Failure(errors);
-                }
 
-                return Result.Success("User deleted successfully");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error deleting user with Id: {UserId}", userId);
-                return Result.Failure("An error occurred while deleting user");
-            }
-        }
 
-       
-        private async Task EnsureRoleExistsAsync(string roleName)
+		public async Task<Result> DeleteUserAsync(Guid userId)
+		{
+			try
+			{
+				await _unitOfWork.BeginTransactionAsync();
+
+				var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+				if (user == null)
+					return Result.Failure("User not found", 404);
+
+				var roles = await _userManager.GetRolesAsync(user);
+				var role = roles.FirstOrDefault() ?? "Unknown";
+
+				Result result = role switch
+				{
+					"Patient" => await _patientService.HandleBeforeDeleteAsync(user.Id),
+					"Doctor" => await _doctorService.HandleBeforeDeleteAsync(user.Id),
+					"Student" => await _studentService.HandleBeforeDeleteAsync(user.Id),
+					_ => Result.Success()
+				};
+
+				if (!result.IsSuccess)
+				{
+					await _unitOfWork.RollbackTransactionAsync();
+					return Result.Failure(result.Message ?? "Failed to delete user", result.Status);
+				}
+
+				user.DeletedAt = DateTime.UtcNow;
+				user.IsDeleted = true;
+				var deleteResult = await _userManager.UpdateAsync(user);
+
+				if (!deleteResult.Succeeded)
+				{
+					await _unitOfWork.RollbackTransactionAsync();
+					return Result.Failure("Failed to update user for soft delete");
+				}
+
+				await _unitOfWork.SaveChangesAsync();
+				await _unitOfWork.CommitTransactionAsync();
+
+				_logger.LogInformation("User deleted successfully: {UserId}", userId);
+				return Result.Success("User deleted successfully",200);
+			}
+			catch (Exception ex)
+			{
+				await _unitOfWork.RollbackTransactionAsync();
+				_logger.LogError(ex, "Error deleting user with Id: {UserId}", userId);
+				return Result.Failure("An error occurred while deleting user");
+			}
+		}
+		private async Task EnsureRoleExistsAsync(string roleName)
         {
             var roleExists = await _roleManager.RoleExistsAsync(roleName);
             if (!roleExists)

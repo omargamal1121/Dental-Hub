@@ -40,14 +40,23 @@ namespace DentalHub.Application.Services.Auth
             _backgroundJobClient = backgroundJobClient;
         }
 
-        public async Task<Result<TokensDto>> LoginAsync(string email, string password)
+        public async Task<Result<TokensDto>> LoginAsync(string emailorphone, string password)
         {
             try
             {
-                var user = await _userManager.FindByEmailAsync(email);
+                User? user;
+                if(emailorphone.Contains("@"))
+                {
+                    user = await _userManager.FindByEmailAsync(emailorphone);
+                }
+                else
+                {
+                    user = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == emailorphone);
+				}
+				
                 if (user == null)
                 {
-                    _logger.LogWarning("Login Failed: Email not found for {Email}", email);
+                    _logger.LogWarning("Login Failed: user not found for {Email}", emailorphone);
                     return Result<TokensDto>.Failure("Invalid email or password.");
                 }
 

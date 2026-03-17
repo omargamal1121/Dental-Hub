@@ -24,5 +24,6 @@ namespace DentalHub.Application.Services.Doctors
         // Get doctors by university
         Task<Result<PagedResult<DoctorDto>>> GetDoctorsByUniversityAsync(
              Guid universityId, int page = 1, int pageSize = 10);
+        Task<Result> HandleBeforeDeleteAsync(Guid id);
     }
 }

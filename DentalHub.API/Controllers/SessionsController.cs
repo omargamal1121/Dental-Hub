@@ -40,9 +40,12 @@ namespace DentalHub.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<SessionDto>>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<PagedResult<SessionDto>>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ApiResponse<PagedResult<SessionDto>>>> GetAll(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string? status = null)
         {
-            var result = await _mediator.Send(new GetAllSessionsQuery(page, pageSize));
+            var result = await _mediator.Send(new GetAllSessionsQuery(page, pageSize, status));
             return HandleResult(result);
         }
 

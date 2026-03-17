@@ -41,15 +41,6 @@ namespace DentalHub.API.Controllers
             return HandleResult(result);
         }
 
-        [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Delete(Guid id)
-        {
-            var result = await _mediator.Send(new DeleteDoctorCommand(id));
-            return HandleResult(result);
-        }
-
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiResponse<DoctorDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]

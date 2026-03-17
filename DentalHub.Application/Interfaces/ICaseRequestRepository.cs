@@ -12,5 +12,7 @@ namespace DentalHub.Application.Interfaces
 		public Task<bool> PendingOtherRequestsAsync(Guid caseId);
 		public Task<bool> RejectAllRequestsForCaseAsync(Guid caseId);
 		public Task<bool> CancelAllStudentRequestsAsync(Guid studentId);
+		public Task<bool> CancelPendingRequestsForPatientAsync(Guid patientId);
+		public Task<bool> CancelPendingRequestsForDoctorAsync(Guid doctorId);
 	}
 }

@@ -1,6 +1,7 @@
 using DentalHub.Application.Commands.Auth;
 using DentalHub.Application.DTOs.Auth;
 using DentalHub.Application.Services.Auth;
+using DentalHub.Application.Services.Identity;
 using MediatR;
 using DentalHub.Application.Common;
 
@@ -48,6 +49,21 @@ namespace DentalHub.Application.Handlers.Auth
         public async Task<Result<bool>> Handle(LogoutCommand request, CancellationToken cancellationToken)
         {
             return await _authService.LogoutAsync(request.UserId);
+        }
+    }
+
+    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Result>
+    {
+        private readonly IUserManagementService _userManagementService;
+
+        public DeleteUserCommandHandler(IUserManagementService userManagementService)
+        {
+            _userManagementService = userManagementService;
+        }
+
+        public async Task<Result> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        {
+            return await _userManagementService.DeleteUserAsync(request.UserId);
         }
     }
 }

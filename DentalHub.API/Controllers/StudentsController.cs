@@ -38,9 +38,9 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ApiResponse<StudentDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<StudentDetailsDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<StudentDto>>> GetById(Guid id)
+        public async Task<ActionResult<ApiResponse<StudentDetailsDto>>> GetById(Guid id)
         {
             var result = await _mediator.Send(new GetStudentByIdQuery(id));
             return HandleResult(result);
@@ -48,9 +48,13 @@ namespace DentalHub.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<StudentDto>>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<PagedResult<StudentDto>>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ApiResponse<PagedResult<StudentDto>>>> GetAll(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string? search = null,
+            [FromQuery] int? level = null)
         {
-            var result = await _mediator.Send(new GetAllStudentsQuery(page, pageSize));
+            var result = await _mediator.Send(new GetAllStudentsQuery(page, pageSize, search, level));
             return HandleResult(result);
         }
 
@@ -65,15 +69,6 @@ namespace DentalHub.API.Controllers
                 return CreateErrorResponse<bool>("Id mismatch", 400);
             }
             var result = await _mediator.Send(command);
-            return HandleResult(result);
-        }
-
-        [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Delete(Guid id)
-        {
-            var result = await _mediator.Send(new DeleteStudentCommand(id));
             return HandleResult(result);
         }
 

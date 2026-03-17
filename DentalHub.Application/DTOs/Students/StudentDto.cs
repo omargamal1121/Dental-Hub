@@ -10,8 +10,7 @@ namespace DentalHub.Application.DTOs.Students
         public Guid UniversityId { get; set; }
         public int Level { get; set; }
         public DateTime CreateAt { get; set; }
-        public int TotalRequests { get; set; }
-        public int ApprovedRequests { get; set; }
-        public int TotalSessions { get; set; }
+        public string PhoneNumber { get; set; } = string.Empty;
+
     }
 }

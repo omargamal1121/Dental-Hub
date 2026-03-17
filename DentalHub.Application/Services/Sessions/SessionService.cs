@@ -164,11 +164,21 @@ namespace DentalHub.Application.Services.Sessions
         }
 
         /// Get all sessions with pagination
-        public async Task<Result<PagedResult<SessionDto>>> GetAllSessionsAsync(int page = 1, int pageSize = 10)
+        public async Task<Result<PagedResult<SessionDto>>> GetAllSessionsAsync(int page = 1, int pageSize = 10, string? status = null)
         {
             try
             {
+                SessionStatus? sessionStatus = null;
+                if (!string.IsNullOrEmpty(status))
+                {
+                    if (Enum.TryParse<SessionStatus>(status, true, out var parsedStatus))
+                    {
+                        sessionStatus = parsedStatus;
+                    }
+                }
+
                 var spec = new BaseSpecificationWithProjection<Session, SessionDto>(
+                    s => !sessionStatus.HasValue || s.Status == sessionStatus.Value,
                     s => new SessionDto
                     {
                         Id = s.Id,

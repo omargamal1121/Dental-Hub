@@ -8,7 +8,7 @@ namespace DentalHub.Application.Services.Sessions
         // CRUD Operations
         Task<Result<SessionDto>> CreateSessionAsync(CreateSessionDto dto);
         Task<Result<SessionDto>> GetSessionByIdAsync(Guid id);
-        Task<Result<PagedResult<SessionDto>>> GetAllSessionsAsync(int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<SessionDto>>> GetAllSessionsAsync(int page = 1, int pageSize = 10, string? status = null);
         Task<Result> DeleteSessionByIdAsync(Guid id);
 
         // Get sessions by various filters

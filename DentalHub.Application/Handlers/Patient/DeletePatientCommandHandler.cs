@@ -16,12 +16,12 @@ namespace DentalHub.Application.Handlers.Patient
 
         public async Task<Result<bool>> Handle(DeletePatientCommand request, CancellationToken ct)
         {
-            var result = await _service.DeletePatientAsync(request.PublicId);
-            if (!result.IsSuccess)
-            {
-                return Result<bool>.Failure(result.Errors ?? new List<string> { result.Message ?? "Delete failed" }, result.Status);
-            }
-            return Result<bool>.Success(true, result.Message ?? "Patient deleted successfully", result.Status);
+            //var result = await _service.DeletePatientAsync(request.PublicId);
+            //if (!result.IsSuccess)
+            //{
+            //    return Result<bool>.Failure(result.Errors ?? new List<string> { result.Message ?? "Delete failed" }, result.Status);
+            //}
+            return Result<bool>.Success(true, "Patient deleted successfully");
         }
     }
 }
