@@ -1,4 +1,4 @@
-﻿using DentalHub.Domain.Entities;
+using DentalHub.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +24,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
         public DbSet<University> Universities { get; set; }
         public DbSet<UniversityMember>  UniversityMembers { get; set; }
         public DbSet<CaseType>   CaseTypes { get; set; }
+        public DbSet<Diagnosis> Diagnoses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

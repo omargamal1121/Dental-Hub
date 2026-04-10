@@ -21,7 +21,7 @@ namespace DentalHub.Domain.Factories
             {
                 CaseId = caseId,
                 StudentId = studentId,
-                ScheduledAt = scheduledAt,
+                
                 Status = status
             };
         }

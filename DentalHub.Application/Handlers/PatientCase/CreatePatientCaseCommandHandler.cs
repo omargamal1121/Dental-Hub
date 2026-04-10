@@ -1,4 +1,4 @@
-﻿using DentalHub.Application.Commands.PatientCase;
+using DentalHub.Application.Commands.PatientCase;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Cases;
 using DentalHub.Application.Services.Cases;
@@ -21,8 +21,8 @@ namespace DentalHub.Application.Handlers.PatientCase
             {
                 PatientId = request.PatientId,
                 CaseTypeId= request.CaseTypeId,
-                
-              
+                IsPublic = request.IsPublic,
+                UniversityId = request.UniversityId,
                 Description = request.Description,
                 Images = request.Images
             };

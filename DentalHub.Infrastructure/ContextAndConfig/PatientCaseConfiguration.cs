@@ -21,9 +21,9 @@ namespace DentalHub.Infrastructure.ContextAndConfig
             builder.HasMany(x => x.Sessions)
                    .WithOne(x => x.PatientCase)
                    .HasForeignKey(x => x.CaseId);
-            builder.HasOne(x => x.CaseType)
-                   .WithMany(x => x.PatientCases)
-                   .HasForeignKey(x => x.CaseTypeId);
+            //builder.HasOne(x => x.CaseType)
+            //       .WithMany(x => x.PatientCases)
+            //       .HasForeignKey(x => x.CaseTypeId);
 			builder.HasQueryFilter(cr => cr.DeleteAt == null);
             builder.HasMany(cr=>cr.Medias).WithOne(m=>m.PatientCase).HasForeignKey(m=>m.PatientCaseId);
 
@@ -38,6 +38,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
             builder.HasIndex(ct => ct.Name).IsUnique();
             builder.HasMany(ct=>ct.Medias).WithOne(m=>m.CaseType).HasForeignKey(ct=>ct.CaseTypeId);
 			builder.HasQueryFilter(cr => cr.DeleteAt == null);
+           
 
 
 

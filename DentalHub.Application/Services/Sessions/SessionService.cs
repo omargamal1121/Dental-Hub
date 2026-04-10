@@ -74,8 +74,7 @@ namespace DentalHub.Application.Services.Sessions
 
                 var overlappingSessionSpec = new BaseSpecification<Session>(s =>
                     s.StudentId == student.Id &&
-                    s.ScheduledAt.Date == scheduledDate &&
-                    s.ScheduledAt.Hour == scheduledHour &&
+                   
                     s.Status != SessionStatus.Cancelled);
 
                 var overlappingSession = await _unitOfWork.Sessions.GetByIdAsync(overlappingSessionSpec);
@@ -97,7 +96,7 @@ namespace DentalHub.Application.Services.Sessions
                     CaseId = patientCase.Id,
                     StudentId = student.Id,
                     PatientId = patient.Id  ,
-                    ScheduledAt = dto.ScheduledAt,
+                
                     Status = SessionStatus.Scheduled
                 };
 
@@ -133,9 +132,9 @@ namespace DentalHub.Application.Services.Sessions
                         PatientName = s.Patient.User.FullName,
                         StudentId = s.Student.Id,
                         StudentName = s.Student.User.FullName,
-                        ScheduledAt = s.ScheduledAt,
+                   
                         Status = s.Status.ToString(),
-                        TotalNotes = s.SessionNotes.Count,
+                        
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -188,9 +187,9 @@ namespace DentalHub.Application.Services.Sessions
                         PatientName = s.Patient.User.FullName,
                         StudentId = s.Student.Id,
                         StudentName = s.Student.User.FullName,
-                        ScheduledAt = s.ScheduledAt,
+                     
                         Status = s.Status.ToString(),
-                        TotalNotes = s.SessionNotes.Count,
+                      
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -202,7 +201,7 @@ namespace DentalHub.Application.Services.Sessions
                 spec.AddInclude("SessionNotes");
                 spec.AddInclude("Medias");
                 spec.ApplyPaging(page, pageSize);
-                spec.ApplyOrderByDescending(s => s.ScheduledAt);
+             
 
 				var sessionsList = await _unitOfWork.Sessions.GetAllAsync(spec);
 				var totalCount = await _unitOfWork.Sessions.CountAsync(spec);
@@ -277,9 +276,9 @@ namespace DentalHub.Application.Services.Sessions
                         PatientName = s.Patient.User.FullName,
                         StudentId = s.Student.Id,
                         StudentName = s.Student.User.FullName,
-                        ScheduledAt = s.ScheduledAt,
+                
                         Status = s.Status.ToString(),
-                        TotalNotes = s.SessionNotes.Count,
+                    
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -291,7 +290,7 @@ namespace DentalHub.Application.Services.Sessions
                 spec.AddInclude("SessionNotes");
                 spec.AddInclude("Medias");
                 spec.ApplyPaging(page, pageSize);
-                spec.ApplyOrderByDescending(s => s.ScheduledAt);
+                
 
 				var sessionsList = await _unitOfWork.Sessions.GetAllAsync(spec);
 				var totalCount = await _unitOfWork.Sessions.CountAsync(spec);
@@ -329,9 +328,9 @@ namespace DentalHub.Application.Services.Sessions
                         PatientName = s.Patient.User.FullName,
                         StudentId = s.Student.Id,
                         StudentName = s.Student.User.FullName,
-                        ScheduledAt = s.ScheduledAt,
+                      
                         Status = s.Status.ToString(),
-                        TotalNotes = s.SessionNotes.Count,
+                    
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -339,7 +338,6 @@ namespace DentalHub.Application.Services.Sessions
 
             
                 spec.ApplyPaging(page, pageSize);
-                spec.ApplyOrderByDescending(s => s.ScheduledAt);
 
 				var sessionsList = await _unitOfWork.Sessions.GetAllAsync(spec);
 				var totalCount = await _unitOfWork.Sessions.CountAsync(spec);
@@ -377,9 +375,9 @@ namespace DentalHub.Application.Services.Sessions
                         PatientName = s.Patient.User.FullName,
                         StudentId = s.Student.Id,
                         StudentName = s.Student.User.FullName,
-                        ScheduledAt = s.ScheduledAt,
+                     
                         Status = s.Status.ToString(),
-                        TotalNotes = s.SessionNotes.Count,
+              
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -391,8 +389,7 @@ namespace DentalHub.Application.Services.Sessions
                 spec.AddInclude("SessionNotes");
                 spec.AddInclude("Medias");
                 spec.ApplyPaging(page, pageSize);
-                spec.ApplyOrderByDescending(s => s.ScheduledAt);
-
+           
 				var sessionsList = await _unitOfWork.Sessions.GetAllAsync(spec);
 				var totalCount = await _unitOfWork.Sessions.CountAsync(spec);
 

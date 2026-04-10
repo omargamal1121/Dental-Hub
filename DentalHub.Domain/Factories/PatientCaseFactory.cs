@@ -18,7 +18,7 @@ namespace DentalHub.Domain.Factories
             return new PatientCase
             {
                 PatientId = patientId,
-                CaseTypeId = casetypeid,
+                //CaseTypeId = casetypeid,
                 Description = Description,
 
 

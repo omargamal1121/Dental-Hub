@@ -20,6 +20,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
         IMainRepository<Media> Medias { get; }
         IMainRepository<UniversityMember> UniversityMembers { get; }
         IMainRepository<CaseType> CaseTypes { get; }
+        IMainRepository<Diagnosis> Diagnoses { get; }
 
        
         Task<int> SaveChangesAsync();

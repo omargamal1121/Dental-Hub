@@ -38,7 +38,7 @@ namespace DentalHub.Application.Services
                             .Select(pc => new PatientCaseSimpleDataDto
                             {
                                 Id = pc.Id,
-                                Name = pc.CaseType.Name,
+                           //     Name = pc.CaseType.Name,
                                 Status = pc.Status,
                                 CreateAt = pc.CreateAt
                             })
@@ -79,7 +79,7 @@ namespace DentalHub.Application.Services
                             .Select(pc => new PatientCaseSimpleDataDto
                             {
                                 Id = pc.Id,
-                                Name = pc.CaseType.Name,
+                              //  Name = pc.CaseType.Name,
                                 Status = pc.Status,
                                 CreateAt = pc.CreateAt
                             })
@@ -118,11 +118,13 @@ namespace DentalHub.Application.Services
 
                         PatientCases = p.PatientCases
                             .Where(pc => filterPatientDto.CaseStatus == null || pc.Status == filterPatientDto.CaseStatus.Value)
-                            .Where(pc => string.IsNullOrEmpty(filterPatientDto.CaseType) || pc.CaseType.Name.Contains(filterPatientDto.CaseType!))
+                            .Where(pc => string.IsNullOrEmpty(filterPatientDto.CaseType) 
+                          //  || pc.CaseType.Name.Contains(filterPatientDto.CaseType!)
+                            )
                             .Select(pc => new PatientCaseSimpleDataDto
                             {
                                 Id = pc.Id,
-                                Name = pc.CaseType.Name,
+                             //   Name = pc.CaseType.Name,
                                 Status = pc.Status,
                                 CreateAt = pc.CreateAt
                             })

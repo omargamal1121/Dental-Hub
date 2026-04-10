@@ -20,6 +20,7 @@ namespace DentalHub.Application.Handlers.PatientCase
             GetAllCasesQuery request, CancellationToken cancellationToken)
         {
             return await _service.GetAllCasesAsync(
+                request.PatientName,
                 request.Search,
                 request.Status,
                 request.Page,

@@ -1,7 +1,8 @@
-﻿using DentalHub.Application.Interfaces;
+using DentalHub.Application.Interfaces;
 using DentalHub.Application.Services.Admins;
 using DentalHub.Application.Services.Cases;
 using DentalHub.Application.Services.CaseTypes;
+using DentalHub.Application.Services.DiagnosesServices;
 using DentalHub.Application.Services.Doctors;
 using DentalHub.Application.Services.Identity;
 using DentalHub.Application.Services;
@@ -34,6 +35,7 @@ namespace DentalHub.Application.Extensions
             services.AddScoped<IPatientCaseService, PatientCaseService>();
             services.AddScoped<ICaseRequestService, CaseRequestService>();
             services.AddScoped<ICaseTypeService, CaseTypeService>();
+            services.AddScoped<IDiagnosisService, DiagnosisService>();
           
 
             // Register Session Management Services

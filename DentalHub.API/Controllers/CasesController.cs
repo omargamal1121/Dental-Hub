@@ -34,12 +34,14 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<PagedResult<PatientCaseDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ApiResponse<PagedResult<PatientCaseDto>>>> GetAll(
-            [FromQuery] string? search   = null,
+            [FromQuery] string? patientName = null,
+
+			[FromQuery] string? search   = null,
             [FromQuery] string? status   = null,
             [FromQuery] int     page     = 1,
             [FromQuery] int     pageSize = 10)
         {
-            var result = await _mediator.Send(new GetAllCasesQuery(search, status, page, pageSize));
+            var result = await _mediator.Send(new GetAllCasesQuery(patientName,search, status, page, pageSize));
             return HandleResult(result);
         }
 
@@ -93,6 +95,27 @@ namespace DentalHub.API.Controllers
             {
                 return CreateErrorResponse<bool>("Id mismatch", 400);
             }
+            var result = await _mediator.Send(command);
+            return HandleResult(result);
+        }
+
+        [HttpPut("{id}/assign-university")]
+        [Authorize(Roles = "Student,Doctor,Admin")]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ApiResponse<object>>> AssignUniversity(Guid id, [FromBody] AssignCaseUniversityDto dto)
+        {
+            var userId = GetUserIdFromToken();
+            var role = GetUserRoleFromToken();
+
+            if (userId == null || string.IsNullOrEmpty(role))
+            {
+                return CreateErrorResponse<object>("Unauthorized", StatusCodes.Status401Unauthorized);
+            }
+
+            var command = new AssignCaseUniversityCommand(id, dto.UniversityId, dto.IsPublic, userId.Value, role);
             var result = await _mediator.Send(command);
             return HandleResult(result);
         }

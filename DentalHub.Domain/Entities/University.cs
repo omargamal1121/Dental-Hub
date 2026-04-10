@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,5 +23,6 @@ namespace DentalHub.Domain.Entities
 		public ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
 		public ICollection<Student> Students { get; set; } = new List<Student>();
 		public ICollection<UniversityMember> Members { get; set; } = new List<UniversityMember>();
+		public ICollection<PatientCase> PatientCases { get; set; } = new List<PatientCase>();
 	}
 }

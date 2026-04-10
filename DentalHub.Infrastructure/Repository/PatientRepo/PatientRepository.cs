@@ -3,11 +3,6 @@ using DentalHub.Application.Specification.Comman;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.ContextAndConfig;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DentalHub.Infrastructure.Repository.PatientRepo
 {
@@ -23,7 +18,7 @@ namespace DentalHub.Infrastructure.Repository.PatientRepo
 		}
 		public async Task< TResult?> GetPatientById<TResult>(Guid id, ISpecificationWithProjection<Patient, TResult> spec)
 		{
-		var query=	patients.AsQueryable().AsNoTracking().Where(p=>p.Id==id).Include(p => p.PatientCases).ThenInclude(pc => pc.CaseType);
+		var query=	patients.AsQueryable().AsNoTracking().Where(p=>p.Id==id).Include(p => p.PatientCases);
 		 return	await SpecificationWithProjectionEvaluator<Patient,TResult>.ProjectionOnly(query,spec).FirstOrDefaultAsync();
 		}
 	

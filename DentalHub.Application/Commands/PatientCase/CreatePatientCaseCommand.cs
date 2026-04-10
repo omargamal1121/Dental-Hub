@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using DentalHub.Application.Common;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
@@ -10,6 +10,8 @@ namespace DentalHub.Application.Commands.PatientCase
         string Title,
         string Description,
         Guid CaseTypeId,
+        bool IsPublic = false,
+        Guid? UniversityId = null,
         List<IFormFile>? Images = null
     ) : IRequest<Result<Guid>>;
 }

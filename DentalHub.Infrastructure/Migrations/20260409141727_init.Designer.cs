@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DentalHub.Infrastructure.Migrations
 {
     [DbContext(typeof(ContextApp))]
-    [Migration("20260224223110_update-media-relations")]
-    partial class updatemediarelations
+    [Migration("20260409141727_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace DentalHub.Infrastructure.Migrations
 
             modelBuilder.Entity("DentalHub.Domain.Entities.Admin", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreateAt")
@@ -36,9 +36,6 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<DateTime?>("DeleteAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
-
                     b.Property<bool>("IsSuperAdmin")
                         .HasColumnType("tinyint(1)");
 
@@ -46,18 +43,10 @@ namespace DentalHub.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("UserId");
-
-                    b.HasIndex("PublicId")
-                        .IsUnique();
+                    b.HasKey("Id");
 
                     b.ToTable("Admins");
                 });
@@ -84,11 +73,6 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<Guid>("PatientCaseId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -103,9 +87,6 @@ namespace DentalHub.Infrastructure.Migrations
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("PatientCaseId");
-
-                    b.HasIndex("PublicId")
-                        .IsUnique();
 
                     b.HasIndex("StudentId");
 
@@ -132,11 +113,6 @@ namespace DentalHub.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime(6)");
 
@@ -145,15 +121,59 @@ namespace DentalHub.Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.HasIndex("PublicId")
-                        .IsUnique();
-
                     b.ToTable("CaseTypes");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.Diagnosis", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("CaseTypeId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreatedById")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool?>("IsAccepted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("PatientCaseId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Stage")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CaseTypeId");
+
+                    b.HasIndex("PatientCaseId");
+
+                    b.ToTable("Diagnoses");
                 });
 
             modelBuilder.Entity("DentalHub.Domain.Entities.Doctor", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreateAt")
@@ -162,33 +182,23 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<DateTime?>("DeleteAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("Specialty")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("UniversityId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<Guid>("UniversityId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("PublicId")
-                        .IsUnique();
+                    b.HasIndex("UniversityId");
 
                     b.ToTable("Doctors");
                 });
@@ -222,11 +232,6 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<Guid?>("PatientId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
                     b.Property<Guid?>("SessionId")
                         .HasColumnType("char(36)");
 
@@ -241,9 +246,6 @@ namespace DentalHub.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.HasIndex("PublicId")
-                        .IsUnique();
-
                     b.HasIndex("SessionId");
 
                     b.ToTable("Medias");
@@ -251,10 +253,13 @@ namespace DentalHub.Infrastructure.Migrations
 
             modelBuilder.Entity("DentalHub.Domain.Entities.Patient", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
 
                     b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int>("City")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateAt")
@@ -263,25 +268,14 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<DateTime?>("DeleteAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("UserId");
-
-                    b.HasIndex("PublicId")
-                        .IsUnique();
+                    b.HasKey("Id");
 
                     b.ToTable("Patients");
                 });
@@ -293,9 +287,6 @@ namespace DentalHub.Infrastructure.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<Guid?>("AssignedStudentId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("CaseTypeId")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreateAt")
@@ -311,11 +302,6 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<Guid>("PatientId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -326,12 +312,7 @@ namespace DentalHub.Infrastructure.Migrations
 
                     b.HasIndex("AssignedStudentId");
 
-                    b.HasIndex("CaseTypeId");
-
                     b.HasIndex("PatientId");
-
-                    b.HasIndex("PublicId")
-                        .IsUnique();
 
                     b.ToTable("PatientCases");
                 });
@@ -354,11 +335,6 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<Guid>("PatientId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
                     b.Property<DateTime>("ScheduledAt")
                         .HasColumnType("datetime(6)");
 
@@ -376,9 +352,6 @@ namespace DentalHub.Infrastructure.Migrations
                     b.HasIndex("CaseId");
 
                     b.HasIndex("PatientId");
-
-                    b.HasIndex("PublicId")
-                        .IsUnique();
 
                     b.HasIndex("StudentId");
 
@@ -401,11 +374,6 @@ namespace DentalHub.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
                     b.Property<Guid>("SessionId")
                         .HasColumnType("char(36)");
 
@@ -414,9 +382,6 @@ namespace DentalHub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PublicId")
-                        .IsUnique();
-
                     b.HasIndex("SessionId");
 
                     b.ToTable("SessionNotes");
@@ -424,7 +389,7 @@ namespace DentalHub.Infrastructure.Migrations
 
             modelBuilder.Entity("DentalHub.Domain.Entities.Student", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreateAt")
@@ -433,34 +398,59 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<DateTime?>("DeleteAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
-
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                    b.Property<Guid>("UniversityId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<string>("University")
-                        .IsRequired()
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UniversityId");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.University", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Address")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("UniversityId")
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Email")
                         .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int?>("FoundedYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("longtext");
 
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("PublicId")
-                        .IsUnique();
-
-                    b.ToTable("Students");
+                    b.ToTable("Universities");
                 });
 
             modelBuilder.Entity("DentalHub.Domain.Entities.UniversityMember", b =>
@@ -487,14 +477,12 @@ namespace DentalHub.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("UniversityId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("UniversityId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UniversityId")
-                        .IsUnique();
+                    b.HasIndex("UniversityId");
 
                     b.ToTable("UniversityMembers");
                 });
@@ -512,6 +500,9 @@ namespace DentalHub.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
@@ -522,6 +513,9 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -541,15 +535,10 @@ namespace DentalHub.Infrastructure.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
@@ -570,8 +559,9 @@ namespace DentalHub.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.HasIndex("PublicId")
-                        .IsUnique();
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -710,8 +700,8 @@ namespace DentalHub.Infrastructure.Migrations
                 {
                     b.HasOne("DentalHub.Domain.Entities.User", "User")
                         .WithOne("Admin")
-                        .HasForeignKey("DentalHub.Domain.Entities.Admin", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("DentalHub.Domain.Entities.Admin", "Id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -744,13 +734,40 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("DentalHub.Domain.Entities.Diagnosis", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.CaseType", "CaseType")
+                        .WithMany("Diagnoses")
+                        .HasForeignKey("CaseTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DentalHub.Domain.Entities.PatientCase", "PatientCase")
+                        .WithMany("Diagnosiss")
+                        .HasForeignKey("PatientCaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CaseType");
+
+                    b.Navigation("PatientCase");
+                });
+
             modelBuilder.Entity("DentalHub.Domain.Entities.Doctor", b =>
                 {
                     b.HasOne("DentalHub.Domain.Entities.User", "User")
                         .WithOne("Doctor")
-                        .HasForeignKey("DentalHub.Domain.Entities.Doctor", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("DentalHub.Domain.Entities.Doctor", "Id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("DentalHub.Domain.Entities.University", "University")
+                        .WithMany("Doctors")
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("University");
 
                     b.Navigation("User");
                 });
@@ -786,7 +803,7 @@ namespace DentalHub.Infrastructure.Migrations
                 {
                     b.HasOne("DentalHub.Domain.Entities.User", "User")
                         .WithOne("Patient")
-                        .HasForeignKey("DentalHub.Domain.Entities.Patient", "UserId")
+                        .HasForeignKey("DentalHub.Domain.Entities.Patient", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -799,12 +816,6 @@ namespace DentalHub.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("AssignedStudentId");
 
-                    b.HasOne("DentalHub.Domain.Entities.CaseType", "CaseType")
-                        .WithMany("PatientCases")
-                        .HasForeignKey("CaseTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DentalHub.Domain.Entities.Patient", "Patient")
                         .WithMany("PatientCases")
                         .HasForeignKey("PatientId")
@@ -812,8 +823,6 @@ namespace DentalHub.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("AssignedStudent");
-
-                    b.Navigation("CaseType");
 
                     b.Navigation("Patient");
                 });
@@ -860,11 +869,30 @@ namespace DentalHub.Infrastructure.Migrations
                 {
                     b.HasOne("DentalHub.Domain.Entities.User", "User")
                         .WithOne("Student")
-                        .HasForeignKey("DentalHub.Domain.Entities.Student", "UserId")
+                        .HasForeignKey("DentalHub.Domain.Entities.Student", "Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("DentalHub.Domain.Entities.University", "University")
+                        .WithMany("Students")
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("University");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.UniversityMember", b =>
+                {
+                    b.HasOne("DentalHub.Domain.Entities.University", "University")
+                        .WithMany("Members")
+                        .HasForeignKey("UniversityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("University");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -920,9 +948,9 @@ namespace DentalHub.Infrastructure.Migrations
 
             modelBuilder.Entity("DentalHub.Domain.Entities.CaseType", b =>
                 {
-                    b.Navigation("Medias");
+                    b.Navigation("Diagnoses");
 
-                    b.Navigation("PatientCases");
+                    b.Navigation("Medias");
                 });
 
             modelBuilder.Entity("DentalHub.Domain.Entities.Doctor", b =>
@@ -941,6 +969,8 @@ namespace DentalHub.Infrastructure.Migrations
                 {
                     b.Navigation("CaseRequests");
 
+                    b.Navigation("Diagnosiss");
+
                     b.Navigation("Medias");
 
                     b.Navigation("Sessions");
@@ -956,6 +986,15 @@ namespace DentalHub.Infrastructure.Migrations
             modelBuilder.Entity("DentalHub.Domain.Entities.Student", b =>
                 {
                     b.Navigation("CaseRequests");
+                });
+
+            modelBuilder.Entity("DentalHub.Domain.Entities.University", b =>
+                {
+                    b.Navigation("Doctors");
+
+                    b.Navigation("Members");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("DentalHub.Domain.Entities.User", b =>

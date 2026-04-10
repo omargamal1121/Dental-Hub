@@ -224,20 +224,20 @@ namespace DentalHub.Application.Services.Students
 
                 var studentGuid = studentId;
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
-                    pc => pc.CaseRequests.Any(cr => cr.StudentId == studentGuid && cr.Status == RequestStatus.Approved) && (
-                    string.IsNullOrEmpty(Casetype) || pc.CaseType.Name.Contains(Casetype) || pc.CaseType.Description.Contains(Casetype)),
+                    pc => pc.CaseRequests.Any(cr => cr.StudentId == studentGuid && cr.Status == RequestStatus.Approved),
+                    //&& (string.IsNullOrEmpty(Casetype) || pc.CaseType.Name.Contains(Casetype) || pc.CaseType.Description.Contains(Casetype)),
                     pc => new PatientCaseDto
                     {
                         Id = pc.Id,
                         PatientId = pc.Patient.Id,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        CaseType = new DTOs.CaseTypes.CaseTypeDto
-                        {
-                            publicId = pc.CaseType.Id,
-                            Name = pc.CaseType.Name,
-                            Description = pc.CaseType.Description
-                        },
+                        //CaseType = new DTOs.CaseTypes.CaseTypeDto
+                        //{
+                        //    publicId = pc.CaseType.Id,
+                        //    Name = pc.CaseType.Name,
+                        //    Description = pc.CaseType.Description
+                        //},
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
@@ -279,20 +279,21 @@ namespace DentalHub.Application.Services.Students
                     pc => pc.Status == CaseStatus.Pending &&
                           !pc.CaseRequests.Any(cr => cr.StudentId == studentGuid)
                           && (
-                          string.IsNullOrEmpty(CaseName) ||
-                          pc.CaseType.Name.Contains(CaseName) || pc.CaseType.Description.Contains(CaseName)),
+                          string.IsNullOrEmpty(CaseName) 
+                          //||pc.CaseType.Name.Contains(CaseName) || pc.CaseType.Description.Contains(CaseName)
+                          ),
                     pc => new AvailableCasesDto
                     {
                         Id = pc.Id,
                         PatientId = pc.Patient.Id,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        CaseType = new DTOs.CaseTypes.CaseTypeDto
-                        {
-                            publicId = pc.CaseType.Id,
-                            Name = pc.CaseType.Name,
-                            Description = pc.CaseType.Description
-                        },
+                        //CaseType = new DTOs.CaseTypes.CaseTypeDto
+                        //{
+                        //    publicId = pc.CaseType.Id,
+                        //    Name = pc.CaseType.Name,
+                        //    Description = pc.CaseType.Description
+                        //},
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()

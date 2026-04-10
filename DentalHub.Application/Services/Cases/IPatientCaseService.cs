@@ -9,8 +9,14 @@ namespace DentalHub.Application.Services.Cases
         Task<Result<PatientCaseDto>> CreateCaseAsync(CreateCaseDto dto);
         Task<Result<PatientCaseDto>> GetCaseByIdAsync(Guid id);
         Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(int page = 1, int pageSize = 10);
-        Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(string? search, string? status, int page = 1, int pageSize = 10);
-        Task<Result<PatientCaseDto>> UpdateCaseAsync(UpdateCaseDto dto);
+        Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(
+   string? patientName,
+   string? caseType,
+   string? status,
+   int page = 1,
+   int pageSize = 10);
+
+		Task<Result<PatientCaseDto>> UpdateCaseAsync(UpdateCaseDto dto);
         Task<Result> DeleteCaseByIdAsync(Guid id);
 
         // Get cases by status
@@ -33,5 +39,7 @@ namespace DentalHub.Application.Services.Cases
             string? treatmentType,
             CaseStatus newStatus
         );
+
+        Task<Result> AssignUniversityAsync(Guid patientCaseId, Guid? universityId, bool isPublic, Guid userId, string role);
     }
 }

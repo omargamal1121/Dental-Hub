@@ -12,6 +12,8 @@ namespace DentalHub.Application.DTOs.Cases
 
 
         public string? Description { get; set; }
+        public bool IsPublic { get; set; }
+        public Guid? UniversityId { get; set; }
 
         public List<IFormFile>? Images { get; set; }
     }

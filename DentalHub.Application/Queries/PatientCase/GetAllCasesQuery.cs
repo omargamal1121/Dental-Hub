@@ -9,7 +9,8 @@ namespace DentalHub.Application.Queries.PatientCase
     /// and optional status filter, plus pagination.
     /// </summary>
     public record GetAllCasesQuery(
-        string? Search   = null,   // partial match on patient name or case-type name
+        string PatientName = null,   // partial match on patient name
+		string? Search   = null,   // partial match on patient name or case-type name
         string? Status   = null,   // filter by CaseStatus enum value
         int     Page     = 1,
         int     PageSize = 10

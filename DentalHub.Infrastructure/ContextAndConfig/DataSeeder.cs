@@ -233,6 +233,108 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                     await context.SaveChangesAsync();
                     logger.LogInformation("✅ Seeded Admin Account with unique number.");
                 }
+                // ── 8. Case Types ───────────────────────────────────────────────────────
+                var typeOrtho = Guid.Parse("01960000-0000-7000-8000-000000000100");
+                var typeRoot = Guid.Parse("01960000-0000-7000-8000-000000000101");
+                var typeExt = Guid.Parse("01960000-0000-7000-8000-000000000102");
+
+                if (!await context.CaseTypes.AnyAsync())
+                {
+                    var caseTypes = new List<CaseType>
+                    {
+                        new() { Id = typeOrtho, Name = "Orthodontics", Description = "Braces, aligners, and jaw correction procedures." },
+                        new() { Id = typeRoot, Name = "Root Canal", Description = "Endodontic therapy to treat infection at the centre of a tooth." },
+                        new() { Id = typeExt, Name = "Tooth Extraction", Description = "Removal of a tooth from its socket in the bone." }
+                    };
+                    await context.CaseTypes.AddRangeAsync(caseTypes);
+                    await context.SaveChangesAsync();
+                    logger.LogInformation("✅ Seeded 3 Case Types.");
+                }
+
+                // ── 9. Patient Cases ────────────────────────────────────────────────────
+                var case1Id = Guid.Parse("01960000-0000-7000-8000-000000000200");
+                var case2Id = Guid.Parse("01960000-0000-7000-8000-000000000201");
+                var patientMonaId = Guid.Parse("01960000-0000-7000-8000-000000000006"); // Mona
+                var patientKarimId = Guid.Parse("01960000-0000-7000-8000-000000000007"); // Karim
+                var studentOmarId = Guid.Parse("01960000-0000-7000-8000-000000000003"); // Omar (Student)
+
+                if (!await context.PatientCases.AnyAsync())
+                {
+                    var patientCases = new List<PatientCase>
+                    {
+                        new() { Id = case1Id, PatientId = patientMonaId, Status = CaseStatus.InProgress, Description = "Patient requires root canal on upper right molar.", AssignedStudentId = studentOmarId, UniversityId = cairoId, IsPublic = true },
+                        new() { Id = case2Id, PatientId = patientKarimId, Status = CaseStatus.Pending, Description = "Patient complaining about pain in wisdom tooth.", UniversityId = ainShamsId, IsPublic = false }
+                    };
+                    await context.PatientCases.AddRangeAsync(patientCases);
+                    await context.SaveChangesAsync();
+                    logger.LogInformation("✅ Seeded Patient Cases.");
+                }
+
+                // ── 10. Diagnoses ───────────────────────────────────────────────────────
+                if (!await context.Diagnoses.AnyAsync())
+                {
+                    var doctorAhmedId = Guid.Parse("01960000-0000-7000-8000-000000000001"); // Ahmed (Doctor)
+
+                    var diagnoses = new List<Diagnosis>
+                    {
+                        new() { Id = Guid.NewGuid(), PatientCaseId = case1Id, CaseTypeId = typeRoot, Stage = DiagnosisStage.AI, Notes = "AI detected pulp infection.", CreatedById = null, Role = "System", IsAccepted = true, TeethNumbers = new List<int> { 14, 15 } },
+                        new() { Id = Guid.NewGuid(), PatientCaseId = case1Id, CaseTypeId = typeRoot, Stage = DiagnosisStage.BasicClinic, Notes = "Confirmed need for root canal.", CreatedById = doctorAhmedId, Role = "Doctor", IsAccepted = true, TeethNumbers = new List<int> { 14, 15 } },
+                        new() { Id = Guid.NewGuid(), PatientCaseId = case2Id, CaseTypeId = typeExt, Stage = DiagnosisStage.AI, Notes = "Possible impacted wisdom tooth.", CreatedById = null, Role = "System", IsAccepted = null, TeethNumbers = new List<int> { 32 } }
+                    };
+                    await context.Diagnoses.AddRangeAsync(diagnoses);
+                    await context.SaveChangesAsync();
+                    logger.LogInformation("✅ Seeded Diagnoses.");
+                }
+
+                // ── 11. Sessions & Session Notes ────────────────────────────────────────
+                if (!await context.Sessions.AnyAsync())
+                {
+                    var sessionId = Guid.Parse("01960000-0000-7000-8000-000000000300");
+
+                    var session = new Session
+                    {
+                        Id = sessionId,
+                        CaseId = case1Id,
+                        StudentId = studentOmarId,
+                        PatientId = patientMonaId,
+                       
+                        Status = SessionStatus.Scheduled
+                    };
+
+                    await context.Sessions.AddAsync(session);
+                    
+                    var sessionNote = new SessionNote
+                    {
+                        Id = Guid.NewGuid(),
+                        SessionId = sessionId,
+                        Note = "Initial consultation and cleaning before the main procedure."
+                    };
+                    await context.SessionNotes.AddAsync(sessionNote);
+
+                    await context.SaveChangesAsync();
+                    logger.LogInformation("✅ Seeded Sessions and Notes.");
+                }
+
+                // ── 12. Case Requests ───────────────────────────────────────────────────
+                if (!await context.CaseRequests.AnyAsync())
+                {
+                    var studentNourId = Guid.Parse("01960000-0000-7000-8000-000000000004"); // Nour
+                    var doctorSaraId = Guid.Parse("01960000-0000-7000-8000-000000000002"); // Sara
+
+                    var request = new CaseRequest
+                    {
+                        Id = Guid.NewGuid(),
+                        StudentId = studentNourId,
+                        DoctorId = doctorSaraId,
+                        PatientCaseId = case2Id,
+                        Description = "Requesting supervision for wisdom tooth extraction.",
+                        Status = RequestStatus.Pending
+                    };
+
+                    await context.CaseRequests.AddAsync(request);
+                    await context.SaveChangesAsync();
+                    logger.LogInformation("✅ Seeded Case Requests.");
+                }
             }
             catch (Exception ex)
             {
