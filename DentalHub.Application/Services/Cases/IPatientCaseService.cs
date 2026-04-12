@@ -7,16 +7,21 @@ namespace DentalHub.Application.Services.Cases
     {
         // CRUD Operations
         Task<Result<PatientCaseDto>> CreateCaseAsync(CreateCaseDto dto);
-        Task<Result<PatientCaseDto>> GetCaseByIdAsync(Guid id);
+
+        /// <summary>
+        /// Get case by ID with optional user context to compute flags and available actions.
+        /// </summary>
+        Task<Result<PatientCaseDto>> GetCaseByIdAsync(Guid id, Guid? userId = null, string? userRole = null);
+
         Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(int page = 1, int pageSize = 10);
         Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(
-   string? patientName,
-   string? caseType,
-   string? status,
-   int page = 1,
-   int pageSize = 10);
+            string? patientName,
+            string? caseType,
+            string? status,
+            int page = 1,
+            int pageSize = 10);
 
-		Task<Result<PatientCaseDto>> UpdateCaseAsync(UpdateCaseDto dto);
+        Task<Result<PatientCaseDto>> UpdateCaseAsync(UpdateCaseDto dto);
         Task<Result> DeleteCaseByIdAsync(Guid id);
 
         // Get cases by status
@@ -25,17 +30,14 @@ namespace DentalHub.Application.Services.Cases
 
         // Get patient's cases
         Task<Result<PagedResult<PatientCaseDto>>> GetPatientCasesAsync(
-			Guid patientId, int page = 1, int pageSize = 10);
+            Guid patientId, int page = 1, int pageSize = 10);
 
         // Change case status
         Task<Result<PatientCaseDto>> UpdateCaseStatusAsync(Guid id, string newStatus);
 
-        /// <summary>
-        /// ADDED: Combined method to update both treatment type and status in one transaction
-        /// This prevents double database calls and ensures consistency
-        /// </summary>
+        /// Combined method to update both treatment type and status in one transaction
         Task<Result<PatientCaseDto>> UpdateCaseWithStatusAsync(
-			Guid id,
+            Guid id,
             string? treatmentType,
             CaseStatus newStatus
         );
