@@ -54,7 +54,15 @@ namespace DentalHub.API.Controllers
             return null;
         }
 
-      
+        protected Guid? GetUniversityIdFromToken()
+        {
+            var claim = User.FindFirst("UniversityId")?.Value;
+
+            if (string.IsNullOrEmpty(claim))
+                return null;
+
+            return Guid.TryParse(claim, out var id) ? id : null;
+        }
         protected string? GetUserRoleFromToken()
         {
             return User?.FindFirst(ClaimTypes.Role)?.Value;

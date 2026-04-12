@@ -26,7 +26,7 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ApiResponse<Guid>>> Create([FromBody] CreateCaseRequestDto dto)
         {
-            var command = new CreateCaseRequestCommand(dto.PatientCasePublicId, dto.StudentPublicId, dto.DoctorPublicId, dto.Description);
+            var command = new CreateCaseRequestCommand(dto.PatientCasePublicId, dto.StudentPublicId, dto.DoctorUsername, dto.Description);
             var result = await _mediator.Send(command);
             return HandleResult(result);
         }

@@ -1,10 +1,11 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Sessions;
+using DentalHub.Application.Factories;
+using DentalHub.Application.Services.Cases;
+using DentalHub.Application.Specification.Comman;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.UnitOfWork;
-using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
-using DentalHub.Application.Specification.Comman;
 
 namespace DentalHub.Application.Services.Sessions
 {
@@ -54,6 +55,32 @@ namespace DentalHub.Application.Services.Sessions
                 {
                     return Result<SessionDto>.Failure("Student not found");
                 }
+                Guid doctorId;
+
+                if (!string.IsNullOrWhiteSpace(dto.DoctorUsername))
+                {
+                    var doctor = await _unitOfWork.Doctors.GetByIdAsync(
+                        new BaseSpecificationWithProjection<Doctor, GetIdsDto>(
+                            d => d.User.UserName == dto.DoctorUsername,
+                            d => new GetIdsDto { Id = d.Id }));
+
+                    if (doctor == null)
+                        return Result<SessionDto>.Failure("Doctor not found");
+
+                    doctorId = doctor.Id;
+                }
+
+                else if (dto.DoctorId.HasValue)
+                {
+                    doctorId = dto.DoctorId.Value;
+                }
+
+                else
+                {
+                    return Result<SessionDto>.Failure("Doctor is required");
+                }
+                patientCase.AssignedDoctorId = doctorId;
+                _unitOfWork.PatientCases.Update(patientCase);
 
                 // BUSINESS RULE 1: Verify student has approved request for this case
                 var approvedRequestSpec = new BaseSpecification<CaseRequest>(cr =>
@@ -77,7 +104,7 @@ namespace DentalHub.Application.Services.Sessions
                    
                     s.Status != SessionStatus.Cancelled);
 
-                var overlappingSession = await _unitOfWork.Sessions.GetByIdAsync(overlappingSessionSpec);
+                var overlappingSession = await _unitOfWork.Sessions.AnyAsync(overlappingSessionSpec);
                 if (overlappingSession != null)
                 {
                     return Result<SessionDto>.Failure(
@@ -96,7 +123,7 @@ namespace DentalHub.Application.Services.Sessions
                     CaseId = patientCase.Id,
                     StudentId = student.Id,
                     PatientId = patient.Id  ,
-                
+                    EvaluteDoctorId = doctorId,
                     Status = SessionStatus.Scheduled
                 };
 

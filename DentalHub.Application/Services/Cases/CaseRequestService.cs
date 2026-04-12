@@ -40,7 +40,7 @@ namespace DentalHub.Application.Services.Cases
 
                 var doctorIds = await _unitOfWork.Doctors.GetByIdAsync(
                     new BaseSpecificationWithProjection<Doctor, GetIdsDto>(
-                        d => d.Id == dto.DoctorPublicId,
+                        d => d.User.UserName == dto.DoctorUsername,
                         d => new GetIdsDto { Id = d.Id, UniversityId = d.UniversityId }));
 
                 if (doctorIds == null)
@@ -85,7 +85,7 @@ namespace DentalHub.Application.Services.Cases
 
                 _logger.LogInformation(
                     "Case request created: {RequestId} - Student: {StudentId}, Case: {CaseId}, Doctor: {DoctorId}",
-                    caseRequest.Id, dto.StudentPublicId, dto.PatientCasePublicId, dto.DoctorPublicId);
+                caseRequest.Id, dto.StudentPublicId, dto.PatientCasePublicId, doctorIds.Id);
 
                 return Result<Guid>.Success(caseRequest.Id, status: 201);
             }
@@ -261,29 +261,19 @@ namespace DentalHub.Application.Services.Cases
             var result = await _unitOfWork.CaseRequests.GetByIdAsync(spec);
 
             if (result == null)
-            {
-                _logger.LogWarning("Approval failed: Request not found. RequestId: {RequestId}", dto.RequestId);
                 return Result<bool>.Failure($"No Request With this Id: {dto.RequestId}", 404);
-            }
-
 
             if (!result.IsPending)
-            {
-                _logger.LogWarning("Approval rejected: Case already approved. CaseId: {CaseId}", result.CaseId);
                 return Result<bool>.Failure("Case already approved by someone else", 409);
-            }
 
             if (result.DoctorId != dto.DoctorId)
-            {
-                _logger.LogWarning("Unauthorized approval attempt. RequestId: {RequestId}, DoctorId: {DoctorId}",
-                    dto.RequestId, dto.DoctorId);
                 return Result<bool>.Failure("No Rights", 401);
-            }
 
             await _unitOfWork.BeginTransactionAsync();
 
             try
             {
+
                 var isUpdated = await _unitOfWork.CaseRequests
                     .UpdateRequestStatusAsync(result.RequestId, RequestStatus.Approved);
 
@@ -292,6 +282,19 @@ namespace DentalHub.Application.Services.Cases
 
                 _logger.LogInformation("Request approved. RequestId: {RequestId}", dto.RequestId);
 
+
+                var caseEntity = await _unitOfWork.PatientCases.GetByIdAsync(
+                    new BaseSpecification<PatientCase>(c => c.Id == result.CaseId));
+
+                if (caseEntity == null)
+                    throw new Exception("Case not found");
+
+                caseEntity.AssignedDoctorId = dto.DoctorId;
+                caseEntity.AssignedStudentId = result.StudentId;
+
+                _unitOfWork.PatientCases.Update(caseEntity);
+
+ 
                 var isAssigned = await _unitOfWork.PatientCases
                     .AssineStudentToCaseAsync(result.CaseId, result.StudentId);
 
@@ -308,9 +311,6 @@ namespace DentalHub.Application.Services.Cases
                 _logger.LogInformation("Other requests updated for CaseId: {CaseId}", result.CaseId);
 
                 await _unitOfWork.CommitTransactionAsync();
-
-                _logger.LogInformation("Approval transaction committed successfully. RequestId: {RequestId}",
-                    dto.RequestId);
 
                 return Result<bool>.Success(true, "Updated");
             }

@@ -13,8 +13,9 @@ namespace DentalHub.Application.Validators.CaseRequests
             RuleFor(x => x.StudentPublicId)
                 .NotEmpty().WithMessage("Student public ID is required");
 
-            RuleFor(x => x.DoctorPublicId)
-                .NotEmpty().WithMessage("Doctor public ID is required");
+            RuleFor(x => x.DoctorUsername)
+                            .NotEmpty().WithMessage("Doctor username is required")
+                            .MinimumLength(3).WithMessage("Doctor username must be at least 3 characters long");
 
             RuleFor(x => x.Description)
                 .NotEmpty().WithMessage("Description is required")
