@@ -36,17 +36,17 @@ namespace DentalHub.API.Controllers
         public async Task<ActionResult<ApiResponse<PagedResult<PatientCaseDto>>>> GetAll(
             [FromQuery] string? patientName = null,
 
-			[FromQuery] string? search   = null,
-            [FromQuery] string? status   = null,
-            [FromQuery] int     page     = 1,
-            [FromQuery] int     pageSize = 10)
+            [FromQuery] string? search = null,
+            [FromQuery] string? status = null,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10)
         {
-            var result = await _mediator.Send(new GetAllCasesQuery(patientName,search, status, page, pageSize));
+            var result = await _mediator.Send(new GetAllCasesQuery(patientName, search, status, page, pageSize));
             return HandleResult(result);
         }
 
 
-      
+
 
         [HttpPost]
         [Consumes("multipart/form-data")]
@@ -72,7 +72,12 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ApiResponse<PatientCaseDto>>> GetById(Guid id)
         {
-            var result = await _mediator.Send(new GetPatientCaseByIdQuery(id));
+            // Pass user context so the service can compute flags and available actions.
+            // Both values are nullable – anonymous callers get no flags (all false).
+            var userId = GetUserIdFromToken();
+            var userRole = GetUserRoleFromToken();
+
+            var result = await _mediator.Send(new GetPatientCaseByIdQuery(id, userId, userRole));
             return HandleResult(result);
         }
 
@@ -89,9 +94,9 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<bool>>> Update(Guid     id, [FromBody] UpdatePatientCaseCommand command)
+        public async Task<ActionResult<ApiResponse<bool>>> Update(Guid id, [FromBody] UpdatePatientCaseCommand command)
         {
-             if (id != command.Id)
+            if (id != command.Id)
             {
                 return CreateErrorResponse<bool>("Id mismatch", 400);
             }

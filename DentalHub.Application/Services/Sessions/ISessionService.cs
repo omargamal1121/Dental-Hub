@@ -12,12 +12,17 @@ namespace DentalHub.Application.Services.Sessions
         Task<Result> DeleteSessionByIdAsync(Guid id);
 
         // Get sessions by various filters
-        Task<Result<PagedResult<SessionDto>>> GetSessionsByStudentIdAsync(
-			Guid studentId, int page = 1, int pageSize = 10);
-        Task<Result<PagedResult<SessionDto>>> GetSessionsByPatientIdAsync(
-			Guid patientId, int page = 1, int pageSize = 10);
-        Task<Result<PagedResult<SessionDto>>> GetSessionsByCaseIdAsync(
-			Guid caseId, int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<SessionDto>>> GetSessionsByStudentIdAsync(Guid studentId, int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<SessionDto>>> GetSessionsByPatientIdAsync(Guid patientId, int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<SessionDto>>> GetSessionsByCaseIdAsync(Guid caseId, int page = 1, int pageSize = 10);
+
+        /// <summary>
+        /// Returns upcoming (future + Scheduled) sessions.
+        /// Optionally filtered by studentId or patientId.
+        /// </summary>
+        Task<Result<PagedResult<SessionDto>>> GetUpcomingSessionsAsync(
+            int page = 1, int pageSize = 10,
+            Guid? studentId = null, Guid? patientId = null);
 
         // Status management
         Task<Result<SessionDto>> UpdateSessionStatusAsync(Guid id, string newStatus);

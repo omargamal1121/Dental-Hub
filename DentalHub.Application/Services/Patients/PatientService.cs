@@ -38,7 +38,7 @@ namespace DentalHub.Application.Services
                             .Select(pc => new PatientCaseSimpleDataDto
                             {
                                 Id = pc.Id,
-                           //     Name = pc.CaseType.Name,
+                                //     Name = pc.CaseType.Name,
                                 Status = pc.Status,
                                 CreateAt = pc.CreateAt
                             })
@@ -79,7 +79,7 @@ namespace DentalHub.Application.Services
                             .Select(pc => new PatientCaseSimpleDataDto
                             {
                                 Id = pc.Id,
-                              //  Name = pc.CaseType.Name,
+                                //  Name = pc.CaseType.Name,
                                 Status = pc.Status,
                                 CreateAt = pc.CreateAt
                             })
@@ -118,13 +118,13 @@ namespace DentalHub.Application.Services
 
                         PatientCases = p.PatientCases
                             .Where(pc => filterPatientDto.CaseStatus == null || pc.Status == filterPatientDto.CaseStatus.Value)
-                            .Where(pc => string.IsNullOrEmpty(filterPatientDto.CaseType) 
-                          //  || pc.CaseType.Name.Contains(filterPatientDto.CaseType!)
+                            .Where(pc => string.IsNullOrEmpty(filterPatientDto.CaseType)
+                            //  || pc.CaseType.Name.Contains(filterPatientDto.CaseType!)
                             )
                             .Select(pc => new PatientCaseSimpleDataDto
                             {
                                 Id = pc.Id,
-                             //   Name = pc.CaseType.Name,
+                                //   Name = pc.CaseType.Name,
                                 Status = pc.Status,
                                 CreateAt = pc.CreateAt
                             })
@@ -134,12 +134,16 @@ namespace DentalHub.Application.Services
 
                 spec.AddInclude(p => p.User);
                 spec.AddInclude(p => p.PatientCases);
-                spec.AddInclude("PatientCases.CaseType");
+                // CaseType is commented out on PatientCase entity - do NOT include it
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(p => p.CreateAt);
 
+                // CountAsync needs a plain BaseSpecification without paging
+                var countSpec = new BaseSpecification<Patient>(
+                    p => filterPatientDto.Name == null || p.User.FullName.Contains(filterPatientDto.Name));
+
                 var patientsList = await _unitOfWork.Patients.GetAllAsync(spec);
-                var totalCount = await _unitOfWork.Patients.CountAsync(spec);
+                var totalCount = await _unitOfWork.Patients.CountAsync(countSpec);
 
                 var pagedResult = PaginationFactory<PatientDto>.Create(
                     count: totalCount,
@@ -213,37 +217,37 @@ namespace DentalHub.Application.Services
             try
             {
                 _logger.LogInformation("Attempting to delete patient: {Id}", id);
-				var patient = await _unitOfWork.Patients.GetByIdAsync(
-                    new BaseSpecificationWithProjection<Patient, GetPatientDataById>(p =>  p.Id == id,p=>
+                var patient = await _unitOfWork.Patients.GetByIdAsync(
+                    new BaseSpecificationWithProjection<Patient, GetPatientDataById>(p => p.Id == id, p =>
                     new GetPatientDataById
-					{
+                    {
                         Id = p.Id,
                         HasProgressCases = p.PatientCases.Any(pc => pc.Status == CaseStatus.InProgress)
-					}));
+                    }));
 
                 if (patient == null)
                     return Result.Failure("Patient not found");
                 if (patient.HasProgressCases)
                     return Result.Failure("Cannot delete patient with in-progress cases");
-                
-                 await _unitOfWork.PatientCases.UpdatePatientCasesStatusAsync(patient.Id, CaseStatus.Cancelled);
+
+                await _unitOfWork.PatientCases.UpdatePatientCasesStatusAsync(patient.Id, CaseStatus.Cancelled);
                 await _unitOfWork.CaseRequests.CancelPendingRequestsForPatientAsync(patient.Id);
 
-				
+
                 await _unitOfWork.SaveChangesAsync();
-				_logger.LogInformation("Patient deleted: {Id}", id);
+                _logger.LogInformation("Patient deleted: {Id}", id);
                 return Result.Success("Patient deleted successfully");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error deleting patient: {Id}", id);
-				return Result.Failure("Error deleting patient");
+                return Result.Failure("Error deleting patient");
             }
         }
     }
     public class GetPatientDataById
-	{
+    {
         public Guid Id { get; set; }
-		public bool HasProgressCases { get; set; }
-	}
+        public bool HasProgressCases { get; set; }
+    }
 }
