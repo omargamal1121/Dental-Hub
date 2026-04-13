@@ -1,0 +1,15 @@
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.deps.json
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.runtimeconfig.json
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.dll
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\bin\Debug\net9.0\DentalHub.Domain.pdb
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.csproj.AssemblyReference.cache
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.AssemblyInfoInputs.cache
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.AssemblyInfo.cs
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.csproj.CoreCompileInputs.cache
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.sourcelink.json
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.dll
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\refint\DentalHub.Domain.dll
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.pdb
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\DentalHub.Domain.genruntimeconfig.cache
+C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.Domain\obj\Debug\net9.0\ref\DentalHub.Domain.dll

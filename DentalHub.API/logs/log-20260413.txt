@@ -1,0 +1,438 @@
+2026-04-13 00:36:20.560 +02:00 [INF] DB tables already exist. Exit install
+2026-04-13 00:36:21.777 +02:00 [INF] User profile is available. Using 'C:\Users\hayth\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-13 00:36:23.950 +02:00 [INF] Executed DbCommand (139ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 00:36:24.266 +02:00 [INF] Executed DbCommand (111ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 00:36:24.484 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 00:36:24.704 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 00:36:24.954 +02:00 [INF] Executed DbCommand (116ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Universities` AS `u`)
+2026-04-13 00:36:25.274 +02:00 [INF] Executed DbCommand (100ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `UniversityMembers` AS `u`
+2026-04-13 00:36:25.504 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Doctors` AS `d`)
+2026-04-13 00:36:25.724 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Students` AS `s`)
+2026-04-13 00:36:25.945 +02:00 [INF] Executed DbCommand (111ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Patients` AS `p`)
+2026-04-13 00:36:26.175 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Admins` AS `a`)
+2026-04-13 00:36:26.395 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `CaseTypes` AS `c`
+    WHERE `c`.`DeleteAt` IS NULL)
+2026-04-13 00:36:26.634 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `PatientCases` AS `p`
+    WHERE `p`.`DeleteAt` IS NULL)
+2026-04-13 00:36:26.864 +02:00 [INF] Executed DbCommand (116ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Diagnoses` AS `d`
+    WHERE `d`.`DeleteAt` IS NULL)
+2026-04-13 00:36:27.108 +02:00 [INF] Executed DbCommand (124ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Sessions` AS `s`
+    WHERE `s`.`DeleteAt` IS NULL)
+2026-04-13 00:36:27.354 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `CaseRequests` AS `c`
+    WHERE `c`.`DeleteAt` IS NULL)
+2026-04-13 00:36:28.398 +02:00 [INF] Now listening on: https://localhost:7267
+2026-04-13 00:36:28.400 +02:00 [INF] Now listening on: http://localhost:5045
+2026-04-13 00:36:28.524 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-04-13 00:36:28.526 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-04-13 00:36:28.527 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-04-13 00:36:28.529 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-04-13 00:36:28.866 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-13 00:36:28.868 +02:00 [INF] Hosting environment: Development
+2026-04-13 00:36:28.869 +02:00 [INF] Content root path: C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.API
+2026-04-13 00:36:29.740 +02:00 [INF] Server haythemhossam:6896:d1e2d043 successfully announced in 803.7915 ms
+2026-04-13 00:36:29.777 +02:00 [INF] Server haythemhossam:6896:d1e2d043 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-04-13 00:36:30.042 +02:00 [INF] Server haythemhossam:6896:d1e2d043 all the dispatchers started
+2026-04-13 00:36:30.154 +02:00 [INF] 1 servers were removed due to timeout
+2026-04-13 00:36:31.507 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-04-13 00:36:34.493 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-04-13 00:36:34.569 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-04-13 00:36:34.573 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-04-13 00:36:34.581 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 null null 3082.5852ms
+2026-04-13 00:36:34.590 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger - null null
+2026-04-13 00:36:34.596 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger - 301 null null 6.3894ms
+2026-04-13 00:36:34.605 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-04-13 00:36:34.742 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 137.563ms
+2026-04-13 00:36:34.756 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui.css - null null
+2026-04-13 00:36:34.756 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.css - null null
+2026-04-13 00:36:34.757 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui-bundle.js - null null
+2026-04-13 00:36:34.774 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-13 00:36:34.773 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui-standalone-preset.js - null null
+2026-04-13 00:36:34.774 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.js - null null
+2026-04-13 00:36:34.812 +02:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2026-04-13 00:36:34.815 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.js - 200 null application/javascript;charset=utf-8 41.1479ms
+2026-04-13 00:36:34.816 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.css - 200 202 text/css 59.9548ms
+2026-04-13 00:36:34.817 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 43.5192ms
+2026-04-13 00:36:34.832 +02:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-04-13 00:36:34.833 +02:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-04-13 00:36:34.837 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui-standalone-preset.js - 200 229223 text/javascript 70.6948ms
+2026-04-13 00:36:34.837 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui.css - 200 154948 text/css 81.6111ms
+2026-04-13 00:36:34.843 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-04-13 00:36:34.848 +02:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-04-13 00:36:34.854 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui-bundle.js - 200 1466324 text/javascript 97.2091ms
+2026-04-13 00:36:34.926 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 83.1064ms
+2026-04-13 00:36:35.077 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-04-13 00:36:35.105 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/favicon-32x32.png - null null
+2026-04-13 00:36:35.109 +02:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2026-04-13 00:36:35.111 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/favicon-32x32.png - 200 628 image/png 6.4996ms
+2026-04-13 00:36:35.408 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 331.06ms
+2026-04-13 18:22:52.848 +02:00 [INF] DB tables already exist. Exit install
+2026-04-13 18:22:53.879 +02:00 [INF] User profile is available. Using 'C:\Users\hayth\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-13 18:22:55.778 +02:00 [INF] Executed DbCommand (210ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 18:22:56.123 +02:00 [INF] Executed DbCommand (111ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 18:22:56.357 +02:00 [INF] Executed DbCommand (119ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 18:22:56.580 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 18:22:56.807 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Universities` AS `u`)
+2026-04-13 18:22:57.118 +02:00 [INF] Executed DbCommand (115ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `UniversityMembers` AS `u`
+2026-04-13 18:22:57.357 +02:00 [INF] Executed DbCommand (119ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Doctors` AS `d`)
+2026-04-13 18:22:57.607 +02:00 [INF] Executed DbCommand (108ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Students` AS `s`)
+2026-04-13 18:22:57.836 +02:00 [INF] Executed DbCommand (119ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Patients` AS `p`)
+2026-04-13 18:22:58.058 +02:00 [INF] Executed DbCommand (107ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Admins` AS `a`)
+2026-04-13 18:22:58.289 +02:00 [INF] Executed DbCommand (119ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `CaseTypes` AS `c`
+    WHERE `c`.`DeleteAt` IS NULL)
+2026-04-13 18:22:58.527 +02:00 [INF] Executed DbCommand (119ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `PatientCases` AS `p`
+    WHERE `p`.`DeleteAt` IS NULL)
+2026-04-13 18:22:58.767 +02:00 [INF] Executed DbCommand (120ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Diagnoses` AS `d`
+    WHERE `d`.`DeleteAt` IS NULL)
+2026-04-13 18:22:58.997 +02:00 [INF] Executed DbCommand (118ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Sessions` AS `s`
+    WHERE `s`.`DeleteAt` IS NULL)
+2026-04-13 18:22:59.219 +02:00 [INF] Executed DbCommand (111ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `CaseRequests` AS `c`
+    WHERE `c`.`DeleteAt` IS NULL)
+2026-04-13 18:22:59.799 +02:00 [INF] Now listening on: https://localhost:7267
+2026-04-13 18:22:59.802 +02:00 [INF] Now listening on: http://localhost:5045
+2026-04-13 18:22:59.894 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-04-13 18:22:59.895 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-04-13 18:22:59.897 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-04-13 18:22:59.900 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-04-13 18:22:59.952 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-13 18:22:59.955 +02:00 [INF] Hosting environment: Development
+2026-04-13 18:22:59.957 +02:00 [INF] Content root path: C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.API
+2026-04-13 18:23:00.420 +02:00 [INF] Server haythemhossam:4684:b988caa4 successfully announced in 464.3065 ms
+2026-04-13 18:23:00.450 +02:00 [INF] Server haythemhossam:4684:b988caa4 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-04-13 18:23:00.765 +02:00 [INF] Server haythemhossam:4684:b988caa4 all the dispatchers started
+2026-04-13 18:23:04.528 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-04-13 18:23:05.256 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-04-13 18:23:05.273 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-04-13 18:23:05.276 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-04-13 18:23:05.285 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 null null 767.7485ms
+2026-04-13 18:23:05.341 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger - null null
+2026-04-13 18:23:05.349 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger - 301 null null 8.1555ms
+2026-04-13 18:23:05.357 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-04-13 18:23:05.443 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 86.1389ms
+2026-04-13 18:23:05.528 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui.css - null null
+2026-04-13 18:23:05.531 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui-standalone-preset.js - null null
+2026-04-13 18:23:05.535 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.js - null null
+2026-04-13 18:23:05.528 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/swagger-ui-bundle.js - null null
+2026-04-13 18:23:05.567 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.js - 200 null application/javascript;charset=utf-8 35.6073ms
+2026-04-13 18:23:05.528 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.css - null null
+2026-04-13 18:23:05.547 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-13 18:23:05.592 +02:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2026-04-13 18:23:05.594 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.css - 200 202 text/css 65.5815ms
+2026-04-13 18:23:05.595 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 47.8202ms
+2026-04-13 18:23:05.600 +02:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-04-13 18:23:05.600 +02:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-04-13 18:23:05.611 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui.css - 200 154948 text/css 82.935ms
+2026-04-13 18:23:05.611 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui-standalone-preset.js - 200 229223 text/javascript 80.1264ms
+2026-04-13 18:23:05.624 +02:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-04-13 18:23:05.626 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/swagger-ui-bundle.js - 200 1466324 text/javascript 97.2431ms
+2026-04-13 18:23:05.638 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-04-13 18:23:05.728 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 89.1843ms
+2026-04-13 18:23:05.834 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-04-13 18:23:06.062 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 228.1144ms
+2026-04-13 18:41:38.554 +02:00 [INF] DB tables already exist. Exit install
+2026-04-13 18:41:39.380 +02:00 [INF] User profile is available. Using 'C:\Users\hayth\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-13 18:41:41.182 +02:00 [INF] Executed DbCommand (154ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 18:41:41.504 +02:00 [INF] Executed DbCommand (126ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 18:41:41.734 +02:00 [INF] Executed DbCommand (118ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 18:41:41.983 +02:00 [INF] Executed DbCommand (130ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 18:41:42.224 +02:00 [INF] Executed DbCommand (111ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Universities` AS `u`)
+2026-04-13 18:41:42.498 +02:00 [INF] Executed DbCommand (135ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `UniversityMembers` AS `u`
+2026-04-13 18:41:42.744 +02:00 [INF] Executed DbCommand (121ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Doctors` AS `d`)
+2026-04-13 18:41:42.993 +02:00 [INF] Executed DbCommand (130ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Students` AS `s`)
+2026-04-13 18:41:43.234 +02:00 [INF] Executed DbCommand (121ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Patients` AS `p`)
+2026-04-13 18:41:43.504 +02:00 [INF] Executed DbCommand (131ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Admins` AS `a`)
+2026-04-13 18:41:43.753 +02:00 [INF] Executed DbCommand (130ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `CaseTypes` AS `c`
+    WHERE `c`.`DeleteAt` IS NULL)
+2026-04-13 18:41:44.015 +02:00 [INF] Executed DbCommand (121ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `PatientCases` AS `p`
+    WHERE `p`.`DeleteAt` IS NULL)
+2026-04-13 18:41:44.254 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Diagnoses` AS `d`
+    WHERE `d`.`DeleteAt` IS NULL)
+2026-04-13 18:41:44.523 +02:00 [INF] Executed DbCommand (130ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Sessions` AS `s`
+    WHERE `s`.`DeleteAt` IS NULL)
+2026-04-13 18:41:44.794 +02:00 [INF] Executed DbCommand (151ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `CaseRequests` AS `c`
+    WHERE `c`.`DeleteAt` IS NULL)
+2026-04-13 18:41:45.288 +02:00 [INF] Now listening on: https://localhost:7267
+2026-04-13 18:41:45.291 +02:00 [INF] Now listening on: http://localhost:5045
+2026-04-13 18:41:45.397 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-04-13 18:41:45.399 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-04-13 18:41:45.400 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-04-13 18:41:45.401 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-04-13 18:41:45.432 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-13 18:41:45.446 +02:00 [INF] Hosting environment: Development
+2026-04-13 18:41:45.447 +02:00 [INF] Content root path: C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.API
+2026-04-13 18:41:45.824 +02:00 [INF] Server haythemhossam:11724:e684d3e5 successfully announced in 374.6768 ms
+2026-04-13 18:41:45.862 +02:00 [INF] Server haythemhossam:11724:e684d3e5 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-04-13 18:41:46.103 +02:00 [INF] Server haythemhossam:11724:e684d3e5 all the dispatchers started
+2026-04-13 18:41:46.193 +02:00 [INF] 1 servers were removed due to timeout
+2026-04-13 18:41:46.732 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-04-13 18:41:47.142 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-04-13 18:41:47.159 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-04-13 18:41:47.161 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-04-13 18:41:47.170 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 null null 463.4714ms
+2026-04-13 18:41:47.183 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-04-13 18:41:47.281 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 98.4055ms
+2026-04-13 18:41:47.287 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-13 18:41:47.287 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.js - null null
+2026-04-13 18:41:47.306 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-04-13 18:41:47.318 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.js - 200 null application/javascript;charset=utf-8 31.4443ms
+2026-04-13 18:41:47.349 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 62.2794ms
+2026-04-13 18:41:47.401 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 95.194ms
+2026-04-13 18:41:47.503 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-04-13 18:41:47.845 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 341.8849ms
+2026-04-13 19:12:07.411 +02:00 [INF] DB tables already exist. Exit install
+2026-04-13 19:12:08.248 +02:00 [INF] User profile is available. Using 'C:\Users\hayth\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-13 19:12:10.125 +02:00 [INF] Executed DbCommand (137ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 19:12:10.393 +02:00 [INF] Executed DbCommand (108ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 19:12:10.593 +02:00 [INF] Executed DbCommand (101ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 19:12:10.803 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-04-13 19:12:11.012 +02:00 [INF] Executed DbCommand (98ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Universities` AS `u`)
+2026-04-13 19:12:11.233 +02:00 [INF] Executed DbCommand (96ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `UniversityMembers` AS `u`
+2026-04-13 19:12:11.452 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Doctors` AS `d`)
+2026-04-13 19:12:11.673 +02:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Students` AS `s`)
+2026-04-13 19:12:11.928 +02:00 [INF] Executed DbCommand (145ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Patients` AS `p`)
+2026-04-13 19:12:12.233 +02:00 [INF] Executed DbCommand (97ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Admins` AS `a`)
+2026-04-13 19:12:12.458 +02:00 [INF] Executed DbCommand (115ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `CaseTypes` AS `c`
+    WHERE `c`.`DeleteAt` IS NULL)
+2026-04-13 19:12:12.673 +02:00 [INF] Executed DbCommand (109ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `PatientCases` AS `p`
+    WHERE `p`.`DeleteAt` IS NULL)
+2026-04-13 19:12:12.904 +02:00 [INF] Executed DbCommand (111ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Diagnoses` AS `d`
+    WHERE `d`.`DeleteAt` IS NULL)
+2026-04-13 19:12:13.143 +02:00 [INF] Executed DbCommand (103ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Sessions` AS `s`
+    WHERE `s`.`DeleteAt` IS NULL)
+2026-04-13 19:12:13.364 +02:00 [INF] Executed DbCommand (119ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `CaseRequests` AS `c`
+    WHERE `c`.`DeleteAt` IS NULL)
+2026-04-13 19:12:13.852 +02:00 [INF] Now listening on: https://localhost:7267
+2026-04-13 19:12:13.854 +02:00 [INF] Now listening on: http://localhost:5045
+2026-04-13 19:12:13.964 +02:00 [INF] Starting Hangfire Server using job storage: 'Server: db39102.public.databaseasp.net@db39102'
+2026-04-13 19:12:13.966 +02:00 [INF] Using the following options for SQL Server job storage:
+2026-04-13 19:12:13.968 +02:00 [INF]     Queue poll interval: 00:00:10.
+2026-04-13 19:12:13.969 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-04-13 19:12:14.048 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-13 19:12:14.067 +02:00 [INF] Hosting environment: Development
+2026-04-13 19:12:14.069 +02:00 [INF] Content root path: C:\Users\hayth\Desktop\Dent\Dental-Hub\DentalHub.API
+2026-04-13 19:12:15.124 +02:00 [INF] Server haythemhossam:24556:dd09762b successfully announced in 1056.8104 ms
+2026-04-13 19:12:15.137 +02:00 [INF] Server haythemhossam:24556:dd09762b is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-04-13 19:12:15.420 +02:00 [INF] 1 servers were removed due to timeout
+2026-04-13 19:12:15.444 +02:00 [INF] Server haythemhossam:24556:dd09762b all the dispatchers started
+2026-04-13 19:12:15.557 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/ - null null
+2026-04-13 19:12:15.893 +02:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-04-13 19:12:15.910 +02:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2026-04-13 19:12:15.914 +02:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-04-13 19:12:15.922 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/ - 302 null null 372.5828ms
+2026-04-13 19:12:15.934 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.html - null null
+2026-04-13 19:12:16.039 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.html - 200 null text/html;charset=utf-8 105.0974ms
+2026-04-13 19:12:16.053 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/index.js - null null
+2026-04-13 19:12:16.054 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-13 19:12:16.055 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/_vs/browserLink - null null
+2026-04-13 19:12:16.065 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/index.js - 200 null application/javascript;charset=utf-8 12.0986ms
+2026-04-13 19:12:16.118 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 64.4637ms
+2026-04-13 19:12:16.170 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/_vs/browserLink - 200 null text/javascript; charset=UTF-8 115.1278ms
+2026-04-13 19:12:16.205 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - null null
+2026-04-13 19:12:16.508 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 302.4302ms

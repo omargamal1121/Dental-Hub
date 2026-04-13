@@ -392,8 +392,14 @@ namespace DentalHub.Application.Services.Students
             }
         }
 
+        public Task<Result<PagedResult<AvailableCasesDto>>> GetAvailableCasesForStudentAsync(Guid studentId, string? patientName, string? caseType, Gender? gender, DiagnosisSource? diagnosisSource, CaseSortBy? sortBy, bool isDescending, int page = 1, int pageSize = 10)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
+
 
     public class GetStudentDataById
     {

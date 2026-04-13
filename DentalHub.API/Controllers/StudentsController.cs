@@ -72,40 +72,79 @@ namespace DentalHub.API.Controllers
             return HandleResult(result);
         }
 
-       
+
         [HttpGet("my-cases")]
         [Authorize(Roles = "Student")]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<PatientCaseDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<PagedResult<PatientCaseDto>>>> GetMyCases(
-            [FromQuery] string? caseType = null,
-            [FromQuery] int     page     = 1,
-            [FromQuery] int     pageSize = 10)
+        [FromQuery] CaseStatus? status = null,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10)
         {
-            var studentPublicId = GetUserIdFromToken();
-            if (studentPublicId == null)
+            var studentId = GetUserIdFromToken();
+
+            if (studentId == null)
                 return CreateErrorResponse<PagedResult<PatientCaseDto>>("Unauthorized", 401);
 
-            var result = await _mediator.Send(new GetMyCasesForStudentQuery(studentPublicId.Value, caseType, page, pageSize));
+            var result = await _mediator.Send(
+                new GetMyCasesForStudentQuery(studentId.Value, status, page, pageSize));
+
             return HandleResult(result);
         }
+
+
+
+        //[HttpGet("available-cases")]
+        //[Authorize(Roles = "Student")]
+        //[ProducesResponseType(typeof(ApiResponse<PagedResult<AvailableCasesDto>>), StatusCodes.Status200OK)]
+        //[ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
+        //public async Task<ActionResult<ApiResponse<PagedResult<AvailableCasesDto>>>> GetAvailableCases(
+        //    [FromQuery] string? caseType = null,
+        //    [FromQuery] int page = 1,
+        //    [FromQuery] int pageSize = 10)
+        //{
+        //    var studentPublicId = GetUserIdFromToken();
+        //    if (studentPublicId == null)
+        //        return CreateErrorResponse<PagedResult<AvailableCasesDto>>("Unauthorized", 401);
+
+        //    var result = await _mediator.Send(new GetAvailableCasesForStudentQuery(studentPublicId.Value, caseType, page, pageSize));
+        //    return HandleResult(result);
+        //}
 
         [HttpGet("available-cases")]
         [Authorize(Roles = "Student")]
-        [ProducesResponseType(typeof(ApiResponse<PagedResult<AvailableCasesDto>>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<PagedResult<AvailableCasesDto>>>> GetAvailableCases(
-            [FromQuery] string? caseType = null,
-            [FromQuery] int     page     = 1,
-            [FromQuery] int     pageSize = 10)
+    [FromQuery] string? patientName = null,
+    [FromQuery] string? caseType = null,
+    [FromQuery] Gender? gender = null,
+    [FromQuery] DiagnosisSource? diagnosisSource = null,
+    [FromQuery] CaseSortBy? sortBy = CaseSortBy.Date,
+    [FromQuery] bool isDesc = false,
+    [FromQuery] int page = 1,
+    [FromQuery] int pageSize = 10)
         {
-            var studentPublicId = GetUserIdFromToken();
-            if (studentPublicId == null)
+            var studentId = GetUserIdFromToken();
+            if (studentId == null)
                 return CreateErrorResponse<PagedResult<AvailableCasesDto>>("Unauthorized", 401);
 
-            var result = await _mediator.Send(new GetAvailableCasesForStudentQuery(studentPublicId.Value, caseType, page, pageSize));
+            var query = new GetAvailableCasesForStudentQuery(
+                studentId.Value,
+                patientName,
+                caseType,
+                gender,
+                diagnosisSource,
+                sortBy,
+                isDesc,
+                page,
+                pageSize
+            );
+
+            var result = await _mediator.Send(query);
             return HandleResult(result);
         }
+
+
 
         [HttpGet("my-requests")]
         [Authorize(Roles = "Student")]

@@ -20,9 +20,18 @@ namespace DentalHub.Application.Services.Students
         Task<Result<PagedResult<PatientCaseDto>>> GetMyCasesForStudentAsync(
             Guid studentId, string? casetype = null, int page = 1, int pageSize = 10);
 
- 
+
         Task<Result<PagedResult<AvailableCasesDto>>> GetAvailableCasesForStudentAsync(
-            Guid studentId,string? casetype=null, int page = 1, int pageSize = 10);
+        Guid studentId,
+        string? patientName,
+        string? caseType,
+        Gender? gender,
+        DiagnosisSource? diagnosisSource,
+        CaseSortBy? sortBy,
+        bool isDescending,
+        int page = 1,
+        int pageSize = 10);
+
 
         // Student Statistics
         Task<Result<StudentStatsDto>> GetStudentStatisticsAsync(Guid studentId);
