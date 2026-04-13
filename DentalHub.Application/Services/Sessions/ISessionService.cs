@@ -6,7 +6,7 @@ namespace DentalHub.Application.Services.Sessions
     public interface ISessionService
     {
         // CRUD Operations
-        Task<Result<SessionDto>> CreateSessionAsync(CreateSessionDto dto);
+        Task<Result<bool>> CreateSessionAsync(CreateSessionDto dto);
         Task<Result<SessionDto>> GetSessionByIdAsync(Guid id);
         Task<Result<PagedResult<SessionDto>>> GetAllSessionsAsync(int page = 1, int pageSize = 10, string? status = null);
         Task<Result> DeleteSessionByIdAsync(Guid id);

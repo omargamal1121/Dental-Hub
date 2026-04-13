@@ -22,25 +22,21 @@ namespace DentalHub.Application.Services.Sessions
 
         #region CRUD Operations
 
-        public async Task<Result<SessionDto>> CreateSessionAsync(CreateSessionDto dto)
+        public async Task<Result<bool>> CreateSessionAsync(CreateSessionDto dto)
         {
             try
             {
                 var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.Id == dto.CaseId));
                 if (patientCase == null)
-                    return Result<SessionDto>.Failure("Patient case not found");
+                    return Result<bool>.Failure("Patient case not found");
 
                 if (patientCase.Status != CaseStatus.InProgress)
-                    return Result<SessionDto>.Failure($"Cannot create session for case with status: {patientCase.Status}");
+                    return Result<bool>.Failure($"Cannot create session for case with status: {patientCase.Status}");
+                var patient = await _unitOfWork.Patients.AnyAsync(new BaseSpecification<Patient>(p => p.Id == patientCase.PatientId));
+                if (!patient)
+                    return Result<bool>.Failure("Patient not found");
 
-                var patient = await _unitOfWork.Patients.GetByIdAsync(new BaseSpecification<Patient>(p => p.Id == patientCase.PatientId));
-                if (patient == null)
-                    return Result<SessionDto>.Failure("Patient not found");
-
-                var student = await _unitOfWork.Students.GetByIdAsync(new BaseSpecification<Student>(s => s.Id == dto.StudentId));
-                if (student == null)
-                    return Result<SessionDto>.Failure("Student not found");
-                }
+             
                 Guid doctorId;
 
                 if (!string.IsNullOrWhiteSpace(dto.DoctorUsername))
@@ -51,7 +47,7 @@ namespace DentalHub.Application.Services.Sessions
                             d => new GetIdsDto { Id = d.Id }));
 
                     if (doctor == null)
-                        return Result<SessionDto>.Failure("Doctor not found");
+                        return Result<bool>.Failure("Doctor not found");
 
                     doctorId = doctor.Id;
                 }
@@ -63,41 +59,51 @@ namespace DentalHub.Application.Services.Sessions
 
                 else
                 {
-                    return Result<SessionDto>.Failure("Doctor is required");
+                    return Result<bool>.Failure("Doctor is required");
                 }
-                patientCase.AssignedDoctorId = doctorId;
-                _unitOfWork.PatientCases.Update(patientCase);
+                //patientCase.AssignedDoctorId = doctorId;
+                //_unitOfWork.PatientCases.Update(patientCase);
 
-                var approvedRequest = await _unitOfWork.CaseRequests.GetByIdAsync(new BaseSpecification<CaseRequest>(cr =>
+                var approvedRequest = await _unitOfWork.CaseRequests.AnyAsync(new BaseSpecification<CaseRequest>(cr =>
                     cr.PatientCaseId == patientCase.Id &&
-                    cr.StudentId == student.Id &&
+                    cr.StudentId == dto.StudentId &&
                     cr.Status == RequestStatus.Approved));
-                if (approvedRequest == null)
-                    return Result<SessionDto>.Failure("Student does not have approval to work on this case");
 
-                var overlappingSessionSpec = new BaseSpecification<Session>(s =>
-                    s.StudentId == student.Id &&
-                   
-                    s.Status != SessionStatus.Cancelled);
 
-                var overlappingSession = await _unitOfWork.Sessions.AnyAsync(overlappingSessionSpec);
-                if (overlappingSession != null)
-                {
-                    return Result<SessionDto>.Failure(
-                        $"You already have a session scheduled at {dto.ScheduledAt:yyyy-MM-dd HH:mm}");
-                }
 
-                // VALIDATION 4: Cannot schedule in the past
-                if (dto.ScheduledAt < DateTime.UtcNow)
-                    return Result<SessionDto>.Failure("Cannot schedule a session in the past");
 
+
+                if (!approvedRequest)
+                    return Result<bool>.Failure("Student does not have approval to work on this case");
+
+				if (dto.ScheduledAt < DateTime.UtcNow)
+					return Result<bool>.Failure("Cannot schedule a session in the past");
+
+				var newStart = dto.ScheduledAt;
+				var newEnd = dto.ScheduledAt.AddHours(1);
+
+				var hasOverlap = await _unitOfWork.Sessions.AnyAsync(new BaseSpecification<Session>(s =>
+					s.StudentId == dto.StudentId &&
+					s.Status == SessionStatus.Scheduled &&
+					s.StartAt < newEnd &&
+					s.EndAt > newStart
+				));
+
+				if (hasOverlap)
+					return Result<bool>.Failure($"Student already has a session overlapping with {newStart:yyyy-MM-dd HH:mm}");
+
+
+
+
+				// VALIDATION 4: Cannot schedule in the past
+				if (dto.ScheduledAt < DateTime.UtcNow)
+                    return Result<bool>.Failure("Cannot schedule a session in the past");
                 var session = new Session
                 {
                     CaseId = patientCase.Id,
-                    StudentId = student.Id,
-                    PatientId = patient.Id  ,
+                    StudentId = dto.StudentId,
+                    PatientId = dto.PatientId,
                     EvaluteDoctorId = doctorId,
-                    PatientId = patient.Id,
                     StartAt = dto.ScheduledAt,
                     EndAt = dto.ScheduledAt.AddHours(1),
                     Status = SessionStatus.Scheduled
@@ -109,14 +115,17 @@ namespace DentalHub.Application.Services.Sessions
                 _logger.LogInformation("Session created: {Id} - Student: {StudentId}, Case: {CaseId}, Scheduled: {ScheduledAt}",
                     session.Id, dto.StudentId, dto.CaseId, dto.ScheduledAt);
 
-                return await GetSessionByIdAsync(session.Id);
+                return Result<bool>.Success(true,"Session created successfully",204);
             }
+
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error creating session");
-                return Result<SessionDto>.Failure("Error creating session");
+                _logger.LogError(ex, "Error creating session for Student: {StudentId}, Case: {CaseId}", dto.StudentId, dto.CaseId);
+                return Result<bool>.Failure("Error creating session");
             }
         }
+          
+        
 
         public async Task<Result<SessionDto>> GetSessionByIdAsync(Guid publicId)
         {
@@ -414,7 +423,7 @@ namespace DentalHub.Application.Services.Sessions
 
                 session.Status = sessionStatus;
                 session.UpdateAt = DateTime.UtcNow;
-                _unitOfWork.Sessions.Update(session);
+             
                 await _unitOfWork.SaveChangesAsync();
 
                 return await GetSessionByIdAsync(publicId);
@@ -499,7 +508,7 @@ namespace DentalHub.Application.Services.Sessions
                 return Result<List<SessionNoteDto>>.Failure("Error retrieving notes");
             }
         }
-
-        #endregion
     }
+    #endregion
+
 }
