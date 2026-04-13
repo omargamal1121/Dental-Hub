@@ -20,8 +20,8 @@ namespace DentalHub.Application.Handlers.Sessions
             var dto = new CreateSessionDto
             {
                 StudentId = request.StudentId,
-                PatientId = request.PatientCaseId,
-               
+                CaseId = request.PatientCaseId,
+                ScheduledAt = request.SessionDate,
             };
 
             var result = await _service.CreateSessionAsync(dto);
