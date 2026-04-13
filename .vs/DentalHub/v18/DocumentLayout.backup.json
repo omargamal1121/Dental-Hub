@@ -1,0 +1,245 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\services\\sessions\\sessionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\services\\sessions\\sessionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\services\\sessions\\isessionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\services\\sessions\\isessionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\handlers\\sessions\\getupcomingsessionsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\handlers\\sessions\\getupcomingsessionsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\services\\students\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\services\\students\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\services\\students\\istudentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\services\\students\\istudentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\handlers\\students\\getmycasesforstudentqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\handlers\\students\\getmycasesforstudentqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\handlers\\students\\getavailablecasesforstudentqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\handlers\\students\\getavailablecasesforstudentqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B3C55415-040A-CDF2-1429-CEBCA9D02535}|DentalHub.API\\DentalHub.API.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.api\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B3C55415-040A-CDF2-1429-CEBCA9D02535}|DentalHub.API\\DentalHub.API.csproj|solutionrelative:dentalhub.api\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\services\\students\\icaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\services\\students\\icaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\queries\\students\\getavailablecasesforstudentquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\queries\\students\\getavailablecasesforstudentquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\handlers\\students\\getstudentbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\handlers\\students\\getstudentbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\handlers\\students\\getstudentstatisticsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\handlers\\students\\getstudentstatisticsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\handlers\\students\\deletestudentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\handlers\\students\\deletestudentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|c:\\users\\hayth\\desktop\\dent\\dental-hub\\dentalhub.application\\handlers\\students\\getallstudentsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B643A680-D894-48F3-BFF6-6716E22294F0}|DentalHub.Application\\DentalHub.Application.csproj|solutionrelative:dentalhub.application\\handlers\\students\\getallstudentsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 13,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ISessionService.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Services\\Sessions\\ISessionService.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Services\\Sessions\\ISessionService.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Services\\Sessions\\ISessionService.cs",
+              "RelativeToolTip": "DentalHub.Application\\Services\\Sessions\\ISessionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T16:17:25.661Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GetUpcomingSessionsQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Sessions\\GetUpcomingSessionsQueryHandler.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Handlers\\Sessions\\GetUpcomingSessionsQueryHandler.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Sessions\\GetUpcomingSessionsQueryHandler.cs",
+              "RelativeToolTip": "DentalHub.Application\\Handlers\\Sessions\\GetUpcomingSessionsQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T16:02:29.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StudentService.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Services\\Students\\StudentService.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Services\\Students\\StudentService.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Services\\Students\\StudentService.cs",
+              "RelativeToolTip": "DentalHub.Application\\Services\\Students\\StudentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T15:53:21.338Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IStudentService.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Services\\Students\\IStudentService.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Services\\Students\\IStudentService.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Services\\Students\\IStudentService.cs",
+              "RelativeToolTip": "DentalHub.Application\\Services\\Students\\IStudentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T15:51:37.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GetMyCasesForStudentQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\GetMyCasesForStudentQueryHandler.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Handlers\\Students\\GetMyCasesForStudentQueryHandler.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\GetMyCasesForStudentQueryHandler.cs",
+              "RelativeToolTip": "DentalHub.Application\\Handlers\\Students\\GetMyCasesForStudentQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T15:50:34.608Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ICaseService.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Services\\Students\\ICaseService.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Services\\Students\\ICaseService.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Services\\Students\\ICaseService.cs",
+              "RelativeToolTip": "DentalHub.Application\\Services\\Students\\ICaseService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T15:38:42.448Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GetAvailableCasesForStudentQuery.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Queries\\Students\\GetAvailableCasesForStudentQuery.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Queries\\Students\\GetAvailableCasesForStudentQuery.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Queries\\Students\\GetAvailableCasesForStudentQuery.cs",
+              "RelativeToolTip": "DentalHub.Application\\Queries\\Students\\GetAvailableCasesForStudentQuery.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAkwBEAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T14:07:52.202Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "GetStudentByIdQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\GetStudentByIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Handlers\\Students\\GetStudentByIdQueryHandler.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\GetStudentByIdQueryHandler.cs",
+              "RelativeToolTip": "DentalHub.Application\\Handlers\\Students\\GetStudentByIdQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T14:01:19.737Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "GetStudentStatisticsQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\GetStudentStatisticsQueryHandler.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Handlers\\Students\\GetStudentStatisticsQueryHandler.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\GetStudentStatisticsQueryHandler.cs",
+              "RelativeToolTip": "DentalHub.Application\\Handlers\\Students\\GetStudentStatisticsQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T14:01:18.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DeleteStudentCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\DeleteStudentCommandHandler.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Handlers\\Students\\DeleteStudentCommandHandler.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\DeleteStudentCommandHandler.cs",
+              "RelativeToolTip": "DentalHub.Application\\Handlers\\Students\\DeleteStudentCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T14:01:17.146Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "GetAllStudentsQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\GetAllStudentsQueryHandler.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Handlers\\Students\\GetAllStudentsQueryHandler.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\GetAllStudentsQueryHandler.cs",
+              "RelativeToolTip": "DentalHub.Application\\Handlers\\Students\\GetAllStudentsQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T14:01:15.938Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GetAvailableCasesForStudentQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\GetAvailableCasesForStudentQueryHandler.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Handlers\\Students\\GetAvailableCasesForStudentQueryHandler.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Handlers\\Students\\GetAvailableCasesForStudentQueryHandler.cs",
+              "RelativeToolTip": "DentalHub.Application\\Handlers\\Students\\GetAvailableCasesForStudentQueryHandler.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwCMAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T14:01:14.163Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "StudentsController.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.API\\Controllers\\StudentsController.cs",
+              "RelativeDocumentMoniker": "DentalHub.API\\Controllers\\StudentsController.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.API\\Controllers\\StudentsController.cs",
+              "RelativeToolTip": "DentalHub.API\\Controllers\\StudentsController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAArwFIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T14:00:34.507Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SessionService.cs",
+              "DocumentMoniker": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Services\\Sessions\\SessionService.cs",
+              "RelativeDocumentMoniker": "DentalHub.Application\\Services\\Sessions\\SessionService.cs",
+              "ToolTip": "C:\\Users\\hayth\\Desktop\\Dent\\Dental-Hub\\DentalHub.Application\\Services\\Sessions\\SessionService.cs",
+              "RelativeToolTip": "DentalHub.Application\\Services\\Sessions\\SessionService.cs",
+              "ViewState": "AgIAACMCAAAAAAAAAAAqwCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T13:59:20.24Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
