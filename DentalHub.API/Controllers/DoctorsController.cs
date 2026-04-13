@@ -5,6 +5,7 @@ using DentalHub.Application.DTOs.Doctors;
 using DentalHub.Application.DTOs.Identity;
 using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.Queries.Doctor;
+using DentalHub.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -56,9 +57,11 @@ namespace DentalHub.API.Controllers
             [FromQuery] int page = 1,
             [FromQuery] int pageSize = 10,
             [FromQuery] string? name = null,
-            [FromQuery] string? spec = null)
+            [FromQuery] string? spec = null,
+            [FromQuery] string? username = null,
+            [FromQuery] Guid? universityId = null)
         {
-            var result = await _mediator.Send(new GetAllDoctorsQuery(page, pageSize, name, spec));
+            var result = await _mediator.Send(new GetAllDoctorsQuery(page, pageSize, name, spec, username, universityId));
             return HandleResult(result);
         }
 
@@ -86,13 +89,15 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetMyRequests(
             [FromQuery] int page = 1,
-            [FromQuery] int pageSize = 10)
+            [FromQuery] int pageSize = 10,
+            [FromQuery] RequestStatus? status = null,
+            [FromQuery] string? sortDirection = "desc")
         {
             var doctorId = GetUserIdFromToken();
             if (doctorId == null)
                 return CreateErrorResponse<PagedResult<CaseRequestDto>>("Unauthorized: Invalid token", 401);
 
-            var result = await _mediator.Send(new GetMyRequestsQuery(doctorId.Value, page, pageSize));
+            var result = await _mediator.Send(new GetMyRequestsQuery(doctorId.Value, page, pageSize, status, sortDirection));
             return HandleResult(result);
         }
 

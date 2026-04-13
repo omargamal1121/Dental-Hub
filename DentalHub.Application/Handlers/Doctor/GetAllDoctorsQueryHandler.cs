@@ -1,4 +1,4 @@
-﻿using DentalHub.Application.Common;
+using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Doctors;
 using DentalHub.Application.Queries.Doctor;
 using DentalHub.Application.Services.Doctors;
@@ -17,7 +17,7 @@ namespace DentalHub.Application.Handlers.Doctor
 
         public async Task<Result<PagedResult<DoctorlistDto>>> Handle(GetAllDoctorsQuery request, CancellationToken ct)
         {
-            return await _service.GetAllDoctorsAsync(request.Page, request.PageSize, request.Name, request.Spec);
+            return await _service.GetAllDoctorsAsync(request.Page, request.PageSize, request.Name, request.Spec, request.Username, request.UniversityId);
         }
     }
 }

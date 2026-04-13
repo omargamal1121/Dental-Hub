@@ -76,40 +76,10 @@ namespace DentalHub.Application.Services.Cases
         {
             try
             {
-                // ── 1. Fetch raw data we need for flags + process-status computation ──
-                var rawSpec = new BaseSpecification<PatientCase>(pc => pc.Id == publicId);
-                rawSpec.AddInclude(pc => pc.Sessions); // needed by ComputeProcessStatus (Evaluated check)
-                var rawCase = await _unitOfWork.PatientCases.GetByIdAsync(rawSpec);
-
-                if (rawCase == null)
-                    return Result<PatientCaseDto>.Failure("Case not found", 404);
-
-                // ── 2. Build the main projection ──
+             
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
                     pc => pc.Id == publicId,
-                    pc => new PatientCaseDto
-                    {
-                        Id = pc.Id,
-                        PatientId = pc.Patient.Id,
-                        PatientName = pc.Patient.User.FullName,
-                        PatientAge = pc.Patient.Age,
-                        Diagnosisdto = pc.Diagnosiss.Select(d => new Diagnosisdto
-                        {
-                            Id = d.Id,
-                            Notes = d.Notes,
-                            CaseType = d.CaseType.Name,
-                            DiagnosisStage = d.Stage.ToString(),
-                            TeethNumbers = d.TeethNumbers
-                        }).OrderByDescending(d => d.DiagnosisStage).FirstOrDefault(),
-                        Status = pc.Status.ToString(),
-                        IsPublic = pc.IsPublic,
-                        UniversityId = pc.UniversityId,
-                        UniversityName = pc.University != null ? pc.University.Name : null,
-                        CreateAt = pc.CreateAt,
-                        TotalSessions = pc.Sessions.Count,
-                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
-                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
-                    }
+                    PatientCaseProjections.ToDto
                 );
 
                 var dto = await _unitOfWork.PatientCases.GetByIdAsync(spec);
@@ -117,16 +87,16 @@ namespace DentalHub.Application.Services.Cases
                     return Result<PatientCaseDto>.Failure("Case not found", 404);
 
                 // ── 3. Compute ProcessStatus ──
-                dto.ProcessStatus = ComputeProcessStatus(rawCase, dto.Diagnosisdto);
+                dto.ProcessStatus = ComputeProcessStatus(dto, dto.Diagnosisdto);
 
                 // ── 4. Compute UserFlags ──
                 if (userId.HasValue && !string.IsNullOrEmpty(userRole))
                 {
-                    dto.UserFlags = await ComputeUserFlagsAsync(rawCase, userId.Value, userRole);
+                    dto.UserFlags = await ComputeUserFlagsAsync(dto, userId.Value, dto.PatientId, dto.Id, userRole);
                 }
 
                 // ── 5. Compute AvailableActions ──
-                dto.AvailableActions = ComputeAvailableActions(dto.UserFlags, rawCase);
+                dto.AvailableActions = ComputeAvailableActions(dto.UserFlags, dto);
 
                 return Result<PatientCaseDto>.Success(dto);
             }
@@ -148,23 +118,19 @@ namespace DentalHub.Application.Services.Cases
         ///   Has completed sessions → "Evaluated"
         ///   Otherwise → maps to Status string
         /// </summary>
-        private static string ComputeProcessStatus(PatientCase rawCase, Diagnosisdto? diagnosisDto)
+        private static string ComputeProcessStatus(PatientCaseDto dto, Diagnosisdto? diagnosisDto)
         {
-            if (rawCase.Status == CaseStatus.Completed)
+            if (dto.Status == CaseStatus.Completed.ToString())
                 return "Completed";
 
-            if (rawCase.Status == CaseStatus.InProgress)
+            if (dto.Status == CaseStatus.InProgress.ToString())
             {
-                // Check if evaluated (has at least one Done session)
-                bool hasEvaluatedSession = rawCase.Sessions != null &&
-                    rawCase.Sessions.Any(s => s.Status == SessionStatus.Done);
-
-                return hasEvaluatedSession ? "Evaluated" : "InProgress";
+                return dto.HasEvaluatedSession ? "Evaluated" : "InProgress";
             }
 
             // Pending or UnderReview:
             // Priority: UnAssigned first (no student), then diagnosis stage, then raw status
-            if (rawCase.AssignedStudentId == null)
+            if (dto.AssignedStudentId == null)
                 return "UnAssigned";
 
             if (diagnosisDto != null)
@@ -177,63 +143,93 @@ namespace DentalHub.Application.Services.Cases
                     return "AIPreliminaryDiagnosis";
             }
 
-            return rawCase.Status.ToString();
+            return dto.Status.ToString();
         }
 
         /// <summary>
         /// Resolve who the current user is relative to this case and return flags.
         /// </summary>
-        private async Task<CaseUserFlags> ComputeUserFlagsAsync(PatientCase rawCase, Guid userId, string userRole)
+        private async Task<CaseUserFlags> ComputeUserFlagsAsync(PatientCaseDto dto, Guid userId,Guid patientId,Guid patientCaseId, string userRole)
         {
             var flags = new CaseUserFlags
             {
-                IsDoctor = userRole == "Doctor",
-                IsStudent = userRole == "Student"
+                Role= userRole
             };
+            flags.IsAssignedStudent = dto.AssignedStudentId.HasValue;
+            flags.IsAssignedDoctor = dto.AssignedDoctorId.HasValue;
+            
 
-            switch (userRole)
+
+			switch (userRole)
             {
                 case "Patient":
                     {
-                        // Check if this user is the patient who owns the case
-                        var patientSpec = new BaseSpecificationWithProjection<Patient, Guid>(
-                            p => p.User.Id == userId, p => p.Id);
-                        var patientId = await _unitOfWork.Patients.GetByIdAsync(patientSpec);
-                        flags.IsOwner = (patientId != Guid.Empty && patientId == rawCase.PatientId);
+
+                        flags.IsOwner = (patientId != Guid.Empty && patientId == dto.PatientId);
                         break;
                     }
 
                 case "Doctor":
                     {
-                        var doctorSpec = new BaseSpecificationWithProjection<Doctor, Guid>(
-                            d => d.User.Id == userId, d => d.Id);
-                        var doctorId = await _unitOfWork.Doctors.GetByIdAsync(doctorSpec);
+						flags.IsOwner = (userId != Guid.Empty && userId == dto.AssignedDoctorId);
+                        flags.IsAssignedToMe = (userId != Guid.Empty && userId == dto.AssignedDoctorId);
 
-                        flags.IsAssignedDoctor = (doctorId != Guid.Empty && rawCase.AssignedDoctorId == doctorId);
 
-                        // Also check if the doctor has any request on this case
-                        var requestSpec = new BaseSpecification<CaseRequest>(
-                            cr => cr.PatientCaseId == rawCase.Id && cr.Doctor.User.Id == userId &&
-                                  (cr.Status == RequestStatus.Pending || cr.Status == RequestStatus.Approved));
+
+
+						var requestSpec = new BaseSpecificationWithProjection<CaseRequest, RequestDataDto>(
+                            cr => cr.PatientCaseId == dto.Id && cr.DoctorId == userId,cr=>new RequestDataDto
+							{
+                                Id = cr.Id,
+                                Status = cr.Status,
+                                
+                            });
+
+
+
                         var request = await _unitOfWork.CaseRequests.GetByIdAsync(requestSpec);
-                        flags.HasPendingRequest = request != null;
-                        break;
+						if (request != null)
+						{
+							flags.HasRequest = true;
+							flags.RequestStatus = request.Status.ToString();
+							flags.RequestId = request.Id;
+
+						}
+                        else
+                            flags.HasRequest = false;
+						break;
                     }
 
                 case "Student":
                     {
-                        var studentSpec = new BaseSpecificationWithProjection<Student, Guid>(
-                            s => s.User.Id == userId, s => s.Id);
-                        var studentId = await _unitOfWork.Students.GetByIdAsync(studentSpec);
+                       
 
-                        flags.IsAssignedStudent = (studentId != Guid.Empty && rawCase.AssignedStudentId == studentId);
+                        flags.IsAssignedToMe = (userId != Guid.Empty && userId == dto.AssignedStudentId);
+                        flags.IsOwner= (userId != Guid.Empty && userId == dto.AssignedStudentId);
 
-                        // Check if student has a pending/approved request
-                        var requestSpec = new BaseSpecification<CaseRequest>(
-                            cr => cr.PatientCaseId == rawCase.Id && cr.Student.User.Id == userId &&
-                                  (cr.Status == RequestStatus.Pending || cr.Status == RequestStatus.Approved));
+
+						var requestSpec = new BaseSpecificationWithProjection<CaseRequest, RequestDataDto>(
+                            cr => cr.PatientCaseId == dto.Id && cr.Student.User.Id == userId, cr => new RequestDataDto
+                            {
+                                Status = cr.Status,
+                                 Id= cr.Id,
+                                
+
+                            });
                         var request = await _unitOfWork.CaseRequests.GetByIdAsync(requestSpec);
-                        flags.HasPendingRequest = request != null;
+
+                        if (request != null) 
+                        {
+                            flags.HasRequest = true;
+							flags.RequestStatus = request.Status.ToString();
+                            flags.RequestId = request.Id;
+
+						}
+                        else
+                        {
+                            flags.HasRequest = false;
+                        }   
+
                         break;
                     }
             }
@@ -244,65 +240,76 @@ namespace DentalHub.Application.Services.Cases
         /// <summary>
         /// Determine what actions the current user can perform on the case.
         /// </summary>
-        private static List<string> ComputeAvailableActions(CaseUserFlags flags, PatientCase rawCase)
+        private static List<string> ComputeAvailableActions(CaseUserFlags flags, PatientCaseDto dto)
         {
             var actions = new List<string>();
 
-            // ── Patient (Owner) ──
-            if (flags.IsOwner)
+            switch (flags.Role)
             {
-                if (rawCase.Status == CaseStatus.Pending)
-                    actions.Add("EditCase");
+                case "Patient":
+                    {
+                       
+                        if (flags.IsOwner && dto.Status == CaseStatus.Pending.ToString())
+                            actions.Add("Remove");
+         
+                        if (flags.IsOwner)
+                        {
+                            actions.Add("ViewSessions");
+                            actions.Add("ViewDiagnosis");
+                        }
+                        break;
+					}
+                    case "Doctor":
+                    {
+                     
 
-                actions.Add("ViewSessions");
-                actions.Add("ViewDiagnosis");
+                        if (flags.IsAssignedToMe)
+                        {
+                            if (!actions.Contains("ViewCase")) actions.Add("ViewCase");
+                            actions.Add("ViewSessions");
+                            actions.Add("EvaluateSession");
+                            actions.Add("AddDiagnosis");
+                            if (dto.Status == CaseStatus.InProgress.ToString())
+                                actions.Add("CompleteCase");
+                        }
+                     
+                        else if (flags.HasRequest && flags.RequestStatus == RequestStatus.Pending.ToString())
+                        {
+                            if (dto.Status == CaseStatus.Pending.ToString() || !dto.AssignedStudentId.HasValue)
+                            {
+                                actions.Add("AcceptRequest");
+                            }
+                            actions.Add("RejectRequest");
+                        }
+                        break;
+					}
+                    case "Student":
+                    {
+                       
+
+                        if (flags.IsAssignedToMe)
+                        {
+                            if (!actions.Contains("ViewCase")) actions.Add("ViewCase");
+                            actions.Add("ViewSessions");
+                            actions.Add("CreateSession");
+                            actions.Add("AddSessionNote");
+                        }
+                        else if (!flags.HasRequest &&
+                                 (dto.Status == CaseStatus.Pending.ToString() || dto.Status == CaseStatus.UnderReview.ToString()) &&
+                                 dto.IsPublic)
+                        {
+                            actions.Add("RequestCase");
+                        }
+                        else if (flags.HasRequest && flags.RequestStatus == RequestStatus.Pending.ToString ())
+                        {
+                            actions.Add("CancelRequest");
+                        }
+                        break;
+					}
+				default:
+                    break;
             }
-
-            // ── Doctor ──
-            if (flags.IsDoctor)
-            {
-                actions.Add("ViewCase");
-
-                if (flags.IsAssignedDoctor)
-                {
-                    actions.Add("ViewSessions");
-                    actions.Add("EvaluateSession");
-                    actions.Add("AddDiagnosis");
-
-                    if (rawCase.Status == CaseStatus.InProgress)
-                        actions.Add("CompleteCase");
-                }
-                else if (!flags.HasPendingRequest &&
-                         (rawCase.Status == CaseStatus.Pending || rawCase.Status == CaseStatus.UnderReview) &&
-                         rawCase.IsPublic)
-                {
-                    actions.Add("RequestToSupervise");
-                }
-            }
-
-            // ── Student ──
-            if (flags.IsStudent)
-            {
-                actions.Add("ViewCase");
-
-                if (flags.IsAssignedStudent)
-                {
-                    actions.Add("ViewSessions");
-                    actions.Add("CreateSession");
-                    actions.Add("AddSessionNote");
-                }
-                else if (!flags.HasPendingRequest &&
-                         (rawCase.Status == CaseStatus.Pending || rawCase.Status == CaseStatus.UnderReview) &&
-                         rawCase.IsPublic)
-                {
-                    actions.Add("RequestCase");
-                }
-                else if (flags.HasPendingRequest)
-                {
-                    actions.Add("CancelRequest");
-                }
-            }
-
+           
             return actions;
         }
 
@@ -359,76 +366,77 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        public async Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(
-            string? patientName, string? caseType, string? status, int page = 1, int pageSize = 10)
+        public async Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(CaseFilterDto filter)
         {
             try
             {
                 CaseStatus? parsedStatus = null;
-                if (!string.IsNullOrWhiteSpace(status))
+                if (!string.IsNullOrWhiteSpace(filter.Status))
                 {
-                    if (!Enum.TryParse<CaseStatus>(status, ignoreCase: true, out var s))
+                    if (!Enum.TryParse<CaseStatus>(filter.Status, ignoreCase: true, out var s))
                         return Result<PagedResult<PatientCaseDto>>.Failure(
-                            $"Invalid status '{status}'. Valid values: {string.Join(", ", Enum.GetNames<CaseStatus>())}", 400);
+                            $"Invalid status '{filter.Status}'. Valid values: {string.Join(", ", Enum.GetNames<CaseStatus>())}", 400);
                     parsedStatus = s;
                 }
 
-                var nameFilter = patientName?.Trim().ToLower();
-                var caseTypeFilter = caseType?.Trim().ToLower();
+                var nameFilter = filter.PatientName?.Trim().ToLower();
+                var caseTypeFilter = filter.CaseType?.Trim().ToLower();
 
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
                     criteria: pc =>
                         (parsedStatus == null || pc.Status == parsedStatus) &&
                         (nameFilter == null || pc.Patient.User.FullName.ToLower().StartsWith(nameFilter)) &&
-                        (caseTypeFilter == null || pc.Diagnosiss.Any(d => d.CaseType.Name.ToLower().StartsWith(caseTypeFilter))),
-
-                    projection: pc => new PatientCaseDto
-                    {
-                        Id = pc.Id,
-                        PatientId = pc.Patient.Id,
-                        PatientName = pc.Patient.User.FullName,
-                        PatientAge = pc.Patient.Age,
-                        Diagnosisdto = pc.Diagnosiss.Select(d => new Diagnosisdto
-                        {
-                            Id = d.Id,
-                            Notes = d.Notes,
-                            CaseType = d.CaseType.Name,
-                            DiagnosisStage = d.Stage.ToString(),
-                            TeethNumbers = d.TeethNumbers
-                        }).OrderByDescending(d => d.DiagnosisStage).FirstOrDefault(),
-                        Status = pc.Status.ToString(),
-                        IsPublic = pc.IsPublic,
-                        UniversityId = pc.UniversityId,
-                        UniversityName = pc.University != null ? pc.University.Name : null,
-                        CreateAt = pc.CreateAt,
-                        TotalSessions = pc.Sessions.Count,
-                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
-                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
-                    }
+                        (caseTypeFilter == null || pc.Diagnosiss.Any(d => d.CaseType.Name.ToLower().StartsWith(caseTypeFilter))) &&
+                        (filter.Gender == null || pc.Patient.Gender == filter.Gender),
+                    PatientCaseProjections.ToDto
                 );
 
-                spec.ApplyPaging(page, pageSize);
-                spec.ApplyOrderByDescending(pc => pc.CreateAt);
+                spec.ApplyPaging(filter.Page, filter.PageSize);
+
+                if (!string.IsNullOrEmpty(filter.SortBy))
+                {
+                    bool isDesc = filter.SortDirection?.ToLower() == "desc";
+                    switch (filter.SortBy.ToLower())
+                    {
+                        case "name":
+                            if (isDesc) spec.ApplyOrderByDescending(pc => pc.Patient.User.FullName);
+                            else spec.ApplyOrderBy(pc => pc.Patient.User.FullName);
+                            break;
+                        case "age":
+                            if (isDesc) spec.ApplyOrderByDescending(pc => pc.Patient.Age);
+                            else spec.ApplyOrderBy(pc => pc.Patient.Age);
+                            break;
+                        case "date":
+                        default:
+                            if (isDesc) spec.ApplyOrderByDescending(pc => pc.CreateAt);
+                            else spec.ApplyOrderBy(pc => pc.CreateAt);
+                            break;
+                    }
+                }
+                else
+                {
+                    spec.ApplyOrderByDescending(pc => pc.CreateAt);
+                }
 
                 // Separate count spec without paging to get correct total
                 var countSpec = new BaseSpecification<PatientCase>(
                     pc =>
                         (parsedStatus == null || pc.Status == parsedStatus) &&
                         (nameFilter == null || pc.Patient.User.FullName.ToLower().StartsWith(nameFilter)) &&
-                        (caseTypeFilter == null || pc.Diagnosiss.Any(d => d.CaseType.Name.ToLower().StartsWith(caseTypeFilter))));
+                        (caseTypeFilter == null || pc.Diagnosiss.Any(d => d.CaseType.Name.ToLower().StartsWith(caseTypeFilter))) &&
+                        (filter.Gender == null || pc.Patient.Gender == filter.Gender));
 
                 var casesList = await _unitOfWork.PatientCases.GetAllAsync(spec);
                 var totalCount = await _unitOfWork.PatientCases.CountAsync(countSpec);
 
                 var pagedResult = PaginationFactory<PatientCaseDto>.Create(
-                    count: totalCount, page: page, pageSize: pageSize, data: casesList);
+                    count: totalCount, page: filter.Page, pageSize: filter.PageSize, data: casesList);
 
                 return Result<PagedResult<PatientCaseDto>>.Success(pagedResult);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting all cases (patientName={PatientName}, caseType={CaseType}, status={Status})",
-                    patientName, caseType, status);
+                _logger.LogError(ex, "Error getting all cases");
                 return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving cases");
             }
         }
@@ -708,5 +716,12 @@ namespace DentalHub.Application.Services.Cases
                 return Result.Failure("Error assigning university", 500);
             }
         }
+    }
+    public class RequestDataDto
+    {
+        public Guid Id { get; set; }
+        public RequestStatus Status { get; set; }
+        
+
     }
 }

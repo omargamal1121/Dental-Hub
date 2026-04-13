@@ -17,7 +17,7 @@ namespace DentalHub.Application.Services.Doctors
         {
             var spec = new BaseSpecification<Doctor>(d => d.UniversityId == universityId);
 
-            spec.AddInclude(d => d.User);
+           
 
             var doctors = await _unitOfWork.Doctors.GetAllAsync(spec);
 
@@ -112,18 +112,21 @@ namespace DentalHub.Application.Services.Doctors
             }
         }
 
-        public async Task<Result<PagedResult<DoctorlistDto>>> GetAllDoctorsAsync(int page = 1, int pageSize = 10, string? name = null, string? spec = null)
+        public async Task<Result<PagedResult<DoctorlistDto>>> GetAllDoctorsAsync(int page = 1, int pageSize = 10, string? name = null, string? spec = null, string? username = null, Guid? universityId = null)
         {
             try
             {
                 var filterSpec = new BaseSpecificationWithProjection<Doctor, DoctorlistDto>(
                     d => (string.IsNullOrEmpty(name) || d.Name.Contains(name)) &&
-                         (string.IsNullOrEmpty(spec) || d.Specialty.Contains(spec)),
+                         (string.IsNullOrEmpty(spec) || d.Specialty.Contains(spec)) &&
+                         (string.IsNullOrEmpty(username) || d.User.UserName.Contains(username)) &&
+                         (!universityId.HasValue || d.UniversityId == universityId.Value),
                     d => new DoctorlistDto
                     {
                         PublicId = d.Id,
                         FullName = d.User.FullName,
                         Email = d.User.Email!,
+                        Username = d.User.UserName,
                         Name = d.Name,
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,

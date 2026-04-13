@@ -33,15 +33,9 @@ namespace DentalHub.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<PatientCaseDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<PagedResult<PatientCaseDto>>>> GetAll(
-            [FromQuery] string? patientName = null,
-
-            [FromQuery] string? search = null,
-            [FromQuery] string? status = null,
-            [FromQuery] int page = 1,
-            [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ApiResponse<PagedResult<PatientCaseDto>>>> GetAll([FromQuery] CaseFilterDto filter)
         {
-            var result = await _mediator.Send(new GetAllCasesQuery(patientName, search, status, page, pageSize));
+            var result = await _mediator.Send(new GetAllCasesQuery(filter));
             return HandleResult(result);
         }
 

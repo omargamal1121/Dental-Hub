@@ -198,18 +198,18 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                 {
                     // ID 13
                     var pat1Id = Guid.Parse("01960000-0000-7000-8000-000000000006");
-                    var pat1User = new User { Id = pat1Id, FullName = "Mona Tarek", UserName = "mona.tarek", Email = "mona.tarek@gmail.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000013" };
-                    var pat1 = new Patient(pat1Id) { Age = 30, Phone = "01000000013" };
+                    var pat1User = new User { Id = pat1Id, FullName = "Mona Tarek", UserName = "01000000013", Email = "mona.tarek@gmail.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000013" };
+                    var pat1 = new Patient(pat1Id) { Age = 30, Phone = "01000000013", Gender = Gender.Female };
 
                     // ID 14
                     var pat2Id = Guid.Parse("01960000-0000-7000-8000-000000000007");
-                    var pat2User = new User { Id = pat2Id, FullName = "Karim Salah", UserName = "karim.salah", Email = "karim.salah@gmail.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000014" };
-                    var pat2 = new Patient(pat2Id) { Age = 45, Phone = "01000000014" };
+                    var pat2User = new User { Id = pat2Id, FullName = "Karim Salah", UserName = "01000000014", Email = "karim.salah@gmail.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000014" };
+                    var pat2 = new Patient(pat2Id) { Age = 45, Phone = "01000000014", Gender = Gender.Male };
 
                     // ID 15
                     var pat3Id = Guid.Parse("01960000-0000-7000-8000-000000000008");
-                    var pat3User = new User { Id = pat3Id, FullName = "Layla Khaled", UserName = "layla.khaled", Email = "layla.khaled@gmail.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000015" };
-                    var pat3 = new Patient(pat3Id) { Age = 25, Phone = "01000000015" };
+                    var pat3User = new User { Id = pat3Id, FullName = "Layla Khaled", UserName = "01000000015", Email = "layla.khaled@gmail.com", EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000015" };
+                    var pat3 = new Patient(pat3Id) { Age = 25, Phone = "01000000015", Gender = Gender.Female };
 
                     await CreateUserWithRoleAsync(userManager, pat1User, "Patient", "Patient@123", logger);
                     await CreateUserWithRoleAsync(userManager, pat2User, "Patient", "Patient@123", logger);
@@ -254,86 +254,143 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                 // ── 9. Patient Cases ────────────────────────────────────────────────────
                 var case1Id = Guid.Parse("01960000-0000-7000-8000-000000000200");
                 var case2Id = Guid.Parse("01960000-0000-7000-8000-000000000201");
-                var patientMonaId = Guid.Parse("01960000-0000-7000-8000-000000000006"); // Mona
+                var case3Id = Guid.Parse("01960000-0000-7000-8000-000000000202");
+                var case4Id = Guid.Parse("01960000-0000-7000-8000-000000000203");
+                var patientMonaId  = Guid.Parse("01960000-0000-7000-8000-000000000006"); // Mona
                 var patientKarimId = Guid.Parse("01960000-0000-7000-8000-000000000007"); // Karim
-                var studentOmarId = Guid.Parse("01960000-0000-7000-8000-000000000003"); // Omar (Student)
+                var patientLaylaId = Guid.Parse("01960000-0000-7000-8000-000000000008"); // Layla
+                var studentOmarId  = Guid.Parse("01960000-0000-7000-8000-000000000003"); // Omar (Student)
+                var doctorAhmedId  = Guid.Parse("01960000-0000-7000-8000-000000000001"); // Ahmed (Doctor)
+                var doctorSaraId   = Guid.Parse("01960000-0000-7000-8000-000000000002"); // Sara (Doctor)
 
                 if (!await context.PatientCases.AnyAsync())
                 {
                     var patientCases = new List<PatientCase>
                     {
-                        new() { Id = case1Id, PatientId = patientMonaId, Status = CaseStatus.InProgress, Description = "Patient requires root canal on upper right molar.", AssignedStudentId = studentOmarId, UniversityId = cairoId, IsPublic = true },
-                        new() { Id = case2Id, PatientId = patientKarimId, Status = CaseStatus.Pending, Description = "Patient complaining about pain in wisdom tooth.", UniversityId = ainShamsId, IsPublic = false }
+                        // Case 1 – InProgress: Root canal, assigned to Omar supervised by Ahmed
+                        new() { Id = case1Id, PatientId = patientMonaId,  Status = CaseStatus.InProgress,  Description = "Patient requires root canal on upper right molar.",              AssignedStudentId = studentOmarId, AssignedDoctorId = doctorAhmedId, UniversityId = cairoId,    IsPublic = true  },
+                        // Case 2 – Pending: Wisdom tooth pain, not yet assigned
+                        new() { Id = case2Id, PatientId = patientKarimId, Status = CaseStatus.Pending,      Description = "Patient complaining about pain in wisdom tooth.",               UniversityId = ainShamsId, IsPublic = false },
+                        // Case 3 – Pending: Orthodontic evaluation for Layla, public
+                        new() { Id = case3Id, PatientId = patientLaylaId, Status = CaseStatus.Pending,      Description = "Patient seeking orthodontic evaluation for crowded teeth.",     UniversityId = cairoId,    IsPublic = true  },
+                        // Case 4 – Completed: Extraction already done for Mona second case
+                        new() { Id = case4Id, PatientId = patientMonaId,  Status = CaseStatus.Completed,   Description = "Lower left premolar extracted successfully.",                  AssignedStudentId = studentOmarId, AssignedDoctorId = doctorAhmedId, UniversityId = cairoId,    IsPublic = true  },
                     };
                     await context.PatientCases.AddRangeAsync(patientCases);
                     await context.SaveChangesAsync();
-                    logger.LogInformation("✅ Seeded Patient Cases.");
+                    logger.LogInformation("✅ Seeded 4 Patient Cases.");
                 }
 
                 // ── 10. Diagnoses ───────────────────────────────────────────────────────
                 if (!await context.Diagnoses.AnyAsync())
                 {
-                    var doctorAhmedId = Guid.Parse("01960000-0000-7000-8000-000000000001"); // Ahmed (Doctor)
-
                     var diagnoses = new List<Diagnosis>
                     {
-                        new() { Id = Guid.NewGuid(), PatientCaseId = case1Id, CaseTypeId = typeRoot, Stage = DiagnosisStage.AI, Notes = "AI detected pulp infection.", CreatedById = null, Role = "System", IsAccepted = true, TeethNumbers = new List<int> { 14, 15 } },
-                        new() { Id = Guid.NewGuid(), PatientCaseId = case1Id, CaseTypeId = typeRoot, Stage = DiagnosisStage.BasicClinic, Notes = "Confirmed need for root canal.", CreatedById = doctorAhmedId, Role = "Doctor", IsAccepted = true, TeethNumbers = new List<int> { 14, 15 } },
-                        new() { Id = Guid.NewGuid(), PatientCaseId = case2Id, CaseTypeId = typeExt, Stage = DiagnosisStage.AI, Notes = "Possible impacted wisdom tooth.", CreatedById = null, Role = "System", IsAccepted = null, TeethNumbers = new List<int> { 32 } }
+                        // ── Case 1 (Root Canal, InProgress) ──────────────────────────────
+                        // AI preliminary
+                        new() { Id = Guid.CreateVersion7(), PatientCaseId = case1Id, CaseTypeId = typeRoot,  Stage = DiagnosisStage.AI,            Notes = "AI scan detected pulp necrosis in upper right quadrant.",             CreatedById = null,         Role = "System", IsAccepted = true,  TeethNumbers = new List<int> { 14, 15 } },
+                        // Doctor confirms with BasicClinic
+                        new() { Id = Guid.CreateVersion7(), PatientCaseId = case1Id, CaseTypeId = typeRoot,  Stage = DiagnosisStage.BasicClinic,   Notes = "Clinical exam confirms irreversible pulpitis. Root canal indicated.",  CreatedById = doctorAhmedId, Role = "Doctor", IsAccepted = true,  TeethNumbers = new List<int> { 14 } },
+                        // Doctor advances to AdvancedClinic after first session
+                        new() { Id = Guid.CreateVersion7(), PatientCaseId = case1Id, CaseTypeId = typeRoot,  Stage = DiagnosisStage.AdvancedClinic, Notes = "Canal shaping complete. Obturation scheduled next session.",          CreatedById = doctorAhmedId, Role = "Doctor", IsAccepted = true,  TeethNumbers = new List<int> { 14 } },
+
+                        // ── Case 2 (Extraction, Pending) ─────────────────────────────────
+                        // AI preliminary only – still pending doctor review
+                        new() { Id = Guid.CreateVersion7(), PatientCaseId = case2Id, CaseTypeId = typeExt,   Stage = DiagnosisStage.AI,            Notes = "AI flags impacted lower-right wisdom tooth (tooth 32).",              CreatedById = null,         Role = "System", IsAccepted = null,  TeethNumbers = new List<int> { 32 } },
+                        // Sara added a basic clinic note
+                        new() { Id = Guid.CreateVersion7(), PatientCaseId = case2Id, CaseTypeId = typeExt,   Stage = DiagnosisStage.BasicClinic,   Notes = "Panoramic X-ray confirms partial bony impaction. Extraction advised.", CreatedById = doctorSaraId, Role = "Doctor", IsAccepted = false, TeethNumbers = new List<int> { 32 } },
+
+                        // ── Case 3 (Orthodontics, Pending) ───────────────────────────────
+                        // AI preliminary
+                        new() { Id = Guid.CreateVersion7(), PatientCaseId = case3Id, CaseTypeId = typeOrtho, Stage = DiagnosisStage.AI,            Notes = "AI identifies moderate crowding in upper anterior region.",            CreatedById = null,         Role = "System", IsAccepted = null,  TeethNumbers = new List<int> { 6, 7, 8, 9, 10, 11 } },
+
+                        // ── Case 4 (Extraction, Completed) ───────────────────────────────
+                        // Full diagnosis chain for a completed case
+                        new() { Id = Guid.CreateVersion7(), PatientCaseId = case4Id, CaseTypeId = typeExt,   Stage = DiagnosisStage.AI,            Notes = "AI detects periapical abscess around lower left premolar.",            CreatedById = null,         Role = "System", IsAccepted = true,  TeethNumbers = new List<int> { 20 } },
+                        new() { Id = Guid.CreateVersion7(), PatientCaseId = case4Id, CaseTypeId = typeExt,   Stage = DiagnosisStage.BasicClinic,   Notes = "Tooth non-restorable. Simple extraction planned.",                    CreatedById = doctorAhmedId, Role = "Doctor", IsAccepted = true,  TeethNumbers = new List<int> { 20 } },
+                        new() { Id = Guid.CreateVersion7(), PatientCaseId = case4Id, CaseTypeId = typeExt,   Stage = DiagnosisStage.AdvancedClinic, Notes = "Extraction completed without complications. Socket healing well.",     CreatedById = doctorAhmedId, Role = "Doctor", IsAccepted = true,  TeethNumbers = new List<int> { 20 } },
                     };
                     await context.Diagnoses.AddRangeAsync(diagnoses);
                     await context.SaveChangesAsync();
-                    logger.LogInformation("✅ Seeded Diagnoses.");
+                    logger.LogInformation("✅ Seeded 9 Diagnoses across 4 cases.");
                 }
 
                 // ── 11. Sessions & Session Notes ────────────────────────────────────────
                 if (!await context.Sessions.AnyAsync())
                 {
-                    var sessionId = Guid.Parse("01960000-0000-7000-8000-000000000300");
+                    var sess1Id = Guid.Parse("01960000-0000-7000-8000-000000000300");
+                    var sess2Id = Guid.Parse("01960000-0000-7000-8000-000000000301");
+                    var sess3Id = Guid.Parse("01960000-0000-7000-8000-000000000302");
 
-                    var session = new Session
+                    var sessions = new List<Session>
                     {
-                        Id = sessionId,
-                        CaseId = case1Id,
-                        StudentId = studentOmarId,
-                        PatientId = patientMonaId,
-                       
-                        Status = SessionStatus.Scheduled
+                        // Session 1 - Done (graded) on Case 1, evaluated by Ahmed
+                        new()
+                        {
+                            Id = sess1Id, CaseId = case1Id, StudentId = studentOmarId, PatientId = patientMonaId,
+                            StartAt = DateTime.UtcNow.AddDays(-10), EndAt = DateTime.UtcNow.AddDays(-10).AddHours(1),
+                            Status = SessionStatus.Done, Grade = 85,
+                            DoctorNote = "Good initial work. Canal access opening was clean.",
+                            EvaluteDoctorId = doctorAhmedId
+                        },
+                        // Session 2 - Scheduled (upcoming) on Case 1
+                        new()
+                        {
+                            Id = sess2Id, CaseId = case1Id, StudentId = studentOmarId, PatientId = patientMonaId,
+                            StartAt = DateTime.UtcNow.AddDays(3), EndAt = DateTime.UtcNow.AddDays(3).AddHours(1),
+                            Status = SessionStatus.Scheduled, Grade = 0, DoctorNote = string.Empty
+                        },
+                        // Session 3 - Done on Case 4 (Completed), evaluated by Ahmed
+                        new()
+                        {
+                            Id = sess3Id, CaseId = case4Id, StudentId = studentOmarId, PatientId = patientMonaId,
+                            StartAt = DateTime.UtcNow.AddDays(-5), EndAt = DateTime.UtcNow.AddDays(-5).AddHours(1),
+                            Status = SessionStatus.Done, Grade = 90,
+                            DoctorNote = "Extraction performed without complications. Post-op instructions given.",
+                            EvaluteDoctorId = doctorAhmedId
+                        },
                     };
+                    await context.Sessions.AddRangeAsync(sessions);
 
-                    await context.Sessions.AddAsync(session);
-                    
-                    var sessionNote = new SessionNote
+                    var sessionNotes = new List<SessionNote>
                     {
-                        Id = Guid.NewGuid(),
-                        SessionId = sessionId,
-                        Note = "Initial consultation and cleaning before the main procedure."
+                        new() { Id = Guid.CreateVersion7(), SessionId = sess1Id, Note = "Patient arrived on time. Local anesthesia administered successfully." },
+                        new() { Id = Guid.CreateVersion7(), SessionId = sess1Id, Note = "Access cavity prepared. Working length confirmed with X-ray." },
+                        new() { Id = Guid.CreateVersion7(), SessionId = sess2Id, Note = "Pre-appointment reminder sent. Patient confirmed attendance." },
+                        new() { Id = Guid.CreateVersion7(), SessionId = sess3Id, Note = "Forceps delivery of tooth 20. Haemostasis achieved with gauze pack." },
                     };
-                    await context.SessionNotes.AddAsync(sessionNote);
+                    await context.SessionNotes.AddRangeAsync(sessionNotes);
 
                     await context.SaveChangesAsync();
-                    logger.LogInformation("✅ Seeded Sessions and Notes.");
+                    logger.LogInformation("✅ Seeded 3 Sessions and 4 Session Notes.");
                 }
 
                 // ── 12. Case Requests ───────────────────────────────────────────────────
                 if (!await context.CaseRequests.AnyAsync())
                 {
-                    var studentNourId = Guid.Parse("01960000-0000-7000-8000-000000000004"); // Nour
-                    var doctorSaraId = Guid.Parse("01960000-0000-7000-8000-000000000002"); // Sara
+                    var studentNourId    = Guid.Parse("01960000-0000-7000-8000-000000000004"); // Nour    (Ain Shams)
+                    var studentFaridaId  = Guid.Parse("01960000-0000-7000-8000-000000000013"); // Farida  (Alexandria)
+                    var studentMahmoudId = Guid.Parse("01960000-0000-7000-8000-000000000014"); // Mahmoud (Assiut)
+                    var doctorDinaId     = Guid.Parse("01960000-0000-7000-8000-000000000010"); // Dina    (Alexandria)
+                    var doctorHossamId   = Guid.Parse("01960000-0000-7000-8000-000000000009"); // Hossam  (Mansoura)
 
-                    var request = new CaseRequest
+                    var caseRequests = new List<CaseRequest>
                     {
-                        Id = Guid.NewGuid(),
-                        StudentId = studentNourId,
-                        DoctorId = doctorSaraId,
-                        PatientCaseId = case2Id,
-                        Description = "Requesting supervision for wisdom tooth extraction.",
-                        Status = RequestStatus.Pending
+                        // Case 2 - Nour asks Sara (Pending)
+                        new() { Id = Guid.CreateVersion7(), StudentId = studentNourId,    DoctorId = doctorSaraId,   PatientCaseId = case2Id, Description = "Requesting supervision for wisdom tooth extraction.",                  Status = RequestStatus.Pending  },
+                        // Case 3 - Omar asks Ahmed (Pending)
+                        new() { Id = Guid.CreateVersion7(), StudentId = studentOmarId,    DoctorId = doctorAhmedId,  PatientCaseId = case3Id, Description = "I have experience with orthodontic cases and would like to take this.", Status = RequestStatus.Pending  },
+                        // Case 3 - Farida asks Dina (Pending, competing)
+                        new() { Id = Guid.CreateVersion7(), StudentId = studentFaridaId,  DoctorId = doctorDinaId,   PatientCaseId = case3Id, Description = "Keen to treat orthodontic crowding as part of my clinical hours.",    Status = RequestStatus.Pending  },
+                        // Case 3 - Mahmoud's request Rejected
+                        new() { Id = Guid.CreateVersion7(), StudentId = studentMahmoudId, DoctorId = doctorHossamId, PatientCaseId = case3Id, Description = "Would like to work on this orthodontic evaluation.",                  Status = RequestStatus.Rejected },
+                        // Case 1 - Nour's old request Taken (Omar was approved instead)
+                        new() { Id = Guid.CreateVersion7(), StudentId = studentNourId,    DoctorId = doctorAhmedId,  PatientCaseId = case1Id, Description = "I wanted to work on this root canal case.",                         Status = RequestStatus.Taken    },
                     };
 
-                    await context.CaseRequests.AddAsync(request);
+                    await context.CaseRequests.AddRangeAsync(caseRequests);
                     await context.SaveChangesAsync();
-                    logger.LogInformation("✅ Seeded Case Requests.");
+                    logger.LogInformation("✅ Seeded 5 Case Requests across 3 cases.");
                 }
             }
             catch (Exception ex)

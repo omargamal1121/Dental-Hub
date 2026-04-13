@@ -65,8 +65,7 @@ namespace DentalHub.Application.Services.Identity
 
 				await _unitOfWork.BeginTransactionAsync();
 
-	
-				var userName = dto.Phone;
+				var userName = !string.IsNullOrWhiteSpace(dto.UserName) ? dto.UserName : dto.Phone;
 
 				var user = new User
 				{
@@ -103,7 +102,7 @@ namespace DentalHub.Application.Services.Identity
 					Age = age,
 					Phone = dto.Phone,
 					CreateAt = DateTime.UtcNow,
-                    
+					Gender = dto.Gender
 				};
 
 				await _unitOfWork.Patients.AddAsync(patient);

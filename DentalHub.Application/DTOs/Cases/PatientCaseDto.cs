@@ -23,7 +23,10 @@ namespace DentalHub.Application.DTOs.Cases
         public string? UniversityName { get; set; }
         public DateTime CreateAt { get; set; }
         public int TotalSessions { get; set; }
+        public bool HasEvaluatedSession { get; set; }
         public int PendingRequests { get; set; }
+        public Guid? AssignedStudentId { get; set; }
+        public Guid? AssignedDoctorId { get; set; }
         public Diagnosisdto? Diagnosisdto { get; set; }
         public List<string> ImageUrls { get; set; } = new List<string>();
 
@@ -55,19 +58,23 @@ namespace DentalHub.Application.DTOs.Cases
         /// <summary>The current user is the patient who owns this case</summary>
         public bool IsOwner { get; set; }
 
-        /// <summary>The current user is a Doctor</summary>
-        public bool IsDoctor { get; set; }
+		/// <summary>The current user is a Doctor</summary>
+		public string Role { get; set; }
 
-        /// <summary>The current user is a Student</summary>
-        public bool IsStudent { get; set; }
+		/// <summary>The current user is the Doctor assigned to supervise this case</summary>
+		public bool IsAssignedDoctor { get; set; }
 
-        /// <summary>The current user is the Doctor assigned to supervise this case</summary>
-        public bool IsAssignedDoctor { get; set; }
-
-        /// <summary>The current user is the Student assigned to treat this case</summary>
+        /// <summary>The case is assigned to a Student</summary>
         public bool IsAssignedStudent { get; set; }
 
+        /// <summary>The case is assigned to the current user (Doctor or Student)</summary>
+        public bool IsAssignedToMe { get; set; }
+
         /// <summary>The current user has a pending request for this case</summary>
-        public bool HasPendingRequest { get; set; }
+        public bool HasRequest { get; set; }
+        public Guid? RequestId { get; set; }
+        public string? RequestStatus { get; set; }
+
+     
     }
 }

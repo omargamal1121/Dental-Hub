@@ -22,7 +22,7 @@ namespace DentalHub.Application.Services.Students
 
  
         Task<Result<PagedResult<AvailableCasesDto>>> GetAvailableCasesForStudentAsync(
-            Guid studentId,string? casetype=null, int page = 1, int pageSize = 10);
+            Guid studentId, CaseFilterDto filter);
 
         // Student Statistics
         Task<Result<StudentStatsDto>> GetStudentStatisticsAsync(Guid studentId);

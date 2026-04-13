@@ -109,7 +109,7 @@ namespace DentalHub.Application.Handlers.CaseRequests
         public GetCaseRequestsByDoctorIdQueryHandler(ICaseRequestService service) => _service = service;
         public async Task<Result<PagedResult<CaseRequestDto>>> Handle(GetCaseRequestsByDoctorIdQuery request, CancellationToken ct)
         {
-            return await _service.GetRequestsByDoctorIdAsync(request.DoctorPublicId, request.Page, request.PageSize);
+            return await _service.GetRequestsByDoctorIdAsync(request.DoctorPublicId, request.Status,request.Sort,request.Page, request.PageSize);
         }
     }
 

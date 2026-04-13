@@ -270,46 +270,75 @@ namespace DentalHub.Application.Services.Students
 
 
         public async Task<Result<PagedResult<AvailableCasesDto>>> GetAvailableCasesForStudentAsync(
-            Guid studentId, string? CaseName = null, int page = 1, int pageSize = 10)
+            Guid studentId, CaseFilterDto filter)
         {
             try
             {
                 var studentGuid = studentId;
+
+                var nameFilter = filter.PatientName?.Trim().ToLower();
+                var caseTypeFilter = filter.CaseType?.Trim().ToLower();
+
                 var spec = new BaseSpecificationWithProjection<PatientCase, AvailableCasesDto>(
                     pc => pc.Status == CaseStatus.Pending &&
-                          !pc.CaseRequests.Any(cr => cr.StudentId == studentGuid)
-                          && (
-                          string.IsNullOrEmpty(CaseName) 
-                          //||pc.CaseType.Name.Contains(CaseName) || pc.CaseType.Description.Contains(CaseName)
-                          ),
+                          !pc.CaseRequests.Any(cr => cr.StudentId == studentGuid) &&
+                          (nameFilter == null || pc.Patient.User.FullName.ToLower().StartsWith(nameFilter)) &&
+                          (caseTypeFilter == null || pc.Diagnosiss.Any(d => d.CaseType.Name.ToLower().StartsWith(caseTypeFilter))) &&
+                          (filter.Gender == null || pc.Patient.Gender == filter.Gender),
                     pc => new AvailableCasesDto
                     {
                         Id = pc.Id,
                         PatientId = pc.Patient.Id,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        //CaseType = new DTOs.CaseTypes.CaseTypeDto
-                        //{
-                        //    publicId = pc.CaseType.Id,
-                        //    Name = pc.CaseType.Name,
-                        //    Description = pc.CaseType.Description
-                        //},
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
                     }
                 );
 
-                spec.ApplyPaging(page, pageSize);
-                spec.ApplyOrderByDescending(pc => pc.CreateAt);
+                spec.ApplyPaging(filter.Page, filter.PageSize);
+                
+                if (!string.IsNullOrEmpty(filter.SortBy))
+                {
+                    bool isDesc = filter.SortDirection?.ToLower() == "desc";
+                    switch (filter.SortBy.ToLower())
+                    {
+                        case "name":
+                            if (isDesc) spec.ApplyOrderByDescending(pc => pc.Patient.User.FullName);
+                            else spec.ApplyOrderBy(pc => pc.Patient.User.FullName);
+                            break;
+                        case "age":
+                            if (isDesc) spec.ApplyOrderByDescending(pc => pc.Patient.Age);
+                            else spec.ApplyOrderBy(pc => pc.Patient.Age);
+                            break;
+                        case "date":
+                        default:
+                            if (isDesc) spec.ApplyOrderByDescending(pc => pc.CreateAt);
+                            else spec.ApplyOrderBy(pc => pc.CreateAt);
+                            break;
+                    }
+                }
+                else
+                {
+                    spec.ApplyOrderByDescending(pc => pc.CreateAt);
+                }
+
+                var countSpec = new BaseSpecification<PatientCase>(
+                    pc => pc.Status == CaseStatus.Pending &&
+                          !pc.CaseRequests.Any(cr => cr.StudentId == studentGuid) &&
+                          (nameFilter == null || pc.Patient.User.FullName.ToLower().StartsWith(nameFilter)) &&
+                          (caseTypeFilter == null || pc.Diagnosiss.Any(d => d.CaseType.Name.ToLower().StartsWith(caseTypeFilter))) &&
+                          (filter.Gender == null || pc.Patient.Gender == filter.Gender)
+                );
 
                 var casesList = await _unitOfWork.PatientCases.GetAllAsync(spec);
-                var totalCount = await _unitOfWork.PatientCases.CountAsync(spec);
+                var totalCount = await _unitOfWork.PatientCases.CountAsync(countSpec);
 
                 var pagedResult = PaginationFactory<AvailableCasesDto>.Create(
                     count: totalCount,
-                    page: page,
-                    pageSize: pageSize,
+                    page: filter.Page,
+                    pageSize: filter.PageSize,
                     data: casesList
                 );
 

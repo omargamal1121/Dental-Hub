@@ -12,7 +12,7 @@ namespace DentalHub.Application.Services.Doctors
         Task<Result<DoctorDto>> GetDoctorByUserIdAsync(Guid userId);
 
         Task<Result<PagedResult<DoctorlistDto>>> GetAllDoctorsAsync(
-            int page = 1, int pageSize = 10, string? name = null, string? spec = null);
+            int page = 1, int pageSize = 10, string? name = null, string? spec = null, string? username = null, Guid? universityId = null);
 
         Task<Result<DoctorDto>> UpdateDoctorAsync(UpdateDoctorDto dto);
 

@@ -1,4 +1,5 @@
 using DentalHub.Application.Commands.CaseRequests;
+using Microsoft.AspNetCore.Authorization;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Cases;
 using DentalHub.Application.DTOs.Shared;
@@ -22,11 +23,17 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Student")]
         [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<Guid>>> Create([FromBody] CreateCaseRequestDto dto)
         {
-            var command = new CreateCaseRequestCommand(dto.PatientCasePublicId, dto.StudentPublicId, dto.DoctorUsername, dto.Description);
+            var studentId = GetUserIdFromToken();
+            if (studentId == null)
+                return CreateErrorResponse<Guid>("Unauthorized: Invalid token", 401);
+
+            var command = new CreateCaseRequestCommand(dto.PatientCasePublicId, studentId.Value, dto.DoctorUsername, dto.Description);
             var result = await _mediator.Send(command);
             return HandleResult(result);
         }
@@ -44,9 +51,9 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("doctor/{doctorId}")]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<CaseRequestDto>>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetRequestsByDoctor(Guid doctorId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ApiResponse<PagedResult<CaseRequestDto>>>> GetRequestsByDoctor(Guid doctorId,RequestStatus? status,string Sort, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            var result = await _mediator.Send(new GetCaseRequestsByDoctorIdQuery(doctorId, page, pageSize));
+            var result = await _mediator.Send(new GetCaseRequestsByDoctorIdQuery(doctorId, status,page, pageSize,Sort));
             return HandleResult(result);
         }
 

@@ -6,7 +6,7 @@ using MediatR;
 
 namespace DentalHub.Application.Handlers.Sessions
 {
-    public class CreateSessionCommandHandler : IRequestHandler<CreateSessionCommand, Result<Guid>>
+    public class CreateSessionCommandHandler : IRequestHandler<CreateSessionCommand, Result<bool>>
     {
         private readonly ISessionService _service;
 
@@ -15,7 +15,7 @@ namespace DentalHub.Application.Handlers.Sessions
             _service = service;
         }
 
-        public async Task<Result<Guid>> Handle(CreateSessionCommand request, CancellationToken ct)
+        public async Task<Result<bool>> Handle(CreateSessionCommand request, CancellationToken ct)
         {
             var dto = new CreateSessionDto
             {
@@ -28,10 +28,10 @@ namespace DentalHub.Application.Handlers.Sessions
 
             if (!result.IsSuccess)
             {
-                return Result<Guid>.Failure(result.Errors ?? new List<string> { result.Message ?? "Session creation failed" }, result.Status);
+                return Result<bool>.Failure(result.Errors ?? new List<string> { result.Message ?? "Session creation failed" }, result.Status);
             }
 
-            return Result<Guid>.Success(result.Data.Id, result.Message, result.Status);
+            return Result<bool>.Success(result.Data, result.Message, result.Status);
         }
     }
 }
