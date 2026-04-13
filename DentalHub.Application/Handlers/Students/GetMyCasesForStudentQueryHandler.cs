@@ -4,26 +4,30 @@ using DentalHub.Application.Queries.Students;
 using DentalHub.Application.Services.Students;
 using MediatR;
 
-namespace DentalHub.Application.Handlers.Students
+public class GetAvailableCasesForStudentQueryHandler
+    : IRequestHandler<GetAvailableCasesForStudentQuery, Result<PagedResult<AvailableCasesDto>>>
 {
-    public class GetMyCasesForStudentQueryHandler
-        : IRequestHandler<GetMyCasesForStudentQuery, Result<PagedResult<PatientCaseDto>>>
+    private readonly IStudentService _service;
+
+    public GetAvailableCasesForStudentQueryHandler(IStudentService service)
     {
-        private readonly IStudentService _service;
+        _service = service;
+    }
 
-        public GetMyCasesForStudentQueryHandler(IStudentService service)
-        {
-            _service = service;
-        }
-
-        public async Task<Result<PagedResult<PatientCaseDto>>> Handle(
-            GetMyCasesForStudentQuery request, CancellationToken cancellationToken)
-        {
-            return await _service.GetMyCasesForStudentAsync(
-                request.StudentPublicId,
-                request.Casetype,
-                request.Page,
-                request.PageSize);
-        }
+    public async Task<Result<PagedResult<AvailableCasesDto>>> Handle(
+        GetAvailableCasesForStudentQuery request,
+        CancellationToken cancellationToken)
+    {
+        return await _service.GetAvailableCasesForStudentAsync(
+            request.StudentPublicId,
+            request.PatientName,
+            request.CaseType,
+            request.Gender,
+            request.DiagnosisSource,
+            request.SortBy,
+            request.IsDescending,
+            request.Page,
+            request.PageSize);
     }
 }
+

@@ -19,6 +19,60 @@ namespace DentalHub.Application.Services.Sessions
             _unitOfWork = unitOfWork;
             _logger = logger;
         }
+        public async Task<Result<PagedResult<SessionDto>>> GetUpcomingSessionsAsync(
+         int page,
+         int pageSize,
+         Guid? studentId,
+         Guid? patientId)
+        {
+            try
+            {
+                var now = DateTime.UtcNow;
+
+                var spec = new BaseSpecificationWithProjection<Session, SessionDto>(
+                    s =>
+                        s.CreateAt >= now &&
+
+                        (!studentId.HasValue || s.StudentId == studentId.Value) &&
+                        (!patientId.HasValue || s.PatientId == patientId.Value),
+
+                    s => new SessionDto
+                    {
+                        Id = s.Id,
+
+                        PatientId = s.PatientId,
+                        StudentId = s.StudentId,
+
+                        Status = s.Status.ToString(),
+                        CreateAt = s.CreateAt
+                    }
+                );
+
+                spec.ApplyOrderBy(s => s.CreateAt);
+                spec.ApplyPaging(page, pageSize);
+
+                var sessions = await _unitOfWork.Sessions.GetAllAsync(spec);
+                var totalCount = await _unitOfWork.Sessions.CountAsync(spec);
+
+                var pagedResult = PaginationFactory<SessionDto>.Create(
+                    count: totalCount,
+                    page: page,
+                    pageSize: pageSize,
+                    data: sessions
+                );
+
+                return Result<PagedResult<SessionDto>>.Success(pagedResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting upcoming sessions");
+
+                return Result<PagedResult<SessionDto>>.Failure(
+                    "Error retrieving upcoming sessions");
+            }
+        }
+
+
 
         #region CRUD Operations
 
