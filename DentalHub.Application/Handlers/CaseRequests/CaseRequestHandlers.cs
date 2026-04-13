@@ -19,7 +19,7 @@ namespace DentalHub.Application.Handlers.CaseRequests
             {
                 PatientCasePublicId = request.PatientCasePublicId,
                 StudentPublicId = request.StudentPublicId,
-                DoctorPublicId = request.DoctorPublicId,
+                DoctorUsername = request.DoctorUsername,
                 Description = request.Description
             });
         }

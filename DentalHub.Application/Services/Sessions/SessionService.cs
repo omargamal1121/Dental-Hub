@@ -1,10 +1,11 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Sessions;
+using DentalHub.Application.Factories;
+using DentalHub.Application.Services.Cases;
+using DentalHub.Application.Specification.Comman;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.UnitOfWork;
-using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
-using DentalHub.Application.Specification.Comman;
 
 namespace DentalHub.Application.Services.Sessions
 {
@@ -39,6 +40,33 @@ namespace DentalHub.Application.Services.Sessions
                 var student = await _unitOfWork.Students.GetByIdAsync(new BaseSpecification<Student>(s => s.Id == dto.StudentId));
                 if (student == null)
                     return Result<SessionDto>.Failure("Student not found");
+                }
+                Guid doctorId;
+
+                if (!string.IsNullOrWhiteSpace(dto.DoctorUsername))
+                {
+                    var doctor = await _unitOfWork.Doctors.GetByIdAsync(
+                        new BaseSpecificationWithProjection<Doctor, GetIdsDto>(
+                            d => d.User.UserName == dto.DoctorUsername,
+                            d => new GetIdsDto { Id = d.Id }));
+
+                    if (doctor == null)
+                        return Result<SessionDto>.Failure("Doctor not found");
+
+                    doctorId = doctor.Id;
+                }
+
+                else if (dto.DoctorId.HasValue)
+                {
+                    doctorId = dto.DoctorId.Value;
+                }
+
+                else
+                {
+                    return Result<SessionDto>.Failure("Doctor is required");
+                }
+                patientCase.AssignedDoctorId = doctorId;
+                _unitOfWork.PatientCases.Update(patientCase);
 
                 var approvedRequest = await _unitOfWork.CaseRequests.GetByIdAsync(new BaseSpecification<CaseRequest>(cr =>
                     cr.PatientCaseId == patientCase.Id &&
@@ -47,6 +75,19 @@ namespace DentalHub.Application.Services.Sessions
                 if (approvedRequest == null)
                     return Result<SessionDto>.Failure("Student does not have approval to work on this case");
 
+                var overlappingSessionSpec = new BaseSpecification<Session>(s =>
+                    s.StudentId == student.Id &&
+                   
+                    s.Status != SessionStatus.Cancelled);
+
+                var overlappingSession = await _unitOfWork.Sessions.AnyAsync(overlappingSessionSpec);
+                if (overlappingSession != null)
+                {
+                    return Result<SessionDto>.Failure(
+                        $"You already have a session scheduled at {dto.ScheduledAt:yyyy-MM-dd HH:mm}");
+                }
+
+                // VALIDATION 4: Cannot schedule in the past
                 if (dto.ScheduledAt < DateTime.UtcNow)
                     return Result<SessionDto>.Failure("Cannot schedule a session in the past");
 
@@ -54,6 +95,8 @@ namespace DentalHub.Application.Services.Sessions
                 {
                     CaseId = patientCase.Id,
                     StudentId = student.Id,
+                    PatientId = patient.Id  ,
+                    EvaluteDoctorId = doctorId,
                     PatientId = patient.Id,
                     StartAt = dto.ScheduledAt,
                     EndAt = dto.ScheduledAt.AddHours(1),

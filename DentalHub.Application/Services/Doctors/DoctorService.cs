@@ -13,6 +13,24 @@ namespace DentalHub.Application.Services.Doctors
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<DoctorService> _logger;
+        public async Task<Result<List<DoctorLookupDto>>> GetDoctorsByUniversityAsync(Guid universityId)
+        {
+            var spec = new BaseSpecification<Doctor>(d => d.UniversityId == universityId);
+
+            spec.AddInclude(d => d.User);
+
+            var doctors = await _unitOfWork.Doctors.GetAllAsync(spec);
+
+            var result = doctors.Select(d => new DoctorLookupDto
+            {
+                Username = d.User != null ? d.User.UserName : "",
+                FullName = d.Name,
+                Specialty = d.Specialty,
+                UniversityName = d.University.Name
+            }).ToList();
+
+            return Result<List<DoctorLookupDto>>.Success(result);
+        }
 
         public DoctorService(IUnitOfWork unitOfWork, ILogger<DoctorService> logger)
         {
@@ -329,5 +347,8 @@ namespace DentalHub.Application.Services.Doctors
     {
         public Guid Id { get; set; }
         public bool HasProgressCases { get; set; }
+
     }
+
+
 }
