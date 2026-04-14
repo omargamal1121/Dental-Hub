@@ -328,6 +328,10 @@ namespace DentalHub.Application.Services.Cases
                         PatientId = pc.Patient.Id,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
+
+                        AssignedStudentId = pc.AssignedStudentId,
+                        AssignedDoctorId = pc.AssignedDoctorId,
+
                         Diagnosisdto = pc.Diagnosiss.Select(d => new Diagnosisdto
                         {
                             Id = d.Id,
