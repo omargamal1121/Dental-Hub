@@ -19,12 +19,7 @@ namespace DentalHub.Application.Handlers.PatientCase
         public async Task<Result<PagedResult<PatientCaseDto>>> Handle(
             GetAllCasesQuery request, CancellationToken cancellationToken)
         {
-            return await _service.GetAllCasesAsync(
-                request.PatientName,
-                request.Search,
-                request.Status,
-                request.Page,
-                request.PageSize);
+            return await _service.GetAllCasesAsync(request.Filter);
         }
     }
 }

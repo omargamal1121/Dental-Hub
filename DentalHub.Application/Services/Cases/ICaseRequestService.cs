@@ -10,7 +10,7 @@ namespace DentalHub.Application.Services.Cases
 
         // Get Requests
         Task<Result<PagedResult<CaseRequestDto>>> GetRequestsByDoctorIdAsync(
-            Guid doctorId, int page = 1, int pageSize = 10);
+            Guid doctorId, RequestStatus? status = null, string? sortDirection = "desc", int page = 1, int pageSize = 10);
 
         Task<Result<PagedResult<CaseRequestDto>>> GetRequestsByStudentIdAsync(
             Guid studentId, RequestStatus? status = null, int page = 1, int pageSize = 10);

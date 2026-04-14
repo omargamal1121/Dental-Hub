@@ -30,38 +30,46 @@ namespace DentalHub.Application.Services.Cases
             {
                 await _unitOfWork.BeginTransactionAsync();
 
+                var checkonpatientCase = await _unitOfWork.PatientCases.AnyAsync(new BaseSpecification<PatientCase>
+                {
 
-                var patientCaseId = dto.PatientCasePublicId;
+                    Criteria=pc=>pc.Id==dto.PatientCasePublicId&&pc.Status==CaseStatus.Pending
+                });
 
-                if (patientCaseId == Guid.Empty)
+
+				if (!checkonpatientCase){
+                    _logger.LogInformation("Patient case not found or taken");
                     return Result<Guid>.Failure("Patient case not found or taken");
+}
 
 
-
-                var doctorIds = await _unitOfWork.Doctors.GetByIdAsync(
+                var doctorIds =( await _unitOfWork.Doctors.GetAllAsync(
                     new BaseSpecificationWithProjection<Doctor, GetIdsDto>(
-                        d => d.User.UserName == dto.DoctorUsername,
-                        d => new GetIdsDto { Id = d.Id, UniversityId = d.UniversityId }));
+                        d => d.User.UserName == dto.DoctorUsername||d.User.Email==dto.DoctorUsername,
+                        d => new GetIdsDto { Id = d.Id, UniversityId = d.UniversityId }))).FirstOrDefault();
 
-                if (doctorIds == null)
+
+                if (doctorIds==null){
+                    _logger.LogInformation("Doctor not found");
                     return Result<Guid>.Failure("Doctor not found");
+                }
 
 
 
-                var studentId = await _unitOfWork.Students.GetByIdAsync(
-                    new BaseSpecificationWithProjection<Student, Guid>(
-                        s => s.Id == dto.StudentPublicId && s.UniversityId == doctorIds.UniversityId,
-                        s => s.Id));
+                var studentId = await _unitOfWork.Students.AnyAsync(
+                    new BaseSpecification<Student>(
+                        s => s.Id == dto.StudentPublicId && s.UniversityId == doctorIds.UniversityId));
 
-                if (studentId == Guid.Empty)
+                if (!studentId){
+                    _logger.LogInformation($"not found {nameof(Student)}: {studentId}");
                     return Result<Guid>.Failure("Student not found");
-
+                }
 
 
                 var duplicate = await _unitOfWork.CaseRequests.AnyAsync(
                     new BaseSpecification<CaseRequest>(cr =>
-                        cr.PatientCaseId == patientCaseId &&
-                        cr.StudentId == studentId &&
+                        cr.PatientCaseId == dto.PatientCasePublicId &&
+                        cr.StudentId == dto.StudentPublicId &&
                         cr.DoctorId == doctorIds.Id));
 
                 if (duplicate)
@@ -71,8 +79,8 @@ namespace DentalHub.Application.Services.Cases
 
                 var caseRequest = new CaseRequest
                 {
-                    PatientCaseId = patientCaseId,
-                    StudentId = studentId,
+                    PatientCaseId = dto.PatientCasePublicId,
+                    StudentId = dto.StudentPublicId,
                     DoctorId = doctorIds.Id,
                     Description = dto.Description,
                     Status = RequestStatus.Pending
@@ -103,12 +111,12 @@ namespace DentalHub.Application.Services.Cases
 
 
         public async Task<Result<PagedResult<CaseRequestDto>>> GetRequestsByDoctorIdAsync(
-            Guid doctorId, int page = 1, int pageSize = 10)
+            Guid doctorId, RequestStatus? status = null, string? sortDirection = "desc", int page = 1, int pageSize = 10)
         {
             try
             {
                 var spec = new BaseSpecificationWithProjection<CaseRequest, CaseRequestDto>(
-                    cr => cr.DoctorId == doctorId,
+                    cr => cr.DoctorId == doctorId && (!status.HasValue || cr.Status == status.Value),
                     cr => new CaseRequestDto
                     {
                         Id = cr.Id,
@@ -126,9 +134,12 @@ namespace DentalHub.Application.Services.Cases
                     }
                 );
 
+                if (sortDirection?.ToLower() == "asc")
+                    spec.ApplyOrderBy(cr => cr.CreateAt);
+                else
+                    spec.ApplyOrderByDescending(cr => cr.CreateAt);
 
                 spec.ApplyPaging(page, pageSize);
-                spec.ApplyOrderByDescending(cr => cr.CreateAt);
 
                 var requestsList = await _unitOfWork.CaseRequests.GetAllAsync(spec);
                 var totalCount = await _unitOfWork.CaseRequests.CountAsync(spec);

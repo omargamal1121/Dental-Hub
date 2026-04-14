@@ -4,6 +4,7 @@ using DentalHub.Infrastructure.ContextAndConfig;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DentalHub.Infrastructure.Migrations
 {
     [DbContext(typeof(ContextApp))]
-    partial class ContextAppModelSnapshot : ModelSnapshot
+    [Migration("20260413231401_add-gender")]
+    partial class addgender
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -300,12 +303,6 @@ namespace DentalHub.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("CreatedById")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("CreatedByRole")
-                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("DeleteAt")
                         .HasColumnType("datetime(6)");

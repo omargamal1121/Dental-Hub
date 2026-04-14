@@ -24,7 +24,9 @@ namespace DentalHub.Application.Handlers.PatientCase
                 IsPublic = request.IsPublic,
                 UniversityId = request.UniversityId,
                 Description = request.Description,
-                Images = request.Images
+                Images = request.Images,
+                CreatedById = request.CreatedById,
+                CreatedByRole = request.CreatedByRole
             };
 
             var result = await _service.CreateCaseAsync(dto);

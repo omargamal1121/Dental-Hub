@@ -23,7 +23,8 @@ public enum SessionStatus
 {
     Scheduled,
     Done,
-    Cancelled
+    Cancelled,
+    Expired,
 }
 public enum Gender
 {

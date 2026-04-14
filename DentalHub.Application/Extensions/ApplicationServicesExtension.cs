@@ -9,6 +9,7 @@ using DentalHub.Application.Services;
 using DentalHub.Application.Services.Sessions;
 using DentalHub.Application.Services.Students;
 using DentalHub.Application.Services.UniversityMembers;
+using DentalHub.Application.Services.Universities;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,6 +44,7 @@ namespace DentalHub.Application.Extensions
 
             // Register University Member Service
             services.AddScoped<IUniversityMemberService, UniversityMemberService>();
+            services.AddScoped<IUniversityService, UniversityService>();
 
             // Register FluentValidation
             services.AddValidatorsFromAssembly(typeof(ApplicationServicesExtension).Assembly);

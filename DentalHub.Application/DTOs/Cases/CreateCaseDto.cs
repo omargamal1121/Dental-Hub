@@ -16,5 +16,7 @@ namespace DentalHub.Application.DTOs.Cases
         public Guid? UniversityId { get; set; }
 
         public List<IFormFile>? Images { get; set; }
+        public Guid? CreatedById { get; set; }
+        public string? CreatedByRole { get; set; }
     }
 }

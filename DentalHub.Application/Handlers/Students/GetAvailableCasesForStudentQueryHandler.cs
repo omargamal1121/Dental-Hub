@@ -21,6 +21,7 @@ namespace DentalHub.Application.Handlers.Students
             GetAvailableCasesForStudentQuery request,
             CancellationToken cancellationToken)
         {
+<<<<<<< HEAD
             var data = await _service.GetAvailableCasesAsync(
                 request.StudentPublicId,
                 request.PatientName,
@@ -35,6 +36,9 @@ namespace DentalHub.Application.Handlers.Students
 
             return Result<PagedResult<AvailableCasesDto>>.Success(data);
 
+=======
+            return await _service.GetAvailableCasesForStudentAsync(request.StudentPublicId, request.Filter);
+>>>>>>> 06fab53184b37dc7805f290a4acd8dead9fd536c
         }
     }
 

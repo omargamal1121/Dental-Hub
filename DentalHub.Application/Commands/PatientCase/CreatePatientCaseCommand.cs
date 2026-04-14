@@ -12,6 +12,8 @@ namespace DentalHub.Application.Commands.PatientCase
         Guid CaseTypeId,
         bool IsPublic = false,
         Guid? UniversityId = null,
-        List<IFormFile>? Images = null
+        List<IFormFile>? Images = null,
+        Guid? CreatedById = null,
+        string? CreatedByRole = null
     ) : IRequest<Result<Guid>>;
 }

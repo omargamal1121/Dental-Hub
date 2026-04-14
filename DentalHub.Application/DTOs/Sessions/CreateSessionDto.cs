@@ -10,5 +10,6 @@ namespace DentalHub.Application.DTOs.Sessions
         public string? DoctorUsername { get; set; }
         public Guid? DoctorId { get; set; }
         public DateTime ScheduledAt { get; set; }
+  
     }
 }

@@ -114,6 +114,7 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("available-cases")]
         [Authorize(Roles = "Student")]
+<<<<<<< HEAD
         public async Task<ActionResult<ApiResponse<PagedResult<AvailableCasesDto>>>> GetAvailableCases(
     [FromQuery] string? patientName = null,
     [FromQuery] string? caseType = null,
@@ -123,11 +124,17 @@ namespace DentalHub.API.Controllers
     [FromQuery] bool isDesc = false,
     [FromQuery] int page = 1,
     [FromQuery] int pageSize = 10)
+=======
+        [ProducesResponseType(typeof(ApiResponse<PagedResult<AvailableCasesDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<ApiResponse<PagedResult<AvailableCasesDto>>>> GetAvailableCases([FromQuery] CaseFilterDto filter)
+>>>>>>> 06fab53184b37dc7805f290a4acd8dead9fd536c
         {
             var studentId = GetUserIdFromToken();
             if (studentId == null)
                 return CreateErrorResponse<PagedResult<AvailableCasesDto>>("Unauthorized", 401);
 
+<<<<<<< HEAD
             var query = new GetAvailableCasesForStudentQuery(
                 studentId.Value,
                 patientName,
@@ -141,6 +148,9 @@ namespace DentalHub.API.Controllers
             );
 
             var result = await _mediator.Send(query);
+=======
+            var result = await _mediator.Send(new GetAvailableCasesForStudentQuery(studentPublicId.Value, filter));
+>>>>>>> 06fab53184b37dc7805f290a4acd8dead9fd536c
             return HandleResult(result);
         }
 

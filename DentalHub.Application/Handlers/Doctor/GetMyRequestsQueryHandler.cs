@@ -1,4 +1,4 @@
-﻿using DentalHub.Application.Common;
+using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Cases;
 using DentalHub.Application.Queries.Doctor;
 using DentalHub.Application.Services.Cases;
@@ -20,6 +20,8 @@ namespace DentalHub.Application.Handlers.Doctor
         {
             return await _caseRequestService.GetRequestsByDoctorIdAsync(
                 request.DoctorUserId,
+                request.Status,
+                request.SortDirection,
                 request.Page,
                 request.PageSize);
         }

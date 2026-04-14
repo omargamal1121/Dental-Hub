@@ -15,6 +15,7 @@ using DentalHub.Application.DTOs.Cases;
 public class GetAvailableCasesForStudentQuery
     : IRequest<Result<PagedResult<AvailableCasesDto>>>
 {
+<<<<<<< HEAD
     public Guid StudentPublicId { get; }
 
     public string? PatientName { get; }
@@ -50,5 +51,11 @@ public class GetAvailableCasesForStudentQuery
         Page = page;
         PageSize = pageSize;
     }
+=======
+    public record GetAvailableCasesForStudentQuery(
+		Guid StudentPublicId,
+        CaseFilterDto Filter
+    ) : IRequest<Result<PagedResult<AvailableCasesDto>>>;
+>>>>>>> 06fab53184b37dc7805f290a4acd8dead9fd536c
 }
 

@@ -113,7 +113,7 @@ namespace DentalHub.API.Controllers
             var result = await _mediator.Send(new DeleteDiagnosisCommand(id));
             return HandleResult(result);
         }
-
+    
         [HttpPost("{id}/accept")]
         [Authorize(Roles = "Doctor,Admin")]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]

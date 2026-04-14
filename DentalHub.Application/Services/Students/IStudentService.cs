@@ -22,6 +22,7 @@ namespace DentalHub.Application.Services.Students
 
 
         Task<Result<PagedResult<AvailableCasesDto>>> GetAvailableCasesForStudentAsync(
+<<<<<<< HEAD
         Guid studentId,
         string? patientName,
         string? caseType,
@@ -32,6 +33,9 @@ namespace DentalHub.Application.Services.Students
         int page = 1,
         int pageSize = 10);
 
+=======
+            Guid studentId, CaseFilterDto filter);
+>>>>>>> 06fab53184b37dc7805f290a4acd8dead9fd536c
 
         // Student Statistics
         Task<Result<StudentStatsDto>> GetStudentStatisticsAsync(Guid studentId);

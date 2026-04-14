@@ -28,7 +28,7 @@ namespace DentalHub.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<Guid>>> Create([FromBody] CreateSessionCommand command)
+        public async Task<ActionResult<ApiResponse<bool>>> Create([FromBody] CreateSessionCommand command)
         {
             var result = await _mediator.Send(command);
             return HandleResult(result);

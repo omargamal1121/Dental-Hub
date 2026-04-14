@@ -14,12 +14,7 @@ namespace DentalHub.Application.Services.Cases
         Task<Result<PatientCaseDto>> GetCaseByIdAsync(Guid id, Guid? userId = null, string? userRole = null);
 
         Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(int page = 1, int pageSize = 10);
-        Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(
-            string? patientName,
-            string? caseType,
-            string? status,
-            int page = 1,
-            int pageSize = 10);
+        Task<Result<PagedResult<PatientCaseDto>>> GetAllCasesAsync(CaseFilterDto filter);
 
         Task<Result<PatientCaseDto>> UpdateCaseAsync(UpdateCaseDto dto);
         Task<Result> DeleteCaseByIdAsync(Guid id);

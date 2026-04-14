@@ -25,5 +25,7 @@ namespace DentalHub.Domain.Entities
 		public Guid? UniversityId { get; set; }
 		public University? University { get; set; }
 
+        public Guid? CreatedById { get; set; }
+        public string? CreatedByRole { get; set; }
 	}
 }

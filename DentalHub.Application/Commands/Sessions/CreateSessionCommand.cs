@@ -8,5 +8,5 @@ namespace DentalHub.Application.Commands.Sessions
     Guid PatientCaseId,
     DateTime SessionDate,
     string Location
-) : IRequest<Result<Guid>>;
+) : IRequest<Result<bool>>;
 }
