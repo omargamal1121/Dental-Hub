@@ -135,17 +135,7 @@ namespace DentalHub.API.Controllers
             return HandleResult(result);
         }
 
-        [AllowAnonymous]
-        [HttpGet("university-doctors")]
-        public async Task<ActionResult<ApiResponse<List<DoctorLookupDto>>>> GetUniversityDoctors(
-            [FromQuery] Guid universityId,
-            [FromQuery] string? name)
-        {
-            var result = await _mediator.Send(
-                new GetUniversityDoctorsQuery(universityId, name));
-
-            return HandleResult(result);
-        }
+    
     }
         #endregion
 

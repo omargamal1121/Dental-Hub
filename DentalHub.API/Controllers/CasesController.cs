@@ -16,10 +16,12 @@ namespace DentalHub.API.Controllers
     public class CasesController : BaseController
     {
         private readonly IMediator _mediator;
+        private readonly IConfiguration _configuration;
 
-        public CasesController(IMediator mediator) : base()
+        public CasesController(IMediator mediator, IConfiguration configuration) : base()
         {
             _mediator = mediator;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -49,6 +51,26 @@ namespace DentalHub.API.Controllers
         public async Task<ActionResult<ApiResponse<Guid>>> Create([FromForm] CreatePatientCaseCommand command)
         {
             var result = await _mediator.Send(command);
+            return HandleResult(result);
+        }
+
+        [HttpPost("ai/create")]
+        [Consumes("multipart/form-data")]
+        [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<ApiResponse<Guid>>> CreateByAI([FromForm] CreatePatientCaseCommand command)
+        {
+            var headerApiKey = Request.Headers["X-AI-API-KEY"].FirstOrDefault();
+            var configuredApiKey = _configuration["AI_Configuration:ApiKey"];
+
+            if (string.IsNullOrEmpty(headerApiKey) || headerApiKey != configuredApiKey)
+            {
+                return CreateErrorResponse<Guid>("Invalid or missing AI API Key.", StatusCodes.Status401Unauthorized);
+            }
+
+            var aiCommand = command with { CreatedByRole = "AI", CreatedById = null };
+            var result = await _mediator.Send(aiCommand);
             return HandleResult(result);
         }
 

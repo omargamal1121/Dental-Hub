@@ -256,6 +256,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                 var case2Id = Guid.Parse("01960000-0000-7000-8000-000000000201");
                 var case3Id = Guid.Parse("01960000-0000-7000-8000-000000000202");
                 var case4Id = Guid.Parse("01960000-0000-7000-8000-000000000203");
+                var case5Id = Guid.Parse("01960000-0000-7000-8000-000000000204");
                 var patientMonaId  = Guid.Parse("01960000-0000-7000-8000-000000000006"); // Mona
                 var patientKarimId = Guid.Parse("01960000-0000-7000-8000-000000000007"); // Karim
                 var patientLaylaId = Guid.Parse("01960000-0000-7000-8000-000000000008"); // Layla
@@ -268,17 +269,19 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                     var patientCases = new List<PatientCase>
                     {
                         // Case 1 – InProgress: Root canal, assigned to Omar supervised by Ahmed
-                        new() { Id = case1Id, PatientId = patientMonaId,  Status = CaseStatus.InProgress,  Description = "Patient requires root canal on upper right molar.",              AssignedStudentId = studentOmarId, AssignedDoctorId = doctorAhmedId, UniversityId = cairoId,    IsPublic = true  },
+                        new() { Id = case1Id, PatientId = patientMonaId,  Status = CaseStatus.InProgress,  Description = "Patient requires root canal on upper right molar.",              AssignedStudentId = studentOmarId, AssignedDoctorId = doctorAhmedId, UniversityId = cairoId,    IsPublic = true, CreatedByRole="Patient", CreatedById=patientMonaId  },
                         // Case 2 – Pending: Wisdom tooth pain, not yet assigned
-                        new() { Id = case2Id, PatientId = patientKarimId, Status = CaseStatus.Pending,      Description = "Patient complaining about pain in wisdom tooth.",               UniversityId = ainShamsId, IsPublic = false },
+                        new() { Id = case2Id, PatientId = patientKarimId, Status = CaseStatus.Pending,      Description = "Patient complaining about pain in wisdom tooth.",               UniversityId = ainShamsId, IsPublic = false, CreatedByRole="Patient", CreatedById=patientKarimId },
                         // Case 3 – Pending: Orthodontic evaluation for Layla, public
-                        new() { Id = case3Id, PatientId = patientLaylaId, Status = CaseStatus.Pending,      Description = "Patient seeking orthodontic evaluation for crowded teeth.",     UniversityId = cairoId,    IsPublic = true  },
+                        new() { Id = case3Id, PatientId = patientLaylaId, Status = CaseStatus.Pending,      Description = "Patient seeking orthodontic evaluation for crowded teeth.",     UniversityId = cairoId,    IsPublic = true, CreatedByRole="Patient", CreatedById=patientLaylaId  },
                         // Case 4 – Completed: Extraction already done for Mona second case
-                        new() { Id = case4Id, PatientId = patientMonaId,  Status = CaseStatus.Completed,   Description = "Lower left premolar extracted successfully.",                  AssignedStudentId = studentOmarId, AssignedDoctorId = doctorAhmedId, UniversityId = cairoId,    IsPublic = true  },
+                        new() { Id = case4Id, PatientId = patientMonaId,  Status = CaseStatus.Completed,   Description = "Lower left premolar extracted successfully.",                  AssignedStudentId = studentOmarId, AssignedDoctorId = doctorAhmedId, UniversityId = cairoId,    IsPublic = true, CreatedByRole="Patient", CreatedById=patientMonaId  },
+                        // Case 5 – AI Created Preliminary Case
+                        new() { Id = case5Id, PatientId = patientLaylaId, Status = CaseStatus.UnderReview, Description = "Automated scan detection of potential gingivitis.",                UniversityId = null,       IsPublic = true, CreatedByRole="AI",      CreatedById=null },
                     };
                     await context.PatientCases.AddRangeAsync(patientCases);
                     await context.SaveChangesAsync();
-                    logger.LogInformation("✅ Seeded 4 Patient Cases.");
+                    logger.LogInformation("✅ Seeded 5 Patient Cases (including 1 AI-created).");
                 }
 
                 // ── 10. Diagnoses ───────────────────────────────────────────────────────

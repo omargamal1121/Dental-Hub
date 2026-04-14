@@ -29,6 +29,8 @@ namespace DentalHub.Application.DTOs.Cases
         public Guid? AssignedDoctorId { get; set; }
         public Diagnosisdto? Diagnosisdto { get; set; }
         public List<string> ImageUrls { get; set; } = new List<string>();
+        public Guid? CreatedById { get; set; }
+        public string? CreatedByRole { get; set; }
 
         /// <summary>
         /// Flags describing the current user's relationship to this case

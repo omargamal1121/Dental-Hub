@@ -43,7 +43,9 @@ namespace DentalHub.Application.Services.Cases
                     Description = dto.Description ?? string.Empty,
                     IsPublic = dto.IsPublic,
                     UniversityId = dto.UniversityId,
-                    Status = CaseStatus.Pending
+                    Status = CaseStatus.Pending,
+                    CreatedById = dto.CreatedById,
+                    CreatedByRole = dto.CreatedByRole
                 };
 
                 await _unitOfWork.PatientCases.AddAsync(patientCase);
@@ -343,7 +345,9 @@ namespace DentalHub.Application.Services.Cases
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
                         PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
-                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
+                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList(),
+                        CreatedById = pc.CreatedById,
+                        CreatedByRole = pc.CreatedByRole
                     }
                 );
 
@@ -522,7 +526,9 @@ namespace DentalHub.Application.Services.Cases
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
                         PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
-                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
+                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList(),
+                        CreatedById = pc.CreatedById,
+                        CreatedByRole = pc.CreatedByRole
                     }
                 );
 
@@ -572,7 +578,9 @@ namespace DentalHub.Application.Services.Cases
                         CreateAt = pc.CreateAt,
                         TotalSessions = pc.Sessions.Count,
                         PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
-                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
+                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList(),
+                        CreatedById = pc.CreatedById,
+                        CreatedByRole = pc.CreatedByRole
                     }
                 );
 

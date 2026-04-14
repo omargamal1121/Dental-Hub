@@ -21,6 +21,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
         IMainRepository<UniversityMember> UniversityMembers { get; }
         IMainRepository<CaseType> CaseTypes { get; }
         IMainRepository<Diagnosis> Diagnoses { get; }
+        IMainRepository<University> Universities { get; }
 
        
         Task<int> SaveChangesAsync();

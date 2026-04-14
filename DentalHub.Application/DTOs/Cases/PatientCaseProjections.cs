@@ -31,7 +31,9 @@ namespace DentalHub.Application.DTOs.Cases
                 AssignedStudentId = pc.AssignedStudentId,
                 AssignedDoctorId = pc.AssignedDoctorId,
                 HasEvaluatedSession = pc.Sessions.Any(s => s.Status == SessionStatus.Done),
-                ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
+                ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList(),
+                CreatedById = pc.CreatedById,
+                CreatedByRole = pc.CreatedByRole
                 
             };
     }
