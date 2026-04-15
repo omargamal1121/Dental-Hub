@@ -72,7 +72,7 @@ namespace DentalHub.API.Controllers
             return HandleResult(result);
         }
 
-       
+       //This Mu Update
         [HttpGet("my-cases")]
         [Authorize(Roles = "Student")]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<PatientCaseDto>>), StatusCodes.Status200OK)]
