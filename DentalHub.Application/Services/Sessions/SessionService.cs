@@ -32,11 +32,13 @@ namespace DentalHub.Application.Services.Sessions
 
                 if (patientCase.Status != CaseStatus.InProgress)
                     return Result<bool>.Failure($"Cannot create session for case with status: {patientCase.Status}");
-                var patient = await _unitOfWork.Patients.AnyAsync(new BaseSpecification<Patient>(p => p.Id == patientCase.PatientId));
-                if (!patient)
+                var patient = await _unitOfWork.Patients.GetByIdAsync(
+                    new BaseSpecification<Patient>(p => p.Id == patientCase.PatientId));
+
+                if (patient == null)
                     return Result<bool>.Failure("Patient not found");
 
-             
+
                 Guid doctorId;
 
                 if (!string.IsNullOrWhiteSpace(dto.DoctorUsername))
@@ -52,15 +54,14 @@ namespace DentalHub.Application.Services.Sessions
                     doctorId = doctor.Id;
                 }
 
-                else if (dto.DoctorId.HasValue)
-                {
-                    doctorId = dto.DoctorId.Value;
-                }
-
                 else
                 {
-                    return Result<bool>.Failure("Doctor is required");
+                    if (patientCase.AssignedDoctorId == null)
+                        return Result<bool>.Failure("This case has no assigned doctor");
+
+                    doctorId = patientCase.AssignedDoctorId.Value;
                 }
+
                 //patientCase.AssignedDoctorId = doctorId;
                 //_unitOfWork.PatientCases.Update(patientCase);
 
@@ -102,7 +103,7 @@ namespace DentalHub.Application.Services.Sessions
                 {
                     CaseId = patientCase.Id,
                     StudentId = dto.StudentId,
-                    PatientId = dto.PatientId,
+                    PatientId = patientCase.PatientId,     
                     EvaluteDoctorId = doctorId,
                     StartAt = dto.ScheduledAt,
                     EndAt = dto.ScheduledAt.AddHours(1),
@@ -115,7 +116,7 @@ namespace DentalHub.Application.Services.Sessions
                 _logger.LogInformation("Session created: {Id} - Student: {StudentId}, Case: {CaseId}, Scheduled: {ScheduledAt}",
                     session.Id, dto.StudentId, dto.CaseId, dto.ScheduledAt);
 
-                return Result<bool>.Success(true,"Session created successfully",204);
+                return Result<bool>.Success(true,"Session created successfully", 204);
             }
 
             catch (Exception ex)

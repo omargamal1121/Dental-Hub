@@ -302,26 +302,16 @@ namespace DentalHub.Application.Services.Cases
 
                 caseEntity.AssignedDoctorId = dto.DoctorId;
                 caseEntity.AssignedStudentId = result.StudentId;
+                caseEntity.Status = CaseStatus.InProgress;
 
                 _unitOfWork.PatientCases.Update(caseEntity);
 
- 
-                var isAssigned = await _unitOfWork.PatientCases
-                    .AssineStudentToCaseAsync(result.CaseId, result.StudentId);
-
-                if (!isAssigned)
-                    throw new Exception("Failed to assign student to case.");
-
-                _logger.LogInformation("Student assigned to case. CaseId: {CaseId}, StudentId: {StudentId}",
-                    result.CaseId, result.StudentId);
-
-
-                await _unitOfWork.CaseRequests
-                    .TakenOtherRequestsAsync(result.CaseId, result.RequestId);
-
-                _logger.LogInformation("Other requests updated for CaseId: {CaseId}", result.CaseId);
+                await _unitOfWork.CaseRequests.TakenOtherRequestsAsync(result.CaseId, result.RequestId);
 
                 await _unitOfWork.CommitTransactionAsync();
+
+                _logger.LogInformation("Case {CaseId} updated to InProgress and assigned to Student {StudentId}",
+                    result.CaseId, result.StudentId);
 
                 return Result<bool>.Success(true, "Updated");
             }
