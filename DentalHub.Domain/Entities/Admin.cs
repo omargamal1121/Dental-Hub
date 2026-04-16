@@ -11,8 +11,9 @@ namespace DentalHub.Domain.Entities
 
 		}
 		public string Phone { get; set; }
+		public Guid UniversityId { get; set; }
 
-        public bool IsSuperAdmin { get; set; }
+		public bool IsSuperAdmin { get; set; }
 
 
         public User User { get; set; }

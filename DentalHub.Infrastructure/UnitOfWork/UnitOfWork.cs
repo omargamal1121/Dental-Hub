@@ -4,6 +4,7 @@ using DentalHub.Infrastructure.ContextAndConfig;
 using DentalHub.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Infrastructure.UnitOfWork
@@ -13,7 +14,10 @@ namespace DentalHub.Infrastructure.UnitOfWork
         private readonly ContextApp _context;
         private IDbContextTransaction? _transaction;
         private int _transactionCounter = 0;
+       private readonly IServiceProvider _serviceProvider;
+
         private readonly ILogger<UnitOfWork>? _logger;
+        private readonly Dictionary<Type, object> _repositories = new();
 
         // Repositories
         public IMainRepository<User> Users { get; }
@@ -32,6 +36,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
         public IMainRepository<University> Universities { get; }
 
         public UnitOfWork(
+             IServiceProvider serviceProvider,
             IMainRepository<User> users,
             IMainRepository<Student> students,
 			IPatientRepository patients,
@@ -49,6 +54,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
             ContextApp context,
             ILogger<UnitOfWork>? logger = null)
         {
+            _serviceProvider = serviceProvider;
             Users = users;
             Students = students;
             Patients = patients;
@@ -66,6 +72,13 @@ namespace DentalHub.Infrastructure.UnitOfWork
             _context = context;
             _logger = logger;
         }
+
+
+public IMainRepository<T> GetRepository<T>() where T : class
+{
+    return _serviceProvider.GetService<IMainRepository<T>>() 
+           ?? new MainRepository<T>(_context);
+}
 
         // ========== Save Changes ==========
 

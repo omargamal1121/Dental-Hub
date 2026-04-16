@@ -8,7 +8,8 @@ namespace DentalHub.Infrastructure.UnitOfWork
     public interface IUnitOfWork : IDisposable
     {
       
-        IMainRepository<User> Users { get; }
+        IMainRepository<T> GetRepository<T>() where T : class;
+		IMainRepository<User> Users { get; }
         IMainRepository<Student> Students { get; }
         IPatientRepository Patients { get; }
         IMainRepository<Doctor> Doctors { get; }

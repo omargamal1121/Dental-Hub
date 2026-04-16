@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using DentalHub.Infrastructure.UnitOfWork;
+using DentalHub.Application.Specification.Comman;
+using System.Threading.Tasks;
 
 namespace DentalHub.Application.Services.Auth
 {
@@ -20,10 +23,12 @@ namespace DentalHub.Application.Services.Auth
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IBackgroundJobClient _backgroundJobClient;
 
-        private const string RefreshCookieName = "Refresh";
+        private readonly IUnitOfWork _unitOfWork;
+		private const string RefreshCookieName = "Refresh";
 
         public AuthenticationService(
-            IHttpContextAccessor httpContextAccessor,
+            IUnitOfWork unitOfWork,
+			IHttpContextAccessor httpContextAccessor,
             ILogger<AuthenticationService> logger,
             UserManager<User> userManager,
       //      IRefreshTokenService refreshTokenService,
@@ -37,6 +42,7 @@ namespace DentalHub.Application.Services.Auth
        //     _refreshTokenService = refreshTokenService;
             _tokenService = tokenService;
             _configuration = configuration;
+            _unitOfWork = unitOfWork;
             _backgroundJobClient = backgroundJobClient;
         }
 
@@ -88,6 +94,7 @@ namespace DentalHub.Application.Services.Auth
                 //}
 
                 var roles = (await _userManager.GetRolesAsync(user)).ToList();
+                var universityId = await GetUserUniversityId(user, roles);
 
                 return Result<TokensDto>.Success(
                     new TokensDto
@@ -95,7 +102,7 @@ namespace DentalHub.Application.Services.Auth
                         Token = tokenResult.Data,
                         Roles = roles,
                         PublicId = user.Id,
-                        universityId = user.Student?.UniversityId ?? user.Doctor?.UniversityId
+                        universityId = universityId
                     },
                     "Login successfully");
             }
@@ -106,8 +113,29 @@ namespace DentalHub.Application.Services.Auth
             }
         }
 
+		private async Task<Guid?> GetUserUniversityId(User user, IList<string> roles)
+		{
+			if (roles.Contains("Admin"))
+				return await GetUniversityIdAsync<Admin>(user.Id);
 
-        public async Task<Result<bool>> LogoutAsync(Guid userId)
+			if (roles.Contains("Doctor"))
+				return await GetUniversityIdAsync<Doctor>(user.Id);
+
+			if (roles.Contains("Student"))
+				return await GetUniversityIdAsync<Student>(user.Id);
+
+			return null;
+		}
+
+		private async Task<Guid?> GetUniversityIdAsync<T>(Guid userId) where T : class
+		{
+			return await _unitOfWork.GetRepository<T>()
+				.GetByIdAsync(new BaseSpecificationWithProjection<T, Guid>(
+					x => EF.Property<Guid>(x, "Id") == userId,
+					x => EF.Property<Guid>(x, "UniversityId")
+				));
+		}
+		public async Task<Result<bool>> LogoutAsync(Guid userId)
         {
             _logger.LogInformation("Executing {Method}", nameof(LogoutAsync));
 

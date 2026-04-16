@@ -6,7 +6,8 @@ public enum CaseStatus
     Completed,
     Cancelled,
 	UnderReview,
-	
+	Rejected
+
 }
 
 public enum RequestStatus
