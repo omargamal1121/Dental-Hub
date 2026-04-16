@@ -18,5 +18,10 @@ namespace DentalHub.Application.DTOs.Cases
         public List<IFormFile>? Images { get; set; }
         public Guid? CreatedById { get; set; }
         public string? CreatedByRole { get; set; }
+
+        public string? Phone { get; set; }
+        public string? NationalId { get; set; }
+        public string? City { get; set; }
+
     }
 }

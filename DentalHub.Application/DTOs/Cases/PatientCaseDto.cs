@@ -17,6 +17,9 @@ namespace DentalHub.Application.DTOs.Cases
         /// AIPreliminaryDiagnosis | DiagnosedInClinic | UnAssigned | InProgress | Evaluated | Completed
         /// </summary>
         public string ProcessStatus { get; set; } = string.Empty;
+        public string Phone { get; set; }
+        public string City { get; set; }
+        public string NationalId { get; set; }
 
         public bool IsPublic { get; set; }
         public Guid? UniversityId { get; set; }
