@@ -94,7 +94,8 @@ namespace DentalHub.Application.Services.Auth
                     {
                         Token = tokenResult.Data,
                         Roles = roles,
-                        PublicId = user.Id
+                        PublicId = user.Id,
+                        universityId = user.Student?.UniversityId ?? user.Doctor?.UniversityId
                     },
                     "Login successfully");
             }
