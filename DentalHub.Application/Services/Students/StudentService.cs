@@ -293,10 +293,21 @@ namespace DentalHub.Application.Services.Students
                         PatientAge = pc.Patient.Age,
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
-                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
+                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList(),
+                        Diagnosisdto = pc.Diagnosiss
+        .Select(d => new Diagnosisdto
+        {
+            Id = d.Id,
+            Notes = d.Notes,
+            CaseType = d.CaseType.Name,
+            DiagnosisStage = d.Stage.ToString(),
+            TeethNumbers = d.TeethNumbers
+        }).ToList(),
                     }
                 );
+                {
 
+                };
                 spec.ApplyPaging(filter.Page, filter.PageSize);
                 
                 if (!string.IsNullOrEmpty(filter.SortBy))

@@ -46,6 +46,8 @@ namespace DentalHub.Application.Services.Cases
                     Status = CaseStatus.Pending,
                     CreatedById = dto.CreatedById,
                     CreatedByRole = dto.CreatedByRole
+                  
+
                 };
 
                 await _unitOfWork.PatientCases.AddAsync(patientCase);

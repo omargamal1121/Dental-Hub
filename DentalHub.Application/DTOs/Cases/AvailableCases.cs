@@ -12,8 +12,11 @@ namespace DentalHub.Application.DTOs.Cases
 		public string Status { get; set; } = string.Empty;
 		public DateTime CreateAt { get; set; }
 		public Gender gender { get; set; }
-		
-		public List<string> ImageUrls { get; set; } = new List<string>();
+        public List<Diagnosisdto> Diagnosisdto { get; set; }
+
+
+
+        public List<string> ImageUrls { get; set; } = new List<string>();
 
 	}
 

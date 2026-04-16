@@ -1,5 +1,6 @@
 using DentalHub.Application.DTOs.Cases;
 using DentalHub.Domain.Entities;
+using Microsoft.OpenApi.Extensions;
 using System.Linq.Expressions;
 
 namespace DentalHub.Application.DTOs.Cases
@@ -34,7 +35,8 @@ namespace DentalHub.Application.DTOs.Cases
                 ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList(),
                 CreatedById = pc.CreatedById,
                 CreatedByRole = pc.CreatedByRole
-                
+                ,City=pc.Patient.City.GetDisplayName(),
+                Phone=pc.Patient.Phone
             };
     }
 }
