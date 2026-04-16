@@ -90,9 +90,9 @@ namespace DentalHub.API.Controllers
             return HandleResult(result);
         }
 
-        //[HttpGet("available-cases")]
+        [HttpGet("available-cases")]
         [Authorize(Roles = "Student")]
-        [AllowAnonymous] // For Test Only
+        //[AllowAnonymous] // For Test Only
         [ProducesResponseType(typeof(ApiResponse<PagedResult<AvailableCasesDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<PagedResult<AvailableCasesDto>>>> GetAvailableCases([FromQuery] CaseFilterDto filter)
