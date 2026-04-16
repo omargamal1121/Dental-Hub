@@ -92,7 +92,7 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("available-cases")]
         [Authorize(Roles = "Student")]
-        //[AllowAnonymous] // For Test Only
+        //[AllowAnonymous] // For Test Only//
         [ProducesResponseType(typeof(ApiResponse<PagedResult<AvailableCasesDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<PagedResult<AvailableCasesDto>>>> GetAvailableCases([FromQuery] CaseFilterDto filter)
@@ -148,6 +148,7 @@ namespace DentalHub.API.Controllers
             var result = await _mediator.Send(new GetCaseRequestsByStudentIdQuery(studentPublicId.Value, requestStatus, page, pageSize));
             return HandleResult(result);
         }
+
 
         [HttpGet("{id}/statistics")]
         [ProducesResponseType(typeof(ApiResponse<StudentStatsDto>), StatusCodes.Status200OK)]
