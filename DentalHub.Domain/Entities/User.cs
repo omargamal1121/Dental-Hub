@@ -12,6 +12,8 @@ namespace DentalHub.Domain.Entities
             Id = Guid.CreateVersion7();
         }
 
+
+
         public string FullName { get; set; }
         public Patient? Patient { get; set; }
         public Student? Student { get; set; }

@@ -79,11 +79,15 @@ namespace DentalHub.Application.Services.Auth
 
             var jti = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
 
+            var universityId = user.Student?.UniversityId??
+                            user.Doctor?.UniversityId;
+
             var claims = new List<Claim>
             {
                 new(JwtRegisteredClaimNames.Jti, jti),
                 new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
+                new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
+                new("UniversityId", universityId?.ToString() ?? "")
             };
 
             var roles = await _userManager.GetRolesAsync(user);
