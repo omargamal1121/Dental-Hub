@@ -1,13 +1,14 @@
 using DentalHub.Application.Commands.CaseRequests;
-using Microsoft.AspNetCore.Authorization;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Cases;
 using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.Queries.CaseRequests;
 using DentalHub.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace DentalHub.API.Controllers
 {
@@ -114,8 +115,20 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<IEnumerable<CaseRequestDto>>), StatusCodes.Status200OK)]
         public async Task<ActionResult<ApiResponse<IEnumerable<CaseRequestDto>>>> GetByCase(Guid caseId, [FromQuery] RequestStatus? status = null)
         {
-            var result = await _mediator.Send(new GetCaseRequestsByCaseIdQuery(caseId, status));
+            var userId = Guid.Parse(User.FindFirst("uid")?.Value);
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            var result = await _mediator.Send(
+                new GetCaseRequestsByCaseIdQuery(
+                    caseId,
+                    userId,
+                    role,
+                    status
+                )
+            );
+
             return HandleResult(result);
+
         }
 
         [HttpPost("student/{studentId}/cancel-all")]

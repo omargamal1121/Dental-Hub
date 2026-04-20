@@ -6,7 +6,10 @@ using DentalHub.Domain.Entities;
 namespace DentalHub.Application.Queries.CaseRequests
 {
     public record GetCaseRequestsByCaseIdQuery(
-		Guid CasePublicId,
+        Guid CasePublicId,
+        Guid CurrentUserId,
+        string Role,
         RequestStatus? Status = null
     ) : IRequest<Result<IEnumerable<CaseRequestDto>>>;
+
 }

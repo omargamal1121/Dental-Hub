@@ -492,32 +492,109 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
-        public async Task<Result<IEnumerable<CaseRequestDto>>> GetRequestsByCaseIdAsync(Guid caseId, RequestStatus? status = null)
+        //public async Task<Result<IEnumerable<CaseRequestDto>>> GetRequestsByCaseIdAsync(Guid caseId, RequestStatus? status = null)
+        //{
+        //    try
+        //    {
+        //        _logger.LogInformation("Getting requests for Case: {CaseId} with Status: {Status}", caseId, status);
+        //        var spec = new BaseSpecificationWithProjection<CaseRequest, CaseRequestDto>(
+        //            cr => cr.PatientCaseId == caseId && (!status.HasValue || cr.Status == status.Value),
+        //            cr => new CaseRequestDto
+        //            {
+        //                Id = cr.Id,
+        //                PatientCasePublicId = cr.PatientCaseId,
+        //                PatientName = cr.PatientCase.Patient.User.FullName,
+        //              //  CaseName = cr.PatientCase.CaseType.Name,
+        //                StudentPublicId = cr.StudentId,
+        //                StudentName = cr.Student.User.FullName,
+        //                Level = cr.Student.Level,
+        //                DoctorId = cr.DoctorId,
+        //                DoctorName = cr.Doctor.User.FullName,
+        //                Description = cr.Description,
+        //                Status = cr.Status.ToString(),
+        //                CreateAt = cr.CreateAt
+        //            }
+        //        );
+
+        //        var requestsList = await _unitOfWork.CaseRequests.GetAllAsync(spec);
+        //        return Result<IEnumerable<CaseRequestDto>>.Success(requestsList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error getting requests for CaseId: {CaseId}", caseId);
+        //        return Result<IEnumerable<CaseRequestDto>>.Failure("Error retrieving requests");
+        //    }
+        //}
+
+        public async Task<Result<IEnumerable<CaseRequestDto>>> GetRequestsByCaseIdAsync(
+     Guid caseId,
+     Guid currentUserId,
+     string role,
+     RequestStatus? status = null)
         {
             try
             {
-                _logger.LogInformation("Getting requests for Case: {CaseId} with Status: {Status}", caseId, status);
-                var spec = new BaseSpecificationWithProjection<CaseRequest, CaseRequestDto>(
-                    cr => cr.PatientCaseId == caseId && (!status.HasValue || cr.Status == status.Value),
-                    cr => new CaseRequestDto
-                    {
-                        Id = cr.Id,
-                        PatientCasePublicId = cr.PatientCaseId,
-                        PatientName = cr.PatientCase.Patient.User.FullName,
-                      //  CaseName = cr.PatientCase.CaseType.Name,
-                        StudentPublicId = cr.StudentId,
-                        StudentName = cr.Student.User.FullName,
-                        Level = cr.Student.Level,
-                        DoctorId = cr.DoctorId,
-                        DoctorName = cr.Doctor.User.FullName,
-                        Description = cr.Description,
-                        Status = cr.Status.ToString(),
-                        CreateAt = cr.CreateAt
-                    }
-                );
+                _logger.LogInformation("Getting requests for Case: {CaseId}", caseId);
 
-                var requestsList = await _unitOfWork.CaseRequests.GetAllAsync(spec);
-                return Result<IEnumerable<CaseRequestDto>>.Success(requestsList);
+                // 👨‍⚕️ Doctor
+                if (role.ToLower() == "doctor" )
+                {
+                    var spec = new BaseSpecificationWithProjection<CaseRequest, CaseRequestDto>(
+                        cr => cr.PatientCaseId == caseId &&
+                              cr.Status != RequestStatus.Rejected,
+
+                        cr => new CaseRequestDto
+                        {
+                            Id = cr.Id,
+                            PatientCasePublicId = cr.PatientCaseId,
+                            PatientName = cr.PatientCase.Patient.User.FullName,
+                            StudentPublicId = cr.StudentId,
+                            StudentName = cr.Student.User.FullName,
+                            Level = cr.Student.Level,
+                            DoctorId = cr.DoctorId,
+                            DoctorName = cr.Doctor.User.FullName,
+                            Description = cr.Description,
+                            Status = cr.Status.ToString(),
+                            CreateAt = cr.CreateAt
+                        }
+                    );
+
+                    var requestsList = await _unitOfWork.CaseRequests.GetAllAsync(spec);
+
+                    return Result<IEnumerable<CaseRequestDto>>.Success(requestsList);
+                }
+
+                // 👨‍🎓 Student
+
+                if (role.ToLower() == "student")
+                {
+                    var spec = new BaseSpecificationWithProjection<CaseRequest, CaseRequestDto>(
+                        cr => cr.PatientCaseId == caseId &&
+                              cr.StudentId == currentUserId,
+
+                        cr => new CaseRequestDto
+                        {
+                            Id = cr.Id,
+                            PatientCasePublicId = cr.PatientCaseId,
+                            PatientName = cr.PatientCase.Patient.User.FullName,
+                            StudentPublicId = cr.StudentId,
+                            StudentName = cr.Student.User.FullName,
+                            Level = cr.Student.Level,
+                            DoctorId = cr.DoctorId,
+                            DoctorName = cr.Doctor.User.FullName,
+                            Description = cr.Description,
+                            Status = cr.Status.ToString(),
+                            IsRejectedStudent = cr.Status == RequestStatus.Rejected,
+                            CreateAt = cr.CreateAt
+                        }
+                    );
+
+                    var requests = await _unitOfWork.CaseRequests.GetAllAsync(spec);
+
+                    return Result<IEnumerable<CaseRequestDto>>.Success(requests);
+                }
+
+                return Result<IEnumerable<CaseRequestDto>>.Failure("Unauthorized");
             }
             catch (Exception ex)
             {
@@ -525,6 +602,7 @@ namespace DentalHub.Application.Services.Cases
                 return Result<IEnumerable<CaseRequestDto>>.Failure("Error retrieving requests");
             }
         }
+
 
         public async Task<Result<bool>> CancelAllStudentRequestsAsync(Guid studentId)
         {
