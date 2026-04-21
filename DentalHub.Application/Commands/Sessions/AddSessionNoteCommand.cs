@@ -6,6 +6,7 @@ namespace DentalHub.Application.Commands.Sessions
     public record AddSessionNoteCommand(
         Guid SessionId,
         string Note,
-        bool IsPrivate
+        bool IsPrivate,
+            string? ImageUrl
     ) : IRequest<Result<Guid>>;
 }
