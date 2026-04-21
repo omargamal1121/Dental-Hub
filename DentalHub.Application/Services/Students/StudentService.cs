@@ -294,7 +294,11 @@ namespace DentalHub.Application.Services.Students
                         Status = pc.Status.ToString(),
                         CreateAt = pc.CreateAt,
                         ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList(),
+                        gender = pc.Patient.Gender,
                         Diagnosisdto = pc.Diagnosiss
+                        
+                        
+                        
         .Select(d => new Diagnosisdto
         {
             Id = d.Id,

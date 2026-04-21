@@ -31,9 +31,15 @@ namespace DentalHub.Application.Services.Cases
         Task<Result<bool>> MarkAllRequestsTakenForCaseAsync(
             Guid caseId, Guid approvedRequestId);
 
-        Task<Result<IEnumerable<CaseRequestDto>>> GetRequestsByCaseIdAsync(
-            Guid caseId, RequestStatus? status = null);
+        //Task<Result<IEnumerable<CaseRequestDto>>> GetRequestsByCaseIdAsync(
+        //    Guid caseId, RequestStatus? status = null);
 
+        Task<Result<IEnumerable<CaseRequestDto>>> GetRequestsByCaseIdAsync(
+            Guid caseId,
+            Guid currentUserId,
+            string role,
+            RequestStatus? status = null
+        );
         Task<Result<bool>> CancelAllStudentRequestsAsync(Guid studentId);
     }
 }

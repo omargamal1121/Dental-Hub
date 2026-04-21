@@ -129,7 +129,14 @@ namespace DentalHub.Application.Handlers.CaseRequests
         public GetCaseRequestsByCaseIdQueryHandler(ICaseRequestService service) => _service = service;
         public async Task<Result<IEnumerable<CaseRequestDto>>> Handle(GetCaseRequestsByCaseIdQuery request, CancellationToken ct)
         {
-            return await _service.GetRequestsByCaseIdAsync(request.CasePublicId, request.Status);
+            //return await _service.GetRequestsByCaseIdAsync(request.CasePublicId, request.Status);
+
+            return await _service.GetRequestsByCaseIdAsync(
+     request.CasePublicId,
+     request.CurrentUserId,
+     request.Role,
+     request.Status
+ );
         }
     }
 
