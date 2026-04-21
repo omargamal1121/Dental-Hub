@@ -91,27 +91,27 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpGet("available-cases")]
-        //[Authorize(Roles = "Student")]
-        [AllowAnonymous] // For Test Only//
+        [Authorize(Roles = "Student")]
+        //[AllowAnonymous] // For Test Only//
         [ProducesResponseType(typeof(ApiResponse<PagedResult<AvailableCasesDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<PagedResult<AvailableCasesDto>>>> GetAvailableCases([FromQuery] CaseFilterDto filter)
         {
-            //var studentPublicId = GetUserIdFromToken();
-            //if (studentPublicId == null)
-            //    return CreateErrorResponse<PagedResult<AvailableCasesDto>>("Unauthorized", 401);
-
-            //var result = await _mediator.Send(new GetAvailableCasesForStudentQuery(studentPublicId.Value, filter));
-            //return HandleResult(result);
-
             var studentPublicId = GetUserIdFromToken();
-
-            // For Test Only
             if (studentPublicId == null)
-                studentPublicId = Guid.Parse("11111111-1111-1111-1111-111111111111");
+                return CreateErrorResponse<PagedResult<AvailableCasesDto>>("Unauthorized", 401);
 
             var result = await _mediator.Send(new GetAvailableCasesForStudentQuery(studentPublicId.Value, filter));
             return HandleResult(result);
+
+            //var studentPublicId = GetUserIdFromToken();
+
+            //// For Test Only
+            //if (studentPublicId == null)
+            //    studentPublicId = Guid.Parse("11111111-1111-1111-1111-111111111111");
+
+            //var result = await _mediator.Send(new GetAvailableCasesForStudentQuery(studentPublicId.Value, filter));
+            //return HandleResult(result);
 
         }
 
