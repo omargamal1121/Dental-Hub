@@ -46,6 +46,9 @@ namespace DentalHub.Application.Extensions
             services.AddScoped<IUniversityMemberService, UniversityMemberService>();
             services.AddScoped<IUniversityService, UniversityService>();
 
+            // Register Chat Service
+            services.AddScoped<IChatService, ChatService>();
+
             // Register FluentValidation
             services.AddValidatorsFromAssembly(typeof(ApplicationServicesExtension).Assembly);
 
