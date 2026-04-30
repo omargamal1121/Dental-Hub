@@ -1,10 +1,12 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Sessions;
 using DentalHub.Application.Factories;
+using DentalHub.Application.Interfaces;
 using DentalHub.Application.Services.Cases;
 using DentalHub.Application.Specification.Comman;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.UnitOfWork;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace DentalHub.Application.Services.Sessions
@@ -13,11 +15,13 @@ namespace DentalHub.Application.Services.Sessions
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<SessionService> _logger;
+        private readonly IMediaService _mediaService;
 
-        public SessionService(IUnitOfWork unitOfWork, ILogger<SessionService> logger)
+        public SessionService(IUnitOfWork unitOfWork, ILogger<SessionService> logger, IMediaService mediaService)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _mediaService = mediaService;
         }
 
         #region CRUD Operations
@@ -73,37 +77,29 @@ namespace DentalHub.Application.Services.Sessions
 
 
 
-
                 if (!approvedRequest)
                     return Result<bool>.Failure("Student does not have approval to work on this case");
 
-				if (dto.ScheduledAt < DateTime.UtcNow)
-					return Result<bool>.Failure("Cannot schedule a session in the past");
-
-				var newStart = dto.ScheduledAt;
-				var newEnd = dto.ScheduledAt.AddHours(1);
-
-				var hasOverlap = await _unitOfWork.Sessions.AnyAsync(new BaseSpecification<Session>(s =>
-					s.StudentId == dto.StudentId &&
-					s.Status == SessionStatus.Scheduled &&
-					s.StartAt < newEnd &&
-					s.EndAt > newStart
-				));
-
-				if (hasOverlap)
-					return Result<bool>.Failure($"Student already has a session overlapping with {newStart:yyyy-MM-dd HH:mm}");
-
-
-
-
-				// VALIDATION 4: Cannot schedule in the past
-				if (dto.ScheduledAt < DateTime.UtcNow)
+                if (dto.ScheduledAt < DateTime.UtcNow)
                     return Result<bool>.Failure("Cannot schedule a session in the past");
+
+                var newStart = dto.ScheduledAt;
+                var newEnd = dto.ScheduledAt.AddHours(1);
+
+                var hasOverlap = await _unitOfWork.Sessions.AnyAsync(new BaseSpecification<Session>(s =>
+                    s.StudentId == dto.StudentId &&
+                    s.Status == SessionStatus.Scheduled &&
+                    s.StartAt < newEnd &&
+                    s.EndAt > newStart
+                ));
+
+                if (hasOverlap)
+                    return Result<bool>.Failure($"Student already has a session overlapping with {newStart:yyyy-MM-dd HH:mm}");
                 var session = new Session
                 {
                     CaseId = patientCase.Id,
                     StudentId = dto.StudentId,
-                    PatientId = patientCase.PatientId,     
+                    PatientId = patientCase.PatientId,
                     EvaluteDoctorId = doctorId,
                     StartAt = dto.ScheduledAt,
                     EndAt = dto.ScheduledAt.AddHours(1),
@@ -116,7 +112,7 @@ namespace DentalHub.Application.Services.Sessions
                 _logger.LogInformation("Session created: {Id} - Student: {StudentId}, Case: {CaseId}, Scheduled: {ScheduledAt}",
                     session.Id, dto.StudentId, dto.CaseId, dto.ScheduledAt);
 
-                return Result<bool>.Success(true,"Session created successfully", 204);
+                return Result<bool>.Success(true, "Session created successfully", 204);
             }
 
             catch (Exception ex)
@@ -125,8 +121,8 @@ namespace DentalHub.Application.Services.Sessions
                 return Result<bool>.Failure("Error creating session");
             }
         }
-          
-        
+
+
 
         public async Task<Result<SessionDto>> GetSessionByIdAsync(Guid publicId)
         {
@@ -145,6 +141,7 @@ namespace DentalHub.Application.Services.Sessions
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
+                        TotalNotes = s.SessionNotes.Count,
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -213,6 +210,7 @@ namespace DentalHub.Application.Services.Sessions
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
+                        TotalNotes = s.SessionNotes.Count,
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -254,6 +252,7 @@ namespace DentalHub.Application.Services.Sessions
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
+                        TotalNotes = s.SessionNotes.Count,
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -293,6 +292,7 @@ namespace DentalHub.Application.Services.Sessions
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
+                        TotalNotes = s.SessionNotes.Count,
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -332,6 +332,7 @@ namespace DentalHub.Application.Services.Sessions
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
+                        TotalNotes = s.SessionNotes.Count,
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -343,6 +344,44 @@ namespace DentalHub.Application.Services.Sessions
 
                 var list = await _unitOfWork.Sessions.GetAllAsync(projSpec);
                 var totalCount = await _unitOfWork.Sessions.CountAsync(countSpec);
+
+                // Enrich each session with its notes + media
+                foreach (var session in list)
+                {
+                    var noteSpec = new BaseSpecificationWithProjection<SessionNote, SessionNoteDto>(
+                        sn => sn.SessionId == session.Id,
+                        sn => new SessionNoteDto
+                        {
+                            Id = sn.Id,
+                            SessionId = sn.SessionId,
+                            Note = sn.Note,
+                            CreateAt = sn.CreateAt,
+                            Medias = new List<SessionMediaDto>()
+                        }
+                    );
+                    noteSpec.ApplyOrderBy(sn => sn.CreateAt);
+
+                    var notes = await _unitOfWork.SessionNotes.GetAllAsync(noteSpec);
+
+                    foreach (var note in notes)
+                    {
+                        var mediaSpec = new BaseSpecificationWithProjection<Media, SessionMediaDto>(
+                            m => m.SessionNoteId == note.Id,
+                            m => new SessionMediaDto
+                            {
+                                Id = m.Id,
+                                SessionId = session.Id,
+                                NoteId = note.Id,
+                                MediaUrl = m.MediaUrl,
+                                CreateAt = m.CreateAt
+                            }
+                        );
+                        note.Medias = await _unitOfWork.Medias.GetAllAsync(mediaSpec);
+                    }
+
+                    session.Notes = notes.ToList();
+                    session.TotalNotes = notes.Count;
+                }
 
                 return Result<PagedResult<SessionDto>>.Success(
                     PaginationFactory<SessionDto>.Create(totalCount, page, pageSize, list));
@@ -378,6 +417,7 @@ namespace DentalHub.Application.Services.Sessions
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
+                        TotalNotes = s.SessionNotes.Count,
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -424,7 +464,7 @@ namespace DentalHub.Application.Services.Sessions
 
                 session.Status = sessionStatus;
                 session.UpdateAt = DateTime.UtcNow;
-             
+
                 await _unitOfWork.SaveChangesAsync();
 
                 return await GetSessionByIdAsync(publicId);
@@ -474,7 +514,8 @@ namespace DentalHub.Application.Services.Sessions
                     Id = note.Id,
                     SessionId = dto.SessionId,
                     Note = note.Note,
-                    CreateAt = note.CreateAt
+                    CreateAt = note.CreateAt,
+                    Medias = new List<SessionMediaDto>()
                 });
             }
             catch (Exception ex)
@@ -488,6 +529,7 @@ namespace DentalHub.Application.Services.Sessions
         {
             try
             {
+                // Step 1: جيبي الـ notes بدون medias
                 var spec = new BaseSpecificationWithProjection<SessionNote, SessionNoteDto>(
                     sn => sn.SessionId == sessionPublicId,
                     sn => new SessionNoteDto
@@ -495,12 +537,32 @@ namespace DentalHub.Application.Services.Sessions
                         Id = sn.Id,
                         SessionId = sn.SessionId,
                         Note = sn.Note,
-                        CreateAt = sn.CreateAt
+                        CreateAt = sn.CreateAt,
+                        Medias = new List<SessionMediaDto>()
                     }
                 );
                 spec.ApplyOrderBy(sn => sn.CreateAt);
 
                 var notes = await _unitOfWork.SessionNotes.GetAllAsync(spec);
+
+                // Step 2: لكل note جيبي الـ medias في query منفصلة
+                foreach (var note in notes)
+                {
+                    var mediaSpec = new BaseSpecificationWithProjection<Media, SessionMediaDto>(
+                        m => m.SessionNoteId == note.Id,
+                        m => new SessionMediaDto
+                        {
+                            Id = m.Id,
+                            SessionId = sessionPublicId,
+                            NoteId = note.Id,
+                            MediaUrl = m.MediaUrl,
+                            CreateAt = m.CreateAt
+                        }
+                    );
+
+                    note.Medias = await _unitOfWork.Medias.GetAllAsync(mediaSpec);
+                }
+
                 return Result<List<SessionNoteDto>>.Success(notes);
             }
             catch (Exception ex)
@@ -509,7 +571,127 @@ namespace DentalHub.Application.Services.Sessions
                 return Result<List<SessionNoteDto>>.Failure("Error retrieving notes");
             }
         }
-    }
-    #endregion
 
+        public async Task<Result<SessionMediaDto>> AddNoteMediaAsync(Guid sessionId, Guid noteId, IFormFile file)
+        {
+            try
+            {
+                var note = await _unitOfWork.SessionNotes.GetByIdAsync(
+                    new BaseSpecification<SessionNote>(n => n.Id == noteId && n.SessionId == sessionId));
+
+                if (note == null)
+                    return Result<SessionMediaDto>.Failure("Note not found or does not belong to this session");
+
+                var uploadResult = await _mediaService.SaveNoteMediaAsync(file, noteId);
+                if (!uploadResult.IsSuccess)
+                    return Result<SessionMediaDto>.Failure(uploadResult.Message ?? "Upload failed");
+
+                return Result<SessionMediaDto>.Success(new SessionMediaDto
+                {
+                    Id = uploadResult.Data.Id,
+                    SessionId = sessionId,
+                    NoteId = noteId,
+                    MediaUrl = uploadResult.Data.MediaUrl,
+                    CreateAt = uploadResult.Data.CreateAt
+                }, "Media uploaded successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error adding media to note: {NoteId}", noteId);
+                return Result<SessionMediaDto>.Failure("Error uploading media");
+            }
+        }
+
+        public async Task<Result<List<SessionMediaDto>>> GetNoteMediaAsync(Guid noteId)
+        {
+            try
+            {
+                var noteExists = await _unitOfWork.SessionNotes.AnyAsync(new BaseSpecification<SessionNote>(n => n.Id == noteId));
+                if (!noteExists)
+                    return Result<List<SessionMediaDto>>.Failure("Note not found");
+
+                var spec = new BaseSpecificationWithProjection<Media, SessionMediaDto>(
+                    m => m.SessionNoteId == noteId,
+                    m => new SessionMediaDto
+                    {
+                        Id = m.Id,
+                        SessionId = m.Session != null ? m.Session.Id : Guid.Empty,
+                        NoteId = noteId,
+                        MediaUrl = m.MediaUrl,
+                        CreateAt = m.CreateAt
+                    }
+                );
+                spec.ApplyOrderBy(m => m.CreateAt);
+
+                var media = await _unitOfWork.Medias.GetAllAsync(spec);
+                return Result<List<SessionMediaDto>>.Success(media);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting note media: {NoteId}", noteId);
+                return Result<List<SessionMediaDto>>.Failure("Error retrieving media");
+            }
+        }
+
+        public async Task<Result<SessionMediaDto>> AddSessionMediaAsync(Guid sessionId, IFormFile file)
+        {
+            try
+            {
+                var session = await _unitOfWork.Sessions.GetByIdAsync(new BaseSpecification<Session>(s => s.Id == sessionId));
+                if (session == null)
+                    return Result<SessionMediaDto>.Failure("Session not found");
+
+                var uploadResult = await _mediaService.SaveSessionMediaAsync(file, sessionId);
+                if (!uploadResult.IsSuccess)
+                    return Result<SessionMediaDto>.Failure(uploadResult.Message ?? "Upload failed");
+
+                var dto = new SessionMediaDto
+                {
+                    Id = uploadResult.Data.Id,
+                    SessionId = sessionId,
+                    MediaUrl = uploadResult.Data.MediaUrl,
+                    CreateAt = uploadResult.Data.MediaUrl != null ? uploadResult.Data.CreateAt : DateTime.UtcNow
+                };
+
+                return Result<SessionMediaDto>.Success(dto, "Media uploaded successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error adding media to session: {SessionId}", sessionId);
+                return Result<SessionMediaDto>.Failure("Error uploading media");
+            }
+        }
+
+        public async Task<Result<List<SessionMediaDto>>> GetSessionMediaAsync(Guid sessionId)
+        {
+            try
+            {
+                var sessionExists = await _unitOfWork.Sessions.AnyAsync(new BaseSpecification<Session>(s => s.Id == sessionId));
+                if (!sessionExists)
+                    return Result<List<SessionMediaDto>>.Failure("Session not found");
+
+                var spec = new BaseSpecificationWithProjection<Media, SessionMediaDto>(
+                    m => m.SessionId == sessionId && m.SessionNoteId == null,
+                    m => new SessionMediaDto
+                    {
+                        Id = m.Id,
+                        SessionId = m.SessionId!.Value,
+                        MediaUrl = m.MediaUrl,
+                        CreateAt = m.CreateAt
+                    }
+                );
+                spec.ApplyOrderBy(m => m.CreateAt);
+
+                var media = await _unitOfWork.Medias.GetAllAsync(spec);
+                return Result<List<SessionMediaDto>>.Success(media);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting session media: {Id}", sessionId);
+                return Result<List<SessionMediaDto>>.Failure("Error retrieving media");
+            }
+        }
+
+        #endregion
+    }
 }

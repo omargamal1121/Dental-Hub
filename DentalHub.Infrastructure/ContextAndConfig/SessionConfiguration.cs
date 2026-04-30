@@ -18,7 +18,11 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                    .WithOne(x => x.Session)
                    .HasForeignKey(x => x.SessionId);
 
-			builder.HasQueryFilter(cr => cr.DeleteAt == null);
+            builder.HasMany(x => x.SessionNotes)
+                   .WithOne(x => x.Session)
+                   .HasForeignKey(x => x.SessionId);
+
+            builder.HasQueryFilter(cr => cr.DeleteAt == null);
 
 		}
 	}
