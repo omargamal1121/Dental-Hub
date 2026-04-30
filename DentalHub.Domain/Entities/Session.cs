@@ -17,7 +17,7 @@
         public Doctor? EvaluteDoctor { get; set; }
         public ICollection<Media> Medias { get; set; }
 
-        //  public ICollection<SessionNote> SessionNotes { get; set; }
+        public ICollection<SessionNote> SessionNotes { get; set; }
         public Patient Patient { get; set; }
         public Guid PatientId { get; set; }
     }

@@ -21,5 +21,8 @@ namespace DentalHub.Application.DTOs.Sessions
         public int TotalNotes { get; set; }
         public int TotalMedia { get; set; }
         public DateTime CreateAt { get; set; }
+
+        /// <summary>Full notes with their media — populated by the GetSessionsByCaseId endpoint</summary>
+        public List<SessionNoteDto> Notes { get; set; } = new();
     }
 }

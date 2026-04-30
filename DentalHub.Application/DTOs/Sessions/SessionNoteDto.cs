@@ -7,6 +7,8 @@ namespace DentalHub.Application.DTOs.Sessions
         public Guid SessionId { get; set; }
         public string Note { get; set; } = string.Empty;
         public DateTime CreateAt { get; set; }
+        public List<SessionMediaDto> Medias { get; set; } = new();
+
     }
 
     /// DTO for creating a session note
