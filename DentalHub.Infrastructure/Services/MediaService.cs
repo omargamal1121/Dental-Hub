@@ -22,10 +22,10 @@ namespace DentalHub.Infrastructure.Services
         private readonly Cloudinary _cloudinary;
 
         private int MaxFileSize => _configuration.GetValue<int>("Security:FileUpload:MaxFileSizeMB", 10) * 1024 * 1024;
-        
+
         private string[] AllowedContentTypes => _configuration.GetSection("Security:FileUpload:AllowedContentTypes").Get<string[]>()
             ?? new[] { "image/jpeg", "image/jpg", "image/png", "image/gif", "image/webp" };
-        
+
         private string[] AllowedExtensions => _configuration.GetSection("Security:FileUpload:AllowedExtensions").Get<string[]>()
             ?? new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
 
@@ -99,6 +99,9 @@ namespace DentalHub.Infrastructure.Services
         public async Task<Result<Media>> SaveSessionMediaAsync(IFormFile file, Guid sessionId)
             => await SaveMediaAndLinkToEntityAsync(file, "SessionPhotos", sessionId, "Session");
 
+        public async Task<Result<Media>> SaveNoteMediaAsync(IFormFile file, Guid noteId)
+            => await SaveMediaAndLinkToEntityAsync(file, "NotePhotos", noteId, "Note");
+
         public async Task<Result<Media>> SaveCaseTypeMediaAsync(IFormFile file, Guid caseTypeId)
             => await SaveMediaAndLinkToEntityAsync(file, "CaseTypePhotos", caseTypeId, "CaseType");
 
@@ -126,7 +129,7 @@ namespace DentalHub.Infrastructure.Services
                 {
                     MediaUrl = uploadResult.Data.SecureUrl.ToString(),
                     CloudinaryPublicId = uploadResult.Data.PublicId,
-                    
+
                     CreateAt = DateTime.UtcNow
                 };
 
@@ -179,6 +182,9 @@ namespace DentalHub.Infrastructure.Services
                     break;
                 case "session":
                     media.SessionId = entityId;
+                    break;
+                case "note":
+                    media.SessionNoteId = entityId;
                     break;
                 case "casetype":
                     media.CaseTypeId = entityId;

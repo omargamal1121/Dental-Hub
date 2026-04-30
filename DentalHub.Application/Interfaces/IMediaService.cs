@@ -11,6 +11,7 @@ namespace DentalHub.Application.Interfaces
 
         Task<Result<Media>> SavePatientMediaAsync(IFormFile file, Guid patientId);
         Task<Result<Media>> SaveSessionMediaAsync(IFormFile file, Guid sessionId);
+        Task<Result<Media>> SaveNoteMediaAsync(IFormFile file, Guid noteId);
         Task<Result<Media>> SaveCaseTypeMediaAsync(IFormFile file, Guid caseTypeId);
         Task<Result<Media>> SaveCaseMediaAsync(IFormFile file, Guid caseId);
 
