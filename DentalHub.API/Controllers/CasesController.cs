@@ -120,6 +120,16 @@ namespace DentalHub.API.Controllers
             return HandleResult(result);
         }
 
+        [HttpPut("{id}/status")]
+        [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ApiResponse<bool>>> UpdateStatus(Guid id, [FromBody] UpdateCaseStatusDto dto)
+        {
+            var result = await _mediator.Send(new UpdatePatientCaseStatusCommand(id, dto.Status));
+            return HandleResult(result);
+        }
+
         [HttpPut("{id}/assign-university")]
         [Authorize(Roles = "Student,Doctor,Admin")]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
