@@ -138,6 +138,10 @@ namespace DentalHub.Application.Services.Sessions
                         PatientName = s.Patient.User.FullName,
                         StudentId = s.StudentId,
                         StudentName = s.Student.User.FullName,
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
@@ -208,6 +212,10 @@ namespace DentalHub.Application.Services.Sessions
                         StudentId = s.StudentId,
                         StudentName = s.Student.User.FullName,
                         ScheduledAt = s.StartAt,
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
                         TotalNotes = s.SessionNotes.Count,
@@ -250,6 +258,10 @@ namespace DentalHub.Application.Services.Sessions
                         StudentId = s.StudentId,
                         StudentName = s.Student.User.FullName,
                         ScheduledAt = s.StartAt,
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
                         TotalNotes = s.SessionNotes.Count,
@@ -290,6 +302,10 @@ namespace DentalHub.Application.Services.Sessions
                         StudentId = s.StudentId,
                         StudentName = s.Student.User.FullName,
                         ScheduledAt = s.StartAt,
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
                         TotalNotes = s.SessionNotes.Count,
@@ -330,6 +346,10 @@ namespace DentalHub.Application.Services.Sessions
                         StudentId = s.StudentId,
                         StudentName = s.Student.User.FullName,
                         ScheduledAt = s.StartAt,
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
                         TotalNotes = s.SessionNotes.Count,
@@ -415,6 +435,10 @@ namespace DentalHub.Application.Services.Sessions
                         StudentId = s.StudentId,
                         StudentName = s.Student.User.FullName,
                         ScheduledAt = s.StartAt,
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
                         TotalNotes = s.SessionNotes.Count,
@@ -441,6 +465,53 @@ namespace DentalHub.Application.Services.Sessions
             {
                 _logger.LogError(ex, "Error getting upcoming sessions");
                 return Result<PagedResult<SessionDto>>.Failure("Error retrieving upcoming sessions");
+            }
+        }
+
+        #endregion
+        #region Evaluation
+
+        public async Task<Result<Guid>> EvaluateSessionAsync(Guid sessionId, Guid doctorId, int grade, string note, bool isFinalSession)
+        {
+            try
+            {
+                var session = await _unitOfWork.Sessions.GetByIdAsync(new BaseSpecification<Session>(s => s.Id == sessionId));
+
+                if (session == null)
+                    return Result<Guid>.Failure("Session not found.");
+
+                if (session.Status == SessionStatus.Cancelled || session.Status == SessionStatus.Expired)
+                    return Result<Guid>.Failure($"Cannot evaluate a session with status: {session.Status}");
+
+                if (session.Status == SessionStatus.Done)
+                    return Result<Guid>.Failure("This session has already been evaluated.");
+
+                if (session.StartAt.Date > DateTime.UtcNow.Date)
+                    return Result<Guid>.Failure("Cannot evaluate a future session.");
+
+                session.Grade = grade;
+                session.DoctorNote = note;
+                session.EvaluteDoctorId = doctorId;
+                session.UpdateAt = DateTime.UtcNow;
+
+                session.Status = SessionStatus.Done;
+
+                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.Id == session.CaseId));
+                if (patientCase != null)
+                {
+                    patientCase.Status = isFinalSession ? CaseStatus.Completed : CaseStatus.InProgress;
+                    _unitOfWork.PatientCases.Update(patientCase);
+                }
+
+                _unitOfWork.Sessions.Update(session);
+                await _unitOfWork.SaveChangesAsync();
+
+                return Result<Guid>.Success(session.Id, "Session evaluated and marked as Done.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error evaluating session: {Id}", sessionId);
+                return Result<Guid>.Failure("Error saving evaluation.");
             }
         }
 

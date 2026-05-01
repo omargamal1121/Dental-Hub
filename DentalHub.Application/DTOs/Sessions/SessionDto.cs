@@ -10,6 +10,10 @@ namespace DentalHub.Application.DTOs.Sessions
         public string PatientName { get; set; } = string.Empty;
         public Guid StudentId { get; set; }
         public string StudentName { get; set; } = string.Empty;
+        public int Grade { get; set; }
+        public string? DoctorNote { get; set; }
+        public Guid? EvaluteDoctorId { get; set; }
+        public string? EvaluteDoctorName { get; set; }
 
         /// <summary>Session start date and time (maps to Session.StartAt)</summary>
         public DateTime ScheduledAt { get; set; }
@@ -21,6 +25,7 @@ namespace DentalHub.Application.DTOs.Sessions
         public int TotalNotes { get; set; }
         public int TotalMedia { get; set; }
         public DateTime CreateAt { get; set; }
+        public DateTime? UpdateAt { get; set; }
 
         /// <summary>Full notes with their media — populated by the GetSessionsByCaseId endpoint</summary>
         public List<SessionNoteDto> Notes { get; set; } = new();
