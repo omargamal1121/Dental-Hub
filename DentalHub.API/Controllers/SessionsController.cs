@@ -2,13 +2,13 @@ using DentalHub.Application.Commands.Sessions;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Sessions;
 using DentalHub.Application.DTOs.Shared;
+using DentalHub.Application.Interfaces;
 using DentalHub.Application.Queries.Sessions;
+using DentalHub.Infrastructure.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Security.Claims;
 
 namespace DentalHub.API.Controllers
 {
@@ -210,29 +210,6 @@ namespace DentalHub.API.Controllers
         {
             var result = await _mediator.Send(
                 new GetUpcomingSessionsQuery(page, pageSize, studentId, patientId));
-            return HandleResult(result);
-        }
-
-        // ──────────────────────────────────────────
-        //  Evaluation
-        // ──────────────────────────────────────────
-
-        [HttpPost("{id}/evaluate")]
-        [Authorize(Roles = "Doctor")]
-        [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<ApiResponse<Guid>>> Evaluate(Guid id, [FromBody] EvaluateRequest request)
-        {
-            var doctorIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            if (string.IsNullOrEmpty(doctorIdClaim))
-                return CreateErrorResponse<Guid>("Unauthorized: Doctor ID not found in token", 401);
-
-            var doctorId = Guid.Parse(doctorIdClaim);
-
-            var result = await _mediator.Send(new EvaluateSessionCommand(id, doctorId, request.Grade, request.Note, request.IsFinalSession));
-
             return HandleResult(result);
         }
     }
