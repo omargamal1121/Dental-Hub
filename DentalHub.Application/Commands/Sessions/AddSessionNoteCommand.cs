@@ -1,12 +1,11 @@
 using MediatR;
 using DentalHub.Application.Common;
+using DentalHub.Application.DTOs.Sessions;
 
 namespace DentalHub.Application.Commands.Sessions
 {
     public record AddSessionNoteCommand(
         Guid SessionId,
-        string Note,
-        bool IsPrivate,
-            string? ImageUrl
-    ) : IRequest<Result<Guid>>;
+        string Note
+    ) : IRequest<Result<SessionNoteDto>>;
 }

@@ -68,13 +68,13 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost("{id}/notes")]
-        [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<SessionNoteDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ApiResponse<Guid>>> AddNote(Guid id, [FromBody] AddSessionNoteCommand command)
+        public async Task<ActionResult<ApiResponse<SessionNoteDto>>> AddNote(Guid id, [FromBody] AddSessionNoteCommand command)
         {
             if (id != command.SessionId)
-                return CreateErrorResponse<Guid>("Id mismatch", 400);
+                return CreateErrorResponse<SessionNoteDto>("Id mismatch", 400);
 
             var result = await _mediator.Send(command);
             return HandleResult(result);
@@ -88,6 +88,56 @@ namespace DentalHub.API.Controllers
             var result = await _mediator.Send(new GetSessionNotesQuery(id));
             return HandleResult(result);
         }
+
+        [HttpPost("{id}/notes/{noteId}/media")]
+        [ProducesResponseType(typeof(ApiResponse<SessionMediaDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ApiResponse<SessionMediaDto>>> UploadNoteMedia(Guid id, Guid noteId, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return CreateErrorResponse<SessionMediaDto>("File is required", 400);
+
+            var result = await _mediator.Send(new AddNoteMediaCommand(id, noteId, file));
+            return HandleResult(result);
+        }
+
+        [HttpGet("{id}/notes/{noteId}/media")]
+        [ProducesResponseType(typeof(ApiResponse<List<SessionMediaDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ApiResponse<List<SessionMediaDto>>>> GetNoteMedia(Guid id, Guid noteId)
+        {
+            var result = await _mediator.Send(new GetNoteMediaQuery(id, noteId));
+            return HandleResult(result);
+        }
+
+
+        // ──────────────────────────────────────────
+        //  Media
+        // ──────────────────────────────────────────
+
+        [HttpPost("{id}/media")]
+        [ProducesResponseType(typeof(ApiResponse<SessionMediaDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ApiResponse<SessionMediaDto>>> UploadMedia(Guid id, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return CreateErrorResponse<SessionMediaDto>("File is required", 400);
+
+            var result = await _mediator.Send(new AddSessionMediaCommand(id, file));
+            return HandleResult(result);
+        }
+
+        [HttpGet("{id}/media")]
+        [ProducesResponseType(typeof(ApiResponse<List<SessionMediaDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ApiResponse<List<SessionMediaDto>>>> GetMedia(Guid id)
+        {
+            var result = await _mediator.Send(new GetSessionMediaQuery(id));
+            return HandleResult(result);
+        }
+
 
         // ──────────────────────────────────────────
         //  Filter endpoints (by entity)

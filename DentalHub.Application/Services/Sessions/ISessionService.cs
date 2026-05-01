@@ -1,33 +1,27 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Sessions;
+using Microsoft.AspNetCore.Http;
 
 namespace DentalHub.Application.Services.Sessions
 {
     public interface ISessionService
     {
-        // CRUD Operations
+        // CRUD
         Task<Result<bool>> CreateSessionAsync(CreateSessionDto dto);
         Task<Result<SessionDto>> GetSessionByIdAsync(Guid id);
         Task<Result<PagedResult<SessionDto>>> GetAllSessionsAsync(int page = 1, int pageSize = 10, string? status = null);
         Task<Result> DeleteSessionByIdAsync(Guid id);
 
-        // Get sessions by various filters
+        // Filters
         Task<Result<PagedResult<SessionDto>>> GetSessionsByStudentIdAsync(Guid studentId, int page = 1, int pageSize = 10);
         Task<Result<PagedResult<SessionDto>>> GetSessionsByPatientIdAsync(Guid patientId, int page = 1, int pageSize = 10);
         Task<Result<PagedResult<SessionDto>>> GetSessionsByCaseIdAsync(Guid caseId, int page = 1, int pageSize = 10);
+        Task<Result<PagedResult<SessionDto>>> GetUpcomingSessionsAsync(int page = 1, int pageSize = 10, Guid? studentId = null, Guid? patientId = null);
 
-        /// <summary>
-        /// Returns upcoming (future + Scheduled) sessions.
-        /// Optionally filtered by studentId or patientId.
-        /// </summary>
-        Task<Result<PagedResult<SessionDto>>> GetUpcomingSessionsAsync(
-            int page = 1, int pageSize = 10,
-            Guid? studentId = null, Guid? patientId = null);
-
-        // Status management
+        // Status
         Task<Result<SessionDto>> UpdateSessionStatusAsync(Guid id, string newStatus);
 
-        // Session notes
+        // Notes
         Task<Result<SessionNoteDto>> AddSessionNoteAsync(CreateSessionNoteDto dto);
         Task<Result<List<SessionNoteDto>>> GetSessionNotesAsync(Guid sessionId);
         Task<Result<Guid>> EvaluateSessionAsync(Guid sessionId, Guid doctorId, int grade, string note, bool isFinalSession);
