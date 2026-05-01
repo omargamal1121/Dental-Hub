@@ -132,6 +132,8 @@ namespace DentalHub.API.Controllers
             if (studentPublicId == null)
                 return CreateErrorResponse<PagedResult<CaseRequestDto>>("Unauthorized", 401);
 
+
+
             RequestStatus? requestStatus = null;
             if (!string.IsNullOrEmpty(status))
             {
