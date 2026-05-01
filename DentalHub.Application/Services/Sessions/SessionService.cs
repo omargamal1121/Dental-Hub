@@ -146,7 +146,11 @@ namespace DentalHub.Application.Services.Sessions
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
                         TotalMedia = s.Medias.Count,
-                        CreateAt = s.CreateAt
+                        CreateAt = s.CreateAt,
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet"
                     }
                 );
 
@@ -213,6 +217,10 @@ namespace DentalHub.Application.Services.Sessions
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -254,6 +262,10 @@ namespace DentalHub.Application.Services.Sessions
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -293,6 +305,10 @@ namespace DentalHub.Application.Services.Sessions
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -332,6 +348,10 @@ namespace DentalHub.Application.Services.Sessions
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -378,6 +398,10 @@ namespace DentalHub.Application.Services.Sessions
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
+                        Grade = s.Grade,
+                        DoctorNote = s.DoctorNote,
+                        EvaluteDoctorId = s.EvaluteDoctorId,
+                        EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
                         TotalMedia = s.Medias.Count,
                         CreateAt = s.CreateAt
                     }
@@ -449,6 +473,58 @@ namespace DentalHub.Application.Services.Sessions
 
         #endregion
 
+        #region Evaluation
+
+        public async Task<Result<Guid>> EvaluateSessionAsync(Guid sessionId, Guid doctorId, int grade, string note, bool isFinalSession)
+        {
+            try
+            {
+
+                var session = await _unitOfWork.Sessions.GetByIdAsync(new BaseSpecification<Session>(s => s.Id == sessionId));
+
+                if (session == null)
+                    return Result<Guid>.Failure("Session not found.");
+
+                if (session.Status == SessionStatus.Cancelled)
+                    return Result<Guid>.Failure("Cannot evaluate a cancelled session.");
+
+                session.Grade = grade;
+                session.DoctorNote = note;
+                session.EvaluteDoctorId = doctorId;
+                session.UpdateAt = DateTime.UtcNow;
+
+                session.Status = SessionStatus.Done;
+
+                // 3. Update Patient Case Flag
+                var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.Id == session.CaseId));
+
+                if (patientCase != null)
+                {
+                    if (isFinalSession)
+                    {
+                        patientCase.Status = CaseStatus.Completed;
+                    }
+                    else
+                    {
+                        patientCase.Status = CaseStatus.InProgress;
+                    }
+
+                    _unitOfWork.PatientCases.Update(patientCase);
+                }
+            
+                _unitOfWork.Sessions.Update(session);
+                await _unitOfWork.SaveChangesAsync();
+
+                return Result<Guid>.Success(session.Id, $"Session evaluated successfully with a grade of {grade}/20.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error evaluating session: {Id}", sessionId);
+                return Result<Guid>.Failure("Error saving evaluation to the database.");
+            }
+        }
+
+        #endregion
         #region Session Notes
 
         public async Task<Result<SessionNoteDto>> AddSessionNoteAsync(CreateSessionNoteDto dto)

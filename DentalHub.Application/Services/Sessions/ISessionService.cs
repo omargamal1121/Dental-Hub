@@ -30,5 +30,6 @@ namespace DentalHub.Application.Services.Sessions
         // Session notes
         Task<Result<SessionNoteDto>> AddSessionNoteAsync(CreateSessionNoteDto dto);
         Task<Result<List<SessionNoteDto>>> GetSessionNotesAsync(Guid sessionId);
+        Task<Result<Guid>> EvaluateSessionAsync(Guid sessionId, Guid doctorId, int grade, string note, bool isFinalSession);
     }
 }
