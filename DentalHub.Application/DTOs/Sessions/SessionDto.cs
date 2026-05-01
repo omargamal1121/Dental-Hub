@@ -18,11 +18,14 @@ namespace DentalHub.Application.DTOs.Sessions
         public DateTime EndAt { get; set; }
 
         public string Status { get; set; } = string.Empty;
+
+        public int Grade { get; set; }
+        public string? DoctorNote { get; set; }
+        public Guid? EvaluteDoctorId { get; set; }
+        public string? EvaluteDoctorName { get; set; }
         public int TotalNotes { get; set; }
         public int TotalMedia { get; set; }
         public DateTime CreateAt { get; set; }
-
-        /// <summary>Full notes with their media — populated by the GetSessionsByCaseId endpoint</summary>
-        public List<SessionNoteDto> Notes { get; set; } = new();
+        public DateTime? UpdateAt { get; set; }
     }
 }

@@ -24,13 +24,6 @@ namespace DentalHub.Application.Services.Sessions
         // Notes
         Task<Result<SessionNoteDto>> AddSessionNoteAsync(CreateSessionNoteDto dto);
         Task<Result<List<SessionNoteDto>>> GetSessionNotesAsync(Guid sessionId);
-
-        // Session-level media
-        Task<Result<SessionMediaDto>> AddSessionMediaAsync(Guid sessionId, IFormFile file);
-        Task<Result<List<SessionMediaDto>>> GetSessionMediaAsync(Guid sessionId);
-
-        // Note-level media
-        Task<Result<SessionMediaDto>> AddNoteMediaAsync(Guid sessionId, Guid noteId, IFormFile file);
-        Task<Result<List<SessionMediaDto>>> GetNoteMediaAsync(Guid noteId);
+        Task<Result<Guid>> EvaluateSessionAsync(Guid sessionId, Guid doctorId, int grade, string note, bool isFinalSession);
     }
 }
