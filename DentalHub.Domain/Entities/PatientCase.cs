@@ -5,11 +5,11 @@ namespace DentalHub.Domain.Entities
     public class PatientCase : BaseEntitiy
 	{
         public Guid PatientId { get; set; }
-		public Guid CaseTypeId { get; set; }
+		//public Guid CaseTypeId { get; set; }
 
 		public CaseStatus Status { get; set; }
 		public string Description { get; set; }=null!;
-		public CaseType CaseType { get; set; } = null!;
+		//public CaseType CaseType { get; set; } = null!;
 		public Guid? AssignedStudentId { get; set; }
 		public Student? AssignedStudent { get; set; }
 

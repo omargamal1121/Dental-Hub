@@ -1,4 +1,5 @@
 using DentalHub.Application.DTOs.Cases;
+using DentalHub.Application.DTOs.Diagnoses;
 using DentalHub.Domain.Entities;
 using Microsoft.OpenApi.Extensions;
 using System.Linq.Expressions;
@@ -14,14 +15,16 @@ namespace DentalHub.Application.DTOs.Cases
                 PatientId = pc.Patient.Id,
                 PatientName = pc.Patient.User.FullName,
                 PatientAge = pc.Patient.Age,
-                Diagnosisdto = pc.Diagnosiss.Select(d => new Diagnosisdto
-                {
-                    Id = d.Id,
-                    Notes = d.Notes,
-                    CaseType = d.CaseType.Name,
-                    DiagnosisStage = d.Stage.ToString(),
-                    TeethNumbers = d.TeethNumbers
-                }).OrderByDescending(d => d.DiagnosisStage).FirstOrDefault(),
+                Diagnoses = pc.Diagnosiss
+    .Select(d => new DiagnosisDto
+    {
+        Id = d.Id,
+        Notes = d.Notes,
+        CaseTypeName = d.CaseType != null ? d.CaseType.Name : string.Empty,
+        Stage = d.Stage,
+        TeethNumbers = d.TeethNumbers
+    })
+    .ToList(),
                 Status = pc.Status.ToString(),
                 IsPublic = pc.IsPublic,
                 UniversityId = pc.UniversityId,
