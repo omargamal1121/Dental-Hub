@@ -22,6 +22,7 @@ namespace DentalHub.Application.Handlers.Sessions
                 StudentId = request.StudentId,
                 CaseId = request.PatientCaseId,
                 ScheduledAt = request.SessionDate,
+                DoctorUsername = request.DoctorUsername,
             };
 
             var result = await _service.CreateSessionAsync(dto);

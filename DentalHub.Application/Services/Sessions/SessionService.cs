@@ -100,7 +100,7 @@ namespace DentalHub.Application.Services.Sessions
                     CaseId = patientCase.Id,
                     StudentId = dto.StudentId,
                     PatientId = patientCase.PatientId,
-                    EvaluteDoctorId = doctorId,
+                    AssignedDoctorId = doctorId,
                     StartAt = dto.ScheduledAt,
                     EndAt = dto.ScheduledAt.AddHours(1),
                     Status = SessionStatus.Scheduled
@@ -112,7 +112,7 @@ namespace DentalHub.Application.Services.Sessions
                 _logger.LogInformation("Session created: {Id} - Student: {StudentId}, Case: {CaseId}, Scheduled: {ScheduledAt}",
                     session.Id, dto.StudentId, dto.CaseId, dto.ScheduledAt);
 
-                return Result<bool>.Success(true, "Session created successfully", 204);
+                return Result<bool>.Success(true, "Session created successfully", 201);
             }
 
             catch (Exception ex)
@@ -142,6 +142,8 @@ namespace DentalHub.Application.Services.Sessions
                         DoctorNote = s.DoctorNote,
                         EvaluteDoctorId = s.EvaluteDoctorId,
                         EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
+                        AssignedDoctorId = s.AssignedDoctorId,
+                        AssignedDoctorName = s.AssignedDoctor != null ? s.AssignedDoctor.Name : null,
                         ScheduledAt = s.StartAt,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
@@ -216,6 +218,8 @@ namespace DentalHub.Application.Services.Sessions
                         DoctorNote = s.DoctorNote,
                         EvaluteDoctorId = s.EvaluteDoctorId,
                         EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
+                        AssignedDoctorId = s.AssignedDoctorId,
+                        AssignedDoctorName = s.AssignedDoctor != null ? s.AssignedDoctor.Name : null,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
                         TotalNotes = s.SessionNotes.Count,
@@ -262,6 +266,8 @@ namespace DentalHub.Application.Services.Sessions
                         DoctorNote = s.DoctorNote,
                         EvaluteDoctorId = s.EvaluteDoctorId,
                         EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
+                        AssignedDoctorId = s.AssignedDoctorId,
+                        AssignedDoctorName = s.AssignedDoctor != null ? s.AssignedDoctor.Name : null,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
                         TotalNotes = s.SessionNotes.Count,
@@ -306,6 +312,8 @@ namespace DentalHub.Application.Services.Sessions
                         DoctorNote = s.DoctorNote,
                         EvaluteDoctorId = s.EvaluteDoctorId,
                         EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
+                        AssignedDoctorId = s.AssignedDoctorId,
+                        AssignedDoctorName = s.AssignedDoctor != null ? s.AssignedDoctor.Name : null,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
                         TotalNotes = s.SessionNotes.Count,
@@ -350,6 +358,8 @@ namespace DentalHub.Application.Services.Sessions
                         DoctorNote = s.DoctorNote,
                         EvaluteDoctorId = s.EvaluteDoctorId,
                         EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
+                        AssignedDoctorId = s.AssignedDoctorId,
+                        AssignedDoctorName = s.AssignedDoctor != null ? s.AssignedDoctor.Name : null,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
                         TotalNotes = s.SessionNotes.Count,
@@ -439,6 +449,8 @@ namespace DentalHub.Application.Services.Sessions
                         DoctorNote = s.DoctorNote,
                         EvaluteDoctorId = s.EvaluteDoctorId,
                         EvaluteDoctorName = s.EvaluteDoctor != null ? s.EvaluteDoctor.Name : "Not Evaluated Yet",
+                        AssignedDoctorId = s.AssignedDoctorId,
+                        AssignedDoctorName = s.AssignedDoctor != null ? s.AssignedDoctor.Name : null,
                         EndAt = s.EndAt,
                         Status = s.Status.ToString(),
                         TotalNotes = s.SessionNotes.Count,
@@ -469,6 +481,7 @@ namespace DentalHub.Application.Services.Sessions
         }
 
         #endregion
+
         #region Evaluation
 
         public async Task<Result<Guid>> EvaluateSessionAsync(Guid sessionId, Guid doctorId, int grade, string note, bool isFinalSession)
@@ -476,42 +489,43 @@ namespace DentalHub.Application.Services.Sessions
             try
             {
                 var session = await _unitOfWork.Sessions.GetByIdAsync(new BaseSpecification<Session>(s => s.Id == sessionId));
+                if (session == null) return Result<Guid>.Failure("Session not found.");
 
-                if (session == null)
-                    return Result<Guid>.Failure("Session not found.");
 
-                if (session.Status == SessionStatus.Cancelled || session.Status == SessionStatus.Expired)
-                    return Result<Guid>.Failure($"Cannot evaluate a session with status: {session.Status}");
+                if (session.Status != SessionStatus.Done)
+                    return Result<Guid>.Failure("This session cannot be evaluated because it hasn't been marked as 'Done' yet.");
 
-                if (session.Status == SessionStatus.Done)
+                if (session.EvaluteDoctorId.HasValue)
                     return Result<Guid>.Failure("This session has already been evaluated.");
 
-                if (session.StartAt.Date > DateTime.UtcNow.Date)
-                    return Result<Guid>.Failure("Cannot evaluate a future session.");
 
                 session.Grade = grade;
                 session.DoctorNote = note;
                 session.EvaluteDoctorId = doctorId;
                 session.UpdateAt = DateTime.UtcNow;
 
-                session.Status = SessionStatus.Done;
-
                 var patientCase = await _unitOfWork.PatientCases.GetByIdAsync(new BaseSpecification<PatientCase>(pc => pc.Id == session.CaseId));
+
                 if (patientCase != null)
                 {
-                    patientCase.Status = isFinalSession ? CaseStatus.Completed : CaseStatus.InProgress;
-                    _unitOfWork.PatientCases.Update(patientCase);
+
+                    if (isFinalSession)
+                    {
+                        patientCase.Status = CaseStatus.Completed;
+                        _unitOfWork.PatientCases.Update(patientCase);
+                    }
+
                 }
 
                 _unitOfWork.Sessions.Update(session);
                 await _unitOfWork.SaveChangesAsync();
 
-                return Result<Guid>.Success(session.Id, "Session evaluated and marked as Done.");
+                return Result<Guid>.Success(session.Id, "Session evaluation submitted successfully.");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error evaluating session: {Id}", sessionId);
-                return Result<Guid>.Failure("Error saving evaluation.");
+                _logger.LogError(ex, "Error during session evaluation: {Id}", sessionId);
+                return Result<Guid>.Failure("An error occurred while saving the evaluation.");
             }
         }
 
@@ -600,7 +614,6 @@ namespace DentalHub.Application.Services.Sessions
         {
             try
             {
-                // Step 1: جيبي الـ notes بدون medias
                 var spec = new BaseSpecificationWithProjection<SessionNote, SessionNoteDto>(
                     sn => sn.SessionId == sessionPublicId,
                     sn => new SessionNoteDto
@@ -616,7 +629,7 @@ namespace DentalHub.Application.Services.Sessions
 
                 var notes = await _unitOfWork.SessionNotes.GetAllAsync(spec);
 
-                // Step 2: لكل note جيبي الـ medias في query منفصلة
+
                 foreach (var note in notes)
                 {
                     var mediaSpec = new BaseSpecificationWithProjection<Media, SessionMediaDto>(
@@ -673,20 +686,22 @@ namespace DentalHub.Application.Services.Sessions
             }
         }
 
-        public async Task<Result<List<SessionMediaDto>>> GetNoteMediaAsync(Guid noteId)
+        public async Task<Result<List<SessionMediaDto>>> GetNoteMediaAsync(Guid sessionId, Guid noteId)
         {
             try
             {
-                var noteExists = await _unitOfWork.SessionNotes.AnyAsync(new BaseSpecification<SessionNote>(n => n.Id == noteId));
-                if (!noteExists)
-                    return Result<List<SessionMediaDto>>.Failure("Note not found");
+                var note = await _unitOfWork.SessionNotes.GetByIdAsync(
+                    new BaseSpecification<SessionNote>(n => n.Id == noteId && n.SessionId == sessionId));
+
+                if (note == null)
+                    return Result<List<SessionMediaDto>>.Failure("Note not found or does not belong to this session");
 
                 var spec = new BaseSpecificationWithProjection<Media, SessionMediaDto>(
                     m => m.SessionNoteId == noteId,
                     m => new SessionMediaDto
                     {
                         Id = m.Id,
-                        SessionId = m.Session != null ? m.Session.Id : Guid.Empty,
+                        SessionId = sessionId,
                         NoteId = noteId,
                         MediaUrl = m.MediaUrl,
                         CreateAt = m.CreateAt
