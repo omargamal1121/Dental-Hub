@@ -14,6 +14,8 @@ namespace DentalHub.Application.DTOs.Sessions
         public string? DoctorNote { get; set; }
         public Guid? EvaluteDoctorId { get; set; }
         public string? EvaluteDoctorName { get; set; }
+        public Guid? AssignedDoctorId { get; set; }
+        public string? AssignedDoctorName { get; set; }
 
         /// <summary>Session start date and time (maps to Session.StartAt)</summary>
         public DateTime ScheduledAt { get; set; }

@@ -31,7 +31,8 @@ namespace DentalHub.Application.DTOs.Cases
                 PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
                 AssignedStudentId = pc.AssignedStudentId,
                 AssignedDoctorId = pc.AssignedDoctorId,
-                HasEvaluatedSession = pc.Sessions.Any(s => s.Status == SessionStatus.Done),
+                HasEvaluatedSession = pc.Sessions.Any() &&
+                      !pc.Sessions.Any(s => s.Status == SessionStatus.Scheduled),
                 ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList(),
                 CreatedById = pc.CreatedById,
                 CreatedByRole = pc.CreatedByRole

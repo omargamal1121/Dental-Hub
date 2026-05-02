@@ -17,7 +17,7 @@ namespace DentalHub.Application.Handlers.Sessions
 
         public async Task<Result<List<SessionMediaDto>>> Handle(GetNoteMediaQuery request, CancellationToken ct)
         {
-            return await _service.GetNoteMediaAsync(request.NoteId);
+            return await _service.GetNoteMediaAsync(request.SessionId, request.NoteId);
         }
     }
 }
