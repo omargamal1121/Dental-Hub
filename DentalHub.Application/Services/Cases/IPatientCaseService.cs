@@ -27,6 +27,10 @@ namespace DentalHub.Application.Services.Cases
         Task<Result<PagedResult<PatientCaseDto>>> GetPatientCasesAsync(
             Guid patientId, int page = 1, int pageSize = 10);
 
+        // Get cases by doctor id
+        Task<Result<PagedResult<PatientCaseDto>>> GetCasesByDoctorIdAsync(
+            Guid doctorId, string? status, int page = 1, int pageSize = 10);
+
         // Change case status
         Task<Result<PatientCaseDto>> UpdateCaseStatusAsync(Guid id, string newStatus);
 

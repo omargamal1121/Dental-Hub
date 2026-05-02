@@ -10,6 +10,9 @@ namespace DentalHub.Application.DTOs.Doctors
     
         public string Specialty { get; set; } = string.Empty;
         public Guid UniversityId { get; set; }
+        public string UniversityName { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
 
         public DateTime CreateAt { get; set; }
         public int TotalStudents { get; set; }

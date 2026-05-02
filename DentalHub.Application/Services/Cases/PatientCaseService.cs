@@ -653,6 +653,73 @@ namespace DentalHub.Application.Services.Cases
             }
         }
 
+        public async Task<Result<PagedResult<PatientCaseDto>>> GetCasesByDoctorIdAsync(Guid doctorId, string? status, int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                CaseStatus? caseStatus = null;
+                if (!string.IsNullOrEmpty(status))
+                {
+                    if (Enum.TryParse<CaseStatus>(status, true, out var parsedStatus))
+                    {
+                        caseStatus = parsedStatus;
+                    }
+                    else
+                    {
+                        return Result<PagedResult<PatientCaseDto>>.Failure($"Invalid status: {status}", 400);
+                    }
+                }
+
+                var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
+                    pc => pc.AssignedDoctorId == doctorId && (!caseStatus.HasValue || pc.Status == caseStatus.Value),
+                    pc => new PatientCaseDto
+                    {
+                        Id = pc.Id,
+                        PatientId = pc.PatientId,
+                        PatientName = pc.Patient.User.FullName,
+                        PatientAge = pc.Patient.Age,
+                        Diagnoses = pc.Diagnosiss
+    .Select(d => new DiagnosisDto
+    {
+        Id = d.Id,
+        Notes = d.Notes,
+        CaseTypeName = d.CaseType.Name ?? string.Empty,
+        Stage = d.Stage,
+        TeethNumbers = d.TeethNumbers
+    })
+    .ToList(),
+                        Status = pc.Status.ToString(),
+                        IsPublic = pc.IsPublic,
+                        UniversityId = pc.UniversityId,
+                        UniversityName = pc.University != null ? pc.University.Name : null,
+                        CreateAt = pc.CreateAt,
+                        TotalSessions = pc.Sessions.Count,
+                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
+                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList(),
+                        CreatedById = pc.CreatedById,
+                        CreatedByRole = pc.CreatedByRole
+                    }
+                );
+
+                spec.ApplyPaging(page, pageSize);
+                spec.ApplyOrderByDescending(pc => pc.CreateAt);
+
+                var countSpec = new BaseSpecification<PatientCase>(pc => pc.AssignedDoctorId == doctorId && (!caseStatus.HasValue || pc.Status == caseStatus.Value));
+                var casesList = await _unitOfWork.PatientCases.GetAllAsync(spec);
+                var totalCount = await _unitOfWork.PatientCases.CountAsync(countSpec);
+
+                var pagedResult = PaginationFactory<PatientCaseDto>.Create(
+                    count: totalCount, page: page, pageSize: pageSize, data: casesList);
+
+                return Result<PagedResult<PatientCaseDto>>.Success(pagedResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting cases by doctor id: {DoctorId}", doctorId);
+                return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving cases");
+            }
+        }
+
         #endregion
 
         #region Status Management

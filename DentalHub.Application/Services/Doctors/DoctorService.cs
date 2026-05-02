@@ -53,8 +53,11 @@ namespace DentalHub.Application.Services.Doctors
                      
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
+                        UniversityName = d.University.Name,
+                        PhoneNumber = d.User.PhoneNumber ?? string.Empty,
+                        UserName = d.User.UserName ?? string.Empty,
                         CreateAt = d.CreateAt,
-                        TotalStudents = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved),
+                       // TotalStudents = d.CaseRequests.Where(cr => cr.Status == RequestStatus.Approved).Select(cr => cr.StudentId).Distinct().Count(),
                         PendingRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
                         ApprovedRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved)
                     }
@@ -91,8 +94,11 @@ namespace DentalHub.Application.Services.Doctors
                     
                         Specialty = d.Specialty,
                         UniversityId = d.UniversityId,
+                        UniversityName = d.University.Name,
+                        PhoneNumber = d.User.PhoneNumber ?? string.Empty,
+                        UserName = d.User.UserName ?? string.Empty,
                         CreateAt = d.CreateAt,
-                        TotalStudents = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved),
+                        //TotalStudents = d.CaseRequests.Where(cr => cr.Status == RequestStatus.Approved).Select(cr => cr.StudentId).Distinct().Count(),
                         PendingRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
                         ApprovedRequests = d.CaseRequests.Count(cr => cr.Status == RequestStatus.Approved)
                     }
@@ -298,7 +304,7 @@ namespace DentalHub.Application.Services.Doctors
                     PendingRequests = doctor.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
                     ApprovedRequests = approvedRequests.Count,
                     RejectedRequests = doctor.CaseRequests.Count(cr => cr.Status == RequestStatus.Rejected),
-                    TotalStudents = uniqueStudents,
+                  //  TotalStudents = uniqueStudents,
                     ActiveCases = cases.Count(c => c.Status == CaseStatus.InProgress),
                     CompletedCases = cases.Count(c => c.Status == CaseStatus.Completed)
                 };

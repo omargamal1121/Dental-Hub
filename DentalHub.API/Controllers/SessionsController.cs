@@ -29,10 +29,20 @@ namespace DentalHub.API.Controllers
         // ──────────────────────────────────────────
 
         [HttpPost]
+        [Authorize(Roles = "Student")]
         [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<bool>>> Create([FromBody] CreateSessionCommand command)
         {
+            var studentIdClaim = User.FindFirstValue("uid") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(studentIdClaim))
+                return CreateErrorResponse<bool>("Unauthorized: Student ID not found in token", 401);
+
+            var studentId = Guid.Parse(studentIdClaim);
+            command.StudentId = studentId;
+
             var result = await _mediator.Send(command);
             return HandleResult(result);
         }
@@ -65,6 +75,25 @@ namespace DentalHub.API.Controllers
                 return CreateErrorResponse<bool>("Id mismatch", 400);
 
             var result = await _mediator.Send(command);
+            return HandleResult(result);
+        }
+
+        [HttpPatch("{id}/done")]
+        [Authorize(Roles = "Student")]
+        [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ApiResponse<bool>>> MarkAsDone(Guid id)
+        {
+            var studentIdClaim = User.FindFirstValue("uid") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(studentIdClaim))
+                return CreateErrorResponse<bool>("Unauthorized: Student ID not found in token", 401);
+
+            var studentId = Guid.Parse(studentIdClaim);
+
+            var result = await _mediator.Send(new MarkSessionAsDoneCommand(id, studentId));
             return HandleResult(result);
         }
 
@@ -216,6 +245,8 @@ namespace DentalHub.API.Controllers
         // ──────────────────────────────────────────
         //  Evaluation
         // ──────────────────────────────────────────
+
+
 
         [HttpPost("{id}/evaluate")]
         [Authorize(Roles = "Doctor")]

@@ -225,12 +225,11 @@ namespace DentalHub.Application.Services.Students
 
                 // 1. Main Query
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
-                    pc=>true,
-                    
-                    //pc => pc.CaseRequests.Any(cr =>
-                    //    cr.StudentId == studentGuid &&
-                    //    cr.Status == RequestStatus.Approved
-                    //),
+                    pc => pc.CaseRequests.Any(cr =>
+                        cr.StudentId == studentGuid &&
+                        cr.Status == RequestStatus.Approved
+                    ) && 
+                    (string.IsNullOrEmpty(caseType) || pc.Diagnosiss.Any(d => d.CaseType.Name == caseType)),
 
                     pc => new PatientCaseDto
                     {
@@ -253,12 +252,12 @@ namespace DentalHub.Application.Services.Students
                             : string.Empty,
 
                         Diagnoses = pc.Diagnosiss
-    .Select(d => new DiagnosisDto
-    {
-        Id = d.Id,
-        CaseTypeName = d.CaseType.Name 
-    })
-    .ToList()
+                            .Select(d => new DiagnosisDto
+                            {
+                                Id = d.Id,
+                                CaseTypeName = d.CaseType.Name 
+                            })
+                            .ToList()
                     }
                 );
 
@@ -273,7 +272,8 @@ namespace DentalHub.Application.Services.Students
                     pc => pc.CaseRequests.Any(cr =>
                         cr.StudentId == studentGuid &&
                         cr.Status == RequestStatus.Approved
-                    )
+                    ) && 
+                    (string.IsNullOrEmpty(caseType) || pc.Diagnosiss.Any(d => d.CaseType.Name == caseType))
                 );
 
                 var totalCount = await _unitOfWork.PatientCases.CountAsync(countSpec);

@@ -1,41 +1,122 @@
-using DentalHub.Application.DTOs.Chat;
-using DentalHub.Application.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using DentalHub.Application.Commands.Chat;
+using DentalHub.Application.DTOs.Chat;
 
 namespace DentalHub.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    [Authorize]
     public class ChatController : ControllerBase
     {
-        private readonly IChatService _chatService;
+        private readonly IMediator _mediator;
 
-        public ChatController(IChatService chatService)
+        public ChatController(IMediator mediator)
         {
-            _chatService = chatService;
+            _mediator = mediator;
         }
 
-        [HttpPost("next")]
-        public IActionResult Next([FromBody] ChatRequestDto request)
+        private string GetUserId()
         {
-            // Null state handling is done inside the service layer
-            if (request == null)
+            return User.FindFirst(ClaimTypes.NameIdentifier)?.Value 
+                ?? User.FindFirst("uid")?.Value 
+                ?? string.Empty;
+        }
+
+        [HttpPost("start")]
+        public async Task<IActionResult> StartConversation()
+        {
+            var userId = GetUserId();
+            if (string.IsNullOrEmpty(userId))
             {
-                // Ensure request object exists even if body is completely empty
-                request = new ChatRequestDto();
+                return Unauthorized("User ID could not be found from the token.");
             }
 
-            try
+            var command = new StartConversationCommand { UserId = userId };
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
             {
-                var response = _chatService.ProcessNext(request);
-                return Ok(response);
+                return BadRequest(result.Message);
             }
-            catch (Exception ex)
+
+            return Ok(new { ConversationId = result.ConversationId });
+        }
+
+        [HttpPost("message")]
+        public async Task<IActionResult> SaveMessage([FromBody] SaveMessageDto request)
+        {
+            var userId = GetUserId();
+            if (string.IsNullOrEmpty(userId))
             {
-                // Handle any unexpected errors gracefully
-                return StatusCode(500, new { message = "An error occurred during chat processing.", error = ex.Message });
+                return Unauthorized("User ID could not be found from the token.");
             }
+
+            if (string.IsNullOrWhiteSpace(request.Content))
+            {
+                return BadRequest("Content is required.");
+            }
+
+            var command = new SaveMessageCommand
+            {
+                UserId = userId,
+                ConversationId = request.ConversationId,
+                Content = request.Content,
+                IsAiMessage = request.IsAiMessage
+            };
+
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok();
+        }
+        [HttpGet("conversations")]
+        public async Task<IActionResult> GetConversations()
+        {
+            var userId = GetUserId();
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized("User ID could not be found from the token.");
+            }
+
+            var command = new GetConversationsQuery { UserId = userId };
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok(result.Conversations);
+        }
+
+        [HttpGet("conversation/{conversationId}")]
+        public async Task<IActionResult> GetMessages(Guid conversationId)
+        {
+            var userId = GetUserId();
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized("User ID could not be found from the token.");
+            }
+
+            var command = new GetMessagesQuery { UserId = userId, ConversationId = conversationId };
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok(result.Messages);
         }
     }
 }

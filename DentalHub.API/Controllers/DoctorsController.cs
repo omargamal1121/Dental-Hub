@@ -6,6 +6,8 @@ using DentalHub.Application.DTOs.Identity;
 using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.Queries.Doctor;
 using DentalHub.Domain.Entities;
+using DentalHub.Application.Queries.Sessions;
+using DentalHub.Application.DTOs.Sessions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -135,7 +137,24 @@ namespace DentalHub.API.Controllers
             return HandleResult(result);
         }
 
-    
+        /// Get sessions that need evaluation for the logged-in doctor
+        [Authorize(Roles = "Doctor")]
+        [HttpGet("sessions-to-evaluate")]
+        [ProducesResponseType(typeof(ApiResponse<PagedResult<SessionDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<ApiResponse<PagedResult<SessionDto>>>> GetSessionsToEvaluate(
+            [FromQuery] Guid? studentId = null,
+            [FromQuery] Guid? patientId = null,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10)
+        {
+            var doctorId = GetUserIdFromToken();
+            if (doctorId == null)
+                return CreateErrorResponse<PagedResult<SessionDto>>("Unauthorized: Invalid token", 401);
+
+            var result = await _mediator.Send(new GetSessionsNeedingEvaluationQuery(doctorId.Value, studentId, patientId, page, pageSize));
+            return HandleResult(result);
+        }
     }
         #endregion
 

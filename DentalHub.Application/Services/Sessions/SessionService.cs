@@ -498,6 +498,9 @@ namespace DentalHub.Application.Services.Sessions
                 if (session.EvaluteDoctorId.HasValue)
                     return Result<Guid>.Failure("This session has already been evaluated.");
 
+                if (session.AssignedDoctorId != doctorId)
+                    return Result<Guid>.Failure("You are not authorized to evaluate this session.");
+
 
                 session.Grade = grade;
                 session.DoctorNote = note;
@@ -530,6 +533,85 @@ namespace DentalHub.Application.Services.Sessions
         }
 
         #endregion
+
+        public async Task<Result<bool>> MarkSessionAsDoneAsync(Guid sessionId, Guid studentId)
+        {
+            try
+            {
+                var session = await _unitOfWork.Sessions.GetByIdAsync(new BaseSpecification<Session>(s => s.Id == sessionId));
+                if (session == null)
+                    return Result<bool>.Failure("Session not found");
+
+                if (session.StudentId != studentId)
+                    return Result<bool>.Failure("This session does not belong to you.");
+
+                if (session.Status != SessionStatus.Scheduled)
+                    return Result<bool>.Failure($"Cannot mark session as done. Current status: {session.Status}");
+
+                session.Status = SessionStatus.Done;
+                session.UpdateAt = DateTime.UtcNow;
+
+                _unitOfWork.Sessions.Update(session);
+                await _unitOfWork.SaveChangesAsync();
+
+                return Result<bool>.Success(true, "Session marked as done successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error marking session as done: {Id}", sessionId);
+                return Result<bool>.Failure("Error marking session as done");
+            }
+        }
+
+        public async Task<Result<PagedResult<SessionDto>>> GetSessionsNeedingEvaluationAsync(Guid doctorId, Guid? studentId = null, Guid? patientId = null, int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                var projSpec = new BaseSpecificationWithProjection<Session, SessionDto>(
+                    s => s.AssignedDoctorId == doctorId &&
+                         s.Status == SessionStatus.Done &&
+                         !s.EvaluteDoctorId.HasValue &&
+                         (studentId == null || s.StudentId == studentId) &&
+                         (patientId == null || s.PatientId == patientId),
+                    s => new SessionDto
+                    {
+                        Id = s.Id,
+                        CaseId = s.CaseId,
+                        PatientId = s.PatientId,
+                        PatientName = s.Patient.User.FullName,
+                        StudentId = s.StudentId,
+                        StudentName = s.Student.User.FullName,
+                        ScheduledAt = s.StartAt,
+                        EndAt = s.EndAt,
+                        Status = s.Status.ToString(),
+                        TotalNotes = s.SessionNotes.Count,
+                        TotalMedia = s.Medias.Count,
+                        CreateAt = s.CreateAt
+                    }
+                );
+
+                projSpec.ApplyPaging(page, pageSize);
+                projSpec.ApplyOrderByDescending(s => s.StartAt);
+
+                var countSpec = new BaseSpecification<Session>(
+                    s => s.AssignedDoctorId == doctorId &&
+                         s.Status == SessionStatus.Done &&
+                         !s.EvaluteDoctorId.HasValue &&
+                         (studentId == null || s.StudentId == studentId) &&
+                         (patientId == null || s.PatientId == patientId));
+
+                var list = await _unitOfWork.Sessions.GetAllAsync(projSpec);
+                var totalCount = await _unitOfWork.Sessions.CountAsync(countSpec);
+
+                return Result<PagedResult<SessionDto>>.Success(
+                    PaginationFactory<SessionDto>.Create(totalCount, page, pageSize, list));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting sessions needing evaluation for doctor: {Id}", doctorId);
+                return Result<PagedResult<SessionDto>>.Failure("Error retrieving sessions");
+            }
+        }
 
         #region Status Management
 

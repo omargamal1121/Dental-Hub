@@ -106,6 +106,15 @@ namespace DentalHub.API.Controllers
             return HandleResult(result);
         }
 
+        [HttpGet("doctor/{docId}")]
+        [ProducesResponseType(typeof(ApiResponse<PagedResult<PatientCaseDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ApiResponse<PagedResult<PatientCaseDto>>>> GetByDoctorId(Guid docId, [FromQuery] string? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        {
+            var result = await _mediator.Send(new GetPatientCasesByDoctorIdQuery(docId, status, page, pageSize));
+            return HandleResult(result);
+        }
+
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]

@@ -46,7 +46,7 @@ namespace DentalHub.Application.Extensions
             services.AddScoped<IUniversityMemberService, UniversityMemberService>();
             services.AddScoped<IUniversityService, UniversityService>();
 
-            // Register Chat Service
+            // Register Chat Service - Now Handled by MediatR
             services.AddScoped<IChatService, ChatService>();
 
             // Register FluentValidation
