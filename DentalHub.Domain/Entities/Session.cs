@@ -13,6 +13,9 @@
         public int Grade { get; set; }
         public string DoctorNote { get; set; } = string.Empty;
 
+        public Guid? AssignedDoctorId { get; set; }
+        public Doctor? AssignedDoctor { get; set; }
+
         public Guid? EvaluteDoctorId { get; set; }
         public Doctor? EvaluteDoctor { get; set; }
         public ICollection<Media> Medias { get; set; }
