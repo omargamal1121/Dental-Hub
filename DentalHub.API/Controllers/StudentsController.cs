@@ -86,9 +86,19 @@ namespace DentalHub.API.Controllers
             if (studentPublicId == null)
                 return CreateErrorResponse<PagedResult<PatientCaseDto>>("Unauthorized", 401);
 
+       
             var result = await _mediator.Send(new GetMyCasesForStudentQuery(studentPublicId.Value, caseType, page, pageSize));
             return HandleResult(result);
         }
+
+
+
+
+
+
+
+
+
 
         [HttpGet("available-cases")]
         [Authorize(Roles = "Student")]
@@ -131,6 +141,8 @@ namespace DentalHub.API.Controllers
             var studentPublicId = GetUserIdFromToken();
             if (studentPublicId == null)
                 return CreateErrorResponse<PagedResult<CaseRequestDto>>("Unauthorized", 401);
+
+
 
             RequestStatus? requestStatus = null;
             if (!string.IsNullOrEmpty(status))

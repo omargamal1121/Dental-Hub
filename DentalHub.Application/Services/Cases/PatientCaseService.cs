@@ -1,11 +1,12 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Cases;
+using DentalHub.Application.DTOs.Diagnoses;
+using DentalHub.Application.Factories;
+using DentalHub.Application.Interfaces;
+using DentalHub.Application.Specification.Comman;
 using DentalHub.Domain.Entities;
 using DentalHub.Infrastructure.UnitOfWork;
-using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
-using DentalHub.Application.Specification.Comman;
-using DentalHub.Application.Interfaces;
 
 namespace DentalHub.Application.Services.Cases
 {
@@ -91,7 +92,7 @@ namespace DentalHub.Application.Services.Cases
                     return Result<PatientCaseDto>.Failure("Case not found", 404);
 
                 // ── 3. Compute ProcessStatus ──
-                dto.ProcessStatus = ComputeProcessStatus(dto, dto.Diagnosisdto);
+                dto.ProcessStatus = ComputeProcessStatus(dto, dto.Diagnoses);
 
                 // ── 4. Compute UserFlags ──
                 if (userId.HasValue && !string.IsNullOrEmpty(userRole))
@@ -122,33 +123,69 @@ namespace DentalHub.Application.Services.Cases
         ///   Has completed sessions → "Evaluated"
         ///   Otherwise → maps to Status string
         /// </summary>
-        private static string ComputeProcessStatus(PatientCaseDto dto, Diagnosisdto? diagnosisDto)
+        //private static string ComputeProcessStatus(PatientCaseDto dto, Diagnosisdto? diagnosisDto)
+        //{
+        //    if (dto.Status == CaseStatus.Completed.ToString())
+        //        return "Completed";
+
+        //    if (dto.Status == CaseStatus.InProgress.ToString())
+        //    {
+        //        return dto.HasEvaluatedSession ? "Evaluated" : "InProgress";
+        //    }
+
+        //    // Pending or UnderReview:
+        //    // Priority: UnAssigned first (no student), then diagnosis stage, then raw status
+        //    if (dto.AssignedStudentId == null)
+        //        return "UnAssigned";
+
+        //    if (diagnosisDto != null)
+        //    {
+        //        if (diagnosisDto.DiagnosisStage == DiagnosisStage.BasicClinic.ToString() ||
+        //            diagnosisDto.DiagnosisStage == DiagnosisStage.AdvancedClinic.ToString())
+        //            return "DiagnosedInClinic";
+
+        //        if (diagnosisDto.DiagnosisStage == DiagnosisStage.AI.ToString())
+        //            return "AIPreliminaryDiagnosis";
+        //    }
+
+        //    return dto.Status.ToString();
+        //}
+
+        private static string ComputeProcessStatus(
+    PatientCaseDto dto,
+    List<DiagnosisDto> diagnoses)
         {
             if (dto.Status == CaseStatus.Completed.ToString())
                 return "Completed";
 
             if (dto.Status == CaseStatus.InProgress.ToString())
-            {
                 return dto.HasEvaluatedSession ? "Evaluated" : "InProgress";
-            }
 
-            // Pending or UnderReview:
-            // Priority: UnAssigned first (no student), then diagnosis stage, then raw status
+            // Pending or UnderReview
             if (dto.AssignedStudentId == null)
                 return "UnAssigned";
 
-            if (diagnosisDto != null)
+            if (diagnoses != null && diagnoses.Any())
             {
-                if (diagnosisDto.DiagnosisStage == DiagnosisStage.BasicClinic.ToString() ||
-                    diagnosisDto.DiagnosisStage == DiagnosisStage.AdvancedClinic.ToString())
-                    return "DiagnosedInClinic";
+                // نجيب أحدث Diagnosis (الأهم)
+                var latestDiagnosis = diagnoses
+                    .OrderByDescending(d => d.Stage)
+                    .FirstOrDefault();
 
-                if (diagnosisDto.DiagnosisStage == DiagnosisStage.AI.ToString())
-                    return "AIPreliminaryDiagnosis";
+                if (latestDiagnosis != null)
+                {
+                    if (latestDiagnosis.Stage == DiagnosisStage.BasicClinic ||
+                        latestDiagnosis.Stage == DiagnosisStage.AdvancedClinic)
+                        return "DiagnosedInClinic";
+
+                    if (latestDiagnosis.Stage == DiagnosisStage.AI)
+                        return "AIPreliminaryDiagnosis";
+                }
             }
 
             return dto.Status.ToString();
         }
+
 
         /// <summary>
         /// Resolve who the current user is relative to this case and return flags.
@@ -336,14 +373,16 @@ namespace DentalHub.Application.Services.Cases
                         AssignedStudentId = pc.AssignedStudentId,
                         AssignedDoctorId = pc.AssignedDoctorId,
 
-                        Diagnosisdto = pc.Diagnosiss.Select(d => new Diagnosisdto
-                        {
-                            Id = d.Id,
-                            Notes = d.Notes,
-                            CaseType = d.CaseType.Name,
-                            DiagnosisStage = d.Stage.ToString(),
-                            TeethNumbers = d.TeethNumbers
-                        }).OrderByDescending(d => d.DiagnosisStage).FirstOrDefault(),
+                        Diagnoses = pc.Diagnosiss
+    .Select(d => new DiagnosisDto
+    {
+        Id = d.Id,
+        Notes = d.Notes,
+        CaseTypeName = d.CaseType != null ? d.CaseType.Name : string.Empty,
+        Stage = d.Stage,
+        TeethNumbers = d.TeethNumbers
+    })
+    .ToList(),
                         Status = pc.Status.ToString(),
                         IsPublic = pc.IsPublic,
                         UniversityId = pc.UniversityId,
@@ -517,14 +556,17 @@ namespace DentalHub.Application.Services.Cases
                         PatientId = pc.Patient.Id,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        Diagnosisdto = pc.Diagnosiss.Select(d => new Diagnosisdto
-                        {
-                            Id = d.Id,
-                            Notes = d.Notes,
-                            CaseType = d.CaseType.Name,
-                            DiagnosisStage = d.Stage.ToString(),
-                            TeethNumbers = d.TeethNumbers
-                        }).OrderByDescending(d => d.DiagnosisStage).FirstOrDefault(),
+                        Diagnoses = pc.Diagnosiss
+    .Select(d => new DiagnosisDto
+    {
+        Id = d.Id,
+        Notes = d.Notes,
+        CaseTypeName = d.CaseType.Name ?? string.Empty,
+        Stage = d.Stage,
+        TeethNumbers = d.TeethNumbers
+    })
+    .ToList(),
+
                         Status = pc.Status.ToString(),
                         IsPublic = pc.IsPublic,
                         UniversityId = pc.UniversityId,
@@ -569,14 +611,16 @@ namespace DentalHub.Application.Services.Cases
                         PatientId = pc.PatientId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        Diagnosisdto = pc.Diagnosiss.Select(d => new Diagnosisdto
-                        {
-                            Id = d.Id,
-                            Notes = d.Notes,
-                            CaseType = d.CaseType.Name,
-                            DiagnosisStage = d.Stage.ToString(),
-                            TeethNumbers = d.TeethNumbers
-                        }).OrderByDescending(d => d.DiagnosisStage).FirstOrDefault(),
+                        Diagnoses = pc.Diagnosiss
+    .Select(d => new DiagnosisDto
+    {
+        Id = d.Id,
+        Notes = d.Notes,
+        CaseTypeName = d.CaseType.Name ?? string.Empty,
+        Stage = d.Stage,
+        TeethNumbers = d.TeethNumbers
+    })
+    .ToList(),
                         Status = pc.Status.ToString(),
                         IsPublic = pc.IsPublic,
                         UniversityId = pc.UniversityId,

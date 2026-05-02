@@ -6,6 +6,7 @@ using DentalHub.Infrastructure.UnitOfWork;
 using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 using DentalHub.Application.Specification.Comman;
+using DentalHub.Application.DTOs.Diagnoses;
 
 namespace DentalHub.Application.Services.Students
 {
@@ -215,43 +216,69 @@ namespace DentalHub.Application.Services.Students
 
         #region Cases
 
-        /// Returns cases on which the student has already placed at least one CaseRequest.
         public async Task<Result<PagedResult<PatientCaseDto>>> GetMyCasesForStudentAsync(
-            Guid studentId, string Casetype, int page = 1, int pageSize = 10)
+          Guid studentId, string? caseType, int page = 1, int pageSize = 10)
         {
             try
             {
-
                 var studentGuid = studentId;
+
+                // 1. Main Query
                 var spec = new BaseSpecificationWithProjection<PatientCase, PatientCaseDto>(
-                    pc => pc.CaseRequests.Any(cr => cr.StudentId == studentGuid && cr.Status == RequestStatus.Approved),
-                    //&& (string.IsNullOrEmpty(Casetype) || pc.CaseType.Name.Contains(Casetype) || pc.CaseType.Description.Contains(Casetype)),
+                    pc=>true,
+                    
+                    //pc => pc.CaseRequests.Any(cr =>
+                    //    cr.StudentId == studentGuid &&
+                    //    cr.Status == RequestStatus.Approved
+                    //),
+
                     pc => new PatientCaseDto
                     {
                         Id = pc.Id,
-                        PatientId = pc.Patient.Id,
-                        PatientName = pc.Patient.User.FullName,
-                        PatientAge = pc.Patient.Age,
-                        //CaseType = new DTOs.CaseTypes.CaseTypeDto
-                        //{
-                        //    publicId = pc.CaseType.Id,
-                        //    Name = pc.CaseType.Name,
-                        //    Description = pc.CaseType.Description
-                        //},
-                        Status = pc.Status.ToString(),
-                        CreateAt = pc.CreateAt,
-                        TotalSessions = pc.Sessions.Count,
-                        PendingRequests = pc.CaseRequests.Count(cr => cr.Status == RequestStatus.Pending),
-                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList()
+
+                        PatientName = pc.Patient != null && pc.Patient.User != null
+                            ? pc.Patient.User.FullName
+                            : string.Empty,
+
+                        Phone = pc.Patient != null && pc.Patient.User != null
+                            ? pc.Patient.User.PhoneNumber ?? string.Empty
+                            : string.Empty,
+
+                        City = pc.Patient != null
+                            ? pc.Patient.City.ToString()
+                            : string.Empty,
+
+                        UniversityName = pc.University != null
+                            ? pc.University.Name
+                            : string.Empty,
+
+                        Diagnoses = pc.Diagnosiss
+    .Select(d => new DiagnosisDto
+    {
+        Id = d.Id,
+        CaseTypeName = d.CaseType.Name 
+    })
+    .ToList()
                     }
                 );
 
                 spec.ApplyPaging(page, pageSize);
                 spec.ApplyOrderByDescending(pc => pc.CreateAt);
 
+                // 2. Data
                 var casesList = await _unitOfWork.PatientCases.GetAllAsync(spec);
-                var totalCount = await _unitOfWork.PatientCases.CountAsync(spec);
 
+                // 3. COUNT (IMPORTANT FIX: نفس الفلتر)
+                var countSpec = new BaseSpecification<PatientCase>(
+                    pc => pc.CaseRequests.Any(cr =>
+                        cr.StudentId == studentGuid &&
+                        cr.Status == RequestStatus.Approved
+                    )
+                );
+
+                var totalCount = await _unitOfWork.PatientCases.CountAsync(countSpec);
+
+                // 4. Result
                 var pagedResult = PaginationFactory<PatientCaseDto>.Create(
                     count: totalCount,
                     page: page,
@@ -263,10 +290,24 @@ namespace DentalHub.Application.Services.Students
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting my cases for student: {StudentId}", studentId);
-                return Result<PagedResult<PatientCaseDto>>.Failure("Error retrieving cases");
+                _logger.LogError(ex,
+                    "Error getting my cases for student: {StudentId}", studentId);
+
+                return Result<PagedResult<PatientCaseDto>>.Failure(
+                    "Error retrieving cases");
             }
         }
+
+
+
+
+
+
+
+
+
+
+
 
 
         public async Task<Result<PagedResult<AvailableCasesDto>>> GetAvailableCasesForStudentAsync(

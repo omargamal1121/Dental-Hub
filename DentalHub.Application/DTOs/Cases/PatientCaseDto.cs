@@ -1,4 +1,5 @@
 using DentalHub.Application.DTOs.CaseTypes;
+using DentalHub.Application.DTOs.Diagnoses;
 using DentalHub.Domain.Entities;
 
 namespace DentalHub.Application.DTOs.Cases
@@ -7,44 +8,56 @@ namespace DentalHub.Application.DTOs.Cases
     public class PatientCaseDto
     {
         public Guid Id { get; set; }
+
         public Guid PatientId { get; set; }
         public string PatientName { get; set; } = string.Empty;
         public int PatientAge { get; set; }
+
         public string Status { get; set; } = string.Empty;
 
         /// <summary>
-        /// Process status - clearer picture of the case lifecycle:
+        /// Process status - lifecycle of the case
         /// AIPreliminaryDiagnosis | DiagnosedInClinic | UnAssigned | InProgress | Evaluated | Completed
         /// </summary>
         public string ProcessStatus { get; set; } = string.Empty;
-        public string Phone { get; set; }
-        public string City { get; set; }
-        public string NationalId { get; set; }
+
+        public string Phone { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
+        public string NationalId { get; set; } = string.Empty;
 
         public bool IsPublic { get; set; }
+
         public Guid? UniversityId { get; set; }
         public string? UniversityName { get; set; }
+
         public DateTime CreateAt { get; set; }
+
         public int TotalSessions { get; set; }
         public bool HasEvaluatedSession { get; set; }
         public int PendingRequests { get; set; }
+
         public Guid? AssignedStudentId { get; set; }
         public Guid? AssignedDoctorId { get; set; }
-        public Diagnosisdto? Diagnosisdto { get; set; }
-        public List<string> ImageUrls { get; set; } = new List<string>();
+
+        // ✅ FIXED: بدل Diagnosisdto المفردة
+        public List<DiagnosisDto> Diagnoses { get; set; } = new();
+
+        public List<string> ImageUrls { get; set; } = new();
+
         public Guid? CreatedById { get; set; }
         public string? CreatedByRole { get; set; }
 
         /// <summary>
         /// Flags describing the current user's relationship to this case
         /// </summary>
-        public CaseUserFlags UserFlags { get; set; } = new CaseUserFlags();
+        public CaseUserFlags UserFlags { get; set; } = new();
 
         /// <summary>
-        /// Actions available to the current user based on their relationship and the case state
+        /// Available actions for current user
         /// </summary>
-        public List<string> AvailableActions { get; set; } = new List<string>();
+        public List<string> AvailableActions { get; set; } = new();
     }
+
 
     public class Diagnosisdto
     {
