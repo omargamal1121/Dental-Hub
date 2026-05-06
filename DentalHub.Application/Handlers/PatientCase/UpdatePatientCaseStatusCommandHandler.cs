@@ -3,7 +3,7 @@ using DentalHub.Application.Common;
 using DentalHub.Application.Services.Cases;
 using MediatR;
 
-namespace DentalHub.Application.Handlers.PatientCase
+namespace DentalHub.Application.Handlers.PatientCaseHandler
 {
     public class UpdatePatientCaseStatusCommandHandler : IRequestHandler<UpdatePatientCaseStatusCommand, Result<bool>>
     {

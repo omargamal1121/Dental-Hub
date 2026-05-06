@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 
-namespace DentalHub.API.Controllers
+namespace DentalHub.API.Controllers.v2
 {
-    public class EnumController:ControllerBase
+    [ApiVersion("2.0")]
+    public class EnumController : BaseController
     {
 
   [HttpGet("case-status")]
@@ -103,3 +105,8 @@ namespace DentalHub.API.Controllers
 
     }
 }
+
+
+
+
+

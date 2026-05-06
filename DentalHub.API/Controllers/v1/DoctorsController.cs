@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using DentalHub.Application.Commands.Doctor;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Cases;
@@ -13,10 +14,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DentalHub.API.Controllers
+namespace DentalHub.API.Controllers.v1
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
+    [ApiVersion("1.0")]
     public class DoctorsController : BaseController
     {
         private readonly IMediator _mediator;
@@ -155,8 +156,20 @@ namespace DentalHub.API.Controllers
             var result = await _mediator.Send(new GetSessionsNeedingEvaluationQuery(doctorId.Value, studentId, patientId, page, pageSize));
             return HandleResult(result);
         }
+        [HttpGet("clinical-doctors")]
+        [ProducesResponseType(typeof(ApiResponse<List<DoctorlistDto>>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<ApiResponse<List<DoctorlistDto>>>> GetClinicalDoctors()
+        {
+            var result = await _mediator.Send(new GetClinicalDoctorsQuery());
+            return HandleResult(result);
+        }
     }
         #endregion
 
+
 }
+
+
+
+
 

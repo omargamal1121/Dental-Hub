@@ -234,28 +234,37 @@ namespace DentalHub.Application.Services.Students
                     pc => new PatientCaseDto
                     {
                         Id = pc.Id,
-
+                        PatientId = pc.PatientId,
                         PatientName = pc.Patient != null && pc.Patient.User != null
                             ? pc.Patient.User.FullName
                             : string.Empty,
-
+                        PatientAge = pc.Patient != null ? pc.Patient.Age : 0,
+                        Status = pc.Status.ToString(),
+                        ProcessStatus = pc.Status.ToString(),
                         Phone = pc.Patient != null && pc.Patient.User != null
                             ? pc.Patient.User.PhoneNumber ?? string.Empty
                             : string.Empty,
-
                         City = pc.Patient != null
                             ? pc.Patient.City.ToString()
                             : string.Empty,
-
+                        UniversityId = pc.UniversityId,
                         UniversityName = pc.University != null
                             ? pc.University.Name
                             : string.Empty,
-
-                        Diagnoses = pc.Diagnosiss
+                        CreateAt = pc.CreateAt,
+                        AssignedStudentId = pc.AssignedStudentId,
+                        AssignedDoctorId = pc.AssignedDoctorId,
+                        TotalSessions = pc.Sessions.Count,
+                        HasEvaluatedSession = pc.Sessions.Any(s => s.EvaluteDoctorId != null),
+                        ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList(),
+                        Diagnosisdto = pc.Diagnosiss
                             .Select(d => new DiagnosisDto
                             {
                                 Id = d.Id,
-                                CaseTypeName = d.CaseType.Name 
+                                CaseTypeName = d.CaseType.Name,
+                                Stage = d.Stage,
+                                Notes = d.Notes,
+                                TeethNumbers = d.TeethNumbers
                             })
                             .ToList()
                     }
@@ -336,16 +345,17 @@ namespace DentalHub.Application.Services.Students
                         CreateAt = pc.CreateAt,
                         ImageUrls = pc.Medias.Select(m => m.MediaUrl).ToList(),
                         gender = pc.Patient.Gender,
+                        Description = pc.Description,
                         Diagnosisdto = pc.Diagnosiss
                         
                         
                         
-        .Select(d => new Diagnosisdto
+        .Select(d => new DiagnosisDto
         {
             Id = d.Id,
             Notes = d.Notes,
-            CaseType = d.CaseType.Name,
-            DiagnosisStage = d.Stage.ToString(),
+            CaseTypeName = d.CaseType.Name,
+            Stage = d.Stage,
             TeethNumbers = d.TeethNumbers
         }).ToList(),
                     }

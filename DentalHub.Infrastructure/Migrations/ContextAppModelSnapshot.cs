@@ -350,6 +350,10 @@ namespace DentalHub.Infrastructure.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<string>("NationalId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -358,6 +362,10 @@ namespace DentalHub.Infrastructure.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NationalId")
+                        .IsUnique()
+                        .HasFilter("[DeleteAt] IS NULL");
 
                     b.ToTable("Patients");
                 });
@@ -675,11 +683,14 @@ namespace DentalHub.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
+                        .IsUnique()
+                        .HasDatabaseName("EmailIndex")
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.HasIndex("PhoneNumber")
                         .IsUnique()

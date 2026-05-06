@@ -8,7 +8,7 @@ namespace DentalHub.Application.DTOs.Cases
     {
         public Guid PatientId { get; set; } 
 
-		public Guid CaseTypeId { get; set; } 
+		
 
 
         public string? Description { get; set; }

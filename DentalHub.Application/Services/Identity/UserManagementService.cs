@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging;
+using DentalHub.Application.DTOs.Doctors;
 
 namespace DentalHub.Application.Services.Identity
 {
@@ -43,92 +44,7 @@ namespace DentalHub.Application.Services.Identity
             _studentService = studentService;
         }
 
-		#region Patient Registration
 
-
-		public async Task<Result<AuthResponseDto>> RegisterPatientAsync(RegisterPatientDto dto)
-		{
-			try
-			{
-
-                var today = DateTime.Today;
-				var age = today.Year - dto.BirthDate.Year;
-				if (dto.BirthDate.Date > today.AddYears(-age))
-					age--;
-
-                if (age < 5||age>100)
-                { 
-                  
-				    return Result<AuthResponseDto>.Failure("Invalid Age Must Be Greater than 5 years and less than 100",400);
-
-				}
-
-				await _unitOfWork.BeginTransactionAsync();
-
-				var userName = !string.IsNullOrWhiteSpace(dto.UserName) ? dto.UserName : dto.Phone;
-
-				var user = new User
-				{
-					UserName = userName,
-					Email = dto.Email,
-					FullName = dto.FullName,
-					PhoneNumber = dto.Phone,
-                    PhoneNumberConfirmed=true,
-				
-				};
-
-				var result = await _userManager.CreateAsync(user, dto.Password);
-				if (!result.Succeeded)
-				{
-					await _unitOfWork.RollbackTransactionAsync();
-					var errors = result.Errors.Select(e => e.Description).ToList();
-					return Result<AuthResponseDto>.Failure(errors);
-				}
-
-		
-				var roleResult = await _userManager.AddToRoleAsync(user, "Patient");
-				if (!roleResult.Succeeded)
-				{
-					await _unitOfWork.RollbackTransactionAsync();
-					var errors = roleResult.Errors.Select(e => e.Description).ToList();
-					return Result<AuthResponseDto>.Failure(errors);
-				}
-
-	
-			
-
-				var patient = new Patient(user.Id)
-				{
-					Age = age,
-					Phone = dto.Phone,
-					CreateAt = DateTime.UtcNow,
-					Gender = dto.Gender
-				};
-
-				await _unitOfWork.Patients.AddAsync(patient);
-				await _unitOfWork.SaveChangesAsync();
-
-				
-				await _unitOfWork.CommitTransactionAsync();
-
-				_logger.LogInformation("Patient registered successfully: {Phone}", dto.Phone);
-
-                return Result<AuthResponseDto>.Success(new AuthResponseDto
-				{
-					PublicId = user.Id,
-					Email = user.Email!,
-					FullName = user.FullName,
-					Role = "Patient"
-				}, "Registration successful");
-			}
-			catch (Exception ex)
-			{
-				await _unitOfWork.RollbackTransactionAsync();
-				_logger.LogError(ex, "Error registering patient: {Phone}", dto.Phone);
-				return Result<AuthResponseDto>.Failure("An error occurred during registration");
-			}
-		}
-		#endregion
 
 		#region Student Registration
 
@@ -340,6 +256,71 @@ namespace DentalHub.Application.Services.Identity
 				return Result.Failure("An error occurred while deleting user");
 			}
 		}
+		public async Task<Result<List<DoctorlistDto>>> GetClinicalDoctorsAsync()
+		{
+			try
+			{
+				var clinicalDoctors = await _userManager.GetUsersInRoleAsync("ClinicalDoctor");
+				var result = new List<DoctorlistDto>();
+
+				foreach (var u in clinicalDoctors)
+				{
+					var universityId = Guid.Empty;
+					var specialty = "Clinical Diagnosis Specialist";
+					var createdAt = DateTime.UtcNow;
+
+					// Try Doctor table
+					var doctorData = await _unitOfWork.Doctors.GetByIdAsync(new BaseSpecificationWithProjection<Doctor, (Guid UniversityId, string Specialty, DateTime CreateAt)>(
+						d => d.Id == u.Id,
+						d =>new  (d.UniversityId, d.Specialty, d.CreateAt)
+					));
+
+					if (doctorData.UniversityId != Guid.Empty)
+					{
+						universityId = doctorData.UniversityId;
+						specialty = doctorData.Specialty;
+						createdAt = doctorData.CreateAt;
+					}
+					else
+					{
+						// Try Student table
+						universityId = await _unitOfWork.Students.GetByIdAsync(new BaseSpecificationWithProjection<Student, Guid>(
+							s => s.Id == u.Id,
+							s => s.UniversityId
+						));
+
+						if (universityId == Guid.Empty)
+						{
+							// Try Admin table
+							universityId = await _unitOfWork.Admins.GetByIdAsync(new BaseSpecificationWithProjection<Admin, Guid>(
+								a => a.Id == u.Id,
+								a => a.UniversityId
+							));
+						}
+					}
+
+					result.Add(new DoctorlistDto
+					{
+						PublicId = u.Id,
+						FullName = u.FullName,
+						Email = u.Email ?? string.Empty,
+						Username = u.UserName ?? string.Empty,
+						Name = u.FullName,
+						Specialty = specialty,
+						UniversityId = universityId,
+						CreateAt = createdAt
+					});
+				}
+
+				return Result<List<DoctorlistDto>>.Success(result);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Error getting clinical doctors");
+				return Result<List<DoctorlistDto>>.Failure("Error retrieving clinical doctors");
+			}
+		}
+
 		private async Task EnsureRoleExistsAsync(string roleName)
         {
             var roleExists = await _roleManager.RoleExistsAsync(roleName);

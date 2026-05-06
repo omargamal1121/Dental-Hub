@@ -1,4 +1,5 @@
 using DentalHub.Application.DTOs.CaseTypes;
+using DentalHub.Application.DTOs.Diagnoses;
 
 namespace DentalHub.Application.DTOs.Cases
 {
@@ -12,7 +13,8 @@ namespace DentalHub.Application.DTOs.Cases
 		public string Status { get; set; } = string.Empty;
 		public DateTime CreateAt { get; set; }
 		public Gender gender { get; set; }
-        public List<Diagnosisdto> Diagnosisdto { get; set; }
+		public string Description { get; set; } = string.Empty;
+        public List<DiagnosisDto> Diagnosisdto { get; set; }
 
 
 

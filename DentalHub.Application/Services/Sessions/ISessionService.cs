@@ -35,6 +35,8 @@ namespace DentalHub.Application.Services.Sessions
         Task<Result<Guid>> EvaluateSessionAsync(Guid sessionId, Guid doctorId, int grade, string note, bool isFinalSession);
         Task<Result<bool>> MarkSessionAsDoneAsync(Guid sessionId, Guid studentId);
         Task<Result<PagedResult<SessionDto>>> GetSessionsNeedingEvaluationAsync(Guid doctorId, Guid? studentId = null, Guid? patientId = null, int page = 1, int pageSize = 10);
+        Task<Result<bool>> UpdateSessionScheduleAsync(Guid sessionId, DateTime newScheduledAt, Guid studentId);
+
 
     }
 }

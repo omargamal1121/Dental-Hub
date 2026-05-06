@@ -34,9 +34,7 @@ namespace DentalHub.Application.Services.Cases
                 if (patient == null)
                     return Result<PatientCaseDto>.Failure("Patient not found");
 
-                var casetype = await _unitOfWork.CaseTypes.GetByIdAsync(new BaseSpecification<CaseType>(i => i.Id == dto.CaseTypeId));
-                if (casetype == null)
-                    return Result<PatientCaseDto>.Failure("Case type not found");
+            
 
                 var patientCase = new PatientCase
                 {
@@ -92,7 +90,7 @@ namespace DentalHub.Application.Services.Cases
                     return Result<PatientCaseDto>.Failure("Case not found", 404);
 
                 // ── 3. Compute ProcessStatus ──
-                dto.ProcessStatus = ComputeProcessStatus(dto, dto.Diagnoses);
+                dto.ProcessStatus = ComputeProcessStatus(dto, dto.Diagnosisdto);
 
                 // ── 4. Compute UserFlags ──
                 if (userId.HasValue && !string.IsNullOrEmpty(userRole))
@@ -366,6 +364,7 @@ namespace DentalHub.Application.Services.Cases
                     pc => new PatientCaseDto
                     {
                         Id = pc.Id,
+                        Description = pc.Description,
                         PatientId = pc.Patient.Id,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
@@ -373,7 +372,7 @@ namespace DentalHub.Application.Services.Cases
                         AssignedStudentId = pc.AssignedStudentId,
                         AssignedDoctorId = pc.AssignedDoctorId,
 
-                        Diagnoses = pc.Diagnosiss
+                          Diagnosisdto = pc.Diagnosiss
     .Select(d => new DiagnosisDto
     {
         Id = d.Id,
@@ -553,10 +552,11 @@ namespace DentalHub.Application.Services.Cases
                     pc => new PatientCaseDto
                     {
                         Id = pc.Id,
+                        Description = pc.Description,
                         PatientId = pc.Patient.Id,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        Diagnoses = pc.Diagnosiss
+                        Diagnosisdto = pc.Diagnosiss
     .Select(d => new DiagnosisDto
     {
         Id = d.Id,
@@ -608,10 +608,11 @@ namespace DentalHub.Application.Services.Cases
                     pc => new PatientCaseDto
                     {
                         Id = pc.Id,
+                        Description = pc.Description,
                         PatientId = pc.PatientId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        Diagnoses = pc.Diagnosiss
+                        Diagnosisdto = pc.Diagnosiss
     .Select(d => new DiagnosisDto
     {
         Id = d.Id,
@@ -675,10 +676,11 @@ namespace DentalHub.Application.Services.Cases
                     pc => new PatientCaseDto
                     {
                         Id = pc.Id,
+                        Description = pc.Description,
                         PatientId = pc.PatientId,
                         PatientName = pc.Patient.User.FullName,
                         PatientAge = pc.Patient.Age,
-                        Diagnoses = pc.Diagnosiss
+                        Diagnosisdto = pc.Diagnosiss
     .Select(d => new DiagnosisDto
     {
         Id = d.Id,

@@ -4,7 +4,7 @@ using DentalHub.Application.DTOs.Cases;
 using DentalHub.Application.Services.Cases;
 using MediatR;
 
-namespace DentalHub.Application.Handlers.PatientCase
+namespace DentalHub.Application.Handlers.PatientCaseHandler
 {
     public class UpdatePatientCaseCommandHandler : IRequestHandler<UpdatePatientCaseCommand, Result<bool>>
     {

@@ -1,18 +1,22 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using MediatR;
 using DentalHub.Application.Commands.PatientCase;
+using DentalHub.Application.Commands.v2.PatientCase;
 using DentalHub.Application.Queries.PatientCase;
 using DentalHub.Application.Queries.Students;
 using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.DTOs.Cases;
+using DentalHub.Application.DTOs.v2.Cases;
+using DentalHub.Application.Queries.v2.PatientCase;
 using DentalHub.Application.Common;
 using Microsoft.AspNetCore.Authorization;
 
-namespace DentalHub.API.Controllers
+namespace DentalHub.API.Controllers.v2
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
+    [ApiVersion("2.0")]
     public class CasesController : BaseController
     {
         private readonly IMediator _mediator;
@@ -35,9 +39,9 @@ namespace DentalHub.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<PatientCaseDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<PagedResult<PatientCaseDto>>>> GetAll([FromQuery] CaseFilterDto filter)
+        public async Task<ActionResult<ApiResponse<PagedResult<PatientCaseDto>>>> GetAll([FromQuery] CaseFilterV2Dto filter)
         {
-            var result = await _mediator.Send(new GetAllCasesQuery(filter));
+            var result = await _mediator.Send(new GetAllCasesV2Query(filter));
             return HandleResult(result);
         }
 
@@ -48,8 +52,10 @@ namespace DentalHub.API.Controllers
         [Consumes("multipart/form-data")]
         [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ApiResponse<Guid>>> Create([FromForm] CreatePatientCaseCommand command)
+        public async Task<ActionResult<ApiResponse<Guid>>> Create([FromForm] CreatePatientCaseV2Command command)
         {
+            command.CreatedById = GetUserIdFromToken();
+            command.CreatedByRole = GetUserRoleFromToken();
             var result = await _mediator.Send(command);
             return HandleResult(result);
         }
@@ -59,7 +65,7 @@ namespace DentalHub.API.Controllers
         [ProducesResponseType(typeof(ApiResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<ApiResponse<Guid>>> CreateByAI([FromForm] CreatePatientCaseCommand command)
+        public async Task<ActionResult<ApiResponse<Guid>>> CreateByAI([FromForm] CreatePatientCaseV2Command command)
         {
             var headerApiKey = Request.Headers["X-AI-API-KEY"].FirstOrDefault();
             var configuredApiKey = _configuration["AI_Configuration:ApiKey"];
@@ -69,8 +75,9 @@ namespace DentalHub.API.Controllers
                 return CreateErrorResponse<Guid>("Invalid or missing AI API Key.", StatusCodes.Status401Unauthorized);
             }
 
-            var aiCommand = command with { CreatedByRole = "AI", CreatedById = null };
-            var result = await _mediator.Send(aiCommand);
+            command.CreatedByRole = "AI";
+            command.CreatedById = null;
+            var result = await _mediator.Send(command);
             return HandleResult(result);
         }
 
@@ -161,3 +168,8 @@ namespace DentalHub.API.Controllers
         }
     }
 }
+
+
+
+
+

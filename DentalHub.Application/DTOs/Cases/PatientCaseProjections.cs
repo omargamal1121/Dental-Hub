@@ -12,10 +12,11 @@ namespace DentalHub.Application.DTOs.Cases
             pc => new PatientCaseDto
             {
                 Id = pc.Id,
+                Description = pc.Description,
                 PatientId = pc.Patient.Id,
                 PatientName = pc.Patient.User.FullName,
                 PatientAge = pc.Patient.Age,
-                Diagnoses = pc.Diagnosiss
+                Diagnosisdto = pc.Diagnosiss
     .Select(d => new DiagnosisDto
     {
         Id = d.Id,

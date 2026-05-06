@@ -13,6 +13,7 @@ namespace DentalHub.Application.DTOs.Patients
 
         public string ? NationalId { get; set; }
         public DateTime? BirthDate { get; set; }
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
+        public City? City { get; set; }
 	}
 }

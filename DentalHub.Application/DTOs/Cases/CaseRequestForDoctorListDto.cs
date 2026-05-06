@@ -11,6 +11,6 @@ namespace DentalHub.Application.DTOs.Cases
 		public string Status { get; set; } = string.Empty; 
 		public DateTime CreatedAt { get; set; }
 		public bool Seen { get; set; }
-		public string CaseType { get; set; }
+		public string Diagnosis { get; set; }
 	}
 }

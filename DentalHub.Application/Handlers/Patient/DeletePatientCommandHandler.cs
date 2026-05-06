@@ -3,7 +3,7 @@ using DentalHub.Application.Common;
 using DentalHub.Application.Services;
 using MediatR;
 
-namespace DentalHub.Application.Handlers.Patient
+namespace DentalHub.Application.Handlers.PatientHandlers
 {
     public class DeletePatientCommandHandler : IRequestHandler<DeletePatientCommand, Result<bool>>
     {

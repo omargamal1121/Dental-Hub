@@ -7,6 +7,8 @@ namespace DentalHub.Application.Services
            public CaseStatus? CaseStatus { get; set; }
 
             public string ? CaseType { get; set; }
+            public string? NationalId { get; set; }
+            public string? PhoneNumber { get; set; }
 
 
 		}

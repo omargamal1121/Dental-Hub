@@ -1,4 +1,4 @@
-﻿using DentalHub.Domain.Entities;
+using DentalHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -21,6 +21,10 @@ namespace DentalHub.Infrastructure.ContextAndConfig
                    .WithOne(x => x.Patient)
                    .HasForeignKey(x => x.PatientId);
 			
+            builder.HasIndex(x => x.NationalId)
+                   .IsUnique()
+                   .HasFilter("[DeleteAt] IS NULL");
+
 			builder.HasQueryFilter(cr => !cr.User.IsDeleted);
 
 		}

@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using DentalHub.Application.Commands.Auth;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Admins;
@@ -12,11 +13,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace DentalHub.API.Controllers
+namespace DentalHub.API.Controllers.v1
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
     [Authorize]
+    [ApiVersion("1.0")]
     public class UsersController : BaseController
     {
         private readonly IMediator _mediator;
@@ -81,3 +82,7 @@ namespace DentalHub.API.Controllers
         }
     }
 }
+
+
+
+

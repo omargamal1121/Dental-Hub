@@ -1,42 +1,24 @@
-﻿using DentalHub.Application.Commands.Patient;
+using DentalHub.Application.Commands.Patient;
 using DentalHub.Application.Common;
 using DentalHub.Application.Services.Identity;
 using DentalHub.Application.DTOs.Identity;
 using MediatR;
+using DentalHub.Application.Services;
 
-namespace DentalHub.Application.Handlers.Patient
+namespace DentalHub.Application.Handlers.PatientHandlers
 {
     public class CreatePatientCommandHandler : IRequestHandler<CreatePatientCommand, Result<Guid>>
     {
-        private readonly IUserManagementService _userManagementService;
+        private readonly IPatientService _service;
 
-        public CreatePatientCommandHandler(IUserManagementService userManagementService)
+        public CreatePatientCommandHandler(IPatientService service)
         {
-            _userManagementService = userManagementService;
+            _service = service;
         }
 
         public async Task<Result<Guid>> Handle(CreatePatientCommand request, CancellationToken ct)
         {
-            var registerDto = new RegisterPatientDto
-            {
-                FullName = request.FullName,
-                City= request.City,
-              
-                Password = request.Password,
-                Phone = request.PhoneNumber,
-                NationalId = request.NationalId,
-                BirthDate = request.BirthDate,
-                Gender = request.Gender
-            };
-
-            var result = await _userManagementService.RegisterPatientAsync(registerDto);
-
-            if (!result.IsSuccess)
-            {
-                return Result<Guid>.Failure(result.Errors ?? new List<string> { result.Message ?? "Patient creation failed" }, result.Status);
-            }
-
-            return Result<Guid>.Success(result.Data.PublicId, result.Message, result.Status);
+            return await _service.CreatePatientAsync(request);
         }
     }
 }

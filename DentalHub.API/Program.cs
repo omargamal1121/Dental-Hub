@@ -1,4 +1,4 @@
-﻿using DentalHub.API.Middleware;
+using DentalHub.API.Middleware;
 using DentalHub.Application.Extensions;
 using DentalHub.Application.Interfaces;
 using DentalHub.Application.Services.Auth;
@@ -16,6 +16,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Scalar.AspNetCore;
 using Serilog;
+using Asp.Versioning;
+using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace DentalHub.API
 {
@@ -71,14 +74,46 @@ namespace DentalHub.API
 
             builder.Services.AddHangfireServer();
 
+            // ========== API Versioning ==========
+            builder.Services.AddApiVersioning(options =>
+            {
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ReportApiVersions = true;
+                options.ApiVersionReader = ApiVersionReader.Combine(
+                    new UrlSegmentApiVersionReader(),
+                    new HeaderApiVersionReader("x-api-version"),
+                    new QueryStringApiVersionReader("api-version")
+                );
+            }).AddMvc().AddApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
+            });
+
             builder.Services.AddSwaggerGen(options =>
             {
+                // We'll define v1 and v2 here. In a larger project, you'd use a loop.
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "DentalHub API",
+                    Title = "DentalHub API v1",
                     Version = "v1",
-                    Description = "API Documentation for DentalHub Project"
+                    Description = "API Documentation for DentalHub Project - Version 1"
                 });
+
+                options.SwaggerDoc("v2", new OpenApiInfo
+                {
+                    Title = "DentalHub API v2",
+                    Version = "v2",
+                    Description = "API Documentation for DentalHub Project - Version 2 (Refactored)"
+                });
+
+                //// Filter actions by version to avoid conflicts in Swagger
+                //options.DocInclusionPredicate((docName, apiDesc) =>
+                //{
+                //    if (!apiDesc.TryGetApiVersion(out var apiVersion)) return docName == "v1";
+                //    return $"v{apiVersion.MajorVersion}" == docName;
+                //});
 
                 // Required for [SwaggerResponse] annotations on endpoints
                 options.EnableAnnotations();
@@ -139,8 +174,8 @@ namespace DentalHub.API
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = true;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredLength = 6;
-                options.User.RequireUniqueEmail = false;
+                options.Password.RequiredLength = 8;
+                options.User.RequireUniqueEmail = true;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
@@ -197,6 +232,7 @@ namespace DentalHub.API
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "DentalHub API v1");
+                options.SwaggerEndpoint("/swagger/v2/swagger.json", "DentalHub API v2");
                 options.RoutePrefix = "swagger";
             });
 

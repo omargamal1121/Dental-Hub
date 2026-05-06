@@ -1,4 +1,5 @@
 using DentalHub.Application.DTOs.Cases;
+using DentalHub.Domain.Entities;
 
 namespace DentalHub.Application.DTOs.Patients
 {
@@ -10,7 +11,10 @@ namespace DentalHub.Application.DTOs.Patients
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public int Age { get; set; }
+        public string NationalId { get; set; } = string.Empty;
         public DateTime CreateAt { get; set; }
+        public City City { get; set; }
+        public Gender Gender { get; set; }
        
         public List<PatientCaseSimpleDataDto> PatientCases { get; set; }
 		

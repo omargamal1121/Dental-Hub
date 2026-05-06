@@ -2,6 +2,7 @@ using System;
 
 namespace DentalHub.Application.DTOs.Chat
 {
+    
     public class SaveMessageDto
     {
         public Guid ConversationId { get; set; }

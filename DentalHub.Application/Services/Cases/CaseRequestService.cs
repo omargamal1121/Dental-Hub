@@ -1,5 +1,6 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Cases;
+using DentalHub.Application.DTOs.Diagnoses;
 using DentalHub.Application.Factories;
 using DentalHub.Application.Specification.Comman;
 using DentalHub.Domain.Entities;
@@ -130,6 +131,22 @@ namespace DentalHub.Application.Services.Cases
                         DoctorName = cr.Doctor.User.FullName ?? "Doctor deleted",
                         Description = cr.Description,
                         Status = cr.Status.ToString(),
+                        //Diagnosis = cr.PatientCase.Diagnosiss.OrderBy(d=>d.CreateAt).Select(d => d.CaseType.Name).LastOrDefault() ?? string.Empty,
+                        Diagnosisdto = cr.PatientCase.Diagnosiss
+                            .Select(d => new DiagnosisDto
+                            {
+                                Id = d.Id,
+                                CaseTypeName = d.CaseType.Name,
+                                CaseTypeId = d.CaseTypeId,
+                                CreatedById = d.CreatedById,
+                                IsAccepted = d.IsAccepted,
+                                PatientCaseId = d.PatientCaseId,
+                                Role= d.Role,
+                                Stage = d.Stage,
+                                Notes = d.Notes,
+                                TeethNumbers = d.TeethNumbers
+                            }).ToList(),
+                        ImageUrls = cr.PatientCase.Medias.Select(m => m.MediaUrl).ToList(),
                         CreateAt = cr.CreateAt
                     }
                 );
@@ -180,6 +197,17 @@ namespace DentalHub.Application.Services.Cases
                         DoctorName = cr.Doctor.User.FullName,
                         Description = cr.Description,
                         Status = cr.Status.ToString(),
+                        //Diagnosis = cr.PatientCase.Diagnosiss.Select(d => d.CaseType.Name).FirstOrDefault() ?? string.Empty,
+                        Diagnosisdto = cr.PatientCase.Diagnosiss
+                            .Select(d => new DiagnosisDto
+                            {
+                                Id = d.Id,
+                                CaseTypeName = d.CaseType.Name,
+                                Stage = d.Stage,
+                                Notes = d.Notes,
+                                TeethNumbers = d.TeethNumbers
+                            }).ToList(),
+                        ImageUrls = cr.PatientCase.Medias.Select(m => m.MediaUrl).ToList(),
                         CreateAt = cr.CreateAt
                     }
                 );
@@ -227,6 +255,17 @@ namespace DentalHub.Application.Services.Cases
                         DoctorName = cr.Doctor.User.FullName,
                         Description = cr.Description,
                         Status = cr.Status.ToString(),
+                        //Diagnosis = cr.PatientCase.Diagnosiss.Select(d => d.CaseType.Name).FirstOrDefault() ?? string.Empty,
+                        Diagnosisdto = cr.PatientCase.Diagnosiss
+                            .Select(d => new DiagnosisDto
+                            {
+                                Id = d.Id,
+                                 CaseTypeName = d.CaseType.Name,
+                                Stage = d.Stage,
+                                Notes = d.Notes,
+                                TeethNumbers = d.TeethNumbers
+                            }).ToList(),
+                        ImageUrls = cr.PatientCase.Medias.Select(m => m.MediaUrl).ToList(),
                         CreateAt = cr.CreateAt
                     }
                 );
@@ -555,6 +594,17 @@ namespace DentalHub.Application.Services.Cases
                             DoctorName = cr.Doctor.User.FullName,
                             Description = cr.Description,
                             Status = cr.Status.ToString(),
+                            //Diagnosis = cr.PatientCase.Diagnosiss.Select(d => d.CaseType.Name).FirstOrDefault() ?? string.Empty,
+                            Diagnosisdto = cr.PatientCase.Diagnosiss
+                                .Select(d => new DiagnosisDto
+                                {
+                                    Id = d.Id,
+                                    CaseTypeName = d.CaseType.Name,
+                                    Stage = d.Stage,
+                                    Notes = d.Notes,
+                                    TeethNumbers = d.TeethNumbers
+                                }).ToList(),
+                            ImageUrls = cr.PatientCase.Medias.Select(m => m.MediaUrl).ToList(),
                             CreateAt = cr.CreateAt
                         }
                     );
@@ -584,6 +634,17 @@ namespace DentalHub.Application.Services.Cases
                             DoctorName = cr.Doctor.User.FullName,
                             Description = cr.Description,
                             Status = cr.Status.ToString(),
+                            //Diagnosis = cr.PatientCase.Diagnosiss.Select(d => d.CaseType.Name).FirstOrDefault() ?? string.Empty,
+                            Diagnosisdto = cr.PatientCase.Diagnosiss
+                                .Select(d => new DiagnosisDto
+                                {
+                                    Id = d.Id,
+                                    CaseTypeName = d.CaseType.Name,
+                                    Stage = d.Stage,
+                                    Notes = d.Notes,
+                                    TeethNumbers = d.TeethNumbers
+                                }).ToList(),
+                            ImageUrls = cr.PatientCase.Medias.Select(m => m.MediaUrl).ToList(),
                             IsRejectedStudent = cr.Status == RequestStatus.Rejected,
                             CreateAt = cr.CreateAt
                         }

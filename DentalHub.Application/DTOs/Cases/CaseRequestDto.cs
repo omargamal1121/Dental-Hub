@@ -1,4 +1,5 @@
 using DentalHub.Application.DTOs.CaseTypes;
+using DentalHub.Application.DTOs.Diagnoses;
 
 namespace DentalHub.Application.DTOs.Cases
 {
@@ -8,7 +9,8 @@ namespace DentalHub.Application.DTOs.Cases
         public Guid Id { get; set; }
         public Guid PatientCasePublicId { get; set; }
         public string PatientName { get; set; } = string.Empty;
-		public string CaseName { get; set; }
+
+        public List<DiagnosisDto> Diagnosisdto { get; set; } = new();
 		public Guid StudentPublicId { get; set; }
         public string StudentName { get; set; } = string.Empty;
         public string University { get; set; } = string.Empty;
@@ -19,6 +21,8 @@ namespace DentalHub.Application.DTOs.Cases
         public string Status { get; set; } = string.Empty;
         public DateTime CreateAt { get; set; }
         public bool IsRejectedStudent { get; set; }
+        public List<string> ImageUrls { get; set; } = new();
+
 
     }
   

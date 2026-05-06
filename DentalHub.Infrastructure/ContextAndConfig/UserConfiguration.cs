@@ -1,4 +1,4 @@
-﻿using DentalHub.Domain.Entities;
+using DentalHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -32,6 +32,17 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 			.HasIndex(u => u.PhoneNumber)
 			.IsUnique()
 			.HasFilter("[IsDeleted] = 0");
+
+            builder
+            .HasIndex(u => u.NormalizedEmail)
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
+
+            builder
+            .HasIndex(u => u.NormalizedUserName)
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
+
 			builder.HasQueryFilter(u => !u.IsDeleted);
 		}
 	}

@@ -1,5 +1,6 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Patients;
+using DentalHub.Application.Commands.Patient;
 using static DentalHub.Application.Services.PatientService;
 
 namespace DentalHub.Application.Services
@@ -15,6 +16,7 @@ namespace DentalHub.Application.Services
 
 
         Task<Result<PatientDto>> UpdatePatientAsync(UpdatePatientDto dto);
+        Task<Result<Guid>> CreatePatientAsync(CreatePatientCommand command);
         Task<Result> HandleBeforeDeleteAsync(Guid id);
     }
 }

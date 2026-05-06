@@ -19,7 +19,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 			try
 			{
 				// ── 1. Roles ──────────────────────────────────────────────────────────
-				string[] roles = ["Doctor", "Student", "Patient", "Admin"];
+				string[] roles = ["Doctor", "Student", "Patient", "Admin", "ClinicalDoctor"];
 				foreach (var role in roles)
 				{
 					if (!await roleManager.RoleExistsAsync(role))
@@ -273,6 +273,39 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 					logger.LogInformation("✅ Seeded 28 Students.");
 				}
 
+				// ── 5.5. Ensure Clinical Doctor Students ─────────────────────────────
+				var allClinicalDocs = await userManager.GetUsersInRoleAsync("ClinicalDoctor");
+				bool studentHasRole = false;
+				foreach (var cd in allClinicalDocs)
+				{
+					if (await context.Students.AnyAsync(s => s.Id == cd.Id))
+					{
+						studentHasRole = true;
+						break;
+					}
+				}
+
+				if (!studentHasRole)
+				{
+					var topStudents = await context.Students.Take(2).ToListAsync();
+					foreach (var s in topStudents)
+					{
+						var u = await userManager.FindByIdAsync(s.Id.ToString());
+						if (u != null && !await userManager.IsInRoleAsync(u, "ClinicalDoctor"))
+						{
+							await userManager.AddToRoleAsync(u, "ClinicalDoctor");
+							logger.LogInformation("✅ Assigned ClinicalDoctor role to student {Email} to ensure role coverage.", u.Email);
+						}
+					}
+				}
+				//var u1 = await userManager.FindByIdAsync("e0000000-0000-7000-8000-000000000009");
+				//var u2 = await userManager.FindByIdAsync("e0000000-0000-7000-8000-000000000006");
+				//var u3 = await userManager.FindByIdAsync("e0000000-0000-7000-8000-000000000001");
+			
+				//await userManager.AddToRoleAsync(u1, "ClinicalDoctor");
+				//await userManager.AddToRoleAsync(u2, "ClinicalDoctor");
+				//await userManager.AddToRoleAsync(u3, "ClinicalDoctor");
+
 				// ── 6. Patients ───────────────────────────────────────────────────────
 				if (!await context.Patients.IgnoreQueryFilters().AnyAsync(p => p.Id == Guid.Parse("f0000000-0000-7000-8000-000000000001")))
 				{
@@ -282,31 +315,43 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
 					var patients = new List<(Guid Id, User User, Patient Patient)>
 					{
-						(Guid.Parse("f0000000-0000-7000-8000-000000000001"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000001"), FullName = "Mona Tarek",      UserName = "01000000301", Email = "mona.tarek@gmail.com",      EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000301" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000001")) { Age = 30, Phone = "01000000301", Gender = Gender.Female }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000002"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000002"), FullName = "Karim Salah",     UserName = "01000000302", Email = "karim.salah@gmail.com",     EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000302" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000002")) { Age = 45, Phone = "01000000302", Gender = Gender.Male }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000003"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000003"), FullName = "Layla Khaled",    UserName = "01000000303", Email = "layla.khaled@gmail.com",    EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000303" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000003")) { Age = 25, Phone = "01000000303", Gender = Gender.Female }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000004"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000004"), FullName = "Hany Salem",      UserName = "01000000304", Email = "hany.salem@gmail.com",      EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000304" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000004")) { Age = 52, Phone = "01000000304", Gender = Gender.Male }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000005"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000005"), FullName = "Amina Youssef",   UserName = "01000000305", Email = "amina.youssef@gmail.com",   EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000305" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000005")) { Age = 38, Phone = "01000000305", Gender = Gender.Female }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000006"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000006"), FullName = "Tarek Fahmy",     UserName = "01000000306", Email = "tarek.fahmy@gmail.com",     EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000306" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000006")) { Age = 28, Phone = "01000000306", Gender = Gender.Male }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000007"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000007"), FullName = "Noura Hassan",    UserName = "01000000307", Email = "noura.hassan@gmail.com",    EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000307" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000007")) { Age = 41, Phone = "01000000307", Gender = Gender.Female }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000008"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000008"), FullName = "Sherif Nabil",    UserName = "01000000308", Email = "sherif.nabil@gmail.com",    EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000308" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000008")) { Age = 35, Phone = "01000000308", Gender = Gender.Male }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000009"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000009"), FullName = "Dina Adel",       UserName = "01000000309", Email = "dina.adel@gmail.com",       EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000309" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000009")) { Age = 29, Phone = "01000000309", Gender = Gender.Female }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000010"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000010"), FullName = "Yasser Ahmed",    UserName = "01000000310", Email = "yasser.ahmed@gmail.com",    EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000310" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000010")) { Age = 50, Phone = "01000000310", Gender = Gender.Male }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000011"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000011"), FullName = "Rana Samir",      UserName = "01000000311", Email = "rana.samir@gmail.com",      EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000311" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000011")) { Age = 33, Phone = "01000000311", Gender = Gender.Female }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000012"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000012"), FullName = "Mahmoud Fathy",   UserName = "01000000312", Email = "mahmoud.fathy@gmail.com",   EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000312" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000012")) { Age = 47, Phone = "01000000312", Gender = Gender.Male }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000013"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000013"), FullName = "Salma Ibrahim",   UserName = "01000000313", Email = "salma.ibrahim@gmail.com",   EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000313" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000013")) { Age = 26, Phone = "01000000313", Gender = Gender.Female }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000014"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000014"), FullName = "Khaled Mostafa",  UserName = "01000000314", Email = "khaled.mostafa@gmail.com",  EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000314" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000014")) { Age = 39, Phone = "01000000314", Gender = Gender.Male }),
-						(Guid.Parse("f0000000-0000-7000-8000-000000000015"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000015"), FullName = "Eman Ali",        UserName = "01000000315", Email = "eman.ali@gmail.com",        EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000315" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000015")) { Age = 31, Phone = "01000000315", Gender = Gender.Female }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000001"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000001"), FullName = "Mona Tarek",      UserName = "01000000301", Email = "29401011234567@dentalhub.com",      EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000301" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000001")) { Age = 30, Phone = "01000000301", NationalId = "29401011234567", Gender = Gender.Female }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000002"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000002"), FullName = "Karim Salah",     UserName = "01000000302", Email = "18002021234568@dentalhub.com",     EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000302" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000002")) { Age = 45, Phone = "01000000302", NationalId = "18002021234568", Gender = Gender.Male }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000003"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000003"), FullName = "Layla Khaled",    UserName = "01000000303", Email = "29903031234569@dentalhub.com",    EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000303" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000003")) { Age = 25, Phone = "01000000303", NationalId = "29903031234569", Gender = Gender.Female }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000004"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000004"), FullName = "Hany Salem",      UserName = "01000000304", Email = "17204041234570@dentalhub.com",      EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000304" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000004")) { Age = 52, Phone = "01000000304", NationalId = "17204041234570", Gender = Gender.Male }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000005"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000005"), FullName = "Amina Youssef",   UserName = "01000000305", Email = "28605051234571@dentalhub.com",   EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000305" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000005")) { Age = 38, Phone = "01000000305", NationalId = "28605051234571", Gender = Gender.Female }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000006"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000006"), FullName = "Tarek Fahmy",     UserName = "01000000306", Email = "19606061234572@dentalhub.com",     EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000306" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000006")) { Age = 28, Phone = "01000000306", NationalId = "19606061234572", Gender = Gender.Male }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000007"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000007"), FullName = "Noura Hassan",    UserName = "01000000307", Email = "28307071234573@dentalhub.com",    EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000307" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000007")) { Age = 41, Phone = "01000000307", NationalId = "28307071234573", Gender = Gender.Female }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000008"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000008"), FullName = "Sherif Nabil",    UserName = "01000000308", Email = "18908081234574@dentalhub.com",    EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000308" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000008")) { Age = 35, Phone = "01000000308", NationalId = "18908081234574", Gender = Gender.Male }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000009"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000009"), FullName = "Dina Adel",       UserName = "01000000309", Email = "29509091234575@dentalhub.com",       EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000309" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000009")) { Age = 29, Phone = "01000000309", NationalId = "29509091234575", Gender = Gender.Female }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000010"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000010"), FullName = "Yasser Ahmed",    UserName = "01000000310", Email = "17410101234576@dentalhub.com",    EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000310" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000010")) { Age = 50, Phone = "01000000310", NationalId = "17410101234576", Gender = Gender.Male }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000011"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000011"), FullName = "Rana Samir",      UserName = "01000000311", Email = "29111111234577@dentalhub.com",      EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000311" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000011")) { Age = 33, Phone = "01000000311", NationalId = "29111111234577", Gender = Gender.Female }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000012"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000012"), FullName = "Mahmoud Fathy",   UserName = "01000000312", Email = "17712121234578@dentalhub.com",   EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000312" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000012")) { Age = 47, Phone = "01000000312", NationalId = "17712121234578", Gender = Gender.Male }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000013"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000013"), FullName = "Salma Ibrahim",   UserName = "01000000313", Email = "29801131234579@dentalhub.com",   EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000313" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000013")) { Age = 26, Phone = "01000000313", NationalId = "29801131234579", Gender = Gender.Female }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000014"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000014"), FullName = "Khaled Mostafa",  UserName = "01000000314", Email = "18502141234580@dentalhub.com",  EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000314" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000014")) { Age = 39, Phone = "01000000314", NationalId = "18502141234580", Gender = Gender.Male }),
+						(Guid.Parse("f0000000-0000-7000-8000-000000000015"), new User { Id = Guid.Parse("f0000000-0000-7000-8000-000000000015"), FullName = "Eman Ali",        UserName = "01000000315", Email = "29303151234581@dentalhub.com",        EmailConfirmed = true, PhoneNumberConfirmed = true, PhoneNumber = "01000000315" }, new Patient(Guid.Parse("f0000000-0000-7000-8000-000000000015")) { Age = 31, Phone = "01000000315", NationalId = "29303151234581", Gender = Gender.Female }),
 					};
 
 					foreach (var (id, user, patient) in patients)
 					{
-						await CreateUserWithRoleAsync(userManager, user, "Patient", "Patient@123", logger);
+					await CreateUserWithRoleAsync(userManager, user, "Patient", "Patient@123", logger);
+						
+						var existingPatient = await context.Patients.IgnoreQueryFilters().AsTracking().FirstOrDefaultAsync(p => p.Id == id);
+						if (existingPatient == null)
+						{
+							await context.Patients.AddAsync(patient);
+						}
+						else
+						{
+							existingPatient.NationalId = patient.NationalId;
+							existingPatient.Phone = patient.Phone;
+							existingPatient.Age = patient.Age;
+							existingPatient.Gender = patient.Gender;
+							context.Patients.Update(existingPatient);
+						}
 					}
-
-					await context.Patients.AddRangeAsync(patients.Select(p => p.Patient));
 					await context.SaveChangesAsync();
-					logger.LogInformation("✅ Seeded 15 Patients.");
+					logger.LogInformation("✅ Seeded/Updated 15 Patients.");
 				}
 
 				// ── 7. Admins ─────────────────────────────────────────────────────────
@@ -324,6 +369,25 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 					await context.Admins.AddAsync(admin);
 					await context.SaveChangesAsync();
 					logger.LogInformation("✅ Seeded Admin Account.");
+				}
+				
+				// ── 7.5. Clinical Doctors ─────────────────────────────────────────────
+				if (!await context.Users.AnyAsync(u => u.UserName == "clinical.doc"))
+				{
+					var clinicalDocId = Guid.Parse("c0000000-0000-7000-8000-000000000001");
+					var clinicalDocUser = new User 
+					{ 
+						Id = clinicalDocId, 
+						FullName = "Dr. Clinical Specialist", 
+						UserName = "clinical.doc", 
+						Email = "clinical@dentalhub.com", 
+						EmailConfirmed = true, 
+						PhoneNumberConfirmed = true, 
+						PhoneNumber = "01000000501" 
+					};
+
+					await CreateUserWithRoleAsync(userManager, clinicalDocUser, "ClinicalDoctor", "Clinical@123", logger);
+					logger.LogInformation("✅ Seeded Clinical Doctor Account.");
 				}
 
 				// ── 8. Case Types ─────────────────────────────────────────────────────
@@ -627,12 +691,23 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 			ILogger logger)
 		{
 			var existingById = await userManager.FindByIdAsync(user.Id.ToString());
-			if (existingById != null) return;
+			if (existingById != null)
+			{
+				existingById.FullName = user.FullName;
+				existingById.Email = user.Email;
+				existingById.UserName = user.UserName;
+				existingById.PhoneNumber = user.PhoneNumber;
+				existingById.NormalizedEmail = userManager.NormalizeEmail(user.Email);
+				existingById.NormalizedUserName = userManager.NormalizeName(user.UserName);
+				
+				await userManager.UpdateAsync(existingById);
+				logger.LogInformation("🔄 Updated user {Email}.", user.Email);
+				return;
+			}
 
 			var existingByEmail = await userManager.FindByEmailAsync(user.Email!);
 			if (existingByEmail != null)
 			{
-				// If ID changed but email is same, we must remove the old user to avoid conflicts
 				await userManager.DeleteAsync(existingByEmail);
 				logger.LogWarning("🗑️ Removed stale user with email {Email} to update ID.", user.Email);
 			}

@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -7,12 +8,12 @@ using MediatR;
 using DentalHub.Application.Commands.Chat;
 using DentalHub.Application.DTOs.Chat;
 
-namespace DentalHub.API.Controllers
+namespace DentalHub.API.Controllers.v2
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
     [Authorize]
-    public class ChatController : ControllerBase
+    [ApiVersion("2.0")]
+    public class ChatController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -120,3 +121,9 @@ namespace DentalHub.API.Controllers
         }
     }
 }
+
+
+
+
+
+

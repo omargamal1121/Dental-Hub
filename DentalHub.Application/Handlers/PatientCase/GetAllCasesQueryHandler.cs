@@ -4,7 +4,7 @@ using DentalHub.Application.Queries.PatientCase;
 using DentalHub.Application.Services.Cases;
 using MediatR;
 
-namespace DentalHub.Application.Handlers.PatientCase
+namespace DentalHub.Application.Handlers.PatientCaseHandler
 {
     public class GetAllCasesQueryHandler
         : IRequestHandler<GetAllCasesQuery, Result<PagedResult<PatientCaseDto>>>

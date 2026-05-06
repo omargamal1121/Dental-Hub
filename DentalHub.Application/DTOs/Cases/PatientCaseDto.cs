@@ -8,6 +8,7 @@ namespace DentalHub.Application.DTOs.Cases
     public class PatientCaseDto
     {
         public Guid Id { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         public Guid PatientId { get; set; }
         public string PatientName { get; set; } = string.Empty;
@@ -40,7 +41,7 @@ namespace DentalHub.Application.DTOs.Cases
         public Guid? AssignedDoctorId { get; set; }
 
         // ✅ FIXED: بدل Diagnosisdto المفردة
-        public List<DiagnosisDto> Diagnoses { get; set; } = new();
+        public List<DiagnosisDto> Diagnosisdto { get; set; } = new();
 
         public List<string> ImageUrls { get; set; } = new();
 
@@ -59,14 +60,7 @@ namespace DentalHub.Application.DTOs.Cases
     }
 
 
-    public class Diagnosisdto
-    {
-        public Guid Id { get; set; }
-        public string DiagnosisStage { get; set; }
-        public string CaseType { get; set; }
-        public string Notes { get; set; }
-        public List<int> TeethNumbers { get; set; } = new List<int>();
-    }
+ 
 
     /// <summary>
     /// Flags describing the relationship between the current user and the case

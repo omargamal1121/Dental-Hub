@@ -563,6 +563,56 @@ namespace DentalHub.Application.Services.Sessions
             }
         }
 
+        public async Task<Result<bool>> UpdateSessionScheduleAsync(Guid sessionId, DateTime newScheduledAt, Guid studentId)
+        {
+            try
+            {
+                var session = await _unitOfWork.Sessions.GetByIdAsync(new BaseSpecification<Session>(s => s.Id == sessionId));
+                if (session == null)
+                    return Result<bool>.Failure("Session not found");
+
+                if (session.StudentId != studentId)
+                    return Result<bool>.Failure("You are not authorized to reschedule this session.");
+
+                if (session.Status != SessionStatus.Scheduled)
+                    return Result<bool>.Failure($"Cannot reschedule session with current status: {session.Status}");
+
+                if (newScheduledAt < DateTime.UtcNow)
+                    return Result<bool>.Failure("Cannot schedule a session in the past");
+
+                var newStart = newScheduledAt;
+                var newEnd = newScheduledAt.AddHours(1);
+
+                var hasOverlap = await _unitOfWork.Sessions.AnyAsync(new BaseSpecification<Session>(s =>
+                    s.Id != sessionId &&
+                    s.StudentId == studentId &&
+                    s.Status == SessionStatus.Scheduled &&
+                    s.StartAt < newEnd &&
+                    s.EndAt > newStart
+                ));
+
+                if (hasOverlap)
+                    return Result<bool>.Failure($"Student already has a session overlapping with {newStart:yyyy-MM-dd HH:mm}");
+
+                session.StartAt = newStart;
+                session.EndAt = newEnd;
+                session.UpdateAt = DateTime.UtcNow;
+
+                _unitOfWork.Sessions.Update(session);
+                await _unitOfWork.SaveChangesAsync();
+
+                _logger.LogInformation("Session rescheduled: {Id} to {ScheduledAt}", sessionId, newScheduledAt);
+
+                return Result<bool>.Success(true, "Session rescheduled successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error rescheduling session: {Id}", sessionId);
+                return Result<bool>.Failure("Error rescheduling session");
+            }
+        }
+
+
         public async Task<Result<PagedResult<SessionDto>>> GetSessionsNeedingEvaluationAsync(Guid doctorId, Guid? studentId = null, Guid? patientId = null, int page = 1, int pageSize = 10)
         {
             try

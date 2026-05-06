@@ -4,7 +4,7 @@ using DentalHub.Application.DTOs.Cases;
 using DentalHub.Application.Services.Cases;
 using MediatR;
 
-namespace DentalHub.Application.Handlers.PatientCase
+namespace DentalHub.Application.Handlers.PatientCaseHandler
 {
     public class CreatePatientCaseCommandHandler : IRequestHandler<CreatePatientCaseCommand, Result<Guid>>
     {
@@ -20,7 +20,7 @@ namespace DentalHub.Application.Handlers.PatientCase
             var dto = new CreateCaseDto
             {
                 PatientId = request.PatientId,
-                CaseTypeId= request.CaseTypeId,
+            
                 IsPublic = request.IsPublic,
                 UniversityId = request.UniversityId,
                 Description = request.Description,

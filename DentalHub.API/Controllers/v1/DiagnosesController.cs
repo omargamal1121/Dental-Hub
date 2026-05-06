@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using DentalHub.Application.Commands.Diagnoses;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Diagnoses;
@@ -8,10 +9,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-namespace DentalHub.API.Controllers
+namespace DentalHub.API.Controllers.v1
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
+    [ApiVersion("1.0")]
     public class DiagnosesController : BaseController
     {
         private readonly IMediator _mediator;
@@ -25,7 +26,7 @@ namespace DentalHub.API.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiResponse<DiagnosisDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ApiResponse<DiagnosisDto>), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ApiResponse<DiagnosisDto>>> GetById(Guid id)
         {
             var result = await _mediator.Send(new GetDiagnosisByIdQuery(id));
@@ -41,7 +42,7 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Student,Doctor,Admin")]
+        [Authorize(Roles = "Admin,ClinicalDoctor")]
         [ProducesResponseType(typeof(ApiResponse<DiagnosisDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
@@ -86,8 +87,9 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Doctor,Admin")]
-        [ProducesResponseType(typeof(ApiResponse<DiagnosisDto>), StatusCodes.Status200OK)]
+		[Authorize(Roles = "Admin,ClinicalDoctor")]
+
+		[ProducesResponseType(typeof(ApiResponse<DiagnosisDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status403Forbidden)]
@@ -103,8 +105,9 @@ namespace DentalHub.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Doctor,Admin")]
-        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+		[Authorize(Roles = "Admin,ClinicalDoctor")]
+
+		[ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
@@ -115,7 +118,7 @@ namespace DentalHub.API.Controllers
         }
     
         [HttpPost("{id}/accept")]
-        [Authorize(Roles = "Doctor,Admin")]
+        [Authorize(Roles = "Admin,ClinicalDoctor")]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status403Forbidden)]
@@ -127,3 +130,7 @@ namespace DentalHub.API.Controllers
         }
     }
 }
+
+
+
+

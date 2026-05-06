@@ -5,7 +5,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DentalHub.Application.Handlers.PatientCase
+namespace DentalHub.Application.Handlers.PatientCaseHandlerHandler
 {
     public class AssignCaseUniversityCommandHandler : IRequestHandler<AssignCaseUniversityCommand, Result>
     {

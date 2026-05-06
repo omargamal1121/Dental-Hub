@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.Interfaces;
@@ -7,14 +8,16 @@ using System.Security.Claims;
 namespace DentalHub.API.Controllers
 {
     [ApiController]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public abstract class BaseController : ControllerBase
     {
-        protected readonly ILinkBuilder? _linkBuilder;
+       // protected readonly ILinkBuilder? _linkBuilder;
 
-        protected BaseController(ILinkBuilder? linkBuilder = null)
-        {
-            _linkBuilder = linkBuilder;
-        }
+        //protected BaseController(ILinkBuilder? linkBuilder = null)
+        //{
+        //    _linkBuilder = linkBuilder;
+        //}
 
         protected List<string> GetModelErrors()
         {
@@ -91,7 +94,7 @@ namespace DentalHub.API.Controllers
           string apiName = "",
           Guid? id = null)
         {
-            var links = _linkBuilder?.MakeRelSelf(_linkBuilder.GenerateLinks(id), apiName);
+          //  var links = _linkBuilder?.MakeRelSelf(_linkBuilder.GenerateLinks(id), apiName);
 
             ApiResponse<T> apiResponse;
 
@@ -102,7 +105,7 @@ namespace DentalHub.API.Controllers
                     result.Data,
                     result.Status,
                     warnings: null,
-                    links: links);
+                    links: null);
             }
             else
             {
@@ -115,7 +118,7 @@ namespace DentalHub.API.Controllers
                     errorResponse,
                     result.Status,
                     warnings: null,
-                    links: links);
+                    links: null );
             }
 
             return result.Status switch
@@ -138,7 +141,7 @@ namespace DentalHub.API.Controllers
          string apiName = "",
          Guid? id = null)
         {
-            var links = _linkBuilder?.MakeRelSelf(_linkBuilder.GenerateLinks(id), apiName);
+            //var links = _linkBuilder?.MakeRelSelf(_linkBuilder.GenerateLinks(id), apiName);
 
             ApiResponse<object> apiResponse;
 
@@ -148,8 +151,7 @@ namespace DentalHub.API.Controllers
                     result.Message ?? "Success",
                     null,
                     result.Status,
-                    warnings: null,
-                    links: links);
+                    warnings: null);
             }
             else
             {
@@ -161,8 +163,7 @@ namespace DentalHub.API.Controllers
                     result.Message ?? "Error",
                     errorResponse,
                     result.Status,
-                    warnings: null,
-                    links: links);
+                    warnings: null);
             }
 
             return result.Status switch

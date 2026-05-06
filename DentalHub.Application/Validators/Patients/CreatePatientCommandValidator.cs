@@ -28,13 +28,18 @@ namespace DentalHub.Application.Validators.Patients
 
             RuleFor(x => x.BirthDate)
                 .NotEmpty().WithMessage("Birth date is required")
-                .LessThan(DateTime.Now).WithMessage("Birth date must be in the past");
+                .Must(birthDate => 
+                {
+                    var age = DateTime.Today.Year - birthDate.Year;
+                    if (birthDate.Date > DateTime.Today.AddYears(-age)) age--;
+                    return age >= 5 && age <= 100;
+                }).WithMessage("Patient age must be between 5 and 100 years");
 
             RuleFor(x => x.Gender)
-                .IsInEnum().WithMessage("Invalid gender");
+                .IsInEnum().WithMessage("Invalid gender selection");
 
             RuleFor(x => x.City)
-                .IsInEnum().WithMessage("Invalid city");
+                .IsInEnum().WithMessage("Invalid city selection");
         }
     }
 }

@@ -1,16 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using MediatR;
 using DentalHub.Application.Queries.UniversityMember;
 using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.DTOs.UniversityMember;
 using DentalHub.Application.Common;
-using Swashbuckle.AspNetCore.Annotations;
+using Asp.Versioning;
 
-namespace DentalHub.API.Controllers
+namespace DentalHub.API.Controllers.v1
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
+    [ApiVersion("1.0")]
     public class UniversityMembersController : BaseController
     {
         private readonly IMediator _mediator;
@@ -36,7 +35,7 @@ namespace DentalHub.API.Controllers
         /// | Assiut University     | 55555555-5555-5555-5555-555555555555 |
         /// | Benha University      | 66666666-6666-6666-6666-666666666666 |
         ///
-        /// Filter by role using the `name` or `department` query parameters.
+        /// Filter by role using the 
         /// </remarks>
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponse<PagedResult<UniversityMemberDto>>), StatusCodes.Status200OK)]
@@ -73,3 +72,6 @@ namespace DentalHub.API.Controllers
         }
     }
 }
+
+
+

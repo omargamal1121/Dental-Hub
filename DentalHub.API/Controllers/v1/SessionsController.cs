@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using DentalHub.Application.Commands.Sessions;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Sessions;
@@ -11,10 +12,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace DentalHub.API.Controllers
+namespace DentalHub.API.Controllers.v1
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
+    [ApiVersion("1.0")]
     public class SessionsController : BaseController
     {
         private readonly IMediator _mediator;
@@ -96,6 +97,30 @@ namespace DentalHub.API.Controllers
             var result = await _mediator.Send(new MarkSessionAsDoneCommand(id, studentId));
             return HandleResult(result);
         }
+        
+        [HttpPatch("{id}/schedule")]
+        [Authorize(Roles = "Student")]
+        [ProducesResponseType(typeof(ApiResponse<bool>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ApiResponse<bool>>> UpdateSchedule(Guid id, [FromBody] UpdateSessionScheduleCommand command)
+        {
+            if (id != command.SessionId)
+                return CreateErrorResponse<bool>("Id mismatch", 400);
+
+            var studentIdClaim = User.FindFirstValue("uid") ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(studentIdClaim))
+                return CreateErrorResponse<bool>("Unauthorized: Student ID not found in token", 401);
+
+            var studentId = Guid.Parse(studentIdClaim);
+            command.StudentId = studentId;
+
+            var result = await _mediator.Send(command);
+            return HandleResult(result);
+        }
+
 
         [HttpPost("{id}/notes")]
         [ProducesResponseType(typeof(ApiResponse<SessionNoteDto>), StatusCodes.Status200OK)]
@@ -269,3 +294,7 @@ namespace DentalHub.API.Controllers
 
     }
 }
+
+
+
+

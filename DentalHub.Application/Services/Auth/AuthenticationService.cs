@@ -118,11 +118,17 @@ namespace DentalHub.Application.Services.Auth
 			if (roles.Contains("Admin"))
 				return await GetUniversityIdAsync<Admin>(user.Id);
 
-			if (roles.Contains("Doctor"))
-				return await GetUniversityIdAsync<Doctor>(user.Id);
+			if (roles.Contains("Doctor") || roles.Contains("ClinicalDoctor"))
+			{
+				var doctorId = await GetUniversityIdAsync<Doctor>(user.Id);
+				if (doctorId != null && doctorId != Guid.Empty) return doctorId;
+			}
 
-			if (roles.Contains("Student"))
-				return await GetUniversityIdAsync<Student>(user.Id);
+			if (roles.Contains("Student") || roles.Contains("ClinicalDoctor"))
+			{
+				var studentId = await GetUniversityIdAsync<Student>(user.Id);
+				if (studentId != null && studentId != Guid.Empty) return studentId;
+			}
 
 			return null;
 		}

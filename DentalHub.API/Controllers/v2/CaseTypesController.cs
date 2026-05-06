@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using DentalHub.Application.Commands.CaseTypes;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.CaseTypes;
@@ -7,10 +8,10 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 
-namespace DentalHub.API.Controllers
+namespace DentalHub.API.Controllers.v2
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
+    [ApiVersion("2.0")]
     public class CaseTypesController : BaseController
     {
         private readonly IMediator _mediator;
@@ -73,3 +74,8 @@ namespace DentalHub.API.Controllers
         }
     }
 }
+
+
+
+
+

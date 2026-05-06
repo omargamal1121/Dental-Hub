@@ -6,6 +6,10 @@ using DentalHub.Application.Factories;
 using Microsoft.Extensions.Logging;
 using DentalHub.Application.Specification.Comman;
 using DentalHub.Application.DTOs.Cases;
+using DentalHub.Application.DTOs.Identity;
+using Microsoft.AspNetCore.Identity;
+using DentalHub.Application.Commands.Patient;
+using DentalHub.Application.DTOs.Diagnoses;
 
 namespace DentalHub.Application.Services
 {
@@ -13,11 +17,13 @@ namespace DentalHub.Application.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<PatientService> _logger;
+        private readonly UserManager<User> _userManager;
 
-        public PatientService(IUnitOfWork unitOfWork, ILogger<PatientService> logger)
+        public PatientService(IUnitOfWork unitOfWork, ILogger<PatientService> logger, UserManager<User> userManager)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _userManager = userManager;
         }
 
         public async Task<Result<PatientDto>> GetPatientByIdAsync(Guid id)
@@ -33,14 +39,23 @@ namespace DentalHub.Application.Services
                         Email = p.User.Email!,
                         Phone = p.Phone,
                         Age = p.Age,
+                        NationalId = p.NationalId,
                         CreateAt = p.CreateAt,
+                        Gender = p.Gender,
+                        City = p.City,
                         PatientCases = p.PatientCases
                             .Select(pc => new PatientCaseSimpleDataDto
                             {
                                 Id = pc.Id,
                                 //     Name = pc.CaseType.Name,
                                 Status = pc.Status,
-                                CreateAt = pc.CreateAt
+                                CreateAt = pc.CreateAt,
+                                UniversityId = pc.UniversityId,
+                                Diagnoses = pc.Diagnosiss.Select(d => new DiagnosisSimpleDto
+                                {
+                                    Id = d.Id,
+                                    CaseTypeName = d.CaseType.Name
+                                }).ToList()
                             })
                             .ToList()
                     }
@@ -74,14 +89,23 @@ namespace DentalHub.Application.Services
                         Email = p.User.Email!,
                         Phone = p.Phone,
                         Age = p.Age,
+                        NationalId = p.NationalId,
                         CreateAt = p.CreateAt,
+                        Gender = p.Gender,
+                        City = p.City,
                         PatientCases = p.PatientCases
                             .Select(pc => new PatientCaseSimpleDataDto
                             {
                                 Id = pc.Id,
                                 //  Name = pc.CaseType.Name,
                                 Status = pc.Status,
-                                CreateAt = pc.CreateAt
+                                CreateAt = pc.CreateAt,
+                                UniversityId = pc.UniversityId,
+                                Diagnoses = pc.Diagnosiss.Select(d => new DiagnosisSimpleDto
+                                {
+                                    Id = d.Id,
+                                    CaseTypeName = d.CaseType.Name
+                                }).ToList()
                             })
                             .ToList()
                     }
@@ -106,7 +130,9 @@ namespace DentalHub.Application.Services
             try
             {
                 var spec = new BaseSpecificationWithProjection<Patient, PatientDto>(
-                    p => filterPatientDto.Name == null || p.User.FullName.Contains(filterPatientDto.Name),
+                    p => (filterPatientDto.Name == null || p.User.FullName.StartsWith(filterPatientDto.Name)) &&
+                         (filterPatientDto.NationalId == null || p.NationalId == filterPatientDto.NationalId) &&
+                         (filterPatientDto.PhoneNumber == null || p.Phone.StartsWith(filterPatientDto.PhoneNumber)),
                     p => new PatientDto
                     {
                         PublicId = p.Id,
@@ -114,8 +140,10 @@ namespace DentalHub.Application.Services
                         Email = p.User.Email!,
                         Phone = p.Phone,
                         Age = p.Age,
+                        NationalId = p.NationalId,
                         CreateAt = p.CreateAt,
-
+                        Gender = p.Gender,
+                        City = p.City,
                         PatientCases = p.PatientCases
                             .Where(pc => filterPatientDto.CaseStatus == null || pc.Status == filterPatientDto.CaseStatus.Value)
                             .Where(pc => string.IsNullOrEmpty(filterPatientDto.CaseType)
@@ -126,7 +154,13 @@ namespace DentalHub.Application.Services
                                 Id = pc.Id,
                                 //   Name = pc.CaseType.Name,
                                 Status = pc.Status,
-                                CreateAt = pc.CreateAt
+                                CreateAt = pc.CreateAt,
+                                UniversityId = pc.UniversityId,
+                                Diagnoses = pc.Diagnosiss.Select(d => new DiagnosisSimpleDto
+                                {
+                                    Id = d.Id,
+                                    CaseTypeName = d.CaseType.Name
+                                }).ToList()
                             })
                             .ToList()
                     }
@@ -140,7 +174,9 @@ namespace DentalHub.Application.Services
 
                 // CountAsync needs a plain BaseSpecification without paging
                 var countSpec = new BaseSpecification<Patient>(
-                    p => filterPatientDto.Name == null || p.User.FullName.Contains(filterPatientDto.Name));
+                    p => (filterPatientDto.Name == null || p.User.FullName.Contains(filterPatientDto.Name)) &&
+                         (filterPatientDto.NationalId == null || p.NationalId == filterPatientDto.NationalId) &&
+                         (filterPatientDto.PhoneNumber == null || p.Phone.Contains(filterPatientDto.PhoneNumber)));
 
                 var patientsList = await _unitOfWork.Patients.GetAllAsync(spec);
                 var totalCount = await _unitOfWork.Patients.CountAsync(countSpec);
@@ -182,8 +218,27 @@ namespace DentalHub.Application.Services
                     patient.User.PhoneNumber = dto.Phone;
                 }
 
-                if (dto.Age.HasValue)
+                if (!string.IsNullOrWhiteSpace(dto.NationalId))
+                    patient.NationalId = dto.NationalId;
+
+                if (dto.BirthDate.HasValue)
+                {
+                    var today = DateTime.Today;
+                    var age = today.Year - dto.BirthDate.Value.Year;
+                    if (dto.BirthDate.Value.Date > today.AddYears(-age))
+                        age--;
+                    patient.Age = age;
+                }
+                else if (dto.Age.HasValue)
+                {
                     patient.Age = dto.Age.Value;
+                }
+                
+                if (dto.Gender.HasValue)
+                    patient.Gender = dto.Gender.Value;
+                
+                if (dto.City.HasValue)
+                    patient.City = dto.City.Value;
 
                 patient.UpdateAt = DateTime.UtcNow;
 
@@ -200,6 +255,8 @@ namespace DentalHub.Application.Services
                     Email = patient.User.Email!,
                     Phone = patient.Phone,
                     Age = patient.Age,
+                    Gender = patient.Gender,
+                    City = patient.City,
                     CreateAt = patient.CreateAt,
 
                 });
@@ -208,6 +265,74 @@ namespace DentalHub.Application.Services
             {
                 _logger.LogError(ex, "Error updating patient: {PublicId}", dto.PublicId);
                 return Result<PatientDto>.Failure("Error updating patient");
+            }
+        }
+
+        public async Task<Result<Guid>> CreatePatientAsync(CreatePatientCommand command)
+        {
+            try
+            {
+                var existingPatientSpec = new BaseSpecification<Patient>(p => p.NationalId == command.NationalId);
+                if (await _unitOfWork.Patients.AnyAsync(existingPatientSpec))
+                {
+                    return Result<Guid>.Failure("A patient with this National ID already exists", 400);
+                }
+
+                var today = DateTime.Today;
+                var age = today.Year - command.BirthDate.Year;
+                if (command.BirthDate.Date > today.AddYears(-age))
+                    age--;
+
+                await _unitOfWork.BeginTransactionAsync();
+
+                var user = new User
+                {
+                    UserName = command.PhoneNumber,
+                    Email = command.NationalId + "@dentalhub.com",
+                    FullName = command.FullName,
+                    PhoneNumber = command.PhoneNumber,
+                    PhoneNumberConfirmed = true,
+                };
+
+                var result = await _userManager.CreateAsync(user, command.Password);
+                if (!result.Succeeded)
+                {
+                    await _unitOfWork.RollbackTransactionAsync();
+                    var errors = result.Errors.Select(e => e.Description).ToList();
+                    return Result<Guid>.Failure(errors);
+                }
+
+                var roleResult = await _userManager.AddToRoleAsync(user, "Patient");
+                if (!roleResult.Succeeded)
+                {
+                    await _unitOfWork.RollbackTransactionAsync();
+                    var errors = roleResult.Errors.Select(e => e.Description).ToList();
+                    return Result<Guid>.Failure(errors);
+                }
+
+                var patient = new Patient(user.Id)
+                {
+                    Age = age,
+                    Phone = command.PhoneNumber,
+                    NationalId = command.NationalId,
+                    CreateAt = DateTime.UtcNow,
+                    Gender = command.Gender,
+                    City = command.City
+                };
+
+                await _unitOfWork.Patients.AddAsync(patient);
+                await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.CommitTransactionAsync();
+
+                _logger.LogInformation("Patient registered successfully: {Phone}", command.PhoneNumber);
+
+                return Result<Guid>.Success(user.Id, "Registration successful");
+            }
+            catch (Exception ex)
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                _logger.LogError(ex, "Error creating patient");
+                return Result<Guid>.Failure("Error creating patient");
             }
         }
 
@@ -229,6 +354,13 @@ namespace DentalHub.Application.Services
                     return Result.Failure("Patient not found");
                 if (patient.HasProgressCases)
                     return Result.Failure("Cannot delete patient with in-progress cases");
+
+                var patientEntity = await _unitOfWork.Patients.GetByIdAsync(new BaseSpecification<Patient>(p => p.Id == id));
+                if (patientEntity != null)
+                {
+                    patientEntity.DeleteAt = DateTime.UtcNow;
+                    _unitOfWork.Patients.Update(patientEntity);
+                }
 
                 await _unitOfWork.PatientCases.UpdatePatientCasesStatusAsync(patient.Id, CaseStatus.Cancelled);
                 await _unitOfWork.CaseRequests.CancelPendingRequestsForPatientAsync(patient.Id);

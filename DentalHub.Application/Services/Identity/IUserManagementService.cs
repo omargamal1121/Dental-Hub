@@ -1,5 +1,6 @@
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Identity;
+using DentalHub.Application.DTOs.Doctors;
 
 namespace DentalHub.Application.Services.Identity
 {
@@ -7,7 +8,7 @@ namespace DentalHub.Application.Services.Identity
     public interface IUserManagementService
     {
         
-        Task<Result<AuthResponseDto>> RegisterPatientAsync(RegisterPatientDto dto);
+
         Task<Result<AuthResponseDto>> RegisterStudentAsync(RegisterStudentDto dto);
         Task<Result<AuthResponseDto>> RegisterDoctorAsync(RegisterDoctorDto dto);
 
@@ -18,5 +19,6 @@ namespace DentalHub.Application.Services.Identity
         // User Management
       //  Task<Result<bool>> CheckEmailExistsAsync(string email);
         Task<Result> DeleteUserAsync(Guid userId);
+        Task<Result<List<DoctorlistDto>>> GetClinicalDoctorsAsync();
     }
 }

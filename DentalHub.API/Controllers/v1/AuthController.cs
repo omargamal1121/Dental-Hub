@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using DentalHub.Application.Commands.Auth;
 using DentalHub.Application.DTOs.Auth;
 using DentalHub.Application.Common;
@@ -8,10 +9,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using DentalHub.Application.DTOs.Shared;
 
-namespace DentalHub.API.Controllers
+namespace DentalHub.API.Controllers.v1
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
+    [ApiVersion("1.0")]
     public class AuthController : BaseController
     {
         private readonly IMediator _mediator;
@@ -80,3 +81,7 @@ namespace DentalHub.API.Controllers
 
     public record ChangePasswordRequestDto(string OldPassword, string NewPassword);
 }
+
+
+
+

@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Shared;
 using DentalHub.Application.DTOs.Universities;
@@ -8,10 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DentalHub.API.Controllers
+namespace DentalHub.API.Controllers.v2
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
+    [ApiVersion("2.0")]
     public class UniversitiesController : BaseController
     {
         private readonly IMediator _mediator;
@@ -30,3 +31,8 @@ namespace DentalHub.API.Controllers
         }
     }
 }
+
+
+
+
+
