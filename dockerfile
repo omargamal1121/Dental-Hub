@@ -9,7 +9,10 @@ COPY DentalHub.Infrastructure/*.csproj DentalHub.Infrastructure/
 COPY DentalHub.Application/*.csproj DentalHub.Application/
 COPY DentalHub.API/*.csproj DentalHub.API/
 
+WORKDIR /app/DentalHub.API
 RUN dotnet restore
+WORKDIR /app
+
 
 # copy full source
 COPY . .

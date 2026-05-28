@@ -1,0 +1,38 @@
+version : "2.38.1"
+Services:
+  API:
+    image: dentalhub:latest
+    ports:
+      - "8080:8080"
+  MyDB:
+    image: mysql:latest
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${rootpassword}
+      MYSQL_DATABASE: dentalhubdb
+      MYSQL_USER: ${dbuser}
+      MYSQL_PASSWORD: ${dbpassword}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping","-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      volumes:
+        - redis-data:/data
+volumes:
+  mysql-data:
+  redis-data:
