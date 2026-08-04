@@ -113,7 +113,19 @@ namespace DentalHub.API.Middleware
     // ✅ Error Response Class
     public class ErrorResponse
     {
-        public int StatusCode { get; set; }
+		public ErrorResponse()
+		{
+			
+		}
+		public ErrorResponse(string message,object errors,int statuscode)
+		{
+            Message= message;
+            Errors= errors;
+            StatusCode = statuscode;
+
+			
+		}
+		public int StatusCode { get; set; }
         public string Message { get; set; } = string.Empty;
         public bool IsSuccess { get; set; }
         public object? Errors { get; set; } // للـ ValidationException

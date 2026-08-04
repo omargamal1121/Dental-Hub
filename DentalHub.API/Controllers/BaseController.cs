@@ -26,6 +26,11 @@ namespace DentalHub.API.Controllers
                 .Select(e => e.ErrorMessage)
                 .ToList();
         }
+        protected string? GetIpAdress()
+        {
+			return HttpContext?.Connection?.RemoteIpAddress?.ToString();
+			
+		}
 
         protected ActionResult<ApiResponse<T>> CreateErrorResponse<T>(
              string message,

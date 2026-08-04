@@ -33,7 +33,7 @@ namespace DentalHub.Application.Services.Auth
         {
             try
             {
-                var user = await _userManager.Users.FirstOrDefaultAsync(us => us.Id == userid);
+                var user = await _userManager.FindByIdAsync(userid.ToString());
                 if (user == null)
                 {
                     _logger.LogWarning("Change password failed: User {UserId} not found.", userid);
@@ -54,8 +54,8 @@ namespace DentalHub.Application.Services.Auth
                     return Result<bool>.Failure($"Errors: {errors}");
                 }
 
-            //    _backgroundJobClient.Enqueue(() => _refreshTokenService.RemoveRefreshTokenAsync(userid));
-                _backgroundJobClient.Enqueue(() => _accountEmailService.SendEmailAfterChangePassAsync(user.UserName, user.Email));
+           
+               await _accountEmailService.SendEmailAfterChangePassAsync(user.UserName, user.Email);
 
                 _logger.LogInformation("Password changed successfully for user {UserId}", userid);
                 return Result<bool>.Success(true, "Password changed successfully.");
@@ -78,8 +78,8 @@ namespace DentalHub.Application.Services.Auth
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                     var encodedToken = System.Net.WebUtility.UrlEncode(token);
 
-                    _backgroundJobClient.Enqueue(() =>
-                        _accountEmailService.SendPasswordResetEmailAsync(user.Email, user.UserName, encodedToken));
+                    
+                     await   _accountEmailService.SendPasswordResetEmailAsync(user.Email, user.UserName, encodedToken);
                 }
 
                 // Always return success (don't reveal user existence)

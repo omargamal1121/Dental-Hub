@@ -23,6 +23,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
         IMainRepository<CaseType> CaseTypes { get; }
         IMainRepository<Diagnosis> Diagnoses { get; }
         IMainRepository<University> Universities { get; }
+        IMainRepository<RefreshToken> RefreshTokens { get; }
 
        
         Task<int> SaveChangesAsync();

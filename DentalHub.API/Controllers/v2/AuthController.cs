@@ -27,6 +27,7 @@ namespace DentalHub.API.Controllers.v2
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<ApiResponse<TokensDto>>> Login([FromBody] LoginCommand command)
         {
+			
             var result = await _mediator.Send(command);
             return HandleResult(result);
         }
@@ -38,9 +39,11 @@ namespace DentalHub.API.Controllers.v2
         public async Task<ActionResult<ApiResponse<bool>>> Logout()
         {
             var userId = GetUserId();
-            if (userId == Guid.Empty) return Unauthorized();
-
-            var result = await _mediator.Send(new LogoutCommand(userId));
+            if (userId == Guid.Empty) return HandleResult(Result<bool>.Failure("Can't Found userid in Token",404));
+          
+            string? ip= GetIpAdress();
+            if(string.IsNullOrEmpty(ip)) return HandleResult(Result<bool>.Failure("Can't get Ip Adress",404));
+			var result = await _mediator.Send(new LogoutCommand(userId,ip));
             return HandleResult(result);
         }
 
@@ -70,7 +73,7 @@ namespace DentalHub.API.Controllers.v2
         public async Task<ActionResult<ApiResponse<bool>>> ChangePassword([FromBody] ChangePasswordRequestDto request)
         {
             var userId = GetUserId();
-            if (userId == Guid.Empty) return Unauthorized();
+            if (userId == Guid.Empty) return HandleResult(Result<bool>.Failure("Can't Get User Id From Token",status:404));
 
             var command = new ChangePasswordCommand(userId, request.OldPassword, request.NewPassword);
             var result = await _mediator.Send(command);

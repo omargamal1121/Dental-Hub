@@ -1,9 +1,9 @@
 using DentalHub.Application.Commands.Auth;
+using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Auth;
 using DentalHub.Application.Services.Auth;
 using DentalHub.Application.Services.Identity;
 using MediatR;
-using DentalHub.Application.Common;
 
 namespace DentalHub.Application.Handlers.Auth
 {
@@ -22,20 +22,20 @@ namespace DentalHub.Application.Handlers.Auth
         }
     }
 
-    //public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, Result<TokensDto>>
-    //{
-    //    private readonly IAuthenticationService _authService;
+    public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, Result<TokensDto>>
+    {
+        private readonly IAuthenticationService _authService;
 
-    //    public RefreshTokenCommandHandler(IAuthenticationService authService)
-    //    {
-    //        _authService = authService;
-    //    }
+        public RefreshTokenCommandHandler(IAuthenticationService authService)
+        {
+            _authService = authService;
+        }
 
-    //    public async Task<Result<TokensDto>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
-    //    {
-    //        return await _authService.RefreshTokenAsync();
-    //    }
-    //}
+        public async Task<Result<TokensDto>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+        {
+            return await _authService.RefreshTokenAsync(request.RefreshToken);
+        }
+    }
 
     public class LogoutCommandHandler : IRequestHandler<LogoutCommand, Result<bool>>
     {
@@ -48,7 +48,22 @@ namespace DentalHub.Application.Handlers.Auth
 
         public async Task<Result<bool>> Handle(LogoutCommand request, CancellationToken cancellationToken)
         {
-            return await _authService.LogoutAsync(request.UserId);
+            return await _authService.LogoutAsync(request.UserId, request.RefreshToken);
+        }
+    }
+
+    public class LogoutFromAllDevicesCommandHandler : IRequestHandler<LogoutFromAllDevicesCommand, Result<bool>>
+    {
+        private readonly IAuthenticationService _authService;
+
+        public LogoutFromAllDevicesCommandHandler(IAuthenticationService authService)
+        {
+            _authService = authService;
+        }
+
+        public async Task<Result<bool>> Handle(LogoutFromAllDevicesCommand request, CancellationToken cancellationToken)
+        {
+            return await _authService.LogoutFromAllDevicesAsync(request.UserId);
         }
     }
 

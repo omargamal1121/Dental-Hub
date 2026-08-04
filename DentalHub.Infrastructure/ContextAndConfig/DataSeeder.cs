@@ -298,13 +298,8 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 						}
 					}
 				}
-				//var u1 = await userManager.FindByIdAsync("e0000000-0000-7000-8000-000000000009");
-				//var u2 = await userManager.FindByIdAsync("e0000000-0000-7000-8000-000000000006");
-				//var u3 = await userManager.FindByIdAsync("e0000000-0000-7000-8000-000000000001");
+				
 			
-				//await userManager.AddToRoleAsync(u1, "ClinicalDoctor");
-				//await userManager.AddToRoleAsync(u2, "ClinicalDoctor");
-				//await userManager.AddToRoleAsync(u3, "ClinicalDoctor");
 
 				// ── 6. Patients ───────────────────────────────────────────────────────
 				if (!await context.Patients.IgnoreQueryFilters().AnyAsync(p => p.Id == Guid.Parse("f0000000-0000-7000-8000-000000000001")))

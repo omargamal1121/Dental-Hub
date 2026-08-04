@@ -34,9 +34,10 @@ namespace DentalHub.Application.Validators.Doctors
                 .NotEmpty().WithMessage("UserName required")
                 .Matches(@"^(?=.{3,20}$)(?!.*__)[a-z][a-z0-9_]*[a-z0-9]$").WithMessage("Invalid username format");
 
-            RuleFor(x => x.Phone)
-                .NotEmpty().WithMessage("Phone number is required")
-                .Matches(@"^\+?[1-9]\d{7,14}$").WithMessage("Invalid phone number format");
-        }
+			RuleFor(x => x.Phone)
+	        .NotEmpty().WithMessage("Phone number is required")
+	        .Matches(@"^(?:\+20|0)?1[0125][0-9]{8}$")
+	        .WithMessage("Invalid Egyptian phone number");
+		}
     }
 }

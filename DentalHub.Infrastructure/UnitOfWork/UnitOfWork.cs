@@ -34,6 +34,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
         public IMainRepository<CaseType> CaseTypes { get; }
         public IMainRepository<Diagnosis> Diagnoses { get; }
         public IMainRepository<University> Universities { get; }
+        public IMainRepository<RefreshToken> RefreshTokens { get; }
 
         public UnitOfWork(
              IServiceProvider serviceProvider,
@@ -51,6 +52,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
             IMainRepository<CaseType> caseTypes,
             IMainRepository<Diagnosis> diagnoses,
             IMainRepository<University> universities,
+            IMainRepository<RefreshToken> refreshTokens,
             ContextApp context,
             ILogger<UnitOfWork>? logger = null)
         {
@@ -69,6 +71,7 @@ namespace DentalHub.Infrastructure.UnitOfWork
             CaseTypes = caseTypes;
             Diagnoses = diagnoses;
             Universities = universities;
+            RefreshTokens = refreshTokens;
             _context = context;
             _logger = logger;
         }

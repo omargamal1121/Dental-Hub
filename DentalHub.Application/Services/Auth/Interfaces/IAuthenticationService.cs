@@ -5,9 +5,9 @@ namespace DentalHub.Application.Services.Auth
 {
     public interface IAuthenticationService
     {
-        Task<Result<TokensDto>> LoginAsync(string email, string password);
-        Task<Result<bool>> LogoutAsync(Guid userId);
-   //     Task<Result<TokensDto>> RefreshTokenAsync();
-    //    Task RemoveRefreshTokenAsync(string refreshToken);
+        Task<Result<TokensDto>> LoginAsync(string emailOrPhone, string password);
+        Task<Result<TokensDto>> RefreshTokenAsync(string refreshToken);
+        Task<Result<bool>> LogoutAsync(Guid userId, string refreshToken);
+        Task<Result<bool>> LogoutFromAllDevicesAsync(Guid userId);
     }
 }

@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using DentalHub.API.Middleware;
 using DentalHub.Application.Extensions;
 using DentalHub.Application.Interfaces;
@@ -12,13 +13,9 @@ using Hangfire.MySql;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Scalar.AspNetCore;
 using Serilog;
-using Asp.Versioning;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace DentalHub.API
 {
@@ -51,10 +48,10 @@ namespace DentalHub.API
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<IPasswordService, PasswordService>();
-            //      builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+            builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IAccountEmailService, AccountEmailService>();
-            builder.Services.AddHangfire(config =>
+            builder.Services.AddHangfire(config => 
             config.UseStorage(
                 new MySqlStorage(
                     builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -242,9 +239,8 @@ namespace DentalHub.API
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            // Map Controllers
-            app.MapControllers();
+			app.UseUserAuthentication();
+			app.MapControllers();
             app.UseHangfireDashboard("/hangfire");
 
             // Redirect root to Swagger

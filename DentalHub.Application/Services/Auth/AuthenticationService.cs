@@ -3,13 +3,11 @@ using DentalHub.Application.Common;
 using DentalHub.Application.DTOs.Auth;
 using DentalHub.Domain.Entities;
 using Hangfire;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using DentalHub.Infrastructure.UnitOfWork;
 using DentalHub.Application.Specification.Comman;
-using System.Threading.Tasks;
 
 namespace DentalHub.Application.Services.Auth
 {
@@ -17,52 +15,47 @@ namespace DentalHub.Application.Services.Auth
     {
         private readonly ILogger<AuthenticationService> _logger;
         private readonly UserManager<User> _userManager;
-      //  private readonly IRefreshTokenService _refreshTokenService;
+        private readonly IRefreshTokenService _refreshTokenService;
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IBackgroundJobClient _backgroundJobClient;
-
         private readonly IUnitOfWork _unitOfWork;
-		private const string RefreshCookieName = "Refresh";
 
         public AuthenticationService(
             IUnitOfWork unitOfWork,
-			IHttpContextAccessor httpContextAccessor,
             ILogger<AuthenticationService> logger,
             UserManager<User> userManager,
-      //      IRefreshTokenService refreshTokenService,
+            IRefreshTokenService refreshTokenService,
             ITokenService tokenService,
             IConfiguration configuration,
             IBackgroundJobClient backgroundJobClient)
         {
-            _httpContextAccessor = httpContextAccessor;
-            _logger = logger;
-            _userManager = userManager;
-       //     _refreshTokenService = refreshTokenService;
-            _tokenService = tokenService;
-            _configuration = configuration;
-            _unitOfWork = unitOfWork;
-            _backgroundJobClient = backgroundJobClient;
+            _logger               = logger;
+            _userManager          = userManager;
+            _refreshTokenService  = refreshTokenService;
+            _tokenService         = tokenService;
+            _configuration        = configuration;
+            _unitOfWork           = unitOfWork;
+            _backgroundJobClient  = backgroundJobClient;
         }
 
-        public async Task<Result<TokensDto>> LoginAsync(string emailorphone, string password)
+        // ─────────────────────────────────────────────────────────────────────────
+        // Login
+        // ─────────────────────────────────────────────────────────────────────────
+
+        public async Task<Result<TokensDto>> LoginAsync(string emailOrPhone, string password)
         {
             try
             {
                 User? user;
-                if(emailorphone.Contains("@"))
-                {
-                    user = await _userManager.FindByEmailAsync(emailorphone);
-                }
+                if (emailOrPhone.Contains('@'))
+                    user = await _userManager.FindByEmailAsync(emailOrPhone);
                 else
-                {
-                    user = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == emailorphone);
-				}
-				
+                    user = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == emailOrPhone);
+
                 if (user == null)
                 {
-                    _logger.LogWarning("Login Failed: user not found for {Email}", emailorphone);
+                    _logger.LogWarning("Login failed — user not found for {Identifier}", emailOrPhone);
                     return Result<TokensDto>.Failure("Invalid email or password.");
                 }
 
@@ -76,32 +69,31 @@ namespace DentalHub.Application.Services.Auth
 
                 await _userManager.ResetAccessFailedCountAsync(user);
 
+                // Generate JWT access token
                 var tokenResult = await _tokenService.GenerateTokenAsync(user);
                 if (!tokenResult.IsSuccess || tokenResult.Data == null)
                 {
-                    _logger.LogError("Failed to generate token: {Message}", tokenResult.Message);
+                    _logger.LogError("Login — failed to generate access token: {Message}", tokenResult.Message);
                     return Result<TokensDto>.Failure("An error occurred during login.");
                 }
 
-                //var refreshTokenResult = await _refreshTokenService.GenerateRefreshTokenAsync(user.Id.ToString(), user.SecurityStamp ?? "");
-                //if (refreshTokenResult.IsSuccess && refreshTokenResult.Data != null)
-                //{
-                //    SetRefreshCookie(refreshTokenResult.Data);
-                //}
-                //else
-                //{
-                //    _logger.LogError("Failed to generate refresh token: {Message}", refreshTokenResult.Message);
-                //}
+                // Generate & store refresh token
+                var refreshResult = await _refreshTokenService.GenerateAndStoreAsync(
+                    user.Id, user.SecurityStamp ?? string.Empty);
 
-                var roles = (await _userManager.GetRolesAsync(user)).ToList();
-                var universityId = await GetUserUniversityId(user, roles);
+                if (!refreshResult.IsSuccess || string.IsNullOrEmpty(refreshResult.Data))
+                    _logger.LogError("Login — failed to generate refresh token for UserId: {UserId}", user.Id);
+
+                var roles         = (await _userManager.GetRolesAsync(user)).ToList();
+                var universityId  = await GetUserUniversityId(user, roles);
 
                 return Result<TokensDto>.Success(
                     new TokensDto
                     {
-                        Token = tokenResult.Data,
-                        Roles = roles,
-                        PublicId = user.Id,
+                        Token        = tokenResult.Data,
+                        RefreshToken = refreshResult.Data ?? string.Empty,
+                        Roles        = roles,
+                        PublicId     = user.Id,
                         universityId = universityId
                     },
                     "Login successfully");
@@ -113,124 +105,132 @@ namespace DentalHub.Application.Services.Auth
             }
         }
 
-		private async Task<Guid?> GetUserUniversityId(User user, IList<string> roles)
-		{
-			if (roles.Contains("Admin"))
-				return await GetUniversityIdAsync<Admin>(user.Id);
+        // ─────────────────────────────────────────────────────────────────────────
+        // Refresh Token
+        // ─────────────────────────────────────────────────────────────────────────
 
-			if (roles.Contains("Doctor") || roles.Contains("ClinicalDoctor"))
-			{
-				var doctorId = await GetUniversityIdAsync<Doctor>(user.Id);
-				if (doctorId != null && doctorId != Guid.Empty) return doctorId;
-			}
-
-			if (roles.Contains("Student") || roles.Contains("ClinicalDoctor"))
-			{
-				var studentId = await GetUniversityIdAsync<Student>(user.Id);
-				if (studentId != null && studentId != Guid.Empty) return studentId;
-			}
-
-			return null;
-		}
-
-		private async Task<Guid?> GetUniversityIdAsync<T>(Guid userId) where T : class
-		{
-			return await _unitOfWork.GetRepository<T>()
-				.GetByIdAsync(new BaseSpecificationWithProjection<T, Guid>(
-					x => EF.Property<Guid>(x, "Id") == userId,
-					x => EF.Property<Guid>(x, "UniversityId")
-				));
-		}
-		public async Task<Result<bool>> LogoutAsync(Guid userId)
+        public async Task<Result<TokensDto>> RefreshTokenAsync(string refreshToken)
         {
-            _logger.LogInformation("Executing {Method}", nameof(LogoutAsync));
+            _logger.LogInformation("Executing {Method}", nameof(RefreshTokenAsync));
+
+            var rotationResult = await _refreshTokenService.RotateAsync(refreshToken);
+            if (!rotationResult.IsSuccess || rotationResult.Data == null)
+            {
+                _logger.LogWarning("RefreshTokenAsync — rotation failed: {Message}", rotationResult.Message);
+                return Result<TokensDto>.Failure(
+                    rotationResult.Errors?.FirstOrDefault() ?? "Invalid refresh token",
+                    rotationResult.Status == 401 ? 401 : 400);
+            }
+
+            return Result<TokensDto>.Success(
+                new TokensDto
+                {
+                    Token        = rotationResult.Data.Token,
+                    RefreshToken = rotationResult.Data.RefreshToken
+                },
+                "Token refreshed");
+        }
+
+        // ─────────────────────────────────────────────────────────────────────────
+        // Logout
+        // ─────────────────────────────────────────────────────────────────────────
+
+        public async Task<Result<bool>> LogoutAsync(Guid userId, string refreshToken)
+        {
+            _logger.LogInformation("Executing {Method} for UserId: {UserId}", nameof(LogoutAsync), userId);
+
+            // Revoke the specific refresh token
+            if (!string.IsNullOrWhiteSpace(refreshToken))
+            {
+                var revokeResult = await _refreshTokenService.RevokeAsync(refreshToken);
+                if (!revokeResult.IsSuccess)
+                    _logger.LogWarning("LogoutAsync — failed to revoke refresh token for UserId: {UserId}", userId);
+            }
+
+            // Rotate SecurityStamp so the current JWT is invalidated on the next validation cycle
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                _logger.LogError("LogoutAsync — user not found: {UserId}", userId);
+                return Result<bool>.Failure("Invalid user ID");
+            }
+
+            var stampResult = await _userManager.UpdateSecurityStampAsync(user);
+            if (!stampResult.Succeeded)
+            {
+                var errors = string.Join(", ", stampResult.Errors.Select(e => e.Description));
+                _logger.LogError("LogoutAsync — failed to update SecurityStamp for UserId: {UserId}: {Errors}",
+                    userId, errors);
+            }
+
+            return Result<bool>.Success(true, "Logout successful");
+        }
+
+        // ─────────────────────────────────────────────────────────────────────────
+        // Logout From All Devices
+        // ─────────────────────────────────────────────────────────────────────────
+
+        public async Task<Result<bool>> LogoutFromAllDevicesAsync(Guid userId)
+        {
+            _logger.LogInformation("Executing {Method} for UserId: {UserId}", nameof(LogoutFromAllDevicesAsync), userId);
 
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
             {
-                _logger.LogError("No user found with Id: {UserId}", userId);
+                _logger.LogError("LogoutFromAllDevicesAsync — user not found: {UserId}", userId);
                 return Result<bool>.Failure("Invalid user ID");
             }
 
-            var updateResult = await _userManager.UpdateSecurityStampAsync(user);
-            if (!updateResult.Succeeded)
+            // 1. Rotate SecurityStamp — this invalidates ALL existing JWTs for the user
+            var stampResult = await _userManager.UpdateSecurityStampAsync(user);
+            if (!stampResult.Succeeded)
             {
-                var errors = string.Join(", ", updateResult.Errors.Select(e => e.Description));
-                _logger.LogError("Failed to update security stamp for user {PublicId}: {Errors}", userId, errors);
+                var errors = string.Join(", ", stampResult.Errors.Select(e => e.Description));
+                _logger.LogError("LogoutFromAllDevicesAsync — SecurityStamp update failed for UserId: {UserId}: {Errors}",
+                    userId, errors);
+                return Result<bool>.Failure("Failed to invalidate sessions");
             }
-            ExpireRefreshCookie();
-            return Result<bool>.Success(true, "Logout Successful");
+
+            // 2. Hard-revoke all active refresh tokens in the DB
+            var revokeResult = await _refreshTokenService.RevokeAllForUserAsync(userId);
+            if (!revokeResult.IsSuccess)
+                _logger.LogWarning("LogoutFromAllDevicesAsync — could not revoke all tokens for UserId: {UserId}", userId);
+
+            _logger.LogInformation("LogoutFromAllDevicesAsync — all sessions invalidated for UserId: {UserId}", userId);
+            return Result<bool>.Success(true, "Logged out from all devices");
         }
 
-        //public async Task<Result<TokensDto>> RefreshTokenAsync()
-        //{
-        //    var refreshToken = GetRefreshCookie();
-        //    if (string.IsNullOrEmpty(refreshToken))
-        //    {
-        //        _logger.LogWarning("Refresh token not found in cookies.");
-        //        return Result<TokensDto>.Failure("Please login again");
-        //    }
+        // ─────────────────────────────────────────────────────────────────────────
+        // Private Helpers
+        // ─────────────────────────────────────────────────────────────────────────
 
-        //    //var tokenResult = await _refreshTokenService.RefreshTokenAsync(refreshToken);
-        //    //if (!tokenResult.IsSuccess || tokenResult.Data == null)
-        //    //{
-        //    //    _logger.LogWarning("Failed to refresh token. Removing refresh token.");
-        //    //    await RemoveRefreshTokenAsync(refreshToken);
-        //    //    ExpireRefreshCookie();
-        //    //    return Result<TokensDto>.Failure("Failed to generate token. Please login again.");
-        //    //}
-        //    SetRefreshCookie(tokenResult.Data.RefreshToken);
-
-        //    var token = new TokensDto
-        //    {
-        //        Token = tokenResult.Data.Token
-        //    };
-        //    return Result<TokensDto>.Success(token, "Token generated");
-        //}
-
-        //public async Task RemoveRefreshTokenAsync(string refreshToken)
-        //{
-        //    try
-        //    {
-        //        await _refreshTokenService.RemoveRefreshTokenAsync(refreshToken);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "Error in {Method}", nameof(RemoveRefreshTokenAsync));
-        //    }
-        //}
-
-        #region Private Helpers
-
-        private string? GetRefreshCookie() =>
-            _httpContextAccessor?.HttpContext?.Request.Cookies[RefreshCookieName];
-
-        private void SetRefreshCookie(string token)
+        private async Task<Guid?> GetUserUniversityId(User user, IList<string> roles)
         {
-            _httpContextAccessor?.HttpContext?.Response.Cookies.Append(
-                RefreshCookieName,
-                token,
-                new CookieOptions
-                {
-                    HttpOnly = true,
-                    Secure = true,
-                    SameSite = SameSiteMode.Strict,
-                    Expires = DateTimeOffset.UtcNow.AddDays(7)
-                });
+            if (roles.Contains("Admin"))
+                return await GetUniversityIdAsync<Admin>(user.Id);
+
+            if (roles.Contains("Doctor") || roles.Contains("ClinicalDoctor"))
+            {
+                var doctorId = await GetUniversityIdAsync<Doctor>(user.Id);
+                if (doctorId != null && doctorId != Guid.Empty) return doctorId;
+            }
+
+            if (roles.Contains("Student") || roles.Contains("ClinicalDoctor"))
+            {
+                var studentId = await GetUniversityIdAsync<Student>(user.Id);
+                if (studentId != null && studentId != Guid.Empty) return studentId;
+            }
+
+            return null;
         }
 
-        private void ExpireRefreshCookie()
+        private async Task<Guid?> GetUniversityIdAsync<T>(Guid userId) where T : class
         {
-            _httpContextAccessor?.HttpContext?.Response.Cookies.Append(
-                RefreshCookieName,
-                string.Empty,
-                new CookieOptions
-                {
-                    Expires = DateTimeOffset.UtcNow.AddDays(-1),
-                    HttpOnly = true,
-                    Secure = true,
-                    SameSite = SameSiteMode.Strict
-                });
+            return await _unitOfWork.GetRepository<T>()
+                .GetByIdAsync(new BaseSpecificationWithProjection<T, Guid>(
+                    x => EF.Property<Guid>(x, "Id") == userId,
+                    x => EF.Property<Guid>(x, "UniversityId")
+                ));
         }
 
         private async Task EnsureLockoutEnabled(User user)
@@ -245,30 +245,33 @@ namespace DentalHub.Application.Services.Auth
         private async Task<Result<TokensDto>> HandleFailedLoginAttemptAsync(User user)
         {
             await _userManager.AccessFailedAsync(user);
-            var failedCount = await _userManager.GetAccessFailedCountAsync(user);
-            var maxFailedAttempts = _configuration.GetValue("Security:LockoutPolicy:MaxFailedAttempts", 5);
-            var lockoutDurationMinutes = _configuration.GetValue("Security:LockoutPolicy:LockoutDurationMinutes", 15);
-            var permanentLockoutAfterAttempts = _configuration.GetValue("Security:LockoutPolicy:PermanentLockoutAfterAttempts", 10);
+            var failedCount              = await _userManager.GetAccessFailedCountAsync(user);
+            var maxFailedAttempts        = _configuration.GetValue("Security:LockoutPolicy:MaxFailedAttempts", 5);
+            var lockoutDurationMinutes   = _configuration.GetValue("Security:LockoutPolicy:LockoutDurationMinutes", 15);
+            var permanentLockoutAfter    = _configuration.GetValue("Security:LockoutPolicy:PermanentLockoutAfterAttempts", 10);
 
-            if (failedCount >= permanentLockoutAfterAttempts)
+            if (failedCount >= permanentLockoutAfter)
             {
                 user.LockoutEnd = DateTime.UtcNow.AddYears(100);
                 await _userManager.UpdateAsync(user);
-                 _backgroundJobClient.Enqueue<IAccountEmailService>(e => e.SendAccountLockedEmailAsync(user.Email, user.UserName, $"Multiple Failed login attempts ({permanentLockoutAfterAttempts}+ times)"));
-                return Result<TokensDto>.Failure("Your account has been permanently locked due to multiple failed login attempts. Please reset your password.");
+
+                if(user.Email is not null)
+                _backgroundJobClient.Enqueue<IAccountEmailService>(
+                    e => e.SendAccountLockedEmailAsync(user.Email, user.UserName??"user",
+                        $"Multiple failed login attempts ({permanentLockoutAfter}+ times)"));
+                return Result<TokensDto>.Failure(
+                    "Your account has been permanently locked due to multiple failed login attempts. Please reset your password.");
             }
 
             if (failedCount >= maxFailedAttempts)
             {
                 user.LockoutEnd = DateTime.UtcNow.AddMinutes(lockoutDurationMinutes);
                 await _userManager.UpdateAsync(user);
-                // BackgroundJob.Enqueue<IAccountEmailService>(e => e.SendAccountLockedEmailAsync(user.Email, user.UserName, $"Multiple Failed login attempts ({maxFailedAttempts}+ times)"));
-                return Result<TokensDto>.Failure($"Too many failed login attempts. Please try again after {lockoutDurationMinutes} minutes.");
+                return Result<TokensDto>.Failure(
+                    $"Too many failed login attempts. Please try again after {lockoutDurationMinutes} minutes.");
             }
 
             return Result<TokensDto>.Failure("Invalid email or password.");
         }
-
-        #endregion
     }
 }
