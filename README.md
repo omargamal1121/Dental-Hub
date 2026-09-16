@@ -408,7 +408,7 @@ This project is currently closed-source. All rights reserved. Contact the reposi
 For issues, questions, or feature requests, please:
 
 1. Check existing [Issues](https://github.com/omargamal1121/Dental-Hub/issues)
-2. Create a new issue with detailed description
+2. Create a new issue with a detailed description
 3. Contact the development team
 
 ---
@@ -416,6 +416,13 @@ For issues, questions, or feature requests, please:
 ## 👨‍💻 Development Team
 
 **Lead Developer:** Omar Gamal ([@omargamal1121](https://github.com/omargamal1121))
+
+---
+
+### Contributors
+- Saja Mohamed
+- Salma Mohamed
+- Haythem Hossam
 
 ---
 
@@ -427,6 +434,6 @@ For issues, questions, or feature requests, please:
 
 ---
 
-**Last Updated:** May 28, 2026  
+**Last Updated:** September 16, 2026  
 **Current Version:** 1.0.0
 
