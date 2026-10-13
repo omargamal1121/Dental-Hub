@@ -38,6 +38,9 @@ public class MySqlFixture : IAsyncLifetime
 			ServerVersion.AutoDetect(Container.GetConnectionString()))
 		.Options;
 
+
+
+
 		ContextApp = new ContextApp(options);
 		 await	 ContextApp.Database.MigrateAsync();
 		_MySqlConnection = new MySqlConnection(Container.GetConnectionString());
