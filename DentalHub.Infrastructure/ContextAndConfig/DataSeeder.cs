@@ -18,6 +18,7 @@ namespace DentalHub.Infrastructure.ContextAndConfig
 
 			try
 			{
+				await	 context.Database.MigrateAsync();
 				// ── 1. Roles ──────────────────────────────────────────────────────────
 				string[] roles = ["Doctor", "Student", "Patient", "Admin", "ClinicalDoctor"];
 				foreach (var role in roles)

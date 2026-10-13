@@ -3,6 +3,7 @@ using DentalHub.Application.Services;
 using DentalHub.Infrastructure.ContextAndConfig;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Net.Http.Json;
 
@@ -66,10 +67,12 @@ public class CreatePatientTests : IClassFixture<MySqlFixture> , IAsyncLifetime
 
 	public async Task InitializeAsync()
 	{
-		var unitOfWork = UnitOfWorkTestFactory.Create(_fixture.ContextApp);
+		var contextApp= _fixture.CreateScope().ServiceProvider.GetRequiredService<ContextApp>();
+		await	contextApp.Database.MigrateAsync();
+		var unitOfWork = UnitOfWorkTestFactory.Create(contextApp);
 		var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 		var logger = loggerFactory.CreateLogger<PatientService>();
-		var UserManager = UserMangerFactory.CreateRealUserManager(_fixture.ContextApp);
+		var UserManager = UserMangerFactory.CreateRealUserManager(contextApp);
 
 		_patientService = new PatientService(unitOfWork, logger, UserManager);
 	}

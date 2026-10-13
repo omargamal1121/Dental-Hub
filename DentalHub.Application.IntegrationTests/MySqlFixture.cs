@@ -1,27 +1,18 @@
 ﻿using DentalHub.Infrastructure.ContextAndConfig;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using Respawn;
-using System.Data.Common;
-using System.Data.Entity;
 using Testcontainers.MySql;
 
 namespace DentalHub.Application.IntegrationTests;
 
 public class MySqlFixture : IAsyncLifetime
 {
-
 	public MySqlContainer Container { get; private set; } = null!;
 	public Respawner Respawn { get; private set; } = null!;
-	public ContextApp ContextApp { get; private set; } = null!;
-	private MySqlConnection _MySqlConnection =null!;
-	public  CusomeWebApHostFactory cusomeWebApHostFactory { get; private set; } = null!;
-	public async Task DisposeAsync()
-	{
-		await _MySqlConnection.CloseAsync();
-		await ContextApp.DisposeAsync();
-		await Container.DisposeAsync();
-	}
+	public CusomeWebApHostFactory cusomeWebApHostFactory { get; private set; } = null!;
+	private MySqlConnection _MySqlConnection = null!;
 
 	public async Task InitializeAsync()
 	{
@@ -32,21 +23,19 @@ public class MySqlFixture : IAsyncLifetime
 			.Build();
 		await Container.StartAsync();
 
-		var options = new DbContextOptionsBuilder<ContextApp>()
-		.UseMySql(
-			Container.GetConnectionString(),
-			ServerVersion.AutoDetect(Container.GetConnectionString()))
-		.Options;
-
-
-
-
-		ContextApp = new ContextApp(options);
-		 await	 ContextApp.Database.MigrateAsync();
 		_MySqlConnection = new MySqlConnection(Container.GetConnectionString());
 		await _MySqlConnection.OpenAsync();
-		await UserMangerFactory.SeedRolesAsync(ContextApp);
-		cusomeWebApHostFactory=new CusomeWebApHostFactory(Container.GetConnectionString());
+
+		cusomeWebApHostFactory = new CusomeWebApHostFactory(Container.GetConnectionString());
+
+		using (var scope = cusomeWebApHostFactory.Services.CreateScope())
+		{
+			//var context = scope.ServiceProvider.GetRequiredService<ContextApp>();
+			//await context.Database.MigrateAsync();
+			//await UserMangerFactory.SeedRolesAsync(context);
+		}
+
+
 
 		Respawn = await Respawner.CreateAsync(_MySqlConnection, new RespawnerOptions
 		{
@@ -54,8 +43,16 @@ public class MySqlFixture : IAsyncLifetime
 			TablesToIgnore = ["AspNetRoles", "AspNetUserRoles"]
 		});
 	}
-	public async Task ResetDatabaseAsync()
+
+	public IServiceScope CreateScope() => cusomeWebApHostFactory.Services.CreateScope();
+
+	public async Task ResetDatabaseAsync() => await Respawn.ResetAsync(_MySqlConnection);
+
+	public async Task DisposeAsync()
 	{
-		await Respawn.ResetAsync(_MySqlConnection);
+		await _MySqlConnection.CloseAsync();
+		await cusomeWebApHostFactory.DisposeAsync();
+		await Container.DisposeAsync();
 	}
 }
+

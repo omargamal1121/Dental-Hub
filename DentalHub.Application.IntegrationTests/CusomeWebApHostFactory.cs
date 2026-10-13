@@ -25,21 +25,21 @@ namespace DentalHub.Application.IntegrationTests
 
 			base.ConfigureWebHost(builder);
 
-			builder.ConfigureServices(Services =>
-			{
-				var oldcontext = Services.SingleOrDefault(d => d.ServiceType == typeof(ContextApp));
-				if(oldcontext != null)
-					Services.Remove(oldcontext);
+			//builder.ConfigureServices(Services =>
+			//{
+			//	var oldcontext = Services.SingleOrDefault(d => d.ServiceType == typeof(ContextApp));
+			//	if(oldcontext != null)
+			//		Services.Remove(oldcontext);
 
-				Services.AddDbContext<ContextApp>(option=>
-				{
-					option.UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString));
-				});
+			//	Services.AddDbContext<ContextApp>(option=>
+			//	{
+			//		option.UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString));
+			//	});
 			
 
 
-			}
-			);
+			//}
+			//);
 		}
 	}
 }
