@@ -20,10 +20,12 @@ jobs:
 
             - name: Build
               run: dotnet build --no-restore
-
+            - name: check docker
+              run: docker --version
             - name: Run tests
               run:  dotnet test --no-build 
     build_docker_image:
+        needs: build_Test
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code

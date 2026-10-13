@@ -53,7 +53,7 @@ _ReSharper*/
 
 # Tests
 TestResults/
-coverage/
+coveragereport/
 
 # Docker
 .dockerignore
