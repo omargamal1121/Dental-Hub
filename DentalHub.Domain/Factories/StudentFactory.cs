@@ -15,11 +15,11 @@ namespace DentalHub.Domain.Factories
                 university = "Unknown University";
 
             if (universityId == Guid.Empty)
-                throw new DomainException("UniversityId can't be empty");
+                throw new DomainException("universityId cannot be empty");
 
             return new Student
             {
-              
+                Id = userId,
                 UniversityId = universityId,
                 Level = 1,
                 CreateAt = DateTime.UtcNow

@@ -1,6 +1,7 @@
 ﻿using DentalHub.Domain.DomainExceptions;
 using DentalHub.Domain.Entities;
 using DentalHub.Domain.Factories;
+using FluentAssertions;
 
 namespace DentalHub.Application.Test;
 
@@ -23,6 +24,19 @@ public class PatientFactoryTest
 
 		Assert.Equal(expectedMessage, ex.Message);
 	}
+	[Theory]
+	[InlineData("00000000-0000-0000-0000-000000000000", 22, "01226493558", "UserId cannot be empty")]
+	[InlineData("11111111-1111-1111-1111-111111111111", 0, "01226493558", "Age must be greater than 0")]
+	[InlineData("11111111-1111-1111-1111-111111111111", 22, "", "Phone cannot be empty")]
+	[InlineData("11111111-1111-1111-1111-111111111111", 22, "abc123", "Phone format is invalid")]
+	public void Create_InvalidInput_ThrowsDomainExceptionWithCorrectMessageWithFulent(
+		string userIdStr, int age, string phone, string expectedMessage)
+	{
+		var userId = Guid.Parse(userIdStr);
+		Action act= () => PatientFactory.Create(userId, age, phone);
+		act.Should().Throw<DomainException>().WithMessage(expectedMessage);
+	
+	}
 	[Fact]
 	public void Create_ValidData_ReturnsPatientWithCorrectValues()
 	{
@@ -39,6 +53,25 @@ public class PatientFactoryTest
 		Assert.Equal(age, result.Age);
 		Assert.Equal(phone, result.Phone);
 		Assert.True((DateTime.UtcNow - result.CreateAt).TotalSeconds < 5);
+	}
+	[Fact]
+	public void Create_ValidData_ReturnsPatientWithCorrectValuesWithFulent()
+	{
+		// Arrange
+		var userId = Guid.NewGuid();
+		var age = 22;
+		var phone = "01226493558";
+
+		// Act
+		var result = PatientFactory.Create(userId, age, phone);
+
+		// Assert
+		result.Should().NotBeNull();
+		result.Age.Should().Be(age);
+		result.Phone.Should().Be(phone);
+		
+	
+	
 	}
 
 }

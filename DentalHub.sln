@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalHub.API", "DentalHub.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalHub.Application.Test", "DentalHub.Application.Test\DentalHub.Application.Test.csproj", "{859CFA8C-8CB2-4D6C-99B9-758D66B0B79A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalHub.Domain.Tests", "DentalHub.Domain.Tests\DentalHub.Domain.Tests.csproj", "{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalHub.Application.IntegrationTests", "DentalHub.Application.IntegrationTests\DentalHub.Application.IntegrationTests.csproj", "{81895A39-CC1B-4E12-A6CB-71995BD5819E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +87,30 @@ Global
 		{859CFA8C-8CB2-4D6C-99B9-758D66B0B79A}.Release|x64.Build.0 = Release|Any CPU
 		{859CFA8C-8CB2-4D6C-99B9-758D66B0B79A}.Release|x86.ActiveCfg = Release|Any CPU
 		{859CFA8C-8CB2-4D6C-99B9-758D66B0B79A}.Release|x86.Build.0 = Release|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Debug|x64.Build.0 = Debug|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Debug|x86.Build.0 = Debug|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Release|x64.ActiveCfg = Release|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Release|x64.Build.0 = Release|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Release|x86.ActiveCfg = Release|Any CPU
+		{B94EE8D2-AE4E-4CA7-8B37-228DC60F99BA}.Release|x86.Build.0 = Release|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Debug|x64.Build.0 = Debug|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Debug|x86.Build.0 = Debug|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Release|x64.ActiveCfg = Release|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Release|x64.Build.0 = Release|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Release|x86.ActiveCfg = Release|Any CPU
+		{81895A39-CC1B-4E12-A6CB-71995BD5819E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
